@@ -1,6 +1,44 @@
 # Research handoff and next actions
 
-Updated: 2026-11-22. This is the coordinator's readable handoff; use `py ai_harness/harness.py status` for live task states. Reviewed research memos are not experimental results or finalized user decisions.
+Updated: 2026-11-25 (COORD-003). This is the coordinator's readable handoff; use `py ai_harness/harness.py status` for live task states. Reviewed research memos are not experimental results or finalized user decisions.
+
+## Update 2026-11-25: experiments run and reviewed
+
+**Start here:**
+- [WORK_SUMMARY.md](../WORK_SUMMARY.md) is a plain-language account for teammates.
+- [COORD-002/status.md](artifacts/COORD-002/status.md) is the authoritative list of reviewer-accepted results and corrections.
+- [DECISIONS.md](DECISIONS.md) "Current state" has the settled choices.
+
+**Done and accepted by independent reviewers:**
+
+| Task | What |
+| --- | --- |
+| ENG-001 | Byte tool |
+| ENG-002 | Environment |
+| ENG-003 | Datasets |
+| ENG-005 | Linear baseline and dense control |
+| REASON-002 | Experiment plan |
+| GRID-001 | Main grid, inherited-classifier heads, byte accounting |
+| GRID-002 | Xavier-init grid |
+| ABL-001 | Loss ablation |
+| ORIENT-001 and ORIENT-002 | Code audits |
+| COORD-001 | Adoption record |
+
+**Headline (measured; see status.md for the qualifiers):**
+- **Setting:** a head on frozen pretrained ResNet-18 features, tested on original ImageNetV2.
+- **Cost of compressed training data:** level 80 (50.3:1 against raw pixels, 89.8% smaller than the stored files) costs about 0.5–1.2 pp of top-1. Level 90 costs 1.5–2.3 pp.
+- **Dictionary heads vs linear:** with Xavier init, they beat a linear head only with the feature-MSE loss, and by under 1 pp at most levels.
+- **Sparsity:** its own effect is unresolved.
+
+**In flight, or waiting for review:**
+- SEED-001: 7 new seeds for sparse vs dense vs linear; pre-registered.
+- ENG-004: pilot, revised for selection bias.
+- COORD-002 and COORD-003.
+- REVIEW-002 to REVIEW-005.
+
+**Not yet started:** REPRO-001, REVIEW-001, SYNTH-001, LIT-002.
+
+The 2026-11-22 update below is historical. Its "ENG-001 pending", "no training has been run", "torch is not installed" and "dataset open" statements are superseded.
 
 ## Update 2026-11-22: adopted user code
 

@@ -1,0 +1,44 @@
+{
+  "base": {
+    "sparse": {
+      "atoms": 2048,
+      "fc_init": "xavier",
+      "k": 512,
+      "model": "sparse",
+      "weight_decay": 0.0
+    },
+    "dense": {
+      "atoms": 2048,
+      "fc_init": "xavier",
+      "k": 2048,
+      "model": "dense",
+      "weight_decay": 0.0
+    },
+    "linear": {
+      "atoms": 0,
+      "fc_init": "xavier",
+      "k": 0,
+      "model": "linear",
+      "weight_decay": 0.0001
+    }
+  },
+  "dictionary_loss": {
+    "reconstruction_weight": 1.0,
+    "dependency_weight": 0.0,
+    "coherence_weight": 0.0
+  },
+  "levels": [
+    "source",
+    "L080",
+    "L090"
+  ],
+  "seeds": [
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51
+  ]
+}

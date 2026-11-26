@@ -1,0 +1,4 @@
+{"id": "REVIEW-005", "title": "Independent review of REVIEW-002 and COORD-002", "role": "reviewer",
+ "description": "User requested (2026-11-25) independent review of tasks still in review. REVIEW-002 is the review of GRID-001/GRID-002/ABL-001 by reviewer-20261125-a (report text transcribed by the experiments' author); COORD-002 is the author's summary of accepted results plus an erratum. Check the review's recomputation and that COORD-002 states only what the accepted reports support. Read-only outside this folder. Record a verdict per task.",
+ "depends_on": [], "write_paths": ["ai_harness/artifacts/REVIEW-005"],
+ "acceptance": ["Both tasks receive a recorded verdict citing this report", "COORD-002 claims traced to specific sections of the accepted reports", "REVIEW-002 transcription and recompute outputs checked"]}

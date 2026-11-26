@@ -1,0 +1,4 @@
+{"id": "REVIEW-004", "title": "Independent review of environment, data and pilot tasks: ENG-002, ENG-003, ENG-004, ENG-005, REASON-002", "role": "reviewer",
+ "description": "User requested (2026-11-25) independent review of tasks still in review. ENG-002 (PyTorch env and main.py check), ENG-003 (ImageNet-1K val and ImageNetV2 download into Datasets/), ENG-004 (first 45k/5k training pilot), ENG-005 (linear baseline and dense control pilot), REASON-002 (experiment plan later executed as GRID-001). Read-only outside this folder; no training or downloads; sample-based data checks only. Record a verdict per task.",
+ "depends_on": [], "write_paths": ["ai_harness/artifacts/REVIEW-004"],
+ "acceptance": ["Each of the five tasks receives a recorded verdict citing this report", "Measured claims spot-checked against logs, JSON outputs and data manifests", "Findings have severity, location and evidence"]}

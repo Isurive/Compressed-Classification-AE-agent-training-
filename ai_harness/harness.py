@@ -275,10 +275,12 @@ class Ledger:
                 self.event(con, task_id, action, agent, detail)
             return self.get(con, task_id)
 
-    def verify_artifacts(self, item):
+    def verify_artifacts(self, item, superseded=()):
         if not item["artifacts"]:
             raise HarnessError(f"No submitted evidence for {item['id']}.")
         for expected in item["artifacts"]:
+            if expected["path"] in superseded:
+                continue  # A later submitted task owns this shared file now; its hash is verified instead.
             actual = self.artifact(item["spec"], expected["path"])
             if actual != expected:
                 raise HarnessError(f"Artifact changed since submission: {expected['path']}. Recover/resubmit or request revision before editing.")
@@ -320,6 +322,18 @@ class Ledger:
             tasks = self.tasks(con)
             self.validate_graph([t["spec"] for t in tasks])
             done = {t["id"] for t in tasks if t["state"] == "done"}
+            # A shared file (e.g. DECISIONS.md) may be re-submitted by a later task. Only the review/done
+            # task with the most recent submit event must match the file; earlier holders are superseded.
+            last_submit = {r["task"]: r["seq"] for r in con.execute(
+                "SELECT task, MAX(seq) AS seq FROM events WHERE action='submit' GROUP BY task")}
+            holder = {}
+            for t in tasks:
+                if t["state"] in {"review", "done"}:
+                    for a in t["artifacts"]:
+                        key = str(self.safe_path(a["path"])).casefold()
+                        if key not in holder or last_submit.get(t["id"], 0) > last_submit.get(holder[key], 0):
+                            holder[key] = t["id"]
+            superseded = []
             for t in tasks:
                 if t["state"] not in STATES:
                     raise HarnessError(f"Invalid state: {t['state']}")
@@ -328,7 +342,10 @@ class Ledger:
                     if set(t["spec"]["depends_on"]) - done:
                         raise HarnessError(f"Unaccepted dependency for {t['id']}.")
                 if t["state"] in {"review", "done"}:
-                    self.verify_artifacts(t)
+                    skip = {a["path"] for a in t["artifacts"]
+                            if holder[str(self.safe_path(a["path"])).casefold()] != t["id"]}
+                    self.verify_artifacts(t, skip)
+                    superseded += [f"{t['id']}: {p}" for p in sorted(skip)]
             for i, left in enumerate(tasks):
                 if left["state"] not in BUSY:
                     continue
@@ -339,7 +356,8 @@ class Ledger:
                                 x, y = self.safe_path(a), self.safe_path(b)
                                 if within(x, y) or within(y, x):
                                     raise HarnessError(f"Conflicting reservations: {left['id']} and {right['id']}")
-            return {"ok": True, "tasks": len(tasks), "stale": [t["id"] for t in tasks if t["stale"]]}
+            return {"ok": True, "tasks": len(tasks), "stale": [t["id"] for t in tasks if t["stale"]],
+                    "superseded": superseded}
 
     def snapshot(self):
         # Hold the ledger write lock through both atomic replacements so snapshots

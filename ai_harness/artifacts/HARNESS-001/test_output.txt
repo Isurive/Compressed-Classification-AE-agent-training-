@@ -1,0 +1,37 @@
+== py 3.14.2
+test_case_insensitive_task_ids_do_not_alias_artifact_directories (test_harness.HarnessTests.test_case_insensitive_task_ids_do_not_alias_artifact_directories) ... ok
+test_competing_claims_are_atomic_with_separate_connections (test_harness.HarnessTests.test_competing_claims_are_atomic_with_separate_connections) ... ok
+test_dependencies_and_independent_review (test_harness.HarnessTests.test_dependencies_and_independent_review) ... ok
+test_empty_missing_and_changed_evidence_rejected (test_harness.HarnessTests.test_empty_missing_and_changed_evidence_rejected) ... ok
+test_invalid_graph_and_add_leave_ledger_unchanged (test_harness.HarnessTests.test_invalid_graph_and_add_leave_ledger_unchanged) ... ok
+test_later_task_supersedes_shared_file_of_done_task (test_harness.HarnessTests.test_later_task_supersedes_shared_file_of_done_task) ... ok
+test_parent_child_and_case_alias_scope_conflicts (test_harness.HarnessTests.test_parent_child_and_case_alias_scope_conflicts) ... ok
+test_revision_retains_owner_and_requires_resubmission (test_harness.HarnessTests.test_revision_retains_owner_and_requires_resubmission) ... ok
+test_scopes_cannot_overwrite_coordination_state (test_harness.HarnessTests.test_scopes_cannot_overwrite_coordination_state) ... ok
+test_seed_idempotent_does_not_replace_work (test_harness.HarnessTests.test_seed_idempotent_does_not_replace_work) ... ok
+test_snapshot_and_cli_are_portable (test_harness.HarnessTests.test_snapshot_and_cli_are_portable) ... ok
+test_stale_tasks_are_not_stolen_and_recovery_is_explicit (test_harness.HarnessTests.test_stale_tasks_are_not_stolen_and_recovery_is_explicit) ... ok
+test_symlink_escape_when_supported (test_harness.HarnessTests.test_symlink_escape_when_supported) ... skipped 'Symlink creation unavailable to this Windows account.'
+test_unsafe_paths_and_out_of_scope_artifact (test_harness.HarnessTests.test_unsafe_paths_and_out_of_scope_artifact) ... ok
+test_wrong_owner_role_and_state (test_harness.HarnessTests.test_wrong_owner_role_and_state) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 1.545s
+
+OK (skipped=1)
+== ai360 3.12.16
+............s..
+----------------------------------------------------------------------
+Ran 15 tests in 1.422s
+
+OK (skipped=1)
+== live ledger check
+{
+  "ok": true,
+  "tasks": 26,
+  "stale": [],
+  "superseded": [
+    "COORD-001: ai_harness/DECISIONS.md",
+    "COORD-001: ai_harness/RESEARCH_STATUS.md"
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-11-25T07:18:55+00:00",
+  "generated_at": "2026-11-26T07:15:16+00:00",
   "project_root": "C:\\Users\\ericw\\OneDrive\\Documents\\AI 360 (DeepLearning\\Final Project",
   "tasks": [
     {
@@ -176,7 +176,7 @@
           "No files outside the task directory are modified"
         ]
       },
-      "state": "review",
+      "state": "done",
       "owner": "claude-orient-20261122-a",
       "artifacts": [
         {
@@ -187,7 +187,7 @@
       ],
       "summary": "File map, observed local environment (RTX 3080 Ti Laptop 16GB, Python 3.14, no torch), and read-only audit of untracked src/ JPEG tool and ResNet-18 sparse-dictionary AE against AGENTS.md standards.",
       "created": "2026-11-23T06:04:49+00:00",
-      "updated": "2026-11-23T06:05:38+00:00",
+      "updated": "2026-11-26T06:37:46+00:00",
       "stale": false
     },
     {
@@ -209,7 +209,7 @@
           "No unrelated content in shared files removed or rewritten"
         ]
       },
-      "state": "review",
+      "state": "done",
       "owner": "claude-orient-20261122-a",
       "artifacts": [
         {
@@ -225,7 +225,7 @@
       ],
       "summary": "Recorded user's 2026-11-22 adoption of src/ with provenance; separated what it settles from open choices; queued ENG-001 and LIT-002.",
       "created": "2026-11-23T06:10:17+00:00",
-      "updated": "2026-11-23T06:11:14+00:00",
+      "updated": "2026-11-26T06:37:46+00:00",
       "stale": false
     },
     {
@@ -247,7 +247,7 @@
           "Unexecuted checks (real dataset, attainable rates) labeled unexecuted"
         ]
       },
-      "state": "review",
+      "state": "done",
       "owner": "claude-orient-20261122-a",
       "artifacts": [
         {
@@ -288,7 +288,7 @@
       ],
       "summary": "Added src/build_jpeg_dataset.py (batch JPEG, strip metadata, fixed subsampling, per-image full/header/payload bytes, aggregate R_existing/R_raw/savings, split-leak hash check). 7 synthetic tests pass. Finding: ~275-325 B standalone JPEG header makes full-file 50:1 vs raw RGB impossible at 32x32 and 64x64.",
       "created": "2026-11-23T06:11:03+00:00",
-      "updated": "2026-11-23T06:15:58+00:00",
+      "updated": "2026-11-26T06:37:47+00:00",
       "stale": false
     },
     {
@@ -334,7 +334,7 @@
           "Unexecuted checks labeled unexecuted"
         ]
       },
-      "state": "review",
+      "state": "done",
       "owner": "claude-orient-20261122-a",
       "artifacts": [
         {
@@ -345,7 +345,7 @@
       ],
       "summary": "Explained the user's main.py/sparse_workflow/image_data pipeline; verified in-memory JPEG pixels equal ENG-001 stored files (80/80); listed gaps (no same-condition conventional baseline, evaluate on source, frozen-pretrained claim scope, byte accounting) and superseded ORIENT-001/COORD-001 statements.",
       "created": "2026-11-24T06:33:36+00:00",
-      "updated": "2026-11-24T06:34:18+00:00",
+      "updated": "2026-11-26T06:37:46+00:00",
       "stale": false
     },
     {
@@ -365,7 +365,7 @@
           "No src/ edits; no dataset or pretrained-weight downloads unless stated"
         ]
       },
-      "state": "review",
+      "state": "done",
       "owner": "claude-orient-20261122-a",
       "artifacts": [
         {
@@ -401,7 +401,7 @@
       ],
       "summary": "Conda env ai360 (Py 3.12, torch 2.11+cu128) on RTX 3080 Ti Laptop; main.py check PASS on CPU, CUDA, CUDA --pretrained; benchmark: CPU JPEG preprocessing ~129 img/s/process is the bottleneck, GPU features ~2660 img/s, head ~127 steps/s; laptop sufficient for frozen-backbone design.",
       "created": "2026-11-24T06:35:08+00:00",
-      "updated": "2026-11-24T06:40:57+00:00",
+      "updated": "2026-11-26T06:37:27+00:00",
       "stale": false
     },
     {
@@ -423,7 +423,7 @@
           "main.py train --plan-only runs against the extracted val folder"
         ]
       },
-      "state": "review",
+      "state": "done",
       "owner": "claude-orient-20261122-a",
       "artifacts": [
         {
@@ -454,7 +454,7 @@
       ],
       "summary": "ImageNet-1K val (50,000 imgs, 6.71 GB) and ImageNetV2 matched-frequency (10,000, 1.24 GB) extracted with original bytes into Datasets/; all hashes and all labels verified; main.py --plan-only gives 45k/5k, 352 batches, 3,520 steps.",
       "created": "2026-11-24T07:11:02+00:00",
-      "updated": "2026-11-24T21:08:24+00:00",
+      "updated": "2026-11-26T06:37:27+00:00",
       "stale": false
     },
     {
@@ -476,13 +476,13 @@
           "No src/ edits; ImageNetV2 untouched"
         ]
       },
-      "state": "review",
+      "state": "done",
       "owner": "claude-orient-20261122-a",
       "artifacts": [
         {
           "path": "ai_harness/artifacts/ENG-004/report.md",
-          "sha256": "a6490a95aadd6937885259bc335f591411c27e13726257a425e9b0bcea6afcb6",
-          "bytes": 4363
+          "sha256": "1b9312292beeabaed1fab045a9f04fed44187a943a2afc4e0c4023f3cf3dfe32",
+          "bytes": 5139
         },
         {
           "path": "ai_harness/artifacts/ENG-004/train_log.txt",
@@ -500,9 +500,9 @@
           "bytes": 628
         }
       ],
-      "summary": "README 45k/5k run: 3m35s total (feature extraction 170s, 10 epochs 36s). Held-out top-1 57.6% source / 57.1% level 20 vs original ResNet fc 70.0% / 69.3%. Head overfits (train 99.8%). Single-seed pilot, not a result.",
+      "summary": "Revised per REVIEW-004 E4-1/E4-2: the 5k 'held-out' set is also the best.pt selection set, so scores are selection-biased (likely <=1-2 pp). README 45k/5k run: 3m35s total (feature extraction 170s, 10 epochs 36s). Top-1 on that set 57.6% source / 57.1% level 20 vs original fc 70.0% / 69.3%. Head overfits (train 99.8%). Single-seed pilot, not a result.",
       "created": "2026-11-24T21:35:03+00:00",
-      "updated": "2026-11-24T21:40:37+00:00",
+      "updated": "2026-11-26T06:44:10+00:00",
       "stale": false
     },
     {
@@ -525,7 +525,7 @@
           "Results labeled single-seed pilot"
         ]
       },
-      "state": "review",
+      "state": "done",
       "owner": "claude-orient-20261122-a",
       "artifacts": [
         {
@@ -576,7 +576,7 @@
       ],
       "summary": "Added src/baseline_head.py (linear head on same frozen features, reusing main.py split/cache/seeds/selection). Same split digest for all. Held-out top-1 @source: sparse k32 57.6%, dense k2048 63.2%, linear 62.0%, original fc 70.0%. Single-seed pilot; selection on reported split noted.",
       "created": "2026-11-24T22:37:44+00:00",
-      "updated": "2026-11-24T22:54:04+00:00",
+      "updated": "2026-11-26T06:37:28+00:00",
       "stale": false
     },
     {
@@ -597,7 +597,7 @@
           "User decisions are listed separately from defaults"
         ]
       },
-      "state": "review",
+      "state": "done",
       "owner": "claude-orient-20261122-a",
       "artifacts": [
         {
@@ -613,7 +613,7 @@
       ],
       "summary": "GRID-001 plan: 8 JPEG levels (source..100; measured 4.8:1 to 229:1 vs raw, 50:1 between levels 80-85) x {sparse k32, dense k2048, linear} x 3 seeds = 72 runs, select on 5k val, test once on ImageNetV2 source; ~1.5-2 h; user decisions listed.",
       "created": "2026-11-24T23:11:45+00:00",
-      "updated": "2026-11-24T23:13:22+00:00",
+      "updated": "2026-11-26T06:37:28+00:00",
       "stale": false
     },
     {
@@ -944,13 +944,13 @@
           "Blocking problems distinguished from optional improvements; independent recomputation of key numbers shown"
         ]
       },
-      "state": "review",
+      "state": "done",
       "owner": "reviewer-20261125-a",
       "artifacts": [
         {
           "path": "ai_harness/artifacts/REVIEW-002/report.md",
-          "sha256": "85cfa99d715de951188753fb09133990b98655e4d3ffe3ce5bb76c2445256bdd",
-          "bytes": 9972
+          "sha256": "808f0018be9fbc6695e032e6626ed1399b7c564dadd135ce3593bc6dd75c1c7d",
+          "bytes": 12046
         },
         {
           "path": "ai_harness/artifacts/REVIEW-002/recompute/independent_check.py",
@@ -1023,9 +1023,9 @@
           "bytes": 3468
         }
       ],
-      "summary": "Independent review: GRID-001, GRID-002, ABL-001 all revise, no blocking findings. analyze.py outputs reproduce byte-identically; own recompute matches all tables, done.json, best.pt, bytes (q20 615,578,103 B, 50.3:1). Should-fix: GRID-001 M-sweep epoch-1 checkpoints (M<=1024); GRID-002 sparse>linear 'established' overstated (>=1 pp only at source/L20); ABL-001 'gain from MSE not sparsity/width' does not follow (dense-mse vs linear +0.39, sparsity|MSE +0.46).",
+      "summary": "Independent review of GRID-001, GRID-002, ABL-001. Round 1: all revise (no blocking); analyze.py outputs byte-identical, own recompute matches all tables/bytes. Round 2: all accepted after report revisions; residual nits noted. Addendum after REVIEW-005: G2-1 per-seed sparse-linear means over GRID-002's 7 levels are 0.95/0.90/0.89 (mean 0.91), not the 5-level 0.76/0.80/0.79; conclusion unchanged (<1 pp). ABL-001 ledger summary still states withdrawn MSE claim.",
       "created": "2026-11-25T07:01:03+00:00",
-      "updated": "2026-11-25T07:15:10+00:00",
+      "updated": "2026-11-26T06:44:45+00:00",
       "stale": false
     },
     {
@@ -1045,13 +1045,13 @@
           "Lists what remains unresolved and the pending reviews"
         ]
       },
-      "state": "review",
+      "state": "done",
       "owner": "claude-orient-20261122-a",
       "artifacts": [
         {
           "path": "ai_harness/artifacts/COORD-002/status.md",
-          "sha256": "1c67ef255fa9ec6a222eac931bf37b4ed80c1485d8f5199e0390cf340eca17dd",
-          "bytes": 4631
+          "sha256": "36bb976c50f0040e81d5fcc480e77566439ea53fa760fb057b9f0d689e415c85",
+          "bytes": 8577
         },
         {
           "path": "ai_harness/artifacts/COORD-002/task.json",
@@ -1059,9 +1059,323 @@
           "bytes": 957
         }
       ],
-      "summary": "Task-local status note of reviewer-accepted results from GRID-001/GRID-002/ABL-001, plus erratum: ABL-001 ledger summary carries withdrawn wording; report.md is authoritative.",
+      "summary": "Revision 2 per REVIEW-005: status note of reviewer-accepted results (GRID-001/002, ABL-001) with qualified head ranking (only sparse>linear sign is consistent; >=1 pp only at source/L20), erratum for two stale ledger summaries (ABL-001, GRID-002) and for numbers in done reports (per-seed 0.95/0.90/0.89; 3.3-6.8 pp; epoch ranges; R_raw wording), plus ENG-004 selection-bias and 64x64 header caveats.",
       "created": "2026-11-25T07:18:32+00:00",
-      "updated": "2026-11-25T07:18:54+00:00",
+      "updated": "2026-11-26T06:44:44+00:00",
+      "stale": false
+    },
+    {
+      "id": "REVIEW-003",
+      "spec": {
+        "id": "REVIEW-003",
+        "title": "Independent review of setup tasks: ORIENT-001, ORIENT-002, COORD-001, ENG-001",
+        "role": "reviewer",
+        "description": "User requested (2026-11-25) independent review of tasks still in review. Review the codebase audits ORIENT-001 and ORIENT-002 against src/, COORD-001 (DECISIONS.md / RESEARCH_STATUS.md edits recording adoption of the user's src/), and ENG-001 (src/build_jpeg_dataset.py byte tool and its tests). Read-only outside this folder; record a verdict per task with the review CLI.",
+        "depends_on": [],
+        "write_paths": [
+          "ai_harness/artifacts/REVIEW-003"
+        ],
+        "acceptance": [
+          "Each of the four tasks receives a recorded verdict citing this report",
+          "Findings have severity, location and evidence",
+          "Code claims checked against the actual source; tests re-run where cheap"
+        ]
+      },
+      "state": "done",
+      "owner": "reviewer-20261125-b",
+      "artifacts": [
+        {
+          "path": "ai_harness/artifacts/REVIEW-003/report.md",
+          "sha256": "5beb921896e4cb761405f80e326e5770ccb02e2c8b06a2e06a917ede10a4179c",
+          "bytes": 23156
+        },
+        {
+          "path": "ai_harness/artifacts/REVIEW-003/task.json",
+          "sha256": "013225de0f8ca53b55b459fe306a7f04cdb2211f4cb85e5e325e832cea61d36a",
+          "bytes": 809
+        }
+      ],
+      "summary": "Reviewed ORIENT-001, ORIENT-002, COORD-001, ENG-001: all accepted, no blocking. Should-fix follow-up C1-1: DECISIONS.md/RESEARCH_STATUS.md stale since 11-22; coordinator to update under a new task. ENG-001 tests 7/7 on both Pythons; ORIENT-002 pixel check reproduced 80/80.",
+      "created": "2026-11-26T06:31:02+00:00",
+      "updated": "2026-11-26T06:44:45+00:00",
+      "stale": false
+    },
+    {
+      "id": "REVIEW-004",
+      "spec": {
+        "id": "REVIEW-004",
+        "title": "Independent review of environment, data and pilot tasks: ENG-002, ENG-003, ENG-004, ENG-005, REASON-002",
+        "role": "reviewer",
+        "description": "User requested (2026-11-25) independent review of tasks still in review. ENG-002 (PyTorch env and main.py check), ENG-003 (ImageNet-1K val and ImageNetV2 download into Datasets/), ENG-004 (first 45k/5k training pilot), ENG-005 (linear baseline and dense control pilot), REASON-002 (experiment plan later executed as GRID-001). Read-only outside this folder; no training or downloads; sample-based data checks only. Record a verdict per task.",
+        "depends_on": [],
+        "write_paths": [
+          "ai_harness/artifacts/REVIEW-004"
+        ],
+        "acceptance": [
+          "Each of the five tasks receives a recorded verdict citing this report",
+          "Measured claims spot-checked against logs, JSON outputs and data manifests",
+          "Findings have severity, location and evidence"
+        ]
+      },
+      "state": "done",
+      "owner": "reviewer-20261125-c",
+      "artifacts": [
+        {
+          "path": "ai_harness/artifacts/REVIEW-004/report.md",
+          "sha256": "1285728634b4319b6b8a33c3b8f77e2cb83ba2d4f5ab953ab3bf8cb62745a9d3",
+          "bytes": 21378
+        },
+        {
+          "path": "ai_harness/artifacts/REVIEW-004/task.json",
+          "sha256": "91f049656ad34c74c3abea873a65b3c06ce289d6938b12160c9bfeb45d3a34aa",
+          "bytes": 906
+        }
+      ],
+      "summary": "Verdicts: ENG-002 accept, ENG-003 accept, ENG-004 revise (E4-1: held-out 5k is the best.pt selection set, undisclosed; add caveat), ENG-005 accept, REASON-002 accept (R2-1 fc-init auto/budget gap remedied in GRID-001/002). Sampled hashes, labels, V2 overlap, timings, metrics, digests verified.",
+      "created": "2026-11-26T06:31:02+00:00",
+      "updated": "2026-11-26T06:44:33+00:00",
+      "stale": false
+    },
+    {
+      "id": "REVIEW-005",
+      "spec": {
+        "id": "REVIEW-005",
+        "title": "Independent review of REVIEW-002 and COORD-002",
+        "role": "reviewer",
+        "description": "User requested (2026-11-25) independent review of tasks still in review. REVIEW-002 is the review of GRID-001/GRID-002/ABL-001 by reviewer-20261125-a (report text transcribed by the experiments' author); COORD-002 is the author's summary of accepted results plus an erratum. Check the review's recomputation and that COORD-002 states only what the accepted reports support. Read-only outside this folder. Record a verdict per task.",
+        "depends_on": [],
+        "write_paths": [
+          "ai_harness/artifacts/REVIEW-005"
+        ],
+        "acceptance": [
+          "Both tasks receive a recorded verdict citing this report",
+          "COORD-002 claims traced to specific sections of the accepted reports",
+          "REVIEW-002 transcription and recompute outputs checked"
+        ]
+      },
+      "state": "done",
+      "owner": "reviewer-20261125-d",
+      "artifacts": [
+        {
+          "path": "ai_harness/artifacts/REVIEW-005/report.md",
+          "sha256": "108ea52d0f852d7c01050449ce0c81cb4204f61512d9f99d75538ef449ba235c",
+          "bytes": 18191
+        }
+      ],
+      "summary": "Independent review of REVIEW-002 and COORD-002: both revise, no blocking. REVIEW-002 R-1 should-fix: G2-1 per-seed means 0.76/0.80/0.79 are ABL 5-level values; GRID-002 7-level are 0.95/0.90/0.89 (propagated to GRID-002 line 20). COORD-002 C-1: ranking sparse>dense>linear lacks qualifiers; C-2: erratum misstates cause/BOARD.md location, misses stale GRID-002 summary; C-3 optional: 3.5 -> 3.3.",
+      "created": "2026-11-26T06:31:02+00:00",
+      "updated": "2026-11-26T06:44:10+00:00",
+      "stale": false
+    },
+    {
+      "id": "SEED-001",
+      "spec": {
+        "id": "SEED-001",
+        "title": "More seeds: is the sparse-vs-dense (and sparse-vs-linear) gap real?",
+        "role": "engineer",
+        "description": "User approved (2026-11-25). Pre-registered before any run. Models: sparse (M2048 k512) and dense (M2048 k2048), both Xavier fc, He encoder, loss CE + feature MSE only (ABL-001 'abl-mse' weights 1/0/0); linear (Xavier, wd 1e-4, GRID-002). Everything else as GRID-002 (10 epochs, batch 128, Adam 1e-3, best.pt by val top-1 then CE, cached GRID-001 features read-only). Levels: source, 80, 90. NEW seeds 45-51 (7 seeds; each seed sets split, init and batch order). Test: original ImageNetV2 (source), once per run after training. 63 runs. New wrapper src/run_seeds.py; existing scripts unchanged; last.pt deleted. PRE-DECLARED ANALYSIS: primary = the 7 new seeds only (independent of the 3 seeds that motivated the question); per level and pooled over the 3 levels (per-seed mean over levels), paired differences sparse-dense and sparse-linear with mean, sd, two-sided paired t 95% CI (df=6), and sign count. Decision: an effect is 'detected' if the 95% CI excludes 0, and 'meaningful' only if its mean is >= 1.0 pp (the project tolerance). Secondary = all 10 seeds (42-51) combining ABL-001 abl-mse and GRID-002 linear runs, which use identical settings. No other comparisons are confirmatory.",
+        "depends_on": [],
+        "write_paths": [
+          "src/run_seeds.py",
+          "runs/SEED-001",
+          "ai_harness/artifacts/SEED-001"
+        ],
+        "acceptance": [
+          "Design and analysis rule recorded in task.json before the first run (timestamps)",
+          "Split digests per seed consistent across the three models; seeds 45-51 distinct from 42-44",
+          "Report gives the pre-declared primary result first, secondary after, with CIs and sign counts",
+          "User src files and all submitted artifacts unmodified"
+        ]
+      },
+      "state": "active",
+      "owner": "claude-orient-20261122-a",
+      "artifacts": [
+        {
+          "path": "ai_harness/artifacts/SEED-001/report.md",
+          "sha256": "e3b730674d841b2a1f59d089d3ea4ef512e22d024b056216e5d6eac245afd7b5",
+          "bytes": 5332
+        },
+        {
+          "path": "ai_harness/artifacts/SEED-001/analysis.md",
+          "sha256": "811be05dcbca66651ed75e0c2095523cde90e48ccbaf071869bc1fbde5c7394e",
+          "bytes": 2698
+        },
+        {
+          "path": "ai_harness/artifacts/SEED-001/analysis.json",
+          "sha256": "a142eec225b7171ea97230ffdf1105ac18367ea8501970b2bb8bf234a4971a5d",
+          "bytes": 15584
+        },
+        {
+          "path": "ai_harness/artifacts/SEED-001/analyze.py",
+          "sha256": "f42bb9c1f7fac4dc38a7d48223785a272a853968d7b15d177b68d9cb909c61ae",
+          "bytes": 5006
+        },
+        {
+          "path": "ai_harness/artifacts/SEED-001/task.json",
+          "sha256": "bc39008dba29e2b47cc25f95eaf950e8105ef12dbafec1e9390df2208af6bf67",
+          "bytes": 1818
+        },
+        {
+          "path": "ai_harness/artifacts/SEED-001/grid_log.txt",
+          "sha256": "75da63cc5462bf9775f7cd85521b616679dc44f797c0f79a22382ad6221a118f",
+          "bytes": 207643
+        },
+        {
+          "path": "ai_harness/artifacts/SEED-001/summary_log.txt",
+          "sha256": "ef07462e6761e07f448553f854353559c31e3a1e85181a06ebc3999e9fd3ae4c",
+          "bytes": 193
+        },
+        {
+          "path": "src/run_seeds.py",
+          "sha256": "6c86a28d2e87d6bd13ed32f05ad9b7f05e5f943b47c1f0c6aecc55de4da8d14a",
+          "bytes": 3070
+        },
+        {
+          "path": "runs/SEED-001/results.csv",
+          "sha256": "3544d4ee3b6cb951083f04bccf76e997fa1945146fc02f7c43aa0d9bf65a1a31",
+          "bytes": 24190
+        },
+        {
+          "path": "runs/SEED-001/summary.csv",
+          "sha256": "90cbbfb532f09f9c53a5a5e282c1f2e6206cc84f5b1f0197af629e9ae84df560",
+          "bytes": 1890
+        },
+        {
+          "path": "runs/SEED-001/settings.json",
+          "sha256": "4a4cd1f470af9f8b313f0790c867c8da67faeb4c5d629e92302b14814364f57e",
+          "bytes": 721
+        }
+      ],
+      "summary": "Pre-registered 7 new seeds (45-51), 63 runs. Pooled over source/L80/L90: sparse-dense +0.41 pp [0.29,0.53] 7/7 (detected, <1 pp); sparse-linear +0.97 [0.78,1.15] 7/7 (>=1 pp only at source, 1.23); dense-linear +0.55 [0.34,0.77]. All-10-seed secondary agrees. Gaps shrink with compression: sparsity adds a small fixed benefit, not compression tolerance.",
+      "created": "2026-11-26T06:37:09+00:00",
+      "updated": "2026-11-26T07:13:29+00:00",
+      "stale": false
+    },
+    {
+      "id": "COORD-003",
+      "spec": {
+        "id": "COORD-003",
+        "title": "Bring DECISIONS.md and RESEARCH_STATUS.md up to date (REVIEW-003 C1-1)",
+        "role": "coordinator",
+        "description": "REVIEW-003 found the shared files stale since 2026-11-22 (entry point, dataset, baseline, environment, ENG-001 status, audit link, results). Add dated 2026-11-25 sections recording user decisions and accepted results with provenance; keep earlier text as history; point to ORIENT-002 and COORD-002/status.md.",
+        "depends_on": [],
+        "write_paths": [
+          "ai_harness/DECISIONS.md",
+          "ai_harness/RESEARCH_STATUS.md",
+          "ai_harness/artifacts/COORD-003"
+        ],
+        "acceptance": [
+          "Every new status cites a user decision, accepted task, or measured run",
+          "Earlier content preserved as history, superseded items marked",
+          "No result stated more strongly than COORD-002/status.md"
+        ]
+      },
+      "state": "done",
+      "owner": "claude-orient-20261122-a",
+      "artifacts": [
+        {
+          "path": "ai_harness/DECISIONS.md",
+          "sha256": "7db973cf78b563ae4187379e5491b2bea71c9cde397aa846907b2f44e11abf7d",
+          "bytes": 12008
+        },
+        {
+          "path": "ai_harness/RESEARCH_STATUS.md",
+          "sha256": "ffdf00dcdc09895f3451bd486ab7e57455cb2bfc917b6950d93c7f308adf41a4",
+          "bytes": 7964
+        },
+        {
+          "path": "ai_harness/artifacts/COORD-003/task.json",
+          "sha256": "3ecd525812ac3dc28299ae13b8f91e4699c6bb5884e5c8b738a2d0bb29ade60a",
+          "bytes": 799
+        }
+      ],
+      "summary": "Revised per reviewer-20261125-b: DECISIONS.md 'Current state, 2026-11-25' (entry point, data, test-reuse caveat, env, baseline, plan, claim scope, 98% target tested/not met, init decision, results pointer, review states, repo), old target/init lines marked superseded, ENG-003 attributed as agent download approved by user; RESEARCH_STATUS.md 2026-11-25 update. Earlier text kept as history.",
+      "created": "2026-11-26T06:42:56+00:00",
+      "updated": "2026-11-26T06:48:31+00:00",
+      "stale": false
+    },
+    {
+      "id": "HARNESS-001",
+      "spec": {
+        "id": "HARNESS-001",
+        "title": "Let a later accepted task supersede a shared-file artifact of an earlier done task",
+        "role": "engineer",
+        "description": "harness.py check fails whenever an integration file (e.g. ai_harness/DECISIONS.md) is legitimately updated by a later task (COORD-003) because the earlier done task (COORD-001) still pins the old hash. Found by REVIEW-003/004/005 reviewers on 2026-11-25. Change check(): for each artifact path, only the review/done task with the most recent submit event must match the file; earlier holders of the same path are reported as 'superseded' instead of failing. Add a unit test; all existing tests must pass.",
+        "depends_on": [],
+        "write_paths": [
+          "ai_harness/harness.py",
+          "ai_harness/test_harness.py",
+          "ai_harness/artifacts/HARNESS-001"
+        ],
+        "acceptance": [
+          "check passes when a later submitted task re-registers a shared file, and lists the superseded path",
+          "check still fails if the latest holder's file is changed after submission",
+          "All tests pass under py and the ai360 Python"
+        ]
+      },
+      "state": "done",
+      "owner": "claude-orient-20261122-a",
+      "artifacts": [
+        {
+          "path": "ai_harness/harness.py",
+          "sha256": "a243e2089737b4f2b722297add02d9a678de4bd5f16c97928af77e3bf165d6e6",
+          "bytes": 24260
+        },
+        {
+          "path": "ai_harness/test_harness.py",
+          "sha256": "a5b0532f1b53e7ee89ade12c4f89e11cacd2e6a6ba2d8467d641365122a59cb7",
+          "bytes": 12506
+        },
+        {
+          "path": "ai_harness/artifacts/HARNESS-001/task.json",
+          "sha256": "381786d3a12ab555b3d07d5d59b58aac311de7f00fb56b128ad78d63fa9fefcd",
+          "bytes": 1032
+        },
+        {
+          "path": "ai_harness/artifacts/HARNESS-001/test_output.txt",
+          "sha256": "7b7c4ef8a3f6ba9d4c7c42521489aa6646a066f095fa8127da2bd62ac3f55e96",
+          "bytes": 2493
+        }
+      ],
+      "summary": "check() now verifies each shared-file artifact only against the review/done task with the latest submit event; earlier holders are listed under 'superseded' instead of failing. New test covers supersede + later tamper. 15 tests pass (1 symlink skip) on py 3.14 and ai360 3.12; live check ok with COORD-001's two files superseded by COORD-003.",
+      "created": "2026-11-26T06:45:04+00:00",
+      "updated": "2026-11-26T06:48:32+00:00",
+      "stale": false
+    },
+    {
+      "id": "REVIEW-006",
+      "spec": {
+        "id": "REVIEW-006",
+        "title": "Independent review of SEED-001 (more seeds, pre-registered)",
+        "role": "reviewer",
+        "description": "User requested (2026-11-26) a review of SEED-001 before the next experiment. Check that the pre-registration in task.json predates the first run, that the analysis implements exactly the pre-declared rule, recompute the key numbers from runs/SEED-001, runs/ABL-001 and runs/GRID-002 results.csv, verify settings match the cited earlier runs, splits, and that the report does not overclaim. Read-only outside this folder; no training. Record a verdict.",
+        "depends_on": [],
+        "write_paths": [
+          "ai_harness/artifacts/REVIEW-006"
+        ],
+        "acceptance": [
+          "Verdict on SEED-001 recorded citing this report",
+          "Primary and secondary numbers independently recomputed",
+          "Pre-registration timing and rule adherence verified from the ledger and file timestamps"
+        ]
+      },
+      "state": "review",
+      "owner": "reviewer-20261125-d",
+      "artifacts": [
+        {
+          "path": "ai_harness/artifacts/REVIEW-006/report.md",
+          "sha256": "cc164131c55e37e6b89d887565587298f9e28d74d8b714361683c3515c074b58",
+          "bytes": 14015
+        },
+        {
+          "path": "ai_harness/artifacts/REVIEW-006/task.json",
+          "sha256": "36ce9a7c658b0a13755dc227291e9dfe03134dc9cf0b12fba8533a86b8d7ba08",
+          "bytes": 872
+        }
+      ],
+      "summary": "Review of SEED-001: revise, no blocking. Pre-registration timing, all primary/secondary numbers, settings equivalence and splits verified. Should-fix: S-1 per-level sign counts 6/7,6/7,7/7 not 'every seed every level'; S-2 dense-linear not pre-registered, label exploratory; S-3 'gaps shrink' not pre-registered and not detected for sparse-dense (+0.16 [-0.18,0.50]).",
+      "created": "2026-11-26T07:10:10+00:00",
+      "updated": "2026-11-26T07:15:16+00:00",
       "stale": false
     }
   ],
@@ -1577,6 +1891,374 @@
       "agent": "claude-orient-20261122-a",
       "detail": "Task-local status note of reviewer-accepted results from GRID-001/GRID-002/ABL-001, plus erratum: ABL-001 ledger summary carries withdrawn wording; report.md is authoritative.",
       "at": "2026-11-25T07:18:54+00:00"
+    },
+    {
+      "seq": 65,
+      "task": "REVIEW-003",
+      "action": "add",
+      "agent": "coordinator",
+      "detail": "Added task specification",
+      "at": "2026-11-26T06:31:02+00:00"
+    },
+    {
+      "seq": 66,
+      "task": "REVIEW-004",
+      "action": "add",
+      "agent": "coordinator",
+      "detail": "Added task specification",
+      "at": "2026-11-26T06:31:02+00:00"
+    },
+    {
+      "seq": 67,
+      "task": "REVIEW-005",
+      "action": "add",
+      "agent": "coordinator",
+      "detail": "Added task specification",
+      "at": "2026-11-26T06:31:02+00:00"
+    },
+    {
+      "seq": 68,
+      "task": "REVIEW-004",
+      "action": "claim",
+      "agent": "reviewer-20261125-c",
+      "detail": "reviewer",
+      "at": "2026-11-26T06:31:49+00:00"
+    },
+    {
+      "seq": 69,
+      "task": "REVIEW-005",
+      "action": "claim",
+      "agent": "reviewer-20261125-d",
+      "detail": "reviewer",
+      "at": "2026-11-26T06:31:50+00:00"
+    },
+    {
+      "seq": 70,
+      "task": "REVIEW-003",
+      "action": "claim",
+      "agent": "reviewer-20261125-b",
+      "detail": "reviewer",
+      "at": "2026-11-26T06:31:50+00:00"
+    },
+    {
+      "seq": 71,
+      "task": "REVIEW-002",
+      "action": "review-revise",
+      "agent": "reviewer-20261125-d",
+      "detail": "REVIEW-005 (full text: ai_harness/artifacts/REVIEW-005/report.md, to be saved by coordinator). Review is sound; 15/15 hashes ok; recompute analysis.md/json byte-identical to submitted; quoted tables, M-sweep best epochs/val curves, whole-pool bytes (q20 683,922,845 B, R_raw 50.22) re-verified. SHOULD-FIX R-1: G2-1 'per-seed means 0.76/0.80/0.79' are ABL-001 5-level sparse-full-linear means; over GRID-002's 7 levels (the 21 pairs) they are 0.95/0.90/0.89. Same in ledger note seq 53 (reviewer's error, not transcription); propagated into accepted GRID-002 report line 20. Conclusion unchanged (<1 pp). Fix: dated addendum in report.md + coordinator erratum for GRID-002 line 20. OPTIONAL R-2: report.md records only revise round; summarize accept re-reviews (seq 59-61). R-3: leftovers missed in re-review: GRID-002 headline 4 still states inheritance explanation as fact; GRID-001 headline 1 'against raw RGB'; ABL-001 line 92 dense-mse epochs 5-8; GRID-001 line 141 epochs 5-7 is mode not range.",
+      "at": "2026-11-26T06:37:03+00:00"
+    },
+    {
+      "seq": 72,
+      "task": "COORD-002",
+      "action": "review-revise",
+      "agent": "reviewer-20261125-d",
+      "detail": "REVIEW-005 (full text: ai_harness/artifacts/REVIEW-005/report.md, to be saved by coordinator). All claims traced; most numbers match. SHOULD-FIX C-1: item 3 'sparse > dense > linear' drops qualifiers: sparse-dense not established (GRID-002 headline 1), dense-linear 0.12-0.85 pp all <1 pp, linear best at L100. SHOULD-FIX C-2: erratum says stale text is in BOARD.md (BOARD has no summaries) and that the ledger could not accept a new summary, but the author's resubmit (seq 58) set the summary and kept the withdrawn sentence; GRID-002 summary ('explains GRID-001 ranking') also stale and not flagged. OPTIONAL C-3: '3.5-6.8 pp' should be 3.3-6.8 (sparse L20 3.26; origin GRID-002 sec 4 line 97); fix in same revision. C-4: L95 min 2.70 not 3; heads 46-54% not 48-54%. C-5: cite ledger accept events 59-61. C-6: item 5 wording vs small consistent L95/L80 sparse-dense retention.",
+      "at": "2026-11-26T06:37:03+00:00"
+    },
+    {
+      "seq": 73,
+      "task": "SEED-001",
+      "action": "add",
+      "agent": "coordinator",
+      "detail": "Added task specification",
+      "at": "2026-11-26T06:37:09+00:00"
+    },
+    {
+      "seq": 74,
+      "task": "SEED-001",
+      "action": "claim",
+      "agent": "claude-orient-20261122-a",
+      "detail": "engineer",
+      "at": "2026-11-26T06:37:09+00:00"
+    },
+    {
+      "seq": 75,
+      "task": "ENG-002",
+      "action": "review-accept",
+      "agent": "reviewer-20261125-c",
+      "detail": "All criteria met; versions, conda-forge channels, check PASS outputs and bench JSON verified. Optional notes only. See ai_harness/artifacts/REVIEW-004/report.md",
+      "at": "2026-11-26T06:37:27+00:00"
+    },
+    {
+      "seq": 76,
+      "task": "ENG-003",
+      "action": "review-accept",
+      "agent": "reviewer-20261125-c",
+      "detail": "Counts 50k/1000x50 and 10k/1000x10, manifest=disk paths, 200+200 sampled sha256/size/decode match, 0/50k label mismatches, 0 V2-pool overlap. Optional: note 29 conflicting-label duplicate groups in DATASETS.md. See ai_harness/artifacts/REVIEW-004/report.md",
+      "at": "2026-11-26T06:37:27+00:00"
+    },
+    {
+      "seq": 77,
+      "task": "ENG-004",
+      "action": "review-revise",
+      "agent": "reviewer-20261125-c",
+      "detail": "Should-fix E4-1: the reported 'held-out' 5k is exactly the best.pt selection set (recomputed; 0.5710 = epoch-8 selection score) but the report does not say so. Add a one-sentence selection-bias caveat/addendum and resubmit; no rerun. All timings/metrics otherwise verified. See ai_harness/artifacts/REVIEW-004/report.md",
+      "at": "2026-11-26T06:37:28+00:00"
+    },
+    {
+      "seq": 78,
+      "task": "ENG-005",
+      "action": "review-accept",
+      "agent": "reviewer-20261125-c",
+      "detail": "Identical split digest in all 3 best.pt verified; src hashes match; all metrics/epochs/timings recomputed; selection bias and single-seed disclosed. Optional wording notes. See ai_harness/artifacts/REVIEW-004/report.md",
+      "at": "2026-11-26T06:37:28+00:00"
+    },
+    {
+      "seq": 79,
+      "task": "REASON-002",
+      "action": "review-accept",
+      "agent": "reviewer-20261125-c",
+      "detail": "Criteria met (grid/controls/metric explicit, test never used for selection, estimates from pilot timings, decisions separate). R2-1: fc-init auto clean-data init and unequal budgets not flagged, but remedied/disclosed in accepted GRID-001/002; no revision needed. See ai_harness/artifacts/REVIEW-004/report.md",
+      "at": "2026-11-26T06:37:28+00:00"
+    },
+    {
+      "seq": 80,
+      "task": "ORIENT-001",
+      "action": "review-accept",
+      "agent": "reviewer-20261125-b",
+      "detail": "Criteria met; code claims hold against current src/ (pre-11-23 text unrecoverable). Optional only: file map omits ai_harness/.gitignore; src/__pycache__ create+delete disclosed; dated statements superseded (see C1-1). See ai_harness/artifacts/REVIEW-003/report.md §1.",
+      "at": "2026-11-26T06:37:46+00:00"
+    },
+    {
+      "seq": 81,
+      "task": "ORIENT-002",
+      "action": "review-accept",
+      "agent": "reviewer-20261125-b",
+      "detail": "All cited line ranges verified; pixel-identity check reproduced 80/80, byte delta 0-200 B under Pillow 12.1 and 13.0. Optional: claim scope omits folded-fc inheritance; check script not saved; §5 task IDs differ from ledger. See ai_harness/artifacts/REVIEW-003/report.md §2.",
+      "at": "2026-11-26T06:37:46+00:00"
+    },
+    {
+      "seq": 82,
+      "task": "COORD-001",
+      "action": "review-accept",
+      "agent": "reviewer-20261125-b",
+      "detail": "Provenance, settled vs open choices recorded; prior content preserved. Should-fix follow-up (not a defect of this task): DECISIONS.md/RESEARCH_STATUS.md unchanged since 11-22 and now stale on entry point, dataset, baseline, env, ENG-001; coordinator should update under a new task. See ai_harness/artifacts/REVIEW-003/report.md §3 C1-1.",
+      "at": "2026-11-26T06:37:46+00:00"
+    },
+    {
+      "seq": 83,
+      "task": "ENG-001",
+      "action": "review-accept",
+      "agent": "reviewer-20261125-b",
+      "detail": "7/7 tests pass (py 3.14/Pillow 12.1 and ai360/Pillow 13.0); pilot table and manifest-vs-file sizes reproduced; formulas match REASON-001 §4. Optional: 64x64 impossibility is encoder-specific; state labels/fs overhead excluded; R_existing includes stripped metadata; CMYK label; truncated user-file hashes. See ai_harness/artifacts/REVIEW-003/report.md §4.",
+      "at": "2026-11-26T06:37:47+00:00"
+    },
+    {
+      "seq": 84,
+      "task": "REVIEW-005",
+      "action": "submit",
+      "agent": "reviewer-20261125-d",
+      "detail": "Independent review of REVIEW-002 and COORD-002: both revise, no blocking. REVIEW-002 R-1 should-fix: G2-1 per-seed means 0.76/0.80/0.79 are ABL 5-level values; GRID-002 7-level are 0.95/0.90/0.89 (propagated to GRID-002 line 20). COORD-002 C-1: ranking sparse>dense>linear lacks qualifiers; C-2: erratum misstates cause/BOARD.md location, misses stale GRID-002 summary; C-3 optional: 3.5 -> 3.3.",
+      "at": "2026-11-26T06:39:11+00:00"
+    },
+    {
+      "seq": 85,
+      "task": "REVIEW-004",
+      "action": "submit",
+      "agent": "reviewer-20261125-c",
+      "detail": "Verdicts: ENG-002 accept, ENG-003 accept, ENG-004 revise (E4-1: held-out 5k is the best.pt selection set, undisclosed; add caveat), ENG-005 accept, REASON-002 accept (R2-1 fc-init auto/budget gap remedied in GRID-001/002). Sampled hashes, labels, V2 overlap, timings, metrics, digests verified.",
+      "at": "2026-11-26T06:41:25+00:00"
+    },
+    {
+      "seq": 86,
+      "task": "REVIEW-003",
+      "action": "submit",
+      "agent": "reviewer-20261125-b",
+      "detail": "Reviewed ORIENT-001, ORIENT-002, COORD-001, ENG-001: all accepted, no blocking. Should-fix follow-up C1-1: DECISIONS.md/RESEARCH_STATUS.md stale since 11-22; coordinator to update under a new task. ENG-001 tests 7/7 on both Pythons; ORIENT-002 pixel check reproduced 80/80.",
+      "at": "2026-11-26T06:41:29+00:00"
+    },
+    {
+      "seq": 87,
+      "task": "ENG-004",
+      "action": "submit",
+      "agent": "claude-orient-20261122-a",
+      "detail": "Revised per REVIEW-004 E4-1/E4-2: the 5k 'held-out' set is also the best.pt selection set, so scores are selection-biased (likely <=1-2 pp). README 45k/5k run: 3m35s total (feature extraction 170s, 10 epochs 36s). Top-1 on that set 57.6% source / 57.1% level 20 vs original fc 70.0% / 69.3%. Head overfits (train 99.8%). Single-seed pilot, not a result.",
+      "at": "2026-11-26T06:41:33+00:00"
+    },
+    {
+      "seq": 88,
+      "task": "COORD-002",
+      "action": "submit",
+      "agent": "claude-orient-20261122-a",
+      "detail": "Revision 2 per REVIEW-005: status note of reviewer-accepted results (GRID-001/002, ABL-001) with qualified head ranking (only sparse>linear sign is consistent; >=1 pp only at source/L20), erratum for two stale ledger summaries (ABL-001, GRID-002) and for numbers in done reports (per-seed 0.95/0.90/0.89; 3.3-6.8 pp; epoch ranges; R_raw wording), plus ENG-004 selection-bias and 64x64 header caveats.",
+      "at": "2026-11-26T06:42:21+00:00"
+    },
+    {
+      "seq": 89,
+      "task": "REVIEW-002",
+      "action": "submit",
+      "agent": "reviewer-20261125-a",
+      "detail": "Independent review of GRID-001, GRID-002, ABL-001. Round 1: all revise (no blocking); analyze.py outputs byte-identical, own recompute matches all tables/bytes. Round 2: all accepted after report revisions; residual nits noted. Addendum after REVIEW-005: G2-1 per-seed sparse-linear means over GRID-002's 7 levels are 0.95/0.90/0.89 (mean 0.91), not the 5-level 0.76/0.80/0.79; conclusion unchanged (<1 pp). ABL-001 ledger summary still states withdrawn MSE claim.",
+      "at": "2026-11-26T06:42:28+00:00"
+    },
+    {
+      "seq": 90,
+      "task": "COORD-003",
+      "action": "add",
+      "agent": "coordinator",
+      "detail": "Added task specification",
+      "at": "2026-11-26T06:42:56+00:00"
+    },
+    {
+      "seq": 91,
+      "task": "COORD-003",
+      "action": "claim",
+      "agent": "claude-orient-20261122-a",
+      "detail": "coordinator",
+      "at": "2026-11-26T06:42:57+00:00"
+    },
+    {
+      "seq": 92,
+      "task": "COORD-003",
+      "action": "submit",
+      "agent": "claude-orient-20261122-a",
+      "detail": "Added dated 2026-11-25 'Current state' to DECISIONS.md and an experiments update to RESEARCH_STATUS.md (entry point main.py, datasets, env, baseline, approved plan, claim scope incl. inherited fc, repo, pointer to COORD-002/status.md); 2026-11-22 text kept as history and marked superseded.",
+      "at": "2026-11-26T06:43:08+00:00"
+    },
+    {
+      "seq": 93,
+      "task": "ENG-004",
+      "action": "review-accept",
+      "agent": "reviewer-20261125-c",
+      "detail": "Re-review: E4-1 fixed - new Selection bias paragraph correctly states the 5k set is the best.pt selection set (epoch 8 of 10, 57.1% = selection score), bounds bias ~1-2 pp, exempts original fc; ledger summary updated. E4-2 addressed. Optional nit: 99.76% rounds to 99.8, not 99.7. Other artifacts unchanged (hashes verified). Ref ai_harness/artifacts/REVIEW-004/report.md",
+      "at": "2026-11-26T06:44:10+00:00"
+    },
+    {
+      "seq": 94,
+      "task": "REVIEW-005",
+      "action": "review-accept",
+      "agent": "reviewer-20261125-c",
+      "detail": "Cross-review: recomputed from runs/GRID-002/results.csv - per-seed sparse-linear 7-level means 0.95/0.90/0.89 and 5-level 0.76/0.80/0.79 (R-1 confirmed); dense-linear 0.80/0.85/0.59/0.21/0.57/0.24/0.12; inherited-minus-Xavier 3.26-6.80 (C-3); GRID-002 linear best_epoch>=9 = 9/24; BOARD.md has no summaries (C-2). Findings fair and proportionate; severities reasonable; no blocking.",
+      "at": "2026-11-26T06:44:10+00:00"
+    },
+    {
+      "seq": 95,
+      "task": "COORD-003",
+      "action": "review-revise",
+      "agent": "reviewer-20261125-b",
+      "detail": "ORIENT-002 link added; RESEARCH_STATUS update and headline numbers match COORD-002. Fix in DECISIONS.md: (1) 'Targets' bullets still say 98%-at-50:1 'untested' and init 'unresolved' unmarked; mark superseded, cite COORD-002 item 6/GRID-002 (criterion 2). (2) Test-data row: add COORD-002 'test reuse' caveat (results informed later experiments). (3) ENG-003 provenance: agent downloaded with user approval, not 'user downloaded'. (4) Mark COORD-002/REVIEW-005 as in review where cited as accepted. No report file (minor).",
+      "at": "2026-11-26T06:44:32+00:00"
+    },
+    {
+      "seq": 96,
+      "task": "REVIEW-004",
+      "action": "review-accept",
+      "agent": "reviewer-20261125-b",
+      "detail": "Spot-checked: ENG-004 timings (215/137/33/36 s) and epoch-8 val 0.571 = reported held-out from train_log; manifest sums 6,706,296,736 / 1,244,630,473 over 50k/10k rows; REASON-002 byte-sample arithmetic (0.501 bpp, 47.9:1, 10.04) and GRID-001 bytes_log 50.2. Findings fair; E4-1 revise justified; R2-1 no-revise reasonable. Optional: its own verify script is temp-only.",
+      "at": "2026-11-26T06:44:33+00:00"
+    },
+    {
+      "seq": 97,
+      "task": "COORD-002",
+      "action": "review-accept",
+      "agent": "reviewer-20261125-d",
+      "detail": "REVIEW-005 re-review of status.md rev 2 (hash 36bb976c verified). C-1 to C-6 resolved: ranking qualified (sparse>linear sign only; sparse-dense 0.2-0.8 and dense-linear 0.1-0.9 not established; linear best at L100), erratum now gives correct cause (seq 58 resubmit) and location (ledger summary, not BOARD.md) and adds GRID-002; 3.3-6.8 pp non-causal; L95 2.7-5.0, L100 7.7-18.7, heads 46-54%; acceptances cited as events 59-61; item 5 reworded. Section B correctly carries R-1 (0.95/0.90/0.89) and R-3; values re-checked against results.csv. Section C sourced in ENG-004 report line 45 and REVIEW-003 E1-1 (ENG-004 itself still in review). No new overclaim.",
+      "at": "2026-11-26T06:44:44+00:00"
+    },
+    {
+      "seq": 98,
+      "task": "REVIEW-002",
+      "action": "review-accept",
+      "agent": "reviewer-20261125-d",
+      "detail": "REVIEW-005 re-review: original 9,972-byte text unchanged (prefix sha256 85cfa99d matches round-1 hash); dated addendum appended by reviewer-20261125-a. R-1 resolved: 7-level per-seed means 0.95/0.90/0.89 (mean 0.91), 5-level 0.76/0.80/0.79 correctly attributed, matches my recompute; notes the slip propagated into GRID-002 headline 1 (carried in COORD-002 erratum B). R-2 resolved: re-review accepts and residual nits summarized, consistent with ledger events 59-61. Trivial: warning mentions BOARD, which shows no summaries.",
+      "at": "2026-11-26T06:44:45+00:00"
+    },
+    {
+      "seq": 99,
+      "task": "REVIEW-003",
+      "action": "review-accept",
+      "agent": "reviewer-20261125-d",
+      "detail": "REVIEW-005 cross-review, spot checks all reproduce: (1) ENG-001 pilot/out/manifest.csv means 32x32 q90 310/352/662/R4.6, q5 274/37/310/9.9; 64x64 q50 298/340/638/19.3, q5 275/62/337/36.4; RGB header range 271-329. (2) GRID-001 manifest source_mode: RGB 343,707 rows, L 6,293 rows (899 images x 7), no CMYK. (3) src lines: sparse_workflow.py:251 MSE target is same-input features, :454-457 best.pt by (top1,-CE); build_jpeg_dataset.py:200-204 raw_bytes and bpp formulas; compress_jpeg.py:51-52 quality mapping and optimize=True; ENG-001 test :61-62 asserts only output-side metadata absence (E1-5 fair). Findings fair and proportionate; C1-1 correctly framed as coordinator follow-up. Its 'check ok' was true when run; check now fails only because COORD-003 legitimately replaced DECISIONS.md, which done COORD-001 still pins (harness limitation, not a REVIEW-003 defect).",
+      "at": "2026-11-26T06:44:45+00:00"
+    },
+    {
+      "seq": 100,
+      "task": "HARNESS-001",
+      "action": "add",
+      "agent": "coordinator",
+      "detail": "Added task specification",
+      "at": "2026-11-26T06:45:04+00:00"
+    },
+    {
+      "seq": 101,
+      "task": "HARNESS-001",
+      "action": "claim",
+      "agent": "claude-orient-20261122-a",
+      "detail": "engineer",
+      "at": "2026-11-26T06:45:05+00:00"
+    },
+    {
+      "seq": 102,
+      "task": "COORD-003",
+      "action": "submit",
+      "agent": "claude-orient-20261122-a",
+      "detail": "Revised per reviewer-20261125-b: DECISIONS.md 'Current state, 2026-11-25' (entry point, data, test-reuse caveat, env, baseline, plan, claim scope, 98% target tested/not met, init decision, results pointer, review states, repo), old target/init lines marked superseded, ENG-003 attributed as agent download approved by user; RESEARCH_STATUS.md 2026-11-25 update. Earlier text kept as history.",
+      "at": "2026-11-26T06:45:52+00:00"
+    },
+    {
+      "seq": 103,
+      "task": "HARNESS-001",
+      "action": "submit",
+      "agent": "claude-orient-20261122-a",
+      "detail": "check() now verifies each shared-file artifact only against the review/done task with the latest submit event; earlier holders are listed under 'superseded' instead of failing. New test covers supersede + later tamper. 15 tests pass (1 symlink skip) on py 3.14 and ai360 3.12; live check ok with COORD-001's two files superseded by COORD-003.",
+      "at": "2026-11-26T06:46:12+00:00"
+    },
+    {
+      "seq": 104,
+      "task": "COORD-003",
+      "action": "review-accept",
+      "agent": "reviewer-20261125-b",
+      "detail": "Re-review: all 4 fixes present (98%-target and init rows added, old bullets marked superseded; test-reuse caveat; ENG-003 agent download with user approval; review states flagged). New rows match COORD-002 item 6 (46-54%, 97.7-98.9%). Hash 7db973cf verified. RESEARCH_STATUS unchanged and fine.",
+      "at": "2026-11-26T06:48:31+00:00"
+    },
+    {
+      "seq": 105,
+      "task": "HARNESS-001",
+      "action": "review-accept",
+      "agent": "reviewer-20261125-b",
+      "detail": "Logic read; 15 tests pass (1 skip) on py 3.14 and ai360 3.12, -B, temp in scratch. Probes in temp ledgers all fail closed: partial re-registration still verifies unshared paths; case-variant path maps to one holder; reverting to old content fails; holder sent to revise falls back to previous holder. Claim blocks two busy tasks on one file. Optional: name superseding task in output; supersession needs only submit, not acceptance.",
+      "at": "2026-11-26T06:48:32+00:00"
+    },
+    {
+      "seq": 106,
+      "task": "SEED-001",
+      "action": "submit",
+      "agent": "claude-orient-20261122-a",
+      "detail": "Pre-registered 7 new seeds (45-51), 63 runs. Pooled over source/L80/L90: sparse-dense +0.41 pp [0.29,0.53] 7/7 (detected, <1 pp); sparse-linear +0.97 [0.78,1.15] 7/7 (>=1 pp only at source, 1.23); dense-linear +0.55 [0.34,0.77]. All-10-seed secondary agrees. Gaps shrink with compression: sparsity adds a small fixed benefit, not compression tolerance.",
+      "at": "2026-11-26T07:06:10+00:00"
+    },
+    {
+      "seq": 107,
+      "task": "REVIEW-006",
+      "action": "add",
+      "agent": "coordinator",
+      "detail": "Added task specification",
+      "at": "2026-11-26T07:10:10+00:00"
+    },
+    {
+      "seq": 108,
+      "task": "REVIEW-006",
+      "action": "claim",
+      "agent": "reviewer-20261125-d",
+      "detail": "reviewer",
+      "at": "2026-11-26T07:10:27+00:00"
+    },
+    {
+      "seq": 109,
+      "task": "SEED-001",
+      "action": "review-revise",
+      "agent": "reviewer-20261125-d",
+      "detail": "REVIEW-006 (full text: ai_harness/artifacts/REVIEW-006/report.md, to be saved by coordinator). No blocking: pre-registration verified (ledger add 06:37:09Z = task.json mtime; first run 23:37:32 local; analyze.py last modified 23:37:43, before first test result 23:38:02); all primary/secondary numbers reproduced independently (incl. t quantiles 2.4469/2.2622); settings identical across SEED/ABL abl-mse/GRID-002 linear (done.json, settings.json, tuned.json, linear best.pt, log headers, loss residual ~1e-8); one digest per seed, 10 distinct; 8/8 user src hashes OK; check ok. SHOULD-FIX S-1: report 'What this settles' 1 says sparse-dense 'consistent on every new seed and at every level'; per level it is 6/7 (source), 6/7 (L80), 7/7 (L90). S-2: dense-linear was not a pre-registered comparison (task.json: sparse-dense and sparse-linear only; 'no other comparisons are confirmatory') but is reported as primary with a verdict (report table, '12 primary comparisons', ledger summary, WORK_SUMMARY Step 9 'real'); label exploratory and drop 'implements exactly that rule'. S-3: 'gaps shrink with compression' (report item 3, ledger summary, WORK_SUMMARY TL;DR and Step 9) is not pre-registered and not shown for sparse-dense: per-seed (source - L90) gap change +0.16 [-0.18, 0.50]; vs linear +0.53 [0.15, 0.91] and +0.37 [0.08, 0.66] (exploratory). Optional: scope sparsity claim to k=512/M=2048 with MSE; state src-hash check; Holm keeps all 8 pre-registered tests.",
+      "at": "2026-11-26T07:13:29+00:00"
+    },
+    {
+      "seq": 110,
+      "task": "REVIEW-006",
+      "action": "submit",
+      "agent": "reviewer-20261125-d",
+      "detail": "Review of SEED-001: revise, no blocking. Pre-registration timing, all primary/secondary numbers, settings equivalence and splits verified. Should-fix: S-1 per-level sign counts 6/7,6/7,7/7 not 'every seed every level'; S-2 dense-linear not pre-registered, label exploratory; S-3 'gaps shrink' not pre-registered and not detected for sparse-dense (+0.16 [-0.18,0.50]).",
+      "at": "2026-11-26T07:15:16+00:00"
     }
   ]
 }

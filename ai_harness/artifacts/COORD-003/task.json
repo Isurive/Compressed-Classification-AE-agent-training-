@@ -1,0 +1,4 @@
+{"id": "COORD-003", "title": "Bring DECISIONS.md and RESEARCH_STATUS.md up to date (REVIEW-003 C1-1)", "role": "coordinator",
+ "description": "REVIEW-003 found the shared files stale since 2026-11-22 (entry point, dataset, baseline, environment, ENG-001 status, audit link, results). Add dated 2026-11-25 sections recording user decisions and accepted results with provenance; keep earlier text as history; point to ORIENT-002 and COORD-002/status.md.",
+ "depends_on": [], "write_paths": ["ai_harness/DECISIONS.md", "ai_harness/RESEARCH_STATUS.md", "ai_harness/artifacts/COORD-003"],
+ "acceptance": ["Every new status cites a user decision, accepted task, or measured run", "Earlier content preserved as history, superseded items marked", "No result stated more strongly than COORD-002/status.md"]}

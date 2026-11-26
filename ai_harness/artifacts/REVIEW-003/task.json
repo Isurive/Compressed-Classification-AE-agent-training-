@@ -1,0 +1,4 @@
+{"id": "REVIEW-003", "title": "Independent review of setup tasks: ORIENT-001, ORIENT-002, COORD-001, ENG-001", "role": "reviewer",
+ "description": "User requested (2026-11-25) independent review of tasks still in review. Review the codebase audits ORIENT-001 and ORIENT-002 against src/, COORD-001 (DECISIONS.md / RESEARCH_STATUS.md edits recording adoption of the user's src/), and ENG-001 (src/build_jpeg_dataset.py byte tool and its tests). Read-only outside this folder; record a verdict per task with the review CLI.",
+ "depends_on": [], "write_paths": ["ai_harness/artifacts/REVIEW-003"],
+ "acceptance": ["Each of the four tasks receives a recorded verdict citing this report", "Findings have severity, location and evidence", "Code claims checked against the actual source; tests re-run where cheap"]}

@@ -141,6 +141,24 @@ class HarnessTests(unittest.TestCase):
         with self.assertRaises(HarnessError):
             self.ledger.check()
 
+    def test_later_task_supersedes_shared_file_of_done_task(self):
+        shared = "ai_harness/SHARED.md"
+        self.ledger.add(task("COORD-A", scopes=[shared]))
+        self.ledger.add(task("COORD-B", scopes=[shared]))
+        (self.root / shared).write_text("Version one.", encoding="utf-8")
+        self.ledger.claim("COORD-A", "writer", "literature")
+        self.ledger.mutate("submit", "COORD-A", "writer", artifacts=[shared], summary="First version")
+        self.ledger.mutate("review", "COORD-A", "critic", verdict="accept", note="Checked.")
+        self.ledger.claim("COORD-B", "writer", "literature")
+        (self.root / shared).write_text("Version two.", encoding="utf-8")
+        self.ledger.mutate("submit", "COORD-B", "writer", artifacts=[shared], summary="Second version")
+        result = self.ledger.check()
+        self.assertTrue(result["ok"])
+        self.assertEqual(result["superseded"], [f"COORD-A: {shared}"])
+        (self.root / shared).write_text("Unreviewed third version.", encoding="utf-8")
+        with self.assertRaises(HarnessError):
+            self.ledger.check()
+
     def test_seed_idempotent_does_not_replace_work(self):
         self.submit()
         changed = task()

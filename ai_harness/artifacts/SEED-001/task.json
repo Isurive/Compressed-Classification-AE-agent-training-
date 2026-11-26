@@ -1,0 +1,14 @@
+{
+  "id": "SEED-001",
+  "title": "More seeds: is the sparse-vs-dense (and sparse-vs-linear) gap real?",
+  "role": "engineer",
+  "description": "User approved (2026-11-25). Pre-registered before any run. Models: sparse (M2048 k512) and dense (M2048 k2048), both Xavier fc, He encoder, loss CE + feature MSE only (ABL-001 'abl-mse' weights 1/0/0); linear (Xavier, wd 1e-4, GRID-002). Everything else as GRID-002 (10 epochs, batch 128, Adam 1e-3, best.pt by val top-1 then CE, cached GRID-001 features read-only). Levels: source, 80, 90. NEW seeds 45-51 (7 seeds; each seed sets split, init and batch order). Test: original ImageNetV2 (source), once per run after training. 63 runs. New wrapper src/run_seeds.py; existing scripts unchanged; last.pt deleted. PRE-DECLARED ANALYSIS: primary = the 7 new seeds only (independent of the 3 seeds that motivated the question); per level and pooled over the 3 levels (per-seed mean over levels), paired differences sparse-dense and sparse-linear with mean, sd, two-sided paired t 95% CI (df=6), and sign count. Decision: an effect is 'detected' if the 95% CI excludes 0, and 'meaningful' only if its mean is >= 1.0 pp (the project tolerance). Secondary = all 10 seeds (42-51) combining ABL-001 abl-mse and GRID-002 linear runs, which use identical settings. No other comparisons are confirmatory.",
+  "depends_on": [],
+  "write_paths": ["src/run_seeds.py", "runs/SEED-001", "ai_harness/artifacts/SEED-001"],
+  "acceptance": [
+    "Design and analysis rule recorded in task.json before the first run (timestamps)",
+    "Split digests per seed consistent across the three models; seeds 45-51 distinct from 42-44",
+    "Report gives the pre-declared primary result first, secondary after, with CIs and sign counts",
+    "User src files and all submitted artifacts unmodified"
+  ]
+}

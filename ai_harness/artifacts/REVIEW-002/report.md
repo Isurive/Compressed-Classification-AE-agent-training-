@@ -150,3 +150,24 @@ ImageNetV2 was reused adaptively: GRID-002 was designed from GRID-001's test res
 - Stored variants were not decoded beyond the authors' pixel check.
 - Tune-run checkpoints were not inspected.
 - The metadata bytes in the source files were not quantified.
+
+## Addendum (2026-11-25, after REVIEW-005)
+
+**R-1: correction to G2-1.**
+- G2-1 gave per-seed means of 0.76, 0.80 and 0.79. Those numbers are sparse-full − linear averaged over ABL-001's **5 levels** (source, 60, 80, 90, 95).
+- The 21 positive pairs cited in G2-1 come from GRID-002's **7 levels** (source through 95). Over those 7 levels the per-seed means are **0.95, 0.90 and 0.89 (mean 0.91)**.
+- I verified this from `runs/GRID-002/results.csv`, ImageNetV2-source rows: 21/21 pairs positive over 7 levels, and 15/15 over 5 levels.
+- The conclusion of G2-1 is unchanged. Both sets of means are below 1 pp, and the per-level gap reaches 1 pp only at source (1.19) and level 20 (1.57).
+- The revised GRID-002 report (headline 1) repeats the 5-level figures beside the 21-pair count. That is a citation-level slip I introduced. It does not change the accepted verdict.
+
+**R-2: outcome of the re-review.** All three reports were revised (only `report.md` changed, and the hashes were re-verified). On re-review I recorded **accept** for each:
+- **GRID-001:** G1-1 resolved. The M effect is marked unresolved, and the best-epoch table matches `results.csv`. G1-2 to G1-5 handled.
+- **GRID-002:** G2-1 to G2-4 resolved or handled.
+  - Nit: §7 says the reviewer "confirmed" the loss weights 1/0.1/0.05. I confirmed only that the regularizer residual is nonzero (0.069–0.081). The exact values follow from the `Settings` defaults in the code.
+- **ABL-001:** A-1 to A-5 resolved or handled.
+  - "MSE is necessary / needed to beat linear" holds only among the variants tested; no tuned weight decay was tried.
+  - The epochs 4–6 vs 6–9 contrast holds for the sparse heads. The dense CE-only head peaks at epochs 5–9.
+  - "Does nothing" would read better as "no detectable effect".
+- **Warning:** the ledger *summary* string for ABL-001 still carries the withdrawn claim ("the feature-MSE auxiliary loss explains the sparse head's gain"). It should be corrected, or kept out of BOARD and synthesis.
+
+R-3 (remaining overstatements) is left to the coordinator's erratum.

@@ -1,0 +1,4 @@
+{"id": "REVIEW-006", "title": "Independent review of SEED-001 (more seeds, pre-registered)", "role": "reviewer",
+ "description": "User requested (2026-11-26) a review of SEED-001 before the next experiment. Check that the pre-registration in task.json predates the first run, that the analysis implements exactly the pre-declared rule, recompute the key numbers from runs/SEED-001, runs/ABL-001 and runs/GRID-002 results.csv, verify settings match the cited earlier runs, splits, and that the report does not overclaim. Read-only outside this folder; no training. Record a verdict.",
+ "depends_on": [], "write_paths": ["ai_harness/artifacts/REVIEW-006"],
+ "acceptance": ["Verdict on SEED-001 recorded citing this report", "Primary and secondary numbers independently recomputed", "Pre-registration timing and rule adherence verified from the ledger and file timestamps"]}

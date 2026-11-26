@@ -42,7 +42,9 @@ CPU preprocessing dominates, as ENG-002 predicted. One training condition costs 
 | Sparse-code classifier trained at level 20 (`best.pt`, epoch 8) | top-1 **57.1%**, top-5 80.2% | top-1 **57.6%**, top-5 80.2% |
 | Original TorchVision ResNet-18 fc (`--baseline`, trained on ImageNet-train originals) | top-1 69.3%, top-5 88.7% | top-1 70.0%, top-5 88.9% |
 
-Training top-1 reached 99.8% while validation top-1 plateaued at about 55–57% from epoch 2, with validation CE flat at about 1.9. Diagnostics: 32 active atoms per image, 99.7% of atoms used, and validation feature MSE fell from 0.59 to 0.36.
+**Selection bias (added 2026-11-25 after REVIEW-004, finding E4-1).** These 5,000 "held-out" images are the **same validation set used to select `best.pt`**. `best.pt` is the epoch (8 of 10) with the highest top-1 on exactly these images, and the level-20 score (57.1%) equals that selection score. So the trained head's numbers are selection-biased and slightly optimistic. Validation top-1 ranged from 55.0% to 57.1% over epochs 2–10, so the bias is probably at most about 1–2 points. The original-fc row is not affected, because it involves no selection. ENG-005 §5 notes the same bias, and the later GRID experiments avoid it by testing only on ImageNetV2.
+
+Training top-1 reached 99.8% while validation top-1 plateaued at about 55–57% from epoch 2, with validation CE flat at about 1.9. Diagnostics: 32 active atoms per image, 99.7% of atoms used, and validation feature MSE fell from 0.59 to 0.36. The 99.7% is from the `best.pt` checkpoint (epoch 8; 99.76%). The final epoch was 99.66% (REVIEW-004, E4-2).
 
 ## Observations (inference, for review)
 
