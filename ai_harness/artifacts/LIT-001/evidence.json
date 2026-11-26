@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "task_id": "LIT-001",
+  "role": "paper_researcher",
+  "checked_on": "2026-11-05",
+  "status": "bounded_first_pass_complete",
+  "inputs_read": ["projectIdea.md", "references.bib"],
+  "novelty_status": "Unconfirmed; broad compressed-training and ordinary capacity comparisons already have prior art.",
+  "sources": [
+    {
+      "id": "nayak2023deep",
+      "title": "Deep Layers Beware: Unraveling the Surprising Benefits of JPEG Compression for Image Classification Pre-processing",
+      "year": 2023,
+      "urls": [
+        "https://www.amazon.science/publications/deep-layers-beware-unraveling-the-surprising-benefits-of-jpeg-compression-for-image-classification-pre-processing",
+        "https://cdn.amazon.science/61/96/9dcc72564f34a8f5652112be022f/deep-layers-beware-unraveling-the-surprising-benefits-of-jpeg-compression-for-image-classification-pre-processing.pdf"
+      ],
+      "evidence_level": "primary_full_text_selected_sections",
+      "locations": ["II-A", "II-B", "II-C", "III"],
+      "verified_claims": ["Pretrained-model fine-tuning on JPEG data", "EfficientNet capacity comparison", "Dataset disk-storage measurement"],
+      "limits": ["Do not equate its compression-ratio notation with raw-RGB-to-JPEG ratio without checking the encoder definition."]
+    },
+    {
+      "id": "lee2026storage_preprint_v1",
+      "title": "Toward storage-aware learning with compressed data: An empirical exploratory study on JPEG",
+      "year": 2026,
+      "inspected_version": "arXiv:2508.12833v1, 2025-08-18",
+      "urls": ["https://arxiv.org/html/2508.12833v1", "https://www.sciencedirect.com/science/article/pii/S2405959525002048"],
+      "evidence_level": "primary_preprint_full_text_selected_sections",
+      "locations": ["3.1", "3.2", "3.3"],
+      "verified_claims": ["Storage proxy is sample count times JPEG quality factor in v1", "Original test images used for quantity-quality experiment"],
+      "limits": ["Final 2026 journal methods not inspected; version differences unresolved."]
+    },
+    {
+      "id": "maudgalya2021learned",
+      "title": "Using Learned Image Compression for Training Accurate and Robust Convolutional Neural Networks",
+      "year": 2021,
+      "urls": ["https://www2.eecs.berkeley.edu/Pubs/TechRpts/2021/EECS-2021-98.pdf"],
+      "evidence_level": "primary_full_text_selected_sections",
+      "locations": ["3.2, printed pp. 9-11", "3.3, printed pp. 12-17", "Figure 3.4", "Tables 3.2-3.3"],
+      "verified_claims": ["Compressed training with original test data", "JPEG rate excludes headers and coding tables", "Separate CNN capacity experiments", "Tiny ImageNet Figure 3.4 reports top-5"],
+      "limits": ["Reported bpp cannot establish equivalent whole-file storage savings."]
+    },
+    {
+      "id": "wei_lossy_csc_unresolved",
+      "title": "Effects of Lossy Compression on Remote Sensing Image Classification Based on Convolutional Sparse Coding",
+      "doi": "10.1109/LGRS.2020.3047789",
+      "urls": ["https://doi.org/10.1109/LGRS.2020.3047789", "https://www.researchgate.net/publication/348858014_Effects_of_Lossy_Compression_on_Remote_Sensing_Image_Classification_Based_on_Convolutional_Sparse_Coding"],
+      "evidence_level": "unresolved_primary_access_third_party_abstract_lead_only",
+      "locations": ["Reproduced abstract only"],
+      "verified_claims": [],
+      "unverified_lead": "Abstract reproduction describes convolutional dictionary features for estimating classification accuracy.",
+      "limits": ["No primary full text inspected", "Codec, dictionary-size ablations, and training-storage overlap unresolved", "Do not use as evidence of absence of exact overlap"]
+    },
+    {
+      "id": "tang_ddlcn_2020",
+      "title": "When Dictionary Learning Meets Deep Learning: Deep Dictionary Learning and Coding Network for Image Recognition with Limited Data",
+      "year": 2020,
+      "urls": ["https://arxiv.org/abs/2005.10940"],
+      "evidence_level": "primary_abstract_only",
+      "locations": ["Abstract", "Publication comment"],
+      "verified_claims": ["Dictionary learning and coding layers for neural image recognition"],
+      "limits": ["Methods, code, licensing, fixed-k compatibility, and JPEG experiments not inspected"]
+    }
+  ],
+  "proposed_incremental_question": "Does dictionary capacity M at fixed active budget k improve the complete-byte training-storage versus original-test-accuracy trade-off over controlled conventional classifiers?",
+  "proposal_is_user_decision": false,
+  "next_gaps": ["Wei primary full text", "Lee final-version comparison", "Friedland, Kuchnik, and Pistono deeper audit", "Sparse neural implementation inspection", "Whole-file compression pilot at selected native resolution"],
+  "work_not_performed": ["No dataset download", "No training", "No executable model review", "No exhaustive novelty search", "No edits to projectIdea.md or references.bib"]
+}

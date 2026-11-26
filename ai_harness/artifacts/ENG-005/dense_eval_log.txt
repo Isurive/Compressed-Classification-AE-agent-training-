@@ -1,0 +1,5 @@
+$ python main.py evaluate --checkpoint ../runs/ENG-005/dense_k2048_45k/best.pt --data ../Datasets/imagenet-1k/val --limit 0 --levels source 20 --baseline --workers 4 --device cuda --json ../ai_harness/artifacts/ENG-005/dense_heldout.json
+start 2026-11-24T15:51:54-07:00
+[15:52:36] {"compression_level": "source", "images": 5000, "top1": 0.6322, "top5": 0.8508, "ce": 1.6296436544418336, "active_per_image": 826.4126, "used_atom_fraction": 1.0, "backbone_top1": 0.6996, "top1_agreement": 0.6906, "backbone_top5": 0.8892}
+[15:53:13] {"compression_level": 20, "images": 5000, "top1": 0.6302, "top5": 0.8490000000000001, "ce": 1.63659658908844, "active_per_image": 829.0716, "used_atom_fraction": 1.0, "backbone_top1": 0.6926, "top1_agreement": 0.6888000000000001, "backbone_top5": 0.8874000000000001}
+exit 0 end 2026-11-24T15:53:14-07:00

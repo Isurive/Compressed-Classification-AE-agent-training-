@@ -1,0 +1,23 @@
+{
+  "sparse": {
+    "atoms": 2048,
+    "fc_init": "auto",
+    "k": 512,
+    "model": "sparse",
+    "weight_decay": 0.0
+  },
+  "dense": {
+    "atoms": 2048,
+    "fc_init": "auto",
+    "k": 2048,
+    "model": "dense",
+    "weight_decay": 0.0
+  },
+  "linear": {
+    "atoms": 0,
+    "fc_init": "original",
+    "k": 0,
+    "model": "linear",
+    "weight_decay": 0.0
+  }
+}

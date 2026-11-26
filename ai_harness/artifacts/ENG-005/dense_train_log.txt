@@ -1,0 +1,40 @@
+$ python main.py train --data ../Datasets/imagenet-1k/val --holdout 0.10 --train-limit 0 --val-limit 0 --epochs 10 --batch-size 128 --lr 0.001 --compression-level 20 --cache memory --workers 4 --device cuda --encoder-init he --fc-init xavier --k 2048 --out ../runs/ENG-005/dense_k2048_45k
+start 2026-11-24T15:45:45-07:00
+[15:45:55] single-pool holdout: 45,000 training, 5,000 validation, 1,000 classes. Device cuda, backbone frozen, Adam lr=0.001.
+[15:45:55] Extracting frozen 512-D features once for 45,000 training images.
+[15:46:31]   training: 4,096/45,000
+[15:46:45]   training: 8,192/45,000
+[15:46:58]   training: 12,288/45,000
+[15:47:13]   training: 16,384/45,000
+[15:47:29]   training: 20,480/45,000
+[15:47:45]   training: 24,576/45,000
+[15:48:02]   training: 28,672/45,000
+[15:48:19]   training: 32,768/45,000
+[15:48:36]   training: 36,864/45,000
+[15:48:51]   training: 40,960/45,000
+[15:49:05]   training: 45,000/45,000
+[15:49:06] Extracting frozen 512-D features once for 5,000 validation images.
+[15:49:44]   validation: 4,096/5,000
+[15:49:48] Encoder initialization: he. Classifier initialization: xavier. Training feature mask: 0.
+[15:49:51]   train batch 250/352   mean loss 3.9016
+[15:49:53] {"epoch": 1, "train": {"loss": 3.4254214331732857, "ce": 2.4306416727701823, "feature_mse": 0.914188902452257, "top1": 0.49820000000000003}, "validation": {"images": 5000, "top1": 0.5998, "top5": 0.8418, "ce": 1.6586315090179444, "active_per_image": 743.2616, "used_atom_fraction": 1.0, "feature_mse": 0.4116925930976868, "backbone_top1": 0.6926, "top1_agreement": 0.6692, "backbone_top5": 0.8874000000000001}}
+[15:49:55]   train batch 250/352   mean loss 1.1978
+[15:49:57] {"epoch": 2, "train": {"loss": 1.21951751759847, "ce": 0.7651124129401313, "feature_mse": 0.3752790432400174, "top1": 0.8060444444444445}, "validation": {"images": 5000, "top1": 0.604, "top5": 0.8454, "ce": 1.6531056320190431, "active_per_image": 765.3438, "used_atom_fraction": 1.0, "feature_mse": 0.3604069363594055, "backbone_top1": 0.6926, "top1_agreement": 0.658, "backbone_top5": 0.8874000000000001}}
+[15:50:00]   train batch 250/352   mean loss 0.6970
+[15:50:01] {"epoch": 3, "train": {"loss": 0.7189897733052572, "ce": 0.323077485148112, "feature_mse": 0.3181873715718587, "top1": 0.9271777777777778}, "validation": {"images": 5000, "top1": 0.618, "top5": 0.8402000000000001, "ce": 1.6737034627914429, "active_per_image": 786.315, "used_atom_fraction": 1.0, "feature_mse": 0.32607308778762817, "backbone_top1": 0.6926, "top1_agreement": 0.672, "backbone_top5": 0.8874000000000001}}
+[15:50:04]   train batch 250/352   mean loss 0.4878
+[15:50:05] {"epoch": 4, "train": {"loss": 0.4912903368631999, "ce": 0.14076312686072456, "feature_mse": 0.27402554071214463, "top1": 0.9779555555555556}, "validation": {"images": 5000, "top1": 0.6226, "top5": 0.8502000000000001, "ce": 1.6413160652160645, "active_per_image": 808.4094, "used_atom_fraction": 1.0, "feature_mse": 0.2870435811042786, "backbone_top1": 0.6926, "top1_agreement": 0.6846, "backbone_top5": 0.8874000000000001}}
+[15:50:08]   train batch 250/352   mean loss 0.3807
+[15:50:09] {"epoch": 5, "train": {"loss": 0.3840180951436361, "ce": 0.07539371523857118, "feature_mse": 0.23327075301276315, "top1": 0.9917333333333334}, "validation": {"images": 5000, "top1": 0.6302, "top5": 0.8490000000000001, "ce": 1.6365965929031372, "active_per_image": 829.0716, "used_atom_fraction": 1.0, "feature_mse": 0.2503933843135834, "backbone_top1": 0.6926, "top1_agreement": 0.6888000000000001, "backbone_top5": 0.8874000000000001}}
+[15:50:12]   train batch 250/352   mean loss 0.3320
+[15:50:14] {"epoch": 6, "train": {"loss": 0.3339581364949544, "ce": 0.05838280680974325, "feature_mse": 0.201371334499783, "top1": 0.9939555555555556}, "validation": {"images": 5000, "top1": 0.6288, "top5": 0.8490000000000001, "ce": 1.6420019039154055, "active_per_image": 854.057, "used_atom_fraction": 1.0, "feature_mse": 0.22307953128814698, "backbone_top1": 0.6926, "top1_agreement": 0.687, "backbone_top5": 0.8874000000000001}}
+[15:50:16]   train batch 250/352   mean loss 0.2988
+[15:50:18] {"epoch": 7, "train": {"loss": 0.30242888107299803, "ce": 0.050753373977873065, "feature_mse": 0.17861684797075061, "top1": 0.9949111111111112}, "validation": {"images": 5000, "top1": 0.6274000000000001, "top5": 0.8468, "ce": 1.6607486373901368, "active_per_image": 881.551, "used_atom_fraction": 1.0, "feature_mse": 0.2034288577079773, "backbone_top1": 0.6926, "top1_agreement": 0.6852, "backbone_top5": 0.8874000000000001}}
+[15:50:21]   train batch 250/352   mean loss 0.2885
+[15:50:22] {"epoch": 8, "train": {"loss": 0.29873000272115074, "ce": 0.058338769128587514, "feature_mse": 0.16842474875979954, "top1": 0.9916222222222223}, "validation": {"images": 5000, "top1": 0.6224000000000001, "top5": 0.8374, "ce": 1.795616568374634, "active_per_image": 897.4502, "used_atom_fraction": 1.0, "feature_mse": 0.20835054304599762, "backbone_top1": 0.6926, "top1_agreement": 0.676, "backbone_top5": 0.8874000000000001}}
+[15:50:25]   train batch 250/352   mean loss 0.3633
+[15:50:26] {"epoch": 9, "train": {"loss": 0.4164268968370226, "ce": 0.14317983535130818, "feature_mse": 0.2019515453338623, "top1": 0.9687333333333333}, "validation": {"images": 5000, "top1": 0.5732, "top5": 0.81, "ce": 2.1560710205078126, "active_per_image": 812.8866, "used_atom_fraction": 1.0, "feature_mse": 0.28876178426742555, "backbone_top1": 0.6926, "top1_agreement": 0.6238, "backbone_top5": 0.8874000000000001}}
+[15:50:28]   train batch 250/352   mean loss 0.5182
+[15:50:30] {"epoch": 10, "train": {"loss": 0.5326770562913683, "ce": 0.2017212553024292, "feature_mse": 0.25949638998243546, "top1": 0.9493555555555556}, "validation": {"images": 5000, "top1": 0.5922000000000001, "top5": 0.8170000000000001, "ce": 2.125947380065918, "active_per_image": 715.4946, "used_atom_fraction": 1.0, "feature_mse": 0.2962968754768372, "backbone_top1": 0.6926, "top1_agreement": 0.6426000000000001, "backbone_top5": 0.8874000000000001}}
+[15:50:30] Deployment: ..\runs\ENG-005\dense_k2048_45k\best.pt   Resume and dictionary: ..\runs\ENG-005\dense_k2048_45k\last.pt
+exit 0 end 2026-11-24T15:50:31-07:00

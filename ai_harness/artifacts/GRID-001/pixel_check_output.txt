@@ -1,0 +1,2 @@
+identical: 3500  different: 0  (500 images x 7 levels)
+pixel check exit 0

@@ -1,0 +1,26 @@
+[
+  {
+    "compression_level": "source",
+    "images": 5000,
+    "top1": 0.6322,
+    "top5": 0.8508,
+    "ce": 1.6296436544418336,
+    "active_per_image": 826.4126,
+    "used_atom_fraction": 1.0,
+    "backbone_top1": 0.6996,
+    "top1_agreement": 0.6906,
+    "backbone_top5": 0.8892
+  },
+  {
+    "compression_level": 20,
+    "images": 5000,
+    "top1": 0.6302,
+    "top5": 0.8490000000000001,
+    "ce": 1.63659658908844,
+    "active_per_image": 829.0716,
+    "used_atom_fraction": 1.0,
+    "backbone_top1": 0.6926,
+    "top1_agreement": 0.6888000000000001,
+    "backbone_top5": 0.8874000000000001
+  }
+]

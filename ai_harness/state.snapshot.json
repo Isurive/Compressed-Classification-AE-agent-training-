@@ -1,0 +1,1582 @@
+{
+  "version": 1,
+  "generated_at": "2026-11-25T07:18:55+00:00",
+  "project_root": "C:\\Users\\ericw\\OneDrive\\Documents\\AI 360 (DeepLearning\\Final Project",
+  "tasks": [
+    {
+      "id": "LIT-001",
+      "spec": {
+        "id": "LIT-001",
+        "title": "Audit closest compressed-training and dictionary-learning papers",
+        "role": "literature",
+        "description": "Read projectIdea.md and the existing bibliography. Inspect primary sources for compressed training-data storage and dictionary capacity under compression. Prioritize Nayak/Friedland, the storage-aware learning article, Berkeley training-compression report, and the unresolved Wei et al. work. Deliver a bounded first-pass evidence matrix and structured source list; record actual access limits, measurement definitions, version differences, exact overlap, and remaining uncertainty. Do not edit the shared bibliography or promise novelty.",
+        "depends_on": [],
+        "write_paths": [
+          "ai_harness/artifacts/LIT-001"
+        ],
+        "acceptance": [
+          "Report and source evidence list exist",
+          "Each key claim has an inspected primary-source location or explicit access limitation",
+          "Actual stored bytes are distinguished from quality-factor proxies and payload-only rates",
+          "Closest overlap and unresolved novelty are stated without overclaiming"
+        ]
+      },
+      "state": "done",
+      "owner": "paper-miner-bootstrap",
+      "artifacts": [
+        {
+          "path": "ai_harness/artifacts/LIT-001/report.md",
+          "sha256": "a637f509edfc51598ce7bcef588f7a546d7e98c2bfa9fd3964bc7af49d3a14cf",
+          "bytes": 9091
+        },
+        {
+          "path": "ai_harness/artifacts/LIT-001/evidence.json",
+          "sha256": "1d4d16972e71396d263715802a9f33511ce2dfb2eefa7f17f52dbae61b5c8a93",
+          "bytes": 4911
+        }
+      ],
+      "summary": "Bounded primary-source audit; full-file bytes distinguished from quality proxy and payload rates; exact novelty unresolved.",
+      "created": "2026-11-06T05:38:12+00:00",
+      "updated": "2026-11-06T05:38:21+00:00",
+      "stale": false
+    },
+    {
+      "id": "REASON-001",
+      "spec": {
+        "id": "REASON-001",
+        "title": "Design the minimum controlled training-storage experiment",
+        "role": "reasoning",
+        "description": "Translate the user's latest goal into a month-sized study of learning from heavily JPEG-compressed training images. Explain a genuine neural dictionary component, fair baselines, M versus k, full-file byte accounting, split/pretraining/clean-target controls, a bounded pilot, and compute/run-count implications. Keep dataset, GPU, and accuracy target feasibility unresolved until supported. No training or downloads.",
+        "depends_on": [],
+        "write_paths": [
+          "ai_harness/artifacts/REASON-001"
+        ],
+        "acceptance": [
+          "A falsifiable research question and minimal comparison are specified",
+          "Compressed training inputs and a common held-out evaluation are explicit",
+          "Dictionary model and sparsity controls are technically meaningful",
+          "Proposed choices, known requirements, and resource unknowns are separated"
+        ]
+      },
+      "state": "done",
+      "owner": "reasoner-bootstrap",
+      "artifacts": [
+        {
+          "path": "ai_harness/artifacts/REASON-001/report.md",
+          "sha256": "b5b9f55bb2fed53b7a57687b5911123a4bec5df2975e72bd202f635107570076",
+          "bytes": 16425
+        }
+      ],
+      "summary": "Proposed four-condition pilot, explicit dictionary routes, storage definitions, fairness and leakage controls, and feasible expansion; no experiments run.",
+      "created": "2026-11-06T05:38:12+00:00",
+      "updated": "2026-11-06T05:38:23+00:00",
+      "stale": false
+    },
+    {
+      "id": "REPRO-001",
+      "spec": {
+        "id": "REPRO-001",
+        "title": "Audit reusable model implementations and pilot requirements",
+        "role": "engineer",
+        "description": "Inspect a small number of existing neural sparse-coding or dictionary-learning implementations and conventional backbones as possible starting points. Verify accessible source code, license, environment requirements, genuine dictionary mechanism, and likely adaptation effort. Propose at most two dataset/resolution options with full-file JPEG feasibility considerations. Identify hardware information needed. This is a read-only feasibility audit; do not install dependencies, download datasets, or run training. Preserve the proposal and bibliography.",
+        "depends_on": [],
+        "write_paths": [
+          "ai_harness/artifacts/REPRO-001"
+        ],
+        "acceptance": [
+          "Implementation claims link to inspected upstream sources",
+          "Unexecuted checks are labeled unexecuted",
+          "A bounded pilot and its resource needs are described",
+          "Recommendation fits the current training-storage question and month constraint"
+        ]
+      },
+      "state": "pending",
+      "owner": null,
+      "artifacts": [],
+      "summary": "",
+      "created": "2026-11-06T05:38:12+00:00",
+      "updated": "2026-11-06T05:38:12+00:00",
+      "stale": false
+    },
+    {
+      "id": "REVIEW-001",
+      "spec": {
+        "id": "REVIEW-001",
+        "title": "Independently challenge evidence and experimental reasoning",
+        "role": "reviewer",
+        "description": "Read accepted LIT-001 and REASON-001 artifacts. Check a small set of consequential source claims and challenge the proposed experiment for confounding, storage accounting, hidden clean information, pretraining, scope, and unjustified novelty. Produce concrete corrections and a recommendation. This review can identify unresolved research even when source-audit tasks are complete.",
+        "depends_on": [
+          "LIT-001",
+          "REASON-001"
+        ],
+        "write_paths": [
+          "ai_harness/artifacts/REVIEW-001"
+        ],
+        "acceptance": [
+          "Findings cite specific source/report locations",
+          "Blocking design flaws are distinguished from optional improvements",
+          "The reviewer does not present their own prior authored report as independently reviewed",
+          "A clear next-step recommendation is recorded"
+        ]
+      },
+      "state": "pending",
+      "owner": null,
+      "artifacts": [],
+      "summary": "",
+      "created": "2026-11-06T05:38:12+00:00",
+      "updated": "2026-11-06T05:38:12+00:00",
+      "stale": false
+    },
+    {
+      "id": "SYNTH-001",
+      "spec": {
+        "id": "SYNTH-001",
+        "title": "Integrate a concrete month-sized project recommendation",
+        "role": "coordinator",
+        "description": "Combine reviewed literature, reasoning, reproducibility, and critique into a proposed project plan. State a narrow contribution relative to actual prior work, a minimal experiment grid, feasible resource assumptions, and remaining user decisions. Provide proposed one-paragraph introduction wording and a four-week division of work in the task directory; preserve the existing proposal files until an integration assignment explicitly includes them.",
+        "depends_on": [
+          "LIT-001",
+          "REASON-001",
+          "REPRO-001",
+          "REVIEW-001"
+        ],
+        "write_paths": [
+          "ai_harness/artifacts/SYNTH-001"
+        ],
+        "acceptance": [
+          "Recommendation traces to reviewed reports",
+          "No novelty or performance guarantee is made",
+          "Plan includes a feasibility milestone and actual unresolved choices",
+          "Draft is ready for user review without modifying unrelated existing work"
+        ]
+      },
+      "state": "pending",
+      "owner": null,
+      "artifacts": [],
+      "summary": "",
+      "created": "2026-11-06T05:38:12+00:00",
+      "updated": "2026-11-06T05:38:12+00:00",
+      "stale": false
+    },
+    {
+      "id": "ORIENT-001",
+      "spec": {
+        "id": "ORIENT-001",
+        "title": "Codebase orientation and audit of untracked src/ code",
+        "role": "engineer",
+        "description": "Map the current project files for future agents, record the local environment (Python, packages, GPU) observed read-only, and audit the untracked src/compress_jpeg.py and src/resnet18_sparse_ae.py against AGENTS.md research standards and REASON-001 controls. Read-only with respect to src/, proposal, bibliography, and shared decision files; no installs, downloads, or training.",
+        "depends_on": [],
+        "write_paths": [
+          "ai_harness/artifacts/ORIENT-001"
+        ],
+        "acceptance": [
+          "File map covers every non-generated project file and its status",
+          "Environment facts are labeled as observed commands, with unexecuted checks labeled unexecuted",
+          "src/ audit separates code facts from inferences and lists concrete gaps relative to the training-storage question",
+          "No files outside the task directory are modified"
+        ]
+      },
+      "state": "review",
+      "owner": "claude-orient-20261122-a",
+      "artifacts": [
+        {
+          "path": "ai_harness/artifacts/ORIENT-001/report.md",
+          "sha256": "55202dfc034e98eefaf1a65481fbe2c19d9619e0645a9837dcdffb30a0eebd05",
+          "bytes": 10864
+        }
+      ],
+      "summary": "File map, observed local environment (RTX 3080 Ti Laptop 16GB, Python 3.14, no torch), and read-only audit of untracked src/ JPEG tool and ResNet-18 sparse-dictionary AE against AGENTS.md standards.",
+      "created": "2026-11-23T06:04:49+00:00",
+      "updated": "2026-11-23T06:05:38+00:00",
+      "stale": false
+    },
+    {
+      "id": "COORD-001",
+      "spec": {
+        "id": "COORD-001",
+        "title": "Record user adoption of src/ as the starting implementation",
+        "role": "coordinator",
+        "description": "The user stated on 2026-11-22 that they wrote src/compress_jpeg.py and src/resnet18_sparse_ae.py and want them adopted. Record this decision with provenance in DECISIONS.md and RESEARCH_STATUS.md, state what adoption does and does not settle (claim scope under a frozen pretrained backbone, dataset, baseline, storage pipeline), and point to follow-up tasks. Do not edit src/, the proposal, or the bibliography.",
+        "depends_on": [],
+        "write_paths": [
+          "ai_harness/DECISIONS.md",
+          "ai_harness/RESEARCH_STATUS.md",
+          "ai_harness/artifacts/COORD-001"
+        ],
+        "acceptance": [
+          "Decision recorded with user provenance and date",
+          "Implications separated from still-open choices",
+          "No unrelated content in shared files removed or rewritten"
+        ]
+      },
+      "state": "review",
+      "owner": "claude-orient-20261122-a",
+      "artifacts": [
+        {
+          "path": "ai_harness/DECISIONS.md",
+          "sha256": "897ddd0974577ddf39898e79c8f1ef967dafd4962eea92992db9e7c525fb027f",
+          "bytes": 7033
+        },
+        {
+          "path": "ai_harness/RESEARCH_STATUS.md",
+          "sha256": "e2a1d1d2130b79de2cbb6e8480aa50238b6f512a8168cedeabd3a55f6041d6c4",
+          "bytes": 6199
+        }
+      ],
+      "summary": "Recorded user's 2026-11-22 adoption of src/ with provenance; separated what it settles from open choices; queued ENG-001 and LIT-002.",
+      "created": "2026-11-23T06:10:17+00:00",
+      "updated": "2026-11-23T06:11:14+00:00",
+      "stale": false
+    },
+    {
+      "id": "ENG-001",
+      "spec": {
+        "id": "ENG-001",
+        "title": "Dataset-level JPEG encoding with a byte manifest",
+        "role": "engineer",
+        "description": "Add a new script src/build_jpeg_dataset.py that reuses src/compress_jpeg.py logic (import it; do not restructure the user's file) to encode an ImageFolder-style split (root/<split>/<class>/*) at a list of JPEG quality settings into stored files under an output root. Write a per-image CSV manifest (image id, class, split, width, height, mode, source bytes, JPEG bytes, bpp, quality, chroma subsampling, metadata policy, Pillow version) and an aggregate summary (total bytes, R_existing, savings %, bpp distribution). Fix chroma subsampling and strip metadata explicitly and identically across conditions. Encode every variant from the same source file (no compression chains). Test on a handful of generated synthetic images only; no dataset download, no torch dependency.",
+        "depends_on": [],
+        "write_paths": [
+          "src/build_jpeg_dataset.py",
+          "ai_harness/artifacts/ENG-001"
+        ],
+        "acceptance": [
+          "Script runs on synthetic test images and its output and manifest are saved in the task folder",
+          "Full-file bytes, bpp, and aggregate savings computed as in REASON-001 section 4",
+          "src/compress_jpeg.py and src/resnet18_sparse_ae.py are unmodified",
+          "Unexecuted checks (real dataset, attainable rates) labeled unexecuted"
+        ]
+      },
+      "state": "review",
+      "owner": "claude-orient-20261122-a",
+      "artifacts": [
+        {
+          "path": "src/build_jpeg_dataset.py",
+          "sha256": "5c59b025632d3738395d0a0e9f063a79e23a8d9a0b329a70144e3d155e930738",
+          "bytes": 14205
+        },
+        {
+          "path": "ai_harness/artifacts/ENG-001/report.md",
+          "sha256": "ff3a4d11ed56a2112e865ccaae0b4bc6f4971bd698ee2dd4db8d4b283d0d20eb",
+          "bytes": 6660
+        },
+        {
+          "path": "ai_harness/artifacts/ENG-001/make_synthetic.py",
+          "sha256": "2ef034b84351469ab23ab75e386d7bd72c93bbe57c6a7773b9b999f286a2e315",
+          "bytes": 2814
+        },
+        {
+          "path": "ai_harness/artifacts/ENG-001/test_build_jpeg_dataset.py",
+          "sha256": "2f95282def8ee5733557cb8cb6d120b7c1fc3e5117be3c6cdb360062211d3318",
+          "bytes": 5870
+        },
+        {
+          "path": "ai_harness/artifacts/ENG-001/pilot/out/manifest.csv",
+          "sha256": "1aecf8f2124d2008746ca7415de834d8bc721f14a3819ccd4e77b1b1203ae6f3",
+          "bytes": 17145
+        },
+        {
+          "path": "ai_harness/artifacts/ENG-001/pilot/out/summary.json",
+          "sha256": "325eaed46da5dab14739dc9dc07a754205a4875565439e499345e4879b4d971c",
+          "bytes": 14690
+        },
+        {
+          "path": "ai_harness/artifacts/ENG-001/pilot/cli_output.txt",
+          "sha256": "3a7f218249742056ce336255ca218de7a641917b82407c2e50e7e2a729eb266d",
+          "bytes": 502
+        }
+      ],
+      "summary": "Added src/build_jpeg_dataset.py (batch JPEG, strip metadata, fixed subsampling, per-image full/header/payload bytes, aggregate R_existing/R_raw/savings, split-leak hash check). 7 synthetic tests pass. Finding: ~275-325 B standalone JPEG header makes full-file 50:1 vs raw RGB impossible at 32x32 and 64x64.",
+      "created": "2026-11-23T06:11:03+00:00",
+      "updated": "2026-11-23T06:15:58+00:00",
+      "stale": false
+    },
+    {
+      "id": "LIT-002",
+      "spec": {
+        "id": "LIT-002",
+        "title": "Verify the Diverse Dictionary Learning citation used in src/",
+        "role": "literature",
+        "description": "src/resnet18_sparse_ae.py cites 'Zheng et al., Diverse Dictionary Learning, https://arxiv.org/abs/2604.17568' as the source of its decoder-dependency penalty. Confirm the paper exists at that ID, its exact title/authors/date, and whether its method matches what the code's dependency_loss implements. Record access level and a proposed BibTeX entry in the task folder; do not edit references.bib or src/.",
+        "depends_on": [],
+        "write_paths": [
+          "ai_harness/artifacts/LIT-002"
+        ],
+        "acceptance": [
+          "Primary source inspected or access failure documented",
+          "Match or mismatch between paper method and code stated with section references",
+          "Proposed BibTeX kept task-local"
+        ]
+      },
+      "state": "pending",
+      "owner": null,
+      "artifacts": [],
+      "summary": "",
+      "created": "2026-11-23T06:11:04+00:00",
+      "updated": "2026-11-23T06:11:04+00:00",
+      "stale": false
+    },
+    {
+      "id": "ORIENT-002",
+      "spec": {
+        "id": "ORIENT-002",
+        "title": "Audit the user's expanded src/ workflow (main.py, sparse_workflow.py, image_data.py)",
+        "role": "engineer",
+        "description": "The user added main.py, sparse_workflow.py, image_data.py, README.md and label tables to src/ on 2026-11-23 and changed compress_jpeg.py and resnet18_sparse_ae.py. Explain what the pipeline does, check it against AGENTS.md and REASON-001 controls, note which statements in ORIENT-001 and COORD-001 it supersedes, and verify read-only that its in-memory JPEG path matches ENG-001's stored files pixel for pixel. No edits to src/, no installs, no training.",
+        "depends_on": [],
+        "write_paths": [
+          "ai_harness/artifacts/ORIENT-002"
+        ],
+        "acceptance": [
+          "Pipeline summary traced to file/line locations",
+          "Gaps relative to the training-storage question separated from code facts",
+          "Superseded earlier statements listed",
+          "Unexecuted checks labeled unexecuted"
+        ]
+      },
+      "state": "review",
+      "owner": "claude-orient-20261122-a",
+      "artifacts": [
+        {
+          "path": "ai_harness/artifacts/ORIENT-002/report.md",
+          "sha256": "a5069edd38db76f29734f14341b41cdf9e1312872afcda3ec1ddada7fa734083",
+          "bytes": 8318
+        }
+      ],
+      "summary": "Explained the user's main.py/sparse_workflow/image_data pipeline; verified in-memory JPEG pixels equal ENG-001 stored files (80/80); listed gaps (no same-condition conventional baseline, evaluate on source, frozen-pretrained claim scope, byte accounting) and superseded ORIENT-001/COORD-001 statements.",
+      "created": "2026-11-24T06:33:36+00:00",
+      "updated": "2026-11-24T06:34:18+00:00",
+      "stale": false
+    },
+    {
+      "id": "ENG-002",
+      "spec": {
+        "id": "ENG-002",
+        "title": "Install PyTorch environment and run main.py check",
+        "role": "engineer",
+        "description": "User approved (2026-11-23) installing PyTorch. Create a conda env (Python 3.12, conda-forge only) with CUDA torch/torchvision and Pillow, confirm the RTX 3080 Ti is usable, and run the user's offline `main.py check` (plus a CUDA variant) without editing src/ or downloading datasets. Record exact versions and commands.",
+        "depends_on": [],
+        "write_paths": [
+          "ai_harness/artifacts/ENG-002"
+        ],
+        "acceptance": [
+          "Exact env name, Python, torch, torchvision, CUDA versions recorded",
+          "main.py check output saved verbatim",
+          "No src/ edits; no dataset or pretrained-weight downloads unless stated"
+        ]
+      },
+      "state": "review",
+      "owner": "claude-orient-20261122-a",
+      "artifacts": [
+        {
+          "path": "ai_harness/artifacts/ENG-002/report.md",
+          "sha256": "74ffa255c2f148ad72e88d54b07014c7f04e8d967752252a89db5b7723c17014",
+          "bytes": 4746
+        },
+        {
+          "path": "ai_harness/artifacts/ENG-002/check_cpu.txt",
+          "sha256": "0f60821e5b34d3965e3d91c075563228624d12395bc909de0db006f34fea78c2",
+          "bytes": 733
+        },
+        {
+          "path": "ai_harness/artifacts/ENG-002/check_cuda.txt",
+          "sha256": "06c02f08beb3ebdc2b50a6a0ac507a3022fcbf018aef7d40a7d174cd84d1409d",
+          "bytes": 734
+        },
+        {
+          "path": "ai_harness/artifacts/ENG-002/check_cuda_pretrained.txt",
+          "sha256": "61065fdc9727ce4acd56418678842af100a6e1cb0f85fca9ac65fe5016e4bc27",
+          "bytes": 3005
+        },
+        {
+          "path": "ai_harness/artifacts/ENG-002/bench.py",
+          "sha256": "ae2cd9127db3296c476464250899ecdaba6246ab8f0112577d7b666a63b1b67e",
+          "bytes": 3512
+        },
+        {
+          "path": "ai_harness/artifacts/ENG-002/bench_output.json",
+          "sha256": "484e006d8250ce5f130a6488f65a251abffcef55c9cff5c47bafc643b67ef0ba",
+          "bytes": 341
+        }
+      ],
+      "summary": "Conda env ai360 (Py 3.12, torch 2.11+cu128) on RTX 3080 Ti Laptop; main.py check PASS on CPU, CUDA, CUDA --pretrained; benchmark: CPU JPEG preprocessing ~129 img/s/process is the bottleneck, GPU features ~2660 img/s, head ~127 steps/s; laptop sufficient for frozen-backbone design.",
+      "created": "2026-11-24T06:35:08+00:00",
+      "updated": "2026-11-24T06:40:57+00:00",
+      "stale": false
+    },
+    {
+      "id": "ENG-003",
+      "spec": {
+        "id": "ENG-003",
+        "title": "Download ImageNet-1K val and ImageNetV2 matched-frequency into Datasets/",
+        "role": "engineer",
+        "description": "User approved (2026-11-24) downloading ImageNet-1K validation (HF ILSVRC/imagenet-1k, data/validation-*.parquet, 6.69 GB) and ImageNetV2 matched-frequency (HF vaishaal/ImageNetV2, 1.26 GB) into Final Project/Datasets (inside OneDrive, user's explicit choice). Download to a temporary folder outside OneDrive, write original JPEG bytes unchanged into class folders, verify counts and labels, record provenance in Datasets/DATASETS.md, and remove temporary downloads. No src/ edits.",
+        "depends_on": [],
+        "write_paths": [
+          "Datasets",
+          "ai_harness/artifacts/ENG-003"
+        ],
+        "acceptance": [
+          "50,000 val images in 1,000 wnid folders and 10,000 ImageNetV2 images in 1,000 class folders, verified by script",
+          "Image bytes written unchanged from the source archives (hash spot check)",
+          "Datasets/DATASETS.md records source, revision, licence/terms note, counts, sizes, commands",
+          "main.py train --plan-only runs against the extracted val folder"
+        ]
+      },
+      "state": "review",
+      "owner": "claude-orient-20261122-a",
+      "artifacts": [
+        {
+          "path": "ai_harness/artifacts/ENG-003/report.md",
+          "sha256": "dc380f538d1aa24ce314a86a50c2d692b9c3885e5dc8a713a15cadc1217c1e97",
+          "bytes": 4164
+        },
+        {
+          "path": "ai_harness/artifacts/ENG-003/extract_datasets.py",
+          "sha256": "3e413bc9595b75a1b592980c1e6b0b8fa223d0c70f32e836665282ae35634d64",
+          "bytes": 5147
+        },
+        {
+          "path": "Datasets/DATASETS.md",
+          "sha256": "a9a63f573fdf2f0382afb9ed285d0084957fc69a40f7663d607fb6df181ceea8",
+          "bytes": 4984
+        },
+        {
+          "path": "Datasets/_manifests/imagenet-1k-val.csv",
+          "sha256": "2942ff61d39ab258f9ffdb055ca842c72d5f2259e31d5c5dd7cf071102ff0ab6",
+          "bytes": 6084852
+        },
+        {
+          "path": "Datasets/_manifests/imagenetv2-matched-frequency.csv",
+          "sha256": "4626ddbd0eae183a4052aae4d52ac7b5cfd0ff5db4566904fae5352b05d13816",
+          "bytes": 1263901
+        }
+      ],
+      "summary": "ImageNet-1K val (50,000 imgs, 6.71 GB) and ImageNetV2 matched-frequency (10,000, 1.24 GB) extracted with original bytes into Datasets/; all hashes and all labels verified; main.py --plan-only gives 45k/5k, 352 batches, 3,520 steps.",
+      "created": "2026-11-24T07:11:02+00:00",
+      "updated": "2026-11-24T21:08:24+00:00",
+      "stale": false
+    },
+    {
+      "id": "ENG-004",
+      "spec": {
+        "id": "ENG-004",
+        "title": "First real training run: timing and sanity check on the 45k/5k ImageNet-val split",
+        "role": "engineer",
+        "description": "User asked (2026-11-24) for a quick first run to measure real timing. Run the src/README.md 45k/5k command (frozen pretrained ResNet-18, compression level 20, 10 epochs, --cache memory --workers 4, he/xavier init) unchanged, output outside src/, then evaluate best.pt on the held-out 5k at levels source and 20 with --baseline. Do not use ImageNetV2. Pilot only: one seed, no tuning, not a research result.",
+        "depends_on": [],
+        "write_paths": [
+          "runs/ENG-004",
+          "ai_harness/artifacts/ENG-004"
+        ],
+        "acceptance": [
+          "Exact command, environment, seed, and full log saved",
+          "Wall-clock time per stage reported from the log",
+          "Held-out metrics reported as a single-seed pilot, labeled not a research result",
+          "No src/ edits; ImageNetV2 untouched"
+        ]
+      },
+      "state": "review",
+      "owner": "claude-orient-20261122-a",
+      "artifacts": [
+        {
+          "path": "ai_harness/artifacts/ENG-004/report.md",
+          "sha256": "a6490a95aadd6937885259bc335f591411c27e13726257a425e9b0bcea6afcb6",
+          "bytes": 4363
+        },
+        {
+          "path": "ai_harness/artifacts/ENG-004/train_log.txt",
+          "sha256": "3b88b4eed9b06b5a7b98a8655c081402f8cc358695c76f2ed59aa58f2a1780d9",
+          "bytes": 6151
+        },
+        {
+          "path": "ai_harness/artifacts/ENG-004/eval_log.txt",
+          "sha256": "adf0c57e9b440dac0ef643ad5b4524a6f18efbf6df864176ab06595fa70f8520",
+          "bytes": 549
+        },
+        {
+          "path": "ai_harness/artifacts/ENG-004/heldout_source_vs_20.json",
+          "sha256": "c532ee83b6dad7e8b3fdec72d5a9d372ac6c82c9128b158091edc44093c8987d",
+          "bytes": 628
+        }
+      ],
+      "summary": "README 45k/5k run: 3m35s total (feature extraction 170s, 10 epochs 36s). Held-out top-1 57.6% source / 57.1% level 20 vs original ResNet fc 70.0% / 69.3%. Head overfits (train 99.8%). Single-seed pilot, not a result.",
+      "created": "2026-11-24T21:35:03+00:00",
+      "updated": "2026-11-24T21:40:37+00:00",
+      "stale": false
+    },
+    {
+      "id": "ENG-005",
+      "spec": {
+        "id": "ENG-005",
+        "title": "Conventional baseline head and dense control, compared with the sparse run",
+        "role": "engineer",
+        "description": "User approved (2026-11-24) adding a baseline. Add src/baseline_head.py: a linear classifier on the same frozen ResNet-18 features, reusing image_data/sparse_workflow split, cache, loader, seeds and best-checkpoint rule unchanged (no edits to user files). Train it at compression level 20 with the ENG-004 settings, run main.py with --k 2048 as the dense (no top-k) control, evaluate all on the same 5k held-out images at source and level 20, and confirm identical split digests. Single seed pilot.",
+        "depends_on": [],
+        "write_paths": [
+          "src/baseline_head.py",
+          "runs/ENG-005",
+          "ai_harness/artifacts/ENG-005"
+        ],
+        "acceptance": [
+          "Existing src files unmodified (hashes before/after)",
+          "Split digest identical across all compared runs",
+          "Same epochs, batch, lr, seed, compression level, selection rule; differences listed",
+          "Results labeled single-seed pilot"
+        ]
+      },
+      "state": "review",
+      "owner": "claude-orient-20261122-a",
+      "artifacts": [
+        {
+          "path": "src/baseline_head.py",
+          "sha256": "0ae8ab5cc30d8f4edb357e8e4b356201e311e1d73449f61f727e1a8feef6e62c",
+          "bytes": 12405
+        },
+        {
+          "path": "ai_harness/artifacts/ENG-005/report.md",
+          "sha256": "575bdca3ee326ba14e1a422930b064812d330765c0217fdf56989b723fcfcbd1",
+          "bytes": 5678
+        },
+        {
+          "path": "ai_harness/artifacts/ENG-005/src_hashes_before.txt",
+          "sha256": "f23e012217b4d307b2b241912e90e1a3279789c299947f69633335604020aa27",
+          "bytes": 602
+        },
+        {
+          "path": "ai_harness/artifacts/ENG-005/linear_train_log.txt",
+          "sha256": "3f5718246fe8be75667f09aac5225bf3fb58c886a173b38743077a7041ac0246",
+          "bytes": 3781
+        },
+        {
+          "path": "ai_harness/artifacts/ENG-005/dense_train_log.txt",
+          "sha256": "ccc1e1b414e454303539ec398e586cc5473ad5f87cf020e94edd41661f680738",
+          "bytes": 6210
+        },
+        {
+          "path": "ai_harness/artifacts/ENG-005/linear_eval_log.txt",
+          "sha256": "d1fbcb6ee386ab8127ab6b1ba9ec45e7d1f7770cd2dd0cd488e1fb3ec320a50e",
+          "bytes": 679
+        },
+        {
+          "path": "ai_harness/artifacts/ENG-005/dense_eval_log.txt",
+          "sha256": "702b66716c3fe17f607dd1bcfdba97441c73b8d12a5e59afded4253877ecc109",
+          "bytes": 837
+        },
+        {
+          "path": "ai_harness/artifacts/ENG-005/linear_heldout.json",
+          "sha256": "d5417fde3ec7d0a7ac7dcbe18e383f295c9c508d7ca71700be0274263ec9978d",
+          "bytes": 426
+        },
+        {
+          "path": "ai_harness/artifacts/ENG-005/dense_heldout.json",
+          "sha256": "f6304537d9451c44f7e51015fbbe514efb0a271855d0238ffc03130e2ab1460c",
+          "bytes": 602
+        }
+      ],
+      "summary": "Added src/baseline_head.py (linear head on same frozen features, reusing main.py split/cache/seeds/selection). Same split digest for all. Held-out top-1 @source: sparse k32 57.6%, dense k2048 63.2%, linear 62.0%, original fc 70.0%. Single-seed pilot; selection on reported split noted.",
+      "created": "2026-11-24T22:37:44+00:00",
+      "updated": "2026-11-24T22:54:04+00:00",
+      "stale": false
+    },
+    {
+      "id": "REASON-002",
+      "spec": {
+        "id": "REASON-002",
+        "title": "Plan the main compressed-training experiment grid",
+        "role": "reasoning",
+        "description": "User asked (2026-11-24) to plan the real experiment after the ENG-004/005 pilots: strong JPEG levels x {sparse k32, dense k2048, linear} with measured bytes, original-image evaluation, multiple seeds. Specify levels, byte accounting, selection/test protocol (fix the pilot's selection-on-reported-split bias), seeds, runtime/resources, outputs, analysis, and decisions for the user. Plan only; no runs.",
+        "depends_on": [],
+        "write_paths": [
+          "ai_harness/artifacts/REASON-002"
+        ],
+        "acceptance": [
+          "Grid, controls and primary metric are explicit and traceable to REASON-001/ENG-005",
+          "Test set is never used for selection",
+          "Runtime and disk estimates derive from measured pilot timings",
+          "User decisions are listed separately from defaults"
+        ]
+      },
+      "state": "review",
+      "owner": "claude-orient-20261122-a",
+      "artifacts": [
+        {
+          "path": "ai_harness/artifacts/REASON-002/plan.md",
+          "sha256": "9dcc18d765deed357d09aa541cefbe9fc3c8147c9da675ec32d58b5a4083079b",
+          "bytes": 8115
+        },
+        {
+          "path": "ai_harness/artifacts/REASON-002/byte_sample.txt",
+          "sha256": "926b28384bc00e9dd291e2503081eaa0cf6839b03995331702dbbc60f7546423",
+          "bytes": 961
+        }
+      ],
+      "summary": "GRID-001 plan: 8 JPEG levels (source..100; measured 4.8:1 to 229:1 vs raw, 50:1 between levels 80-85) x {sparse k32, dense k2048, linear} x 3 seeds = 72 runs, select on 5k val, test once on ImageNetV2 source; ~1.5-2 h; user decisions listed.",
+      "created": "2026-11-24T23:11:45+00:00",
+      "updated": "2026-11-24T23:13:22+00:00",
+      "stale": false
+    },
+    {
+      "id": "GRID-001",
+      "spec": {
+        "id": "GRID-001",
+        "title": "Run the REASON-002 experiment: tuning, main grid, M sweep, byte accounting",
+        "role": "engineer",
+        "description": "User approved REASON-002 (2026-11-24) with choices: tune first on the 5k validation split, outputs in Final Project/runs, include the M sweep. Add src/run_grid.py (new file; reuses user's sparse_workflow.train via FoldFeatureCache, baseline_head pieces), extract pool and ImageNetV2 features once per level, run tuning (seed 42, levels source/90, val only), freeze settings by pre-declared rule, run 8 levels x {sparse, dense, linear} x seeds 42-44, run M sweep, measure stored bytes with build_jpeg_dataset.py, check stored vs in-memory pixels on real images, and test once on ImageNetV2.",
+        "depends_on": [],
+        "write_paths": [
+          "src/run_grid.py",
+          "runs/GRID-001",
+          "ai_harness/artifacts/GRID-001"
+        ],
+        "acceptance": [
+          "ImageNetV2 never used before settings are frozen; tuning rule pre-declared",
+          "Every result row records model, M, k, level, seed, split digest, best epoch",
+          "Stored-bytes table from the full pool; pixel equivalence checked on real images",
+          "User src files unmodified; results labeled with claim scope (frozen pretrained backbone)"
+        ]
+      },
+      "state": "done",
+      "owner": "claude-orient-20261122-a",
+      "artifacts": [
+        {
+          "path": "ai_harness/artifacts/GRID-001/report.md",
+          "sha256": "61704664d46619b0688068c4d612f65c468a94df30bcb8f43edcaba56ea19fe2",
+          "bytes": 18983
+        },
+        {
+          "path": "ai_harness/artifacts/GRID-001/analysis.md",
+          "sha256": "b0deda79258c148f00a9f19a253cae4bfb69de3a4de8ea28dba108937ae8dd7c",
+          "bytes": 9632
+        },
+        {
+          "path": "ai_harness/artifacts/GRID-001/analysis.json",
+          "sha256": "5638350fe634fac565bb738d543058d9f518f2c0b6902be0c54e4c334eb985ab",
+          "bytes": 35719
+        },
+        {
+          "path": "ai_harness/artifacts/GRID-001/analyze.py",
+          "sha256": "491679818a1a1e2ca15fb640348817caf34c5d62707f17017c624dfdfadadd0d",
+          "bytes": 8091
+        },
+        {
+          "path": "ai_harness/artifacts/GRID-001/pixel_check.py",
+          "sha256": "182ece19c2b22ac8952e60c9854c56abce1077ff1c404a665814adaf97731822",
+          "bytes": 1910
+        },
+        {
+          "path": "ai_harness/artifacts/GRID-001/pixel_check_output.txt",
+          "sha256": "c758437cbfdd01231f143f090bfc3bb5a4f4331a732f30db812344e4e1bdedd4",
+          "bytes": 75
+        },
+        {
+          "path": "ai_harness/artifacts/GRID-001/bytes_log.txt",
+          "sha256": "4bae823e0fbdd43070a5137308b69d6a395a27b2554dc954da0b7023a2662568",
+          "bytes": 751
+        },
+        {
+          "path": "ai_harness/artifacts/GRID-001/features_log.txt",
+          "sha256": "c2d610e1c4e214bde892747df119f3ab42e2b9ea0d53a98b990c44b640610213",
+          "bytes": 3621
+        },
+        {
+          "path": "ai_harness/artifacts/GRID-001/tune_log.txt",
+          "sha256": "01ee6893e333848f5bd78a0c3e8a4b42d1fe8b79e019df354f4922c867caa5a2",
+          "bytes": 81394
+        },
+        {
+          "path": "ai_harness/artifacts/GRID-001/grid_log.txt",
+          "sha256": "784a7b5081725653ba139a27ff4612db4e2d3a2b566cfb8ca386e74e19ab492c",
+          "bytes": 234319
+        },
+        {
+          "path": "ai_harness/artifacts/GRID-001/msweep_log.txt",
+          "sha256": "e65783b83c06ace1e40e9db5d4956c6c883687be00630c46b5ada8c7d1bb14de",
+          "bytes": 175629
+        },
+        {
+          "path": "ai_harness/artifacts/GRID-001/reference_log.txt",
+          "sha256": "d7f7f2ee5c0a79217e29136a5217b8b16fb94491ae7a0d385220c991cc453dfd",
+          "bytes": 1638
+        },
+        {
+          "path": "ai_harness/artifacts/GRID-001/summary_log.txt",
+          "sha256": "026ae1efe6703e77c0d03b758871bbb845042ab4c60676f081ff9eba4b2ee91b",
+          "bytes": 193
+        },
+        {
+          "path": "ai_harness/artifacts/GRID-001/src_hashes_before.txt",
+          "sha256": "c97a495e95f8d6d8a4e6e5b6f52535864a4b39f6672f81c3c3dae1b7e2d03c1d",
+          "bytes": 689
+        },
+        {
+          "path": "src/run_grid.py",
+          "sha256": "5274e4e1b1073fb5b6ecea046907f7a92d5627d1cbb07123370a040a80889313",
+          "bytes": 19435
+        },
+        {
+          "path": "runs/GRID-001/results.csv",
+          "sha256": "7473fca7660426b95d5a0afa63beed02daf6a8d9dba0f154b7bceb686fdce40e",
+          "bytes": 45222
+        },
+        {
+          "path": "runs/GRID-001/summary.csv",
+          "sha256": "86b0e55745a0f99e8d79a7de90ffe4fe62d53503c81e2083821e8ab04434f92d",
+          "bytes": 6633
+        },
+        {
+          "path": "runs/GRID-001/tune_results.json",
+          "sha256": "94ea29efe0334b52a5b9ebfd605543edaae81243da4c43b1a54e883489210f8f",
+          "bytes": 3683
+        },
+        {
+          "path": "runs/GRID-001/tuned.json",
+          "sha256": "0c34486e09d8006b7c8daabb931ad2b337eda23772c8ce61b25102a855c77a1b",
+          "bytes": 388
+        },
+        {
+          "path": "runs/GRID-001/reference_original_fc.json",
+          "sha256": "294039f2b715ce333c10639265b0e0fc019ccc41a661132cecd3e15bbc90d731",
+          "bytes": 1876
+        },
+        {
+          "path": "runs/GRID-001/jpeg_variants/summary.json",
+          "sha256": "116c29e9184b06f0dfd1b5f73f832cc46d531d233790cd01cdf82df954fd3fe8",
+          "bytes": 14826
+        },
+        {
+          "path": "runs/GRID-001/jpeg_variants/manifest.csv",
+          "sha256": "4375dbf50b4f477b903a115a2044b127d3ceb9208697ce4d67ded37a1819eefa",
+          "bytes": 99140122
+        }
+      ],
+      "summary": "Revised per REVIEW-002 (report.md only; no numbers changed). Ran tune (28), grid (72), M sweep (36), reference, full-pool bytes. ImageNetV2-source top-1: level 80 (50.3:1 raw, 89.8% saving) costs 0.8-1.2 pp, level 90 ~2 pp. Linear head beats sparse by 1.5-2.3 pp at every level; sparse ~ dense. All tuned heads init from original ImageNet fc (disclosed); original fc 57.3% beats all trained heads. Pixel check 3500/3500 identical; src hashes unchanged.",
+      "created": "2026-11-25T00:07:25+00:00",
+      "updated": "2026-11-25T07:18:02+00:00",
+      "stale": false
+    },
+    {
+      "id": "GRID-002",
+      "spec": {
+        "id": "GRID-002",
+        "title": "Xavier-init grid: heads learned without the inherited ImageNet classifier",
+        "role": "engineer",
+        "description": "User approved (2026-11-24) a follow-up to GRID-001 whose tuned heads all started from the original ImageNet fc. Re-run the same 3 models x 8 levels x seeds 42-44 with fc-init xavier for every head. Settings are frozen from GRID-001 tune_results.json by the same pre-declared rule (highest mean val top-1 over source and level 90, tie lower CE) restricted to xavier candidates; no new tuning and no test reads before freezing. Reuse GRID-001 cached features read-only. New wrapper src/run_grid_xavier.py; do not modify src/run_grid.py (under review). Keep best.pt, history.json, done.json; delete last.pt of these new runs to limit OneDrive disk. Compare with GRID-001.",
+        "depends_on": [],
+        "write_paths": [
+          "src/run_grid_xavier.py",
+          "runs/GRID-002",
+          "ai_harness/artifacts/GRID-002"
+        ],
+        "acceptance": [
+          "Frozen xavier settings derived only from GRID-001 validation tuning, recorded before any GRID-002 test evaluation",
+          "Same splits (digests match GRID-001 per seed), same features, same test protocol",
+          "Report compares xavier vs inherited-fc heads per level with paired drops and claim scope",
+          "User src files and GRID-001 submitted artifacts unmodified"
+        ]
+      },
+      "state": "done",
+      "owner": "claude-orient-20261122-a",
+      "artifacts": [
+        {
+          "path": "ai_harness/artifacts/GRID-002/report.md",
+          "sha256": "73637b99beac5081be8efacfcfd1e8990512e8422dc24defbf2f53dd8c14eff1",
+          "bytes": 12481
+        },
+        {
+          "path": "ai_harness/artifacts/GRID-002/analysis.md",
+          "sha256": "c96f767b1724177cc7ab2c07bcd68040a89b8da084bf49c7e3a2f24765cd7755",
+          "bytes": 3468
+        },
+        {
+          "path": "ai_harness/artifacts/GRID-002/analysis.json",
+          "sha256": "8f0b2e4111d81ca7c3afc189150a20b648be632fe8bcc84da7a7d86986f60773",
+          "bytes": 21121
+        },
+        {
+          "path": "ai_harness/artifacts/GRID-002/analyze.py",
+          "sha256": "568fdeb951bc85295429fd488db5a7498c5dac653c37cee81a0de7b3eaa17c1d",
+          "bytes": 6960
+        },
+        {
+          "path": "ai_harness/artifacts/GRID-002/task.json",
+          "sha256": "7d1528fbc9eb1371dc0d33bd12e902e1cfe48a6bfb6a55a11dbc6171a444de5c",
+          "bytes": 1330
+        },
+        {
+          "path": "ai_harness/artifacts/GRID-002/freeze_log.txt",
+          "sha256": "dad57aab0c818b00f999ada0ad567d92354bdf138c4a5533ccb0262c1a64e346",
+          "bytes": 1058
+        },
+        {
+          "path": "ai_harness/artifacts/GRID-002/grid_log.txt",
+          "sha256": "c2f024dbaa4fb3e15477719751c33f54d7a2261483d9e9b495caf04760df5be7",
+          "bytes": 235107
+        },
+        {
+          "path": "ai_harness/artifacts/GRID-002/summary_log.txt",
+          "sha256": "33055c352def4c365a12ebc2ed0548e2d13cd1df52b03adf95db42e01686efd1",
+          "bytes": 193
+        },
+        {
+          "path": "src/run_grid_xavier.py",
+          "sha256": "feee6d7633401cfc76b75bbddca007a03d0f14b8b59d546953174ba3c241e2f3",
+          "bytes": 3810
+        },
+        {
+          "path": "runs/GRID-002/results.csv",
+          "sha256": "4219075f0f1fbdf5024aed8b673ce0e52b8c8e22c0e927cbede90ef78beb7ea1",
+          "bytes": 31736
+        },
+        {
+          "path": "runs/GRID-002/summary.csv",
+          "sha256": "bfa166b35a591965c0533ad3327dc48eedb780454182e8132b6a3daebea88559",
+          "bytes": 4794
+        },
+        {
+          "path": "runs/GRID-002/tuned.json",
+          "sha256": "9a194ce50639b9b896285733a4c2380662144db165961c0af04223404e2bb339",
+          "bytes": 393
+        }
+      ],
+      "summary": "Revised per REVIEW-002 (report.md only; no numbers changed). Xavier-init grid (72 runs, same splits/features as GRID-001). ImageNetV2-source: sparse 48.3 > dense 48.0 > linear 47.2 at source; sparse beats linear by 0.9-1.6 pp through level 85 (all seeds), sparse vs dense 0.2-0.8 pp (inconclusive). Sparse does not drop less than linear. Level 80 (50.3:1) costs 0.5-1.1 pp. Inherited fc worth 3.7-6.8 pp; explains GRID-001 ranking.",
+      "created": "2026-11-25T04:45:42+00:00",
+      "updated": "2026-11-25T07:18:03+00:00",
+      "stale": false
+    },
+    {
+      "id": "ABL-001",
+      "spec": {
+        "id": "ABL-001",
+        "title": "Ablation: is the sparse head's gain over linear from top-k sparsity, the auxiliary loss, or width?",
+        "role": "engineer",
+        "description": "User approved (2026-11-24) the ablation proposed in GRID-002. Xavier init, same splits/features/test protocol as GRID-002. Factorial: {sparse M2048 k512, dense M2048 k2048} x {MSE only (dependency=coherence=0), no auxiliary loss (reconstruction weight 1e-6 because Settings.validate forbids 0; dependency=coherence=0)}. The full-loss cells and the linear head are reused from GRID-002. Dense with no auxiliary loss is a width-matched 512->2048 ReLU MLP (centered input, He init). Levels source, 60, 80, 90, 95; seeds 42-44; 60 runs. No new tuning: k, lr, epochs as frozen in GRID-002. New wrapper src/run_ablation.py; run_grid.py and run_grid_xavier.py unmodified. Delete last.pt of new runs.",
+        "depends_on": [],
+        "write_paths": [
+          "src/run_ablation.py",
+          "runs/ABL-001",
+          "ai_harness/artifacts/ABL-001"
+        ],
+        "acceptance": [
+          "Variants differ from GRID-002 only in the loss weights stated; splits match by digest",
+          "Report separates sparsity, auxiliary-loss and width effects with paired seed comparisons and the 1 pp rule",
+          "No ImageNetV2-based choice; user src files and submitted artifacts unmodified"
+        ]
+      },
+      "state": "done",
+      "owner": "claude-orient-20261122-a",
+      "artifacts": [
+        {
+          "path": "ai_harness/artifacts/ABL-001/report.md",
+          "sha256": "3b255ad2280ac5df33a8ba8d27e034640cd60776b0f6de41e88f7e4b2c864883",
+          "bytes": 11404
+        },
+        {
+          "path": "ai_harness/artifacts/ABL-001/analysis.md",
+          "sha256": "4e512db433b78cb32f48b7882ffd3a441e1c6040cf5adf3174a28d363bd03494",
+          "bytes": 3174
+        },
+        {
+          "path": "ai_harness/artifacts/ABL-001/analysis.json",
+          "sha256": "6a4fc90acdd9b461e1111bf4880fc69dbce51ae63714362b8a525a86cc2ff90b",
+          "bytes": 12761
+        },
+        {
+          "path": "ai_harness/artifacts/ABL-001/analyze.py",
+          "sha256": "0878407365aa5a65ebb0a117989cff11ffb5501cf8ffbca1de7a8d6280ac3714",
+          "bytes": 5384
+        },
+        {
+          "path": "ai_harness/artifacts/ABL-001/task.json",
+          "sha256": "d5c88063c1b3c97b760bf85b66ef7fe9ec61e8bcdd1e1844a942f648eb3ed72b",
+          "bytes": 1294
+        },
+        {
+          "path": "ai_harness/artifacts/ABL-001/grid_log.txt",
+          "sha256": "cfe1b5b815a23fddc7f36e1b15759ce2ce9c7874c480f5708c422adc4ebe338b",
+          "bytes": 297239
+        },
+        {
+          "path": "ai_harness/artifacts/ABL-001/summary_log.txt",
+          "sha256": "133f00fba09aaad4637b035f3677ad25f0be9d678062ca566d3ab53fd7806faf",
+          "bytes": 192
+        },
+        {
+          "path": "src/run_ablation.py",
+          "sha256": "16e13b2d6dab8d54c13f9face90513fee175247c09cf33422787cfdce48e82a6",
+          "bytes": 5013
+        },
+        {
+          "path": "runs/ABL-001/results.csv",
+          "sha256": "26c8e591be2b4e054a32dd6b7d34285dc01b35d988209ba31f07d4f832c9dbbe",
+          "bytes": 25536
+        },
+        {
+          "path": "runs/ABL-001/summary.csv",
+          "sha256": "1dc7a83576e26b0c791ff05a8ea406c139398aa2001917e35f81d1fd6af141b7",
+          "bytes": 3787
+        },
+        {
+          "path": "runs/ABL-001/settings.json",
+          "sha256": "05f9e96d711fd73dce0be7efc638f7db63b009b109604018652e02ced02867d9",
+          "bytes": 865
+        }
+      ],
+      "summary": "Revised per REVIEW-002 (report.md only; no numbers changed). Ablation (60 runs, Xavier, same splits): the feature-MSE auxiliary loss explains the sparse head's gain (+2.0 pp sparse, +1.4 pp dense, 15/15 pairs). Top-k sparsity alone ~0 (-0.14 pp); with MSE +0.46 pp (<1 pp, unresolved). CE-only 2048-wide MLP is 1.0 pp below linear. Dep/coh regularizers ~0. No component improves compression tolerance.",
+      "created": "2026-11-25T05:34:13+00:00",
+      "updated": "2026-11-25T07:18:04+00:00",
+      "stale": false
+    },
+    {
+      "id": "REVIEW-002",
+      "spec": {
+        "id": "REVIEW-002",
+        "title": "Independent review of GRID-001, GRID-002 and ABL-001 experiments",
+        "role": "reviewer",
+        "description": "User requested (2026-11-25) an independent reviewer for the three submitted experiments authored by claude-orient-20261122-a. Read each task's spec, submitted artifacts and raw outputs (runs/GRID-001, runs/GRID-002, runs/ABL-001); re-run each analyze.py; spot-check numbers against results.csv and a few best.pt/done.json files; check test-set isolation, split pairing, byte accounting, claim scope (pretrained backbone, inherited fc), M/k and capacity confounds, and overclaiming. Record accept/revise for each task via the harness review CLI. Read-only for everything outside this folder; no training runs; no edits to submitted artifacts or src/.",
+        "depends_on": [],
+        "write_paths": [
+          "ai_harness/artifacts/REVIEW-002"
+        ],
+        "acceptance": [
+          "Findings cite specific file/line or table locations with severity",
+          "Each of GRID-001, GRID-002, ABL-001 receives a recorded verdict with a note referencing this report",
+          "Blocking problems distinguished from optional improvements; independent recomputation of key numbers shown"
+        ]
+      },
+      "state": "review",
+      "owner": "reviewer-20261125-a",
+      "artifacts": [
+        {
+          "path": "ai_harness/artifacts/REVIEW-002/report.md",
+          "sha256": "85cfa99d715de951188753fb09133990b98655e4d3ffe3ce5bb76c2445256bdd",
+          "bytes": 9972
+        },
+        {
+          "path": "ai_harness/artifacts/REVIEW-002/recompute/independent_check.py",
+          "sha256": "2cc65ae3930e11ec21a3ee4b25dad093c725f6f777cc6467c3b777fe10afe00c",
+          "bytes": 18072
+        },
+        {
+          "path": "ai_harness/artifacts/REVIEW-002/recompute/independent_check_output.txt",
+          "sha256": "164e3eecb55ab4f142cd73c0592fd5812aa2e30cf834eb137fdcc7fd6288f98d",
+          "bytes": 15841
+        },
+        {
+          "path": "ai_harness/artifacts/REVIEW-002/recompute/ABL-001/analyze.py",
+          "sha256": "7fedf2dd133d428141b62aeb175dbbb2ee4b580ffbf0e4ce58238d9b7b42bc0d",
+          "bytes": 5439
+        },
+        {
+          "path": "ai_harness/artifacts/REVIEW-002/recompute/GRID-001/analyze.py",
+          "sha256": "a1569b99626480e0fcdc02a98ada82c23aa55f671b8d02a1b3c8bc2dde77dc3e",
+          "bytes": 8146
+        },
+        {
+          "path": "ai_harness/artifacts/REVIEW-002/recompute/GRID-002/analyze.py",
+          "sha256": "5456bcdf8699d66c182f691b056fe01cd173631d37d2a4bd769f9fd0603aed7b",
+          "bytes": 7015
+        },
+        {
+          "path": "ai_harness/artifacts/REVIEW-002/recompute/ABL-001/analysis.md",
+          "sha256": "4e512db433b78cb32f48b7882ffd3a441e1c6040cf5adf3174a28d363bd03494",
+          "bytes": 3174
+        },
+        {
+          "path": "ai_harness/artifacts/REVIEW-002/recompute/GRID-001/analysis.md",
+          "sha256": "b0deda79258c148f00a9f19a253cae4bfb69de3a4de8ea28dba108937ae8dd7c",
+          "bytes": 9632
+        },
+        {
+          "path": "ai_harness/artifacts/REVIEW-002/recompute/GRID-002/analysis.md",
+          "sha256": "c96f767b1724177cc7ab2c07bcd68040a89b8da084bf49c7e3a2f24765cd7755",
+          "bytes": 3468
+        },
+        {
+          "path": "ai_harness/artifacts/REVIEW-002/recompute/ABL-001/analysis.json",
+          "sha256": "6a4fc90acdd9b461e1111bf4880fc69dbce51ae63714362b8a525a86cc2ff90b",
+          "bytes": 12761
+        },
+        {
+          "path": "ai_harness/artifacts/REVIEW-002/recompute/GRID-001/analysis.json",
+          "sha256": "5638350fe634fac565bb738d543058d9f518f2c0b6902be0c54e4c334eb985ab",
+          "bytes": 35719
+        },
+        {
+          "path": "ai_harness/artifacts/REVIEW-002/recompute/GRID-002/analysis.json",
+          "sha256": "8f0b2e4111d81ca7c3afc189150a20b648be632fe8bcc84da7a7d86986f60773",
+          "bytes": 21121
+        },
+        {
+          "path": "ai_harness/artifacts/REVIEW-002/recompute/ABL-001/stdout.txt",
+          "sha256": "4e512db433b78cb32f48b7882ffd3a441e1c6040cf5adf3174a28d363bd03494",
+          "bytes": 3174
+        },
+        {
+          "path": "ai_harness/artifacts/REVIEW-002/recompute/GRID-001/stdout.txt",
+          "sha256": "461fdce1ddda04058fd581ac0e0c7512fc7361f1af88d3db571ae0f966894ddf",
+          "bytes": 9634
+        },
+        {
+          "path": "ai_harness/artifacts/REVIEW-002/recompute/GRID-002/stdout.txt",
+          "sha256": "c96f767b1724177cc7ab2c07bcd68040a89b8da084bf49c7e3a2f24765cd7755",
+          "bytes": 3468
+        }
+      ],
+      "summary": "Independent review: GRID-001, GRID-002, ABL-001 all revise, no blocking findings. analyze.py outputs reproduce byte-identically; own recompute matches all tables, done.json, best.pt, bytes (q20 615,578,103 B, 50.3:1). Should-fix: GRID-001 M-sweep epoch-1 checkpoints (M<=1024); GRID-002 sparse>linear 'established' overstated (>=1 pp only at source/L20); ABL-001 'gain from MSE not sparsity/width' does not follow (dense-mse vs linear +0.39, sparsity|MSE +0.46).",
+      "created": "2026-11-25T07:01:03+00:00",
+      "updated": "2026-11-25T07:15:10+00:00",
+      "stale": false
+    },
+    {
+      "id": "COORD-002",
+      "spec": {
+        "id": "COORD-002",
+        "title": "Record accepted experiment results (GRID-001, GRID-002, ABL-001) and the ABL-001 ledger-summary erratum",
+        "role": "coordinator",
+        "description": "After REVIEW-002 accepted the three experiments (2026-11-25), write a task-local status note with the accepted, reviewer-verified conclusions and an erratum: the ABL-001 ledger summary string carries pre-revision wording that the ledger could not update while in review. RESEARCH_STATUS.md and DECISIONS.md are still reserved by COORD-001 (in review), so this note is task-local; a later coordinator task should fold it into the shared files.",
+        "depends_on": [],
+        "write_paths": [
+          "ai_harness/artifacts/COORD-002"
+        ],
+        "acceptance": [
+          "States only conclusions present in the accepted, revised reports, with links",
+          "Erratum quotes the stale summary and points to the authoritative report wording",
+          "Lists what remains unresolved and the pending reviews"
+        ]
+      },
+      "state": "review",
+      "owner": "claude-orient-20261122-a",
+      "artifacts": [
+        {
+          "path": "ai_harness/artifacts/COORD-002/status.md",
+          "sha256": "1c67ef255fa9ec6a222eac931bf37b4ed80c1485d8f5199e0390cf340eca17dd",
+          "bytes": 4631
+        },
+        {
+          "path": "ai_harness/artifacts/COORD-002/task.json",
+          "sha256": "55637456e9b8c9cd2fdccf00c9d92186286c65d3cae9d9bc28c68a07bda6f936",
+          "bytes": 957
+        }
+      ],
+      "summary": "Task-local status note of reviewer-accepted results from GRID-001/GRID-002/ABL-001, plus erratum: ABL-001 ledger summary carries withdrawn wording; report.md is authoritative.",
+      "created": "2026-11-25T07:18:32+00:00",
+      "updated": "2026-11-25T07:18:54+00:00",
+      "stale": false
+    }
+  ],
+  "events": [
+    {
+      "seq": 1,
+      "task": "LIT-001",
+      "action": "init",
+      "agent": "coordinator",
+      "detail": "Seeded pending task",
+      "at": "2026-11-06T05:38:12+00:00"
+    },
+    {
+      "seq": 2,
+      "task": "REASON-001",
+      "action": "init",
+      "agent": "coordinator",
+      "detail": "Seeded pending task",
+      "at": "2026-11-06T05:38:12+00:00"
+    },
+    {
+      "seq": 3,
+      "task": "REPRO-001",
+      "action": "init",
+      "agent": "coordinator",
+      "detail": "Seeded pending task",
+      "at": "2026-11-06T05:38:12+00:00"
+    },
+    {
+      "seq": 4,
+      "task": "REVIEW-001",
+      "action": "init",
+      "agent": "coordinator",
+      "detail": "Seeded pending task",
+      "at": "2026-11-06T05:38:12+00:00"
+    },
+    {
+      "seq": 5,
+      "task": "SYNTH-001",
+      "action": "init",
+      "agent": "coordinator",
+      "detail": "Seeded pending task",
+      "at": "2026-11-06T05:38:12+00:00"
+    },
+    {
+      "seq": 6,
+      "task": "LIT-001",
+      "action": "claim",
+      "agent": "paper-miner-bootstrap",
+      "detail": "literature",
+      "at": "2026-11-06T05:38:14+00:00"
+    },
+    {
+      "seq": 7,
+      "task": "REASON-001",
+      "action": "claim",
+      "agent": "reasoner-bootstrap",
+      "detail": "reasoning",
+      "at": "2026-11-06T05:38:15+00:00"
+    },
+    {
+      "seq": 8,
+      "task": "LIT-001",
+      "action": "submit",
+      "agent": "paper-miner-bootstrap",
+      "detail": "Bounded primary-source audit; full-file bytes distinguished from quality proxy and payload rates; exact novelty unresolved.",
+      "at": "2026-11-06T05:38:17+00:00"
+    },
+    {
+      "seq": 9,
+      "task": "REASON-001",
+      "action": "submit",
+      "agent": "reasoner-bootstrap",
+      "detail": "Proposed four-condition pilot, explicit dictionary routes, storage definitions, fairness and leakage controls, and feasible expansion; no experiments run.",
+      "at": "2026-11-06T05:38:19+00:00"
+    },
+    {
+      "seq": 10,
+      "task": "LIT-001",
+      "action": "review-accept",
+      "agent": "coordinator-root",
+      "detail": "Read report and structured evidence; JSON valid. Independently verified Nayak sections II-B/C, Lee arXiv v1 section 3.1, and Berkeley section 3.2 header exclusions. Access limits and unresolved novelty are explicit. Accept bounded audit, not a novelty proof.",
+      "at": "2026-11-06T05:38:21+00:00"
+    },
+    {
+      "seq": 11,
+      "task": "REASON-001",
+      "action": "review-accept",
+      "agent": "coordinator-root",
+      "detail": "Read full proposed design; checked four-condition comparison, 24-run arithmetic, byte formulas, M/k definition, pretraining and clean-target controls. Accept design memo with dataset/GPU unresolved, not measured findings or final model selection.",
+      "at": "2026-11-06T05:38:23+00:00"
+    },
+    {
+      "seq": 12,
+      "task": "ORIENT-001",
+      "action": "add",
+      "agent": "coordinator",
+      "detail": "Added task specification",
+      "at": "2026-11-23T06:04:49+00:00"
+    },
+    {
+      "seq": 13,
+      "task": "ORIENT-001",
+      "action": "claim",
+      "agent": "claude-orient-20261122-a",
+      "detail": "engineer",
+      "at": "2026-11-23T06:04:50+00:00"
+    },
+    {
+      "seq": 14,
+      "task": "ORIENT-001",
+      "action": "submit",
+      "agent": "claude-orient-20261122-a",
+      "detail": "File map, observed local environment (RTX 3080 Ti Laptop 16GB, Python 3.14, no torch), and read-only audit of untracked src/ JPEG tool and ResNet-18 sparse-dictionary AE against AGENTS.md standards.",
+      "at": "2026-11-23T06:05:38+00:00"
+    },
+    {
+      "seq": 15,
+      "task": "COORD-001",
+      "action": "add",
+      "agent": "coordinator",
+      "detail": "Added task specification",
+      "at": "2026-11-23T06:10:17+00:00"
+    },
+    {
+      "seq": 16,
+      "task": "COORD-001",
+      "action": "claim",
+      "agent": "claude-orient-20261122-a",
+      "detail": "coordinator",
+      "at": "2026-11-23T06:10:17+00:00"
+    },
+    {
+      "seq": 17,
+      "task": "ENG-001",
+      "action": "add",
+      "agent": "coordinator",
+      "detail": "Added task specification",
+      "at": "2026-11-23T06:11:03+00:00"
+    },
+    {
+      "seq": 18,
+      "task": "LIT-002",
+      "action": "add",
+      "agent": "coordinator",
+      "detail": "Added task specification",
+      "at": "2026-11-23T06:11:04+00:00"
+    },
+    {
+      "seq": 19,
+      "task": "COORD-001",
+      "action": "submit",
+      "agent": "claude-orient-20261122-a",
+      "detail": "Recorded user's 2026-11-22 adoption of src/ with provenance; separated what it settles from open choices; queued ENG-001 and LIT-002.",
+      "at": "2026-11-23T06:11:14+00:00"
+    },
+    {
+      "seq": 20,
+      "task": "ENG-001",
+      "action": "claim",
+      "agent": "claude-orient-20261122-a",
+      "detail": "engineer",
+      "at": "2026-11-23T06:13:02+00:00"
+    },
+    {
+      "seq": 21,
+      "task": "ENG-001",
+      "action": "submit",
+      "agent": "claude-orient-20261122-a",
+      "detail": "Added src/build_jpeg_dataset.py (batch JPEG, strip metadata, fixed subsampling, per-image full/header/payload bytes, aggregate R_existing/R_raw/savings, split-leak hash check). 7 synthetic tests pass. Finding: ~275-325 B standalone JPEG header makes full-file 50:1 vs raw RGB impossible at 32x32 and 64x64.",
+      "at": "2026-11-23T06:15:58+00:00"
+    },
+    {
+      "seq": 22,
+      "task": "ORIENT-002",
+      "action": "add",
+      "agent": "coordinator",
+      "detail": "Added task specification",
+      "at": "2026-11-24T06:33:36+00:00"
+    },
+    {
+      "seq": 23,
+      "task": "ORIENT-002",
+      "action": "claim",
+      "agent": "claude-orient-20261122-a",
+      "detail": "engineer",
+      "at": "2026-11-24T06:33:36+00:00"
+    },
+    {
+      "seq": 24,
+      "task": "ORIENT-002",
+      "action": "submit",
+      "agent": "claude-orient-20261122-a",
+      "detail": "Explained the user's main.py/sparse_workflow/image_data pipeline; verified in-memory JPEG pixels equal ENG-001 stored files (80/80); listed gaps (no same-condition conventional baseline, evaluate on source, frozen-pretrained claim scope, byte accounting) and superseded ORIENT-001/COORD-001 statements.",
+      "at": "2026-11-24T06:34:18+00:00"
+    },
+    {
+      "seq": 25,
+      "task": "ENG-002",
+      "action": "add",
+      "agent": "coordinator",
+      "detail": "Added task specification",
+      "at": "2026-11-24T06:35:08+00:00"
+    },
+    {
+      "seq": 26,
+      "task": "ENG-002",
+      "action": "claim",
+      "agent": "claude-orient-20261122-a",
+      "detail": "engineer",
+      "at": "2026-11-24T06:35:09+00:00"
+    },
+    {
+      "seq": 27,
+      "task": "ENG-002",
+      "action": "submit",
+      "agent": "claude-orient-20261122-a",
+      "detail": "Conda env ai360 (Py 3.12, torch 2.11+cu128) on RTX 3080 Ti Laptop; main.py check PASS on CPU, CUDA, CUDA --pretrained; benchmark: CPU JPEG preprocessing ~129 img/s/process is the bottleneck, GPU features ~2660 img/s, head ~127 steps/s; laptop sufficient for frozen-backbone design.",
+      "at": "2026-11-24T06:40:57+00:00"
+    },
+    {
+      "seq": 28,
+      "task": "ENG-003",
+      "action": "add",
+      "agent": "coordinator",
+      "detail": "Added task specification",
+      "at": "2026-11-24T07:11:02+00:00"
+    },
+    {
+      "seq": 29,
+      "task": "ENG-003",
+      "action": "claim",
+      "agent": "claude-orient-20261122-a",
+      "detail": "engineer",
+      "at": "2026-11-24T07:11:02+00:00"
+    },
+    {
+      "seq": 30,
+      "task": "ENG-003",
+      "action": "heartbeat",
+      "agent": "claude-orient-20261122-a",
+      "detail": "Heartbeat",
+      "at": "2026-11-24T07:16:44+00:00"
+    },
+    {
+      "seq": 31,
+      "task": "ENG-003",
+      "action": "submit",
+      "agent": "claude-orient-20261122-a",
+      "detail": "ImageNet-1K val (50,000 imgs, 6.71 GB) and ImageNetV2 matched-frequency (10,000, 1.24 GB) extracted with original bytes into Datasets/; all hashes and all labels verified; main.py --plan-only gives 45k/5k, 352 batches, 3,520 steps.",
+      "at": "2026-11-24T21:08:24+00:00"
+    },
+    {
+      "seq": 32,
+      "task": "ENG-004",
+      "action": "add",
+      "agent": "coordinator",
+      "detail": "Added task specification",
+      "at": "2026-11-24T21:35:03+00:00"
+    },
+    {
+      "seq": 33,
+      "task": "ENG-004",
+      "action": "claim",
+      "agent": "claude-orient-20261122-a",
+      "detail": "engineer",
+      "at": "2026-11-24T21:35:03+00:00"
+    },
+    {
+      "seq": 34,
+      "task": "ENG-004",
+      "action": "submit",
+      "agent": "claude-orient-20261122-a",
+      "detail": "README 45k/5k run: 3m35s total (feature extraction 170s, 10 epochs 36s). Held-out top-1 57.6% source / 57.1% level 20 vs original ResNet fc 70.0% / 69.3%. Head overfits (train 99.8%). Single-seed pilot, not a result.",
+      "at": "2026-11-24T21:40:37+00:00"
+    },
+    {
+      "seq": 35,
+      "task": "ENG-005",
+      "action": "add",
+      "agent": "coordinator",
+      "detail": "Added task specification",
+      "at": "2026-11-24T22:37:44+00:00"
+    },
+    {
+      "seq": 36,
+      "task": "ENG-005",
+      "action": "claim",
+      "agent": "claude-orient-20261122-a",
+      "detail": "engineer",
+      "at": "2026-11-24T22:37:44+00:00"
+    },
+    {
+      "seq": 37,
+      "task": "ENG-005",
+      "action": "submit",
+      "agent": "claude-orient-20261122-a",
+      "detail": "Added src/baseline_head.py (linear head on same frozen features, reusing main.py split/cache/seeds/selection). Same split digest for all. Held-out top-1 @source: sparse k32 57.6%, dense k2048 63.2%, linear 62.0%, original fc 70.0%. Single-seed pilot; selection on reported split noted.",
+      "at": "2026-11-24T22:54:04+00:00"
+    },
+    {
+      "seq": 38,
+      "task": "REASON-002",
+      "action": "add",
+      "agent": "coordinator",
+      "detail": "Added task specification",
+      "at": "2026-11-24T23:11:45+00:00"
+    },
+    {
+      "seq": 39,
+      "task": "REASON-002",
+      "action": "claim",
+      "agent": "claude-orient-20261122-a",
+      "detail": "reasoning",
+      "at": "2026-11-24T23:11:45+00:00"
+    },
+    {
+      "seq": 40,
+      "task": "REASON-002",
+      "action": "submit",
+      "agent": "claude-orient-20261122-a",
+      "detail": "GRID-001 plan: 8 JPEG levels (source..100; measured 4.8:1 to 229:1 vs raw, 50:1 between levels 80-85) x {sparse k32, dense k2048, linear} x 3 seeds = 72 runs, select on 5k val, test once on ImageNetV2 source; ~1.5-2 h; user decisions listed.",
+      "at": "2026-11-24T23:13:22+00:00"
+    },
+    {
+      "seq": 41,
+      "task": "GRID-001",
+      "action": "add",
+      "agent": "coordinator",
+      "detail": "Added task specification",
+      "at": "2026-11-25T00:07:25+00:00"
+    },
+    {
+      "seq": 42,
+      "task": "GRID-001",
+      "action": "claim",
+      "agent": "claude-orient-20261122-a",
+      "detail": "engineer",
+      "at": "2026-11-25T00:07:25+00:00"
+    },
+    {
+      "seq": 43,
+      "task": "GRID-001",
+      "action": "submit",
+      "agent": "claude-orient-20261122-a",
+      "detail": "Ran tune (28), grid (72), M sweep (36), reference, full-pool bytes. ImageNetV2-source top-1: level 80 (50.3:1 raw, 89.8% saving) costs 0.8-1.2 pp, level 90 ~2 pp. Linear head beats sparse by 1.5-2.3 pp at every level; sparse ~ dense. All tuned heads init from original ImageNet fc (disclosed); original fc 57.3% beats all trained heads. Pixel check 3500/3500 identical; src hashes unchanged.",
+      "at": "2026-11-25T02:13:47+00:00"
+    },
+    {
+      "seq": 44,
+      "task": "GRID-002",
+      "action": "add",
+      "agent": "coordinator",
+      "detail": "Added task specification",
+      "at": "2026-11-25T04:45:42+00:00"
+    },
+    {
+      "seq": 45,
+      "task": "GRID-002",
+      "action": "claim",
+      "agent": "claude-orient-20261122-a",
+      "detail": "engineer",
+      "at": "2026-11-25T04:45:43+00:00"
+    },
+    {
+      "seq": 46,
+      "task": "GRID-002",
+      "action": "submit",
+      "agent": "claude-orient-20261122-a",
+      "detail": "Xavier-init grid (72 runs, same splits/features as GRID-001). ImageNetV2-source: sparse 48.3 > dense 48.0 > linear 47.2 at source; sparse beats linear by 0.9-1.6 pp through level 85 (all seeds), sparse vs dense 0.2-0.8 pp (inconclusive). Sparse does not drop less than linear. Level 80 (50.3:1) costs 0.5-1.1 pp. Inherited fc worth 3.7-6.8 pp; explains GRID-001 ranking.",
+      "at": "2026-11-25T05:26:38+00:00"
+    },
+    {
+      "seq": 47,
+      "task": "ABL-001",
+      "action": "add",
+      "agent": "coordinator",
+      "detail": "Added task specification",
+      "at": "2026-11-25T05:34:13+00:00"
+    },
+    {
+      "seq": 48,
+      "task": "ABL-001",
+      "action": "claim",
+      "agent": "claude-orient-20261122-a",
+      "detail": "engineer",
+      "at": "2026-11-25T05:34:13+00:00"
+    },
+    {
+      "seq": 49,
+      "task": "ABL-001",
+      "action": "submit",
+      "agent": "claude-orient-20261122-a",
+      "detail": "Ablation (60 runs, Xavier, same splits): the feature-MSE auxiliary loss explains the sparse head's gain (+2.0 pp sparse, +1.4 pp dense, 15/15 pairs). Top-k sparsity alone ~0 (-0.14 pp); with MSE +0.46 pp (<1 pp, unresolved). CE-only 2048-wide MLP is 1.0 pp below linear. Dep/coh regularizers ~0. No component improves compression tolerance.",
+      "at": "2026-11-25T06:06:09+00:00"
+    },
+    {
+      "seq": 50,
+      "task": "REVIEW-002",
+      "action": "add",
+      "agent": "coordinator",
+      "detail": "Added task specification",
+      "at": "2026-11-25T07:01:03+00:00"
+    },
+    {
+      "seq": 51,
+      "task": "REVIEW-002",
+      "action": "claim",
+      "agent": "reviewer-20261125-a",
+      "detail": "reviewer",
+      "at": "2026-11-25T07:01:30+00:00"
+    },
+    {
+      "seq": 52,
+      "task": "GRID-001",
+      "action": "review-revise",
+      "agent": "reviewer-20261125-a",
+      "detail": "REVIEW-002 (recompute: ai_harness/artifacts/REVIEW-002/recompute/; full report text to be placed at ai_harness/artifacts/REVIEW-002/report.md by coordinator). No blocking issues: analysis.md/json reproduce byte-identically; all tables, bytes (seed42 q20 615,578,103 B, R_raw 50.3, 89.8%), splits, test isolation, done.json/best.pt and src hashes verified. SHOULD-FIX G1-1 (report.md headline 5, sec 5 lines 114-125): M-sweep M=1024 picks epoch 1 in 9/9 compressed-level runs and M=512 picks epochs 1-3 (source 3/3 at epoch 1); val declines after epoch 1, so with fc-init auto these are near-inherited-classifier checkpoints. Disclose best epochs per M, drop 'absolute accuracy improves with M' as a finding and the 'noisy baseline' explanation, mark M effect unresolved. OPTIONAL: R_raw uses native channels (899 grayscale = 1 ch; RGB-equivalent 50.8); saving vs stored includes metadata stripping; history.json exists only for linear runs; 29 duplicate-content pool images with conflicting labels (3-7 straddle train/val).",
+      "at": "2026-11-25T07:13:29+00:00"
+    },
+    {
+      "seq": 53,
+      "task": "GRID-002",
+      "action": "review-revise",
+      "agent": "reviewer-20261125-a",
+      "detail": "REVIEW-002 (recompute: ai_harness/artifacts/REVIEW-002/recompute/). No blocking issues: analysis reproduces byte-identically; freeze rule recomputed from tune_results.json; tuned.json written before first test eval; digests equal GRID-001. SHOULD-FIX G2-1 (report.md headline 1 line 8; sec 6 Seeds line 110): sparse>linear called established / clearing 1 pp, but mean gaps are 1.19 (src), 1.57 (L20), 0.88 (L60), 0.99 (L80), 0.90 (L85), 0.47, 0.39; 21/21 pairs come from only 3 splits (per-seed means 0.76/0.80/0.79). Reword: consistent sign, >=1 pp only at source and L20. OPTIONAL: label the ranking-reversal explanation (sec 4 line 91) as inference; sec 7 line 119 history.json kept only for linear runs (dictionary history only in grid_log.txt); note untuned linear lr/epochs (9/24 best at epoch 9-10, curves flat).",
+      "at": "2026-11-25T07:13:29+00:00"
+    },
+    {
+      "seq": 54,
+      "task": "ABL-001",
+      "action": "review-revise",
+      "agent": "reviewer-20261125-a",
+      "detail": "REVIEW-002 (recompute: ai_harness/artifacts/REVIEW-002/recompute/). No blocking issues: analysis reproduces byte-identically; per-epoch logs confirm loss weights (abl-mse residual +-2e-8, abl-none +-8e-9, full 0.07-0.08); splits match; variants fixed in task.json before running. SHOULD-FIX A-1 (report.md line 14 'Answer', sec 6.1 line 88): 'gain over linear comes from the aux loss, not top-k sparsity or width' does not follow. Within wide heads MSE is clear (+1.99/+1.39), but vs linear: dense-mse - linear +0.39 (12/15), sparse-mse - dense-mse +0.46 (13/15), sparse-full - linear +0.78; all <1 pp, so MSE is necessary to offset the -1.0 width penalty but the residual advantage over linear is unresolved and partly sparsity-given-MSE. A-2: add alternatives (generic regularization - MLP had no wd/dropout while linear wd tuned; code-scale anchoring by unit-norm atoms; earlier best epochs 4-6 vs 6-9) and scope claim to 'vs an unregularized CE-only head of same width'. OPTIONAL: 1e-6 term is ~1e-6-3e-6 (abl-none train MSE 1.04-3.12), not 2e-7, though CE-only-in-effect is correct; 15/15 counts are 3 independent splits; no history.json exists in runs/ABL-001.",
+      "at": "2026-11-25T07:13:29+00:00"
+    },
+    {
+      "seq": 55,
+      "task": "REVIEW-002",
+      "action": "submit",
+      "agent": "reviewer-20261125-a",
+      "detail": "Independent review: GRID-001, GRID-002, ABL-001 all revise, no blocking findings. analyze.py outputs reproduce byte-identically; own recompute matches all tables, done.json, best.pt, bytes (q20 615,578,103 B, 50.3:1). Should-fix: GRID-001 M-sweep epoch-1 checkpoints (M<=1024); GRID-002 sparse>linear 'established' overstated (>=1 pp only at source/L20); ABL-001 'gain from MSE not sparsity/width' does not follow (dense-mse vs linear +0.39, sparsity|MSE +0.46).",
+      "at": "2026-11-25T07:15:10+00:00"
+    },
+    {
+      "seq": 56,
+      "task": "GRID-001",
+      "action": "submit",
+      "agent": "claude-orient-20261122-a",
+      "detail": "Revised per REVIEW-002 (report.md only; no numbers changed). Ran tune (28), grid (72), M sweep (36), reference, full-pool bytes. ImageNetV2-source top-1: level 80 (50.3:1 raw, 89.8% saving) costs 0.8-1.2 pp, level 90 ~2 pp. Linear head beats sparse by 1.5-2.3 pp at every level; sparse ~ dense. All tuned heads init from original ImageNet fc (disclosed); original fc 57.3% beats all trained heads. Pixel check 3500/3500 identical; src hashes unchanged.",
+      "at": "2026-11-25T07:16:44+00:00"
+    },
+    {
+      "seq": 57,
+      "task": "GRID-002",
+      "action": "submit",
+      "agent": "claude-orient-20261122-a",
+      "detail": "Revised per REVIEW-002 (report.md only; no numbers changed). Xavier-init grid (72 runs, same splits/features as GRID-001). ImageNetV2-source: sparse 48.3 > dense 48.0 > linear 47.2 at source; sparse beats linear by 0.9-1.6 pp through level 85 (all seeds), sparse vs dense 0.2-0.8 pp (inconclusive). Sparse does not drop less than linear. Level 80 (50.3:1) costs 0.5-1.1 pp. Inherited fc worth 3.7-6.8 pp; explains GRID-001 ranking.",
+      "at": "2026-11-25T07:16:46+00:00"
+    },
+    {
+      "seq": 58,
+      "task": "ABL-001",
+      "action": "submit",
+      "agent": "claude-orient-20261122-a",
+      "detail": "Revised per REVIEW-002 (report.md only; no numbers changed). Ablation (60 runs, Xavier, same splits): the feature-MSE auxiliary loss explains the sparse head's gain (+2.0 pp sparse, +1.4 pp dense, 15/15 pairs). Top-k sparsity alone ~0 (-0.14 pp); with MSE +0.46 pp (<1 pp, unresolved). CE-only 2048-wide MLP is 1.0 pp below linear. Dep/coh regularizers ~0. No component improves compression tolerance.",
+      "at": "2026-11-25T07:16:47+00:00"
+    },
+    {
+      "seq": 59,
+      "task": "GRID-001",
+      "action": "review-accept",
+      "agent": "reviewer-20261125-a",
+      "detail": "REVIEW-002 re-review of the revised report.md (only the report changed; all 22 artifact hashes verified, results.csv/analysis unchanged). G1-1 resolved: headline 5 and sec 5 now mark the M effect unresolved, the 'improves with M' claim and the noisy-baseline explanation are withdrawn, and the best-epoch table matches results.csv (checked M2048 grid rows too). Optional items: G1-2 R_raw definition (sec 4), G1-3 metadata stripping (sec 4), G1-4 history/settings location (sec 2, sec 8) and G1-5 duplicates (sec 6) are all handled. No new overclaim. Trivial: sec 8 says the analysis needs only results.csv and done.json, but the byte tables also need manifest.csv.",
+      "at": "2026-11-25T07:18:02+00:00"
+    },
+    {
+      "seq": 60,
+      "task": "GRID-002",
+      "action": "review-accept",
+      "agent": "reviewer-20261125-a",
+      "detail": "REVIEW-002 re-review of the revised report.md (12 artifact hashes verified; numbers unchanged). G2-1 resolved: headline 1 and sec 6 now give per-level gaps, say the gap reaches 1 pp only at source and L20, and give the 3-split per-seed means (0.76/0.80/0.79). Optional items: G2-2 is labeled as inference (sec 4); G2-3 is corrected (sec 7); G2-4 is added (sec 6) with the inference 'unlikely to change ranking' flagged as untested; the adaptive test-reuse note is in sec 8. No new overclaim. Nit: sec 7 says the reviewer 'confirmed' loss weights 1/0.1/0.05 from per-epoch losses. I confirmed only that the regularizer residual is nonzero (0.069-0.081); the exact values follow from the Settings defaults in code.",
+      "at": "2026-11-25T07:18:03+00:00"
+    },
+    {
+      "seq": 61,
+      "task": "ABL-001",
+      "action": "review-accept",
+      "agent": "reviewer-20261125-a",
+      "detail": "REVIEW-002 re-review of the revised report.md (11 artifact hashes verified; numbers unchanged). A-1 resolved: the answer paragraph and sec 6.1 now decompose the gain over linear: width -1.00, MSE +1.39, dense-mse vs linear +0.39, sparsity given MSE +0.46, whole method 0.78, all checked against my recompute. The report now states the residual advantage is under 1 pp and neither part is established. A-2 resolved: sec 4 lists generic regularization, code-scale anchoring and training dynamics, and scopes the claim to an unregularized CE-only head of the same width. Optional items: A-3 is corrected (sec 1), A-4 adds per-seed means, A-5 is corrected (sec 5). Minor: 'MSE is necessary / needed to beat linear' (lines 26, 28, sec 6.1) is true only among the tested variants, since sec 4 itself says a tuned weight decay was not tried. The epochs 4-6 vs 6-9 contrast holds for sparse; dense CE-only peaks at 5-9. Headline 2 'does nothing' would read better as 'no detectable effect'. MATERIAL for the coordinator: the ledger summary string still says 'the feature-MSE auxiliary loss explains the sparse head's gain', which is the withdrawn claim. Replace it, or make sure BOARD and synthesis use the report, before synthesis.",
+      "at": "2026-11-25T07:18:04+00:00"
+    },
+    {
+      "seq": 62,
+      "task": "COORD-002",
+      "action": "add",
+      "agent": "coordinator",
+      "detail": "Added task specification",
+      "at": "2026-11-25T07:18:32+00:00"
+    },
+    {
+      "seq": 63,
+      "task": "COORD-002",
+      "action": "claim",
+      "agent": "claude-orient-20261122-a",
+      "detail": "coordinator",
+      "at": "2026-11-25T07:18:32+00:00"
+    },
+    {
+      "seq": 64,
+      "task": "COORD-002",
+      "action": "submit",
+      "agent": "claude-orient-20261122-a",
+      "detail": "Task-local status note of reviewer-accepted results from GRID-001/GRID-002/ABL-001, plus erratum: ABL-001 ledger summary carries withdrawn wording; report.md is authoritative.",
+      "at": "2026-11-25T07:18:54+00:00"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "id": "GRID-002",
+  "title": "Xavier-init grid: heads learned without the inherited ImageNet classifier",
+  "role": "engineer",
+  "description": "User approved (2026-11-24) a follow-up to GRID-001 whose tuned heads all started from the original ImageNet fc. Re-run the same 3 models x 8 levels x seeds 42-44 with fc-init xavier for every head. Settings are frozen from GRID-001 tune_results.json by the same pre-declared rule (highest mean val top-1 over source and level 90, tie lower CE) restricted to xavier candidates; no new tuning and no test reads before freezing. Reuse GRID-001 cached features read-only. New wrapper src/run_grid_xavier.py; do not modify src/run_grid.py (under review). Keep best.pt, history.json, done.json; delete last.pt of these new runs to limit OneDrive disk. Compare with GRID-001.",
+  "depends_on": [],
+  "write_paths": ["src/run_grid_xavier.py", "runs/GRID-002", "ai_harness/artifacts/GRID-002"],
+  "acceptance": [
+    "Frozen xavier settings derived only from GRID-001 validation tuning, recorded before any GRID-002 test evaluation",
+    "Same splits (digests match GRID-001 per seed), same features, same test protocol",
+    "Report compares xavier vs inherited-fc heads per level with paired drops and claim scope",
+    "User src files and GRID-001 submitted artifacts unmodified"
+  ]
+}

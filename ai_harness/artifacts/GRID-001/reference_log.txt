@@ -1,0 +1,10 @@
+start 2026-11-24T19:00:18-07:00
+[19:00:34] {"phase": "reference", "model": "original_fc", "train_level": "imagenet-train", "eval_set": "imagenetv2", "eval_level": "source", "top1": 0.5728, "top5": 0.799, "ce": 1.92487626953125}
+[19:00:34] {"phase": "reference", "model": "original_fc", "train_level": "imagenet-train", "eval_set": "imagenetv2", "eval_level": "L020", "top1": 0.5674, "top5": 0.7913, "ce": 1.9669989868164062}
+[19:00:34] {"phase": "reference", "model": "original_fc", "train_level": "imagenet-train", "eval_set": "imagenetv2", "eval_level": "L060", "top1": 0.5496, "top5": 0.7775, "ce": 2.0658138793945313}
+[19:00:34] {"phase": "reference", "model": "original_fc", "train_level": "imagenet-train", "eval_set": "imagenetv2", "eval_level": "L080", "top1": 0.5149, "top5": 0.7518, "ce": 2.2259351928710935}
+[19:00:34] {"phase": "reference", "model": "original_fc", "train_level": "imagenet-train", "eval_set": "imagenetv2", "eval_level": "L085", "top1": 0.4946, "top5": 0.7316, "ce": 2.3602162353515626}
+[19:00:34] {"phase": "reference", "model": "original_fc", "train_level": "imagenet-train", "eval_set": "imagenetv2", "eval_level": "L090", "top1": 0.4512, "top5": 0.685, "ce": 2.6478646728515627}
+[19:00:34] {"phase": "reference", "model": "original_fc", "train_level": "imagenet-train", "eval_set": "imagenetv2", "eval_level": "L095", "top1": 0.3349, "top5": 0.5683, "ce": 3.4676951171875}
+[19:00:34] {"phase": "reference", "model": "original_fc", "train_level": "imagenet-train", "eval_set": "imagenetv2", "eval_level": "L100", "top1": 0.0983, "top5": 0.2167, "ce": 6.41307802734375}
+exit 0 end 2026-11-24T19:00:35-07:00

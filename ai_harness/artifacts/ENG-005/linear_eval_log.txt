@@ -1,0 +1,5 @@
+$ python baseline_head.py evaluate --checkpoint ../runs/ENG-005/linear_45k/best.pt --data ../Datasets/imagenet-1k/val --limit 0 --levels source 20 --workers 4 --device cuda --json ../ai_harness/artifacts/ENG-005/linear_heldout.json
+start 2026-11-24T15:50:31-07:00
+[15:51:16] {"compression_level": "source", "images": 5000, "top1": 0.6202000000000001, "top5": 0.8484, "ce": 1.5657971099853516, "backbone_top1": 0.6996, "backbone_top5": 0.8892}
+[15:51:53] {"compression_level": 20, "images": 5000, "top1": 0.6162000000000001, "top5": 0.8452000000000001, "ce": 1.5800560447692873, "backbone_top1": 0.6926, "backbone_top5": 0.8874000000000001}
+exit 0 end 2026-11-24T15:51:54-07:00

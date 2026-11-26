@@ -1,0 +1,13 @@
+{
+  "id": "COORD-002",
+  "title": "Record accepted experiment results (GRID-001, GRID-002, ABL-001) and the ABL-001 ledger-summary erratum",
+  "role": "coordinator",
+  "description": "After REVIEW-002 accepted the three experiments (2026-11-25), write a task-local status note with the accepted, reviewer-verified conclusions and an erratum: the ABL-001 ledger summary string carries pre-revision wording that the ledger could not update while in review. RESEARCH_STATUS.md and DECISIONS.md are still reserved by COORD-001 (in review), so this note is task-local; a later coordinator task should fold it into the shared files.",
+  "depends_on": [],
+  "write_paths": ["ai_harness/artifacts/COORD-002"],
+  "acceptance": [
+    "States only conclusions present in the accepted, revised reports, with links",
+    "Erratum quotes the stale summary and points to the authoritative report wording",
+    "Lists what remains unresolved and the pending reviews"
+  ]
+}

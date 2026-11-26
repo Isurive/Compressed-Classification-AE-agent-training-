@@ -1,0 +1,40 @@
+$ python -B -u main.py train --data ../Datasets/imagenet-1k/val --holdout 0.10 --train-limit 0 --val-limit 0 --epochs 10 --batch-size 128 --lr 0.001 --cache memory --encoder-init he --fc-init xavier --workers 4 --device cuda --out ../runs/ENG-004/he_45k
+start 2026-11-24T14:35:13-07:00
+[14:35:21] single-pool holdout: 45,000 training, 5,000 validation, 1,000 classes. Device cuda, backbone frozen, Adam lr=0.001.
+[14:35:21] Extracting frozen 512-D features once for 45,000 training images.
+[14:35:48]   training: 4,096/45,000
+[14:35:59]   training: 8,192/45,000
+[14:36:09]   training: 12,288/45,000
+[14:36:20]   training: 16,384/45,000
+[14:36:31]   training: 20,480/45,000
+[14:36:43]   training: 24,576/45,000
+[14:36:55]   training: 28,672/45,000
+[14:37:06]   training: 32,768/45,000
+[14:37:17]   training: 36,864/45,000
+[14:37:28]   training: 40,960/45,000
+[14:37:38]   training: 45,000/45,000
+[14:37:38] Extracting frozen 512-D features once for 5,000 validation images.
+[14:38:07]   validation: 4,096/5,000
+[14:38:11] Encoder initialization: he. Classifier initialization: xavier. Training feature mask: 0.
+[14:38:14]   train batch 250/352   mean loss 4.4744
+[14:38:15] {"epoch": 1, "train": {"loss": 3.9711175598144535, "ce": 3.2254893573337133, "feature_mse": 0.6664411404927572, "top1": 0.3978888888888889}, "validation": {"images": 5000, "top1": 0.5298, "top5": 0.7904, "ce": 2.0039136249542238, "active_per_image": 32.0, "used_atom_fraction": 0.99755859375, "feature_mse": 0.5864516819000244, "backbone_top1": 0.6926, "top1_agreement": 0.5756, "backbone_top5": 0.8874000000000001}}
+[14:38:17]   train batch 250/352   mean loss 1.6008
+[14:38:19] {"epoch": 2, "train": {"loss": 1.601154338751899, "ce": 0.9630365687052409, "feature_mse": 0.5615286558363173, "top1": 0.7708444444444444}, "validation": {"images": 5000, "top1": 0.55, "top5": 0.798, "ce": 1.932989806365967, "active_per_image": 32.0, "used_atom_fraction": 0.99951171875, "feature_mse": 0.5631530006408692, "backbone_top1": 0.6926, "top1_agreement": 0.6004, "backbone_top5": 0.8874000000000001}}
+[14:38:21]   train batch 250/352   mean loss 1.0626
+[14:38:22] {"epoch": 3, "train": {"loss": 1.0761494857788085, "ce": 0.4805012165493436, "feature_mse": 0.5208231418185764, "top1": 0.9007111111111111}, "validation": {"images": 5000, "top1": 0.553, "top5": 0.795, "ce": 1.9458560798645022, "active_per_image": 32.0, "used_atom_fraction": 0.99853515625, "feature_mse": 0.5343481634140015, "backbone_top1": 0.6926, "top1_agreement": 0.5958, "backbone_top5": 0.8874000000000001}}
+[14:38:25]   train batch 250/352   mean loss 0.7919
+[14:38:26] {"epoch": 4, "train": {"loss": 0.8005991366916233, "ce": 0.253693662431505, "feature_mse": 0.4736046831766765, "top1": 0.9653777777777778}, "validation": {"images": 5000, "top1": 0.552, "top5": 0.7994, "ce": 1.938354668045044, "active_per_image": 32.0, "used_atom_fraction": 0.9970703125, "feature_mse": 0.49140543079376225, "backbone_top1": 0.6926, "top1_agreement": 0.5988, "backbone_top5": 0.8874000000000001}}
+[14:38:29]   train batch 250/352   mean loss 0.6477
+[14:38:30] {"epoch": 5, "train": {"loss": 0.6516740931193035, "ce": 0.15269648585849338, "feature_mse": 0.42708217103746204, "top1": 0.9885555555555556}, "validation": {"images": 5000, "top1": 0.558, "top5": 0.8004, "ce": 1.9360190658569336, "active_per_image": 32.0, "used_atom_fraction": 0.99951171875, "feature_mse": 0.4530421224117279, "backbone_top1": 0.6926, "top1_agreement": 0.6088, "backbone_top5": 0.8874000000000001}}
+[14:38:32]   train batch 250/352   mean loss 0.5614
+[14:38:33] {"epoch": 6, "train": {"loss": 0.5664810856289334, "ce": 0.10559945905473497, "feature_mse": 0.3903400447421604, "top1": 0.9955111111111111}, "validation": {"images": 5000, "top1": 0.562, "top5": 0.7996000000000001, "ce": 1.9179751541137697, "active_per_image": 32.0, "used_atom_fraction": 0.998046875, "feature_mse": 0.42055417184829713, "backbone_top1": 0.6926, "top1_agreement": 0.6124, "backbone_top5": 0.8874000000000001}}
+[14:38:35]   train batch 250/352   mean loss 0.5113
+[14:38:36] {"epoch": 7, "train": {"loss": 0.5153589042663574, "ce": 0.08226985493765937, "feature_mse": 0.36373704075283475, "top1": 0.997488888888889}, "validation": {"images": 5000, "top1": 0.5650000000000001, "top5": 0.7994, "ce": 1.925545534515381, "active_per_image": 32.0, "used_atom_fraction": 0.9990234375, "feature_mse": 0.39753743553161625, "backbone_top1": 0.6926, "top1_agreement": 0.6128, "backbone_top5": 0.8874000000000001}}
+[14:38:39]   train batch 250/352   mean loss 0.4746
+[14:38:40] {"epoch": 8, "train": {"loss": 0.48011418075561524, "ce": 0.06786049981647067, "feature_mse": 0.34395626415676545, "top1": 0.9978666666666667}, "validation": {"images": 5000, "top1": 0.5710000000000001, "top5": 0.8022, "ce": 1.9179635826110841, "active_per_image": 32.0, "used_atom_fraction": 0.99755859375, "feature_mse": 0.3819849238872528, "backbone_top1": 0.6926, "top1_agreement": 0.6222, "backbone_top5": 0.8874000000000001}}
+[14:38:42]   train batch 250/352   mean loss 0.4502
+[14:38:44] {"epoch": 9, "train": {"loss": 0.45389497222900393, "ce": 0.05758849850760566, "feature_mse": 0.3289113911098904, "top1": 0.9981333333333334}, "validation": {"images": 5000, "top1": 0.5692, "top5": 0.8044, "ce": 1.9073631801605226, "active_per_image": 32.0, "used_atom_fraction": 0.99609375, "feature_mse": 0.36629602899551394, "backbone_top1": 0.6926, "top1_agreement": 0.6224000000000001, "backbone_top5": 0.8874000000000001}}
+[14:38:46]   train batch 250/352   mean loss 0.4274
+[14:38:47] {"epoch": 10, "train": {"loss": 0.4310476188235813, "ce": 0.04908190424707201, "feature_mse": 0.31538136410183376, "top1": 0.9983555555555556}, "validation": {"images": 5000, "top1": 0.5684, "top5": 0.8022, "ce": 1.9220911140441896, "active_per_image": 32.0, "used_atom_fraction": 0.99658203125, "feature_mse": 0.35542873287200927, "backbone_top1": 0.6926, "top1_agreement": 0.6184000000000001, "backbone_top5": 0.8874000000000001}}
+[14:38:47] Deployment: ..\runs\ENG-004\he_45k\best.pt   Resume and dictionary: ..\runs\ENG-004\he_45k\last.pt
+exit 0 end 2026-11-24T14:38:48-07:00

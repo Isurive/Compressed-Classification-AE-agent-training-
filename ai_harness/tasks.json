@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "tasks": [
+    {
+      "id": "LIT-001",
+      "title": "Audit closest compressed-training and dictionary-learning papers",
+      "role": "literature",
+      "description": "Read projectIdea.md and the existing bibliography. Inspect primary sources for compressed training-data storage and dictionary capacity under compression. Prioritize Nayak/Friedland, the storage-aware learning article, Berkeley training-compression report, and the unresolved Wei et al. work. Deliver a bounded first-pass evidence matrix and structured source list; record actual access limits, measurement definitions, version differences, exact overlap, and remaining uncertainty. Do not edit the shared bibliography or promise novelty.",
+      "depends_on": [],
+      "write_paths": ["ai_harness/artifacts/LIT-001"],
+      "acceptance": ["Report and source evidence list exist", "Each key claim has an inspected primary-source location or explicit access limitation", "Actual stored bytes are distinguished from quality-factor proxies and payload-only rates", "Closest overlap and unresolved novelty are stated without overclaiming"]
+    },
+    {
+      "id": "REASON-001",
+      "title": "Design the minimum controlled training-storage experiment",
+      "role": "reasoning",
+      "description": "Translate the user's latest goal into a month-sized study of learning from heavily JPEG-compressed training images. Explain a genuine neural dictionary component, fair baselines, M versus k, full-file byte accounting, split/pretraining/clean-target controls, a bounded pilot, and compute/run-count implications. Keep dataset, GPU, and accuracy target feasibility unresolved until supported. No training or downloads.",
+      "depends_on": [],
+      "write_paths": ["ai_harness/artifacts/REASON-001"],
+      "acceptance": ["A falsifiable research question and minimal comparison are specified", "Compressed training inputs and a common held-out evaluation are explicit", "Dictionary model and sparsity controls are technically meaningful", "Proposed choices, known requirements, and resource unknowns are separated"]
+    },
+    {
+      "id": "REPRO-001",
+      "title": "Audit reusable model implementations and pilot requirements",
+      "role": "engineer",
+      "description": "Inspect a small number of existing neural sparse-coding or dictionary-learning implementations and conventional backbones as possible starting points. Verify accessible source code, license, environment requirements, genuine dictionary mechanism, and likely adaptation effort. Propose at most two dataset/resolution options with full-file JPEG feasibility considerations. Identify hardware information needed. This is a read-only feasibility audit; do not install dependencies, download datasets, or run training. Preserve the proposal and bibliography.",
+      "depends_on": [],
+      "write_paths": ["ai_harness/artifacts/REPRO-001"],
+      "acceptance": ["Implementation claims link to inspected upstream sources", "Unexecuted checks are labeled unexecuted", "A bounded pilot and its resource needs are described", "Recommendation fits the current training-storage question and month constraint"]
+    },
+    {
+      "id": "REVIEW-001",
+      "title": "Independently challenge evidence and experimental reasoning",
+      "role": "reviewer",
+      "description": "Read accepted LIT-001 and REASON-001 artifacts. Check a small set of consequential source claims and challenge the proposed experiment for confounding, storage accounting, hidden clean information, pretraining, scope, and unjustified novelty. Produce concrete corrections and a recommendation. This review can identify unresolved research even when source-audit tasks are complete.",
+      "depends_on": ["LIT-001", "REASON-001"],
+      "write_paths": ["ai_harness/artifacts/REVIEW-001"],
+      "acceptance": ["Findings cite specific source/report locations", "Blocking design flaws are distinguished from optional improvements", "The reviewer does not present their own prior authored report as independently reviewed", "A clear next-step recommendation is recorded"]
+    },
+    {
+      "id": "SYNTH-001",
+      "title": "Integrate a concrete month-sized project recommendation",
+      "role": "coordinator",
+      "description": "Combine reviewed literature, reasoning, reproducibility, and critique into a proposed project plan. State a narrow contribution relative to actual prior work, a minimal experiment grid, feasible resource assumptions, and remaining user decisions. Provide proposed one-paragraph introduction wording and a four-week division of work in the task directory; preserve the existing proposal files until an integration assignment explicitly includes them.",
+      "depends_on": ["LIT-001", "REASON-001", "REPRO-001", "REVIEW-001"],
+      "write_paths": ["ai_harness/artifacts/SYNTH-001"],
+      "acceptance": ["Recommendation traces to reviewed reports", "No novelty or performance guarantee is made", "Plan includes a feasibility milestone and actual unresolved choices", "Draft is ready for user review without modifying unrelated existing work"]
+    }
+  ]
+}

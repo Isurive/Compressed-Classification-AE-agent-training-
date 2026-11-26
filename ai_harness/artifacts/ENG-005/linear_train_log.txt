@@ -1,0 +1,29 @@
+$ python baseline_head.py train --data ../Datasets/imagenet-1k/val --holdout 0.10 --train-limit 0 --val-limit 0 --epochs 10 --batch-size 128 --lr 0.001 --compression-level 20 --cache memory --workers 4 --device cuda --fc-init xavier --out ../runs/ENG-005/linear_45k
+start 2026-11-24T15:40:50-07:00
+[15:41:01] single-pool holdout: 45,000 training, 5,000 validation, 1,000 classes. Device cuda, backbone frozen, head Linear(512, 1000) init xavier, Adam lr=0.001 weight_decay=0. Split digest 2bbb411f2b9dcda3f5372d8956415e4bf89d31e6bc9f26f7ef39119dcb4b858f
+[15:41:01] Extracting frozen 512-D features once for 45,000 training images.
+[15:41:38]   training: 4,096/45,000
+[15:41:54]   training: 8,192/45,000
+[15:42:10]   training: 12,288/45,000
+[15:42:28]   training: 16,384/45,000
+[15:42:46]   training: 20,480/45,000
+[15:43:05]   training: 24,576/45,000
+[15:43:23]   training: 28,672/45,000
+[15:43:41]   training: 32,768/45,000
+[15:43:59]   training: 36,864/45,000
+[15:44:15]   training: 40,960/45,000
+[15:44:31]   training: 45,000/45,000
+[15:44:32] Extracting frozen 512-D features once for 5,000 validation images.
+[15:45:22]   validation: 4,096/5,000
+[15:45:29] {"epoch": 1, "train": {"ce": 3.8651889270570545, "top1": 0.3330666666666667}, "validation": {"images": 5000, "top1": 0.5438000000000001, "top5": 0.7958000000000001, "ce": 2.1522170394897464, "backbone_top1": 0.6926, "backbone_top5": 0.8874000000000001}}
+[15:45:31] {"epoch": 2, "train": {"ce": 1.5894898277494642, "top1": 0.6496444444444445}, "validation": {"images": 5000, "top1": 0.5874, "top5": 0.8354, "ce": 1.7393326580047608, "backbone_top1": 0.6926, "backbone_top5": 0.8874000000000001}}
+[15:45:32] {"epoch": 3, "train": {"ce": 1.1716731423695883, "top1": 0.7265777777777778}, "validation": {"images": 5000, "top1": 0.6054, "top5": 0.8412000000000001, "ce": 1.614139119720459, "backbone_top1": 0.6926, "backbone_top5": 0.8874000000000001}}
+[15:45:34] {"epoch": 4, "train": {"ce": 0.9500255619896782, "top1": 0.7721555555555556}, "validation": {"images": 5000, "top1": 0.6054, "top5": 0.8436, "ce": 1.583932810974121, "backbone_top1": 0.6926, "backbone_top5": 0.8874000000000001}}
+[15:45:36] {"epoch": 5, "train": {"ce": 0.7883872419145372, "top1": 0.8128222222222222}, "validation": {"images": 5000, "top1": 0.6162000000000001, "top5": 0.8452000000000001, "ce": 1.5800560775756836, "backbone_top1": 0.6926, "backbone_top5": 0.8874000000000001}}
+[15:45:38] {"epoch": 6, "train": {"ce": 0.6670490130636427, "top1": 0.8416666666666667}, "validation": {"images": 5000, "top1": 0.6064, "top5": 0.8468, "ce": 1.5822295797348023, "backbone_top1": 0.6926, "backbone_top5": 0.8874000000000001}}
+[15:45:39] {"epoch": 7, "train": {"ce": 0.5646348510318332, "top1": 0.8696222222222222}, "validation": {"images": 5000, "top1": 0.6118, "top5": 0.8448, "ce": 1.5953172554016115, "backbone_top1": 0.6926, "backbone_top5": 0.8874000000000001}}
+[15:45:41] {"epoch": 8, "train": {"ce": 0.4839077904701233, "top1": 0.8928444444444444}, "validation": {"images": 5000, "top1": 0.614, "top5": 0.8412000000000001, "ce": 1.6264046728134156, "backbone_top1": 0.6926, "backbone_top5": 0.8874000000000001}}
+[15:45:43] {"epoch": 9, "train": {"ce": 0.417132155529658, "top1": 0.9104222222222222}, "validation": {"images": 5000, "top1": 0.6134000000000001, "top5": 0.8454, "ce": 1.6194077785491945, "backbone_top1": 0.6926, "backbone_top5": 0.8874000000000001}}
+[15:45:44] {"epoch": 10, "train": {"ce": 0.35851323909229704, "top1": 0.9277555555555556}, "validation": {"images": 5000, "top1": 0.6102000000000001, "top5": 0.8454, "ce": 1.6524661293029785, "backbone_top1": 0.6926, "backbone_top5": 0.8874000000000001}}
+[15:45:44] Best checkpoint: ..\runs\ENG-005\linear_45k\best.pt
+exit 0 end 2026-11-24T15:45:45-07:00

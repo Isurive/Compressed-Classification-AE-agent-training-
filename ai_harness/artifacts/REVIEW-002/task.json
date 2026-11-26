@@ -1,0 +1,13 @@
+{
+  "id": "REVIEW-002",
+  "title": "Independent review of GRID-001, GRID-002 and ABL-001 experiments",
+  "role": "reviewer",
+  "description": "User requested (2026-11-25) an independent reviewer for the three submitted experiments authored by claude-orient-20261122-a. Read each task's spec, submitted artifacts and raw outputs (runs/GRID-001, runs/GRID-002, runs/ABL-001); re-run each analyze.py; spot-check numbers against results.csv and a few best.pt/done.json files; check test-set isolation, split pairing, byte accounting, claim scope (pretrained backbone, inherited fc), M/k and capacity confounds, and overclaiming. Record accept/revise for each task via the harness review CLI. Read-only for everything outside this folder; no training runs; no edits to submitted artifacts or src/.",
+  "depends_on": [],
+  "write_paths": ["ai_harness/artifacts/REVIEW-002"],
+  "acceptance": [
+    "Findings cite specific file/line or table locations with severity",
+    "Each of GRID-001, GRID-002, ABL-001 receives a recorded verdict with a note referencing this report",
+    "Blocking problems distinguished from optional improvements; independent recomputation of key numbers shown"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "torch": "2.11.0+cu128",
+  "device": "NVIDIA GeForce RTX 3080 Ti Laptop GPU",
+  "cpu_preprocess_ms_per_image_one_process": 7.73,
+  "cpu_preprocess_images_per_s_one_process": 129.4,
+  "gpu_feature_images_per_s": 2657,
+  "gpu_feature_peak_mem_MiB": 901,
+  "gpu_head_steps_per_s_batch128": 126.9,
+  "gpu_head_peak_mem_MiB": 215
+}

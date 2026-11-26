@@ -1,0 +1,54 @@
+# --- Data: ImageNet terms forbid redistribution; each person downloads their own copy (see Datasets/DATASETS.md)
+Datasets/*
+!Datasets/DATASETS.md
+
+# --- Experiment outputs: checkpoints, cached features and JPEG variants are many GB.
+# Keep only the small result tables needed to check the reports.
+runs/**
+!runs/
+!runs/*/
+!runs/*/results.csv
+!runs/*/summary.csv
+!runs/*/tuned.json
+!runs/*/tune_results.json
+!runs/*/reference_original_fc.json
+!runs/*/settings.json
+!runs/GRID-001/jpeg_variants/
+!runs/GRID-001/jpeg_variants/summary.json
+# runs/GRID-001/jpeg_variants/manifest.csv is ~99 MB (GitHub limit is 100 MB): kept local only.
+
+# --- Model and tensor files anywhere
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.npy
+*.npz
+
+# --- Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+env/
+
+# --- Harness live database (state.snapshot.json is the shareable copy)
+ai_harness/state.sqlite3
+ai_harness/state.sqlite3-*
+
+# --- Secrets and local settings
+.env
+.env.*
+*.token
+.claude/settings.local.json
+.huggingface/
+
+# --- OS / editor / OneDrive
+.DS_Store
+Thumbs.db
+desktop.ini
+~$*
+*.tmp
+.vscode/
+.idea/

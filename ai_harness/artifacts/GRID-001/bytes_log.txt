@@ -1,0 +1,9 @@
+Encoded 50000 images at qualities [76, 39, 20, 15, 10, 6, 1]
+  q76: 2,100,107,080 bytes  R_existing 3.19  savings 68.7%  R_raw 16.4  bpp 1.453  header 0.8%
+  q39: 1,116,832,335 bytes  R_existing 6.00  savings 83.3%  R_raw 30.8  bpp 0.772  header 1.5%
+  q20: 683,922,845 bytes  R_existing 9.81  savings 89.8%  R_raw 50.2  bpp 0.473  header 2.3%
+  q15: 549,769,543 bytes  R_existing 12.20  savings 91.8%  R_raw 62.5  bpp 0.380  header 2.8%
+  q10: 400,001,474 bytes  R_existing 16.77  savings 94.0%  R_raw 85.9  bpp 0.277  header 3.8%
+  q6: 264,607,792 bytes  R_existing 25.34  savings 96.1%  R_raw 129.8  bpp 0.183  header 5.6%
+  q1: 145,820,381 bytes  R_existing 45.99  savings 97.8%  R_raw 235.5  bpp 0.101  header 9.8%
+build exit 0 in 5443 s

@@ -1,0 +1,13 @@
+{
+  "id": "ABL-001",
+  "title": "Ablation: is the sparse head's gain over linear from top-k sparsity, the auxiliary loss, or width?",
+  "role": "engineer",
+  "description": "User approved (2026-11-24) the ablation proposed in GRID-002. Xavier init, same splits/features/test protocol as GRID-002. Factorial: {sparse M2048 k512, dense M2048 k2048} x {MSE only (dependency=coherence=0), no auxiliary loss (reconstruction weight 1e-6 because Settings.validate forbids 0; dependency=coherence=0)}. The full-loss cells and the linear head are reused from GRID-002. Dense with no auxiliary loss is a width-matched 512->2048 ReLU MLP (centered input, He init). Levels source, 60, 80, 90, 95; seeds 42-44; 60 runs. No new tuning: k, lr, epochs as frozen in GRID-002. New wrapper src/run_ablation.py; run_grid.py and run_grid_xavier.py unmodified. Delete last.pt of new runs.",
+  "depends_on": [],
+  "write_paths": ["src/run_ablation.py", "runs/ABL-001", "ai_harness/artifacts/ABL-001"],
+  "acceptance": [
+    "Variants differ from GRID-002 only in the loss weights stated; splits match by digest",
+    "Report separates sparsity, auxiliary-loss and width effects with paired seed comparisons and the 1 pp rule",
+    "No ImageNetV2-based choice; user src files and submitted artifacts unmodified"
+  ]
+}

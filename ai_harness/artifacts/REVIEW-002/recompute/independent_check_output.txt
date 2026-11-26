@@ -1,0 +1,174 @@
+## 1. Row counts and per-phase settings
+GRID-001 198 rows {('grid', True): 72, ('grid', False): 63, ('msweep', True): 36, ('msweep', False): 27}
+    ('grid', 'dense', '2048', '2048', 'auto', '0.0') 45
+    ('grid', 'linear', '0', '0', 'original', '0.0') 45
+    ('grid', 'sparse', '2048', '512', 'auto', '0.0') 45
+    ('msweep', 'sparse', '1024', '512', 'auto', '0.0') 21
+    ('msweep', 'sparse', '4096', '512', 'auto', '0.0') 21
+    ('msweep', 'sparse', '512', '512', 'auto', '0.0') 21
+   distinct run_dirs: 108
+GRID-002 135 rows {('grid-xavier', True): 72, ('grid-xavier', False): 63}
+    ('grid-xavier', 'dense', '2048', '2048', 'xavier', '0.0') 45
+    ('grid-xavier', 'linear', '0', '0', 'xavier', '0.0001') 45
+    ('grid-xavier', 'sparse', '2048', '512', 'xavier', '0.0') 45
+   distinct run_dirs: 72
+ABL-001 108 rows {('abl-mse', True): 30, ('abl-none', True): 30, ('abl-mse', False): 24, ('abl-none', False): 24}
+    ('abl-mse', 'dense', '2048', '2048', 'xavier', '0.0') 27
+    ('abl-mse', 'sparse', '2048', '512', 'xavier', '0.0') 27
+    ('abl-none', 'dense', '2048', '2048', 'xavier', '0.0') 27
+    ('abl-none', 'sparse', '2048', '512', 'xavier', '0.0') 27
+   distinct run_dirs: 60
+
+## 2. Split digests
+seed 42 distinct digests across all three results.csv: 1 2bbb411f2b9dcda3
+seed 43 distinct digests across all three results.csv: 1 36aa0b4f4e44fac2
+seed 44 distinct digests across all three results.csv: 1 6b92e94b1eb1e0d6
+seed 42: kind=single-pool holdout; train 45000 val 5000; overlap 0; recomputed digest matches csv: True; val source is train source: True; pool root: val; example key n01440764/ILSVRC2012_val_00045880.JPEG
+   val images per class min/max 5/5
+seed 43: kind=single-pool holdout; train 45000 val 5000; overlap 0; recomputed digest matches csv: True; val source is train source: True; pool root: val; example key n01440764/ILSVRC2012_val_00013716.JPEG
+   val images per class min/max 5/5
+seed 44: kind=single-pool holdout; train 45000 val 5000; overlap 0; recomputed digest matches csv: True; val source is train source: True; pool root: val; example key n01440764/ILSVRC2012_val_00016018.JPEG
+   val images per class min/max 5/5
+ImageNetV2 files 10000; pool files 49971; identical-content files in both: 0
+
+## 3. Freeze rules
+runs/GRID-001/tuned.json sparse: 6 candidates; rule picks k=512 init=auto wd=0.0 (val 62.93); matches frozen: True
+runs/GRID-001/tuned.json dense: 2 candidates; rule picks k=2048 init=auto wd=0.0 (val 62.83); matches frozen: True
+runs/GRID-001/tuned.json linear: 6 candidates; rule picks k=0 init=original wd=0.0 (val 63.28); matches frozen: True
+runs/GRID-002/tuned.json sparse: 3 candidates; rule picks k=512 init=xavier wd=0.0 (val 60.03); matches frozen: True
+runs/GRID-002/tuned.json dense: 1 candidates; rule picks k=2048 init=xavier wd=0.0 (val 59.43); matches frozen: True
+runs/GRID-002/tuned.json linear: 3 candidates; rule picks k=0 init=xavier wd=0.0001 (val 58.41); matches frozen: True
+   tune dense  k=2048 init=auto     wd=0       mean 62.83 src 66.82 L90 58.84
+   tune dense  k=2048 init=xavier   wd=0       mean 59.43 src 63.90 L90 54.96
+   tune linear k=0    init=original wd=0       mean 63.28 src 67.48 L90 59.08
+   tune linear k=0    init=original wd=0.0001  mean 63.12 src 67.32 L90 58.92
+   tune linear k=0    init=original wd=0.001   mean 62.49 src 66.62 L90 58.36
+   tune linear k=0    init=xavier   wd=0.0001  mean 58.41 src 62.44 L90 54.38
+   tune linear k=0    init=xavier   wd=0.001   mean 58.40 src 62.58 L90 54.22
+   tune linear k=0    init=xavier   wd=0       mean 58.29 src 62.38 L90 54.20
+   tune sparse k=512  init=auto     wd=0       mean 62.93 src 66.76 L90 59.10
+   tune sparse k=128  init=auto     wd=0       mean 60.67 src 64.94 L90 56.40
+   tune sparse k=512  init=xavier   wd=0       mean 60.03 src 64.64 L90 55.42
+   tune sparse k=128  init=xavier   wd=0       mean 57.98 src 62.98 L90 52.98
+   tune sparse k=32   init=auto     wd=0       mean 55.67 src 60.06 L90 51.28
+   tune sparse k=32   init=xavier   wd=0       mean 53.34 src 58.06 L90 48.62
+
+## 4. ImageNetV2-source top-1 (mean, sd) and paired drops, recomputed
+GRID-001 sparse: source 52.07±0.06; L020 51.83±0.13 (drop 0.24±0.07); L060 51.52±0.10 (drop 0.55±0.05); L080 51.27±0.62 (drop 0.81±0.67); L085 50.76±0.23 (drop 1.31±0.28); L090 49.94±0.49 (drop 2.13±0.54); L095 48.98±0.25 (drop 3.10±0.24); L100 41.25±0.35 (drop 10.82±0.29)
+GRID-001 dense: source 52.20±0.11; L020 51.93±0.12 (drop 0.27±0.23); L060 51.52±0.12 (drop 0.68±0.11); L080 51.08±0.23 (drop 1.11±0.32); L085 50.59±0.09 (drop 1.60±0.13); L090 50.09±0.46 (drop 2.10±0.43); L095 48.68±0.29 (drop 3.52±0.19); L100 43.20±4.39 (drop 9.00±4.41)
+GRID-001 linear: source 53.95±0.46; L020 53.76±0.65 (drop 0.19±0.19); L060 53.17±0.51 (drop 0.78±0.49); L080 52.74±0.24 (drop 1.21±0.36); L085 52.56±0.10 (drop 1.39±0.42); L090 52.14±0.47 (drop 1.81±0.77); L095 51.25±0.27 (drop 2.70±0.69); L100 46.30±1.10 (drop 7.65±1.20)
+GRID-002 sparse: source 48.34±0.55; L020 48.57±0.08 (drop -0.23±0.48); L060 48.00±0.19 (drop 0.33±0.37); L080 47.62±0.32 (drop 0.71±0.58); L085 47.32±0.17 (drop 1.02±0.39); L090 46.08±0.15 (drop 2.26±0.66); L095 43.36±0.08 (drop 4.98±0.61); L100 29.69±0.49 (drop 18.64±0.49)
+GRID-002 dense: source 47.95±0.26; L020 47.85±0.41 (drop 0.10±0.15); L060 47.72±0.19 (drop 0.23±0.17); L080 46.85±0.75 (drop 1.10±0.50); L085 46.99±0.28 (drop 0.96±0.12); L090 45.85±0.27 (drop 2.10±0.25); L095 43.09±0.19 (drop 4.86±0.36); L100 29.21±0.11 (drop 18.73±0.30)
+GRID-002 linear: source 47.15±0.21; L020 47.00±0.18 (drop 0.15±0.10); L060 47.12±0.13 (drop 0.03±0.13); L080 46.64±0.19 (drop 0.51±0.16); L085 46.41±0.26 (drop 0.74±0.23); L090 45.61±0.27 (drop 1.54±0.10); L095 42.97±0.25 (drop 4.18±0.30); L100 31.75±0.41 (drop 15.40±0.48)
+GRID-001 sparse-dense gap: source -0.12 [0/3]; L020 -0.09 [1/3]; L060 +0.01 [1/3]; L080 +0.18 [2/3]; L085 +0.17 [3/3]; L090 -0.15 [1/3]; L095 +0.30 [3/3]; L100 -1.95 [2/3]
+GRID-001 sparse-linear gap: source -1.88 [0/3]; L020 -1.93 [0/3]; L060 -1.65 [0/3]; L080 -1.48 [0/3]; L085 -1.80 [0/3]; L090 -2.20 [0/3]; L095 -2.28 [0/3]; L100 -5.05 [0/3]
+GRID-002 sparse-dense gap: source +0.39 [2/3]; L020 +0.72 [3/3]; L060 +0.29 [3/3]; L080 +0.77 [3/3]; L085 +0.33 [2/3]; L090 +0.23 [2/3]; L095 +0.27 [3/3]; L100 +0.48 [3/3]
+GRID-002 sparse-linear gap: source +1.19 [3/3]; L020 +1.57 [3/3]; L060 +0.88 [3/3]; L080 +0.99 [3/3]; L085 +0.90 [3/3]; L090 +0.47 [3/3]; L095 +0.39 [3/3]; L100 -2.06 [0/3]
+msweep M=512: source 50.62±0.57; L080 49.43±0.30; L090 48.47±0.68; L095 47.80±0.73
+msweep M=1024: source 50.63±0.88; L080 50.49±0.35; L090 50.22±0.37; L095 49.36±0.22
+msweep M=4096: source 52.21±0.03; L080 51.61±0.21; L090 50.92±0.35; L095 49.69±0.11
+xavier-inherited sparse: source -3.74; L020 -3.26; L060 -3.52; L080 -3.64; L085 -3.45; L090 -3.86; L095 -5.62; L100 -11.56
+xavier-inherited dense: source -4.25; L020 -4.08; L060 -3.80; L080 -4.23; L085 -3.61; L090 -4.24; L095 -5.59; L100 -13.98
+xavier-inherited linear: source -6.80; L020 -6.76; L060 -6.05; L080 -6.11; L085 -6.15; L090 -6.53; L095 -8.28; L100 -14.55
+
+ABL-001 cells (ImageNetV2-source)
+  sparse-full  source 48.34  L060 48.00  L080 47.62  L090 46.08  L095 43.36
+  dense-full   source 47.95  L060 47.72  L080 46.85  L090 45.85  L095 43.09
+  linear       source 47.15  L060 47.12  L080 46.64  L090 45.61  L095 42.97
+  sparse-mse   source 48.37  L060 48.22  L080 47.52  L090 46.08  L095 43.54
+  dense-mse    source 47.90  L060 47.50  L080 47.23  L090 45.80  L095 43.00
+  sparse-none  source 46.20  L060 45.82  L080 45.40  L090 44.59  L095 41.78
+  dense-none   source 46.16  L060 45.96  L080 45.67  L090 44.62  L095 42.08
+  sparse-mse - sparse-none: mean +1.99; positive 15/15; per-seed means over levels [1.98, 2.09, 1.9]
+  dense-mse - dense-none: mean +1.39; positive 15/15; per-seed means over levels [1.42, 1.36, 1.38]
+  sparse-none - dense-none: mean -0.14; positive 5/15; per-seed means over levels [0.01, -0.28, -0.15]
+  sparse-mse - dense-mse: mean +0.46; positive 13/15; per-seed means over levels [0.57, 0.46, 0.36]
+  sparse-full - dense-full: mean +0.39; positive 13/15; per-seed means over levels [0.63, 0.47, 0.07]
+  dense-none - linear: mean -1.00; positive 0/15; per-seed means over levels [-1.3, -0.92, -0.78]
+  sparse-full - linear: mean +0.78; positive 15/15; per-seed means over levels [0.76, 0.8, 0.79]
+  sparse-mse - linear: mean +0.85; positive 14/15; per-seed means over levels [0.69, 0.89, 0.96]
+  dense-mse - linear: mean +0.39; positive 12/15; per-seed means over levels [0.12, 0.44, 0.6]
+  sparse-full - sparse-mse: mean -0.07; positive 6/15; per-seed means over levels [0.07, -0.1, -0.17]
+  dense-full - dense-mse: mean +0.01; positive 9/15; per-seed means over levels [0.0, -0.11, 0.12]
+
+## 5. done.json vs results.csv (all runs)
+GRID-001: 198 rows checked against done.json, mismatches 0
+GRID-002: 135 rows checked against done.json, mismatches 0
+ABL-001: 108 rows checked against done.json, mismatches 0
+ABL-001 done.json loss weights: {('abl-mse', 1.0, 0.0, 0.0): 30, ('abl-none', 1e-06, 0.0, 0.0): 30}
+best epochs ('ABL-001', 'abl-mse', 'dense'): min 5 max 8 counts {5: 4, 6: 6, 7: 4, 8: 1}
+best epochs ('ABL-001', 'abl-mse', 'sparse'): min 6 max 9 counts {6: 6, 7: 5, 8: 3, 9: 1}
+best epochs ('ABL-001', 'abl-none', 'dense'): min 5 max 9 counts {5: 3, 6: 8, 7: 3, 9: 1}
+best epochs ('ABL-001', 'abl-none', 'sparse'): min 4 max 6 counts {4: 1, 5: 8, 6: 6}
+best epochs ('GRID-001', 'grid', 'dense'): min 1 max 10 counts {1: 1, 5: 5, 6: 11, 7: 4, 8: 1, 9: 1, 10: 1}
+best epochs ('GRID-001', 'grid', 'linear'): min 1 max 5 counts {1: 12, 2: 5, 3: 5, 4: 1, 5: 1}
+best epochs ('GRID-001', 'grid', 'sparse'): min 5 max 10 counts {5: 6, 6: 7, 7: 7, 8: 2, 9: 1, 10: 1}
+best epochs ('GRID-001', 'msweep', 'sparse'): min 1 max 10 counts {1: 17, 2: 4, 3: 1, 4: 1, 5: 5, 6: 5, 7: 2, 10: 1}
+best epochs ('GRID-002', 'grid-xavier', 'dense'): min 5 max 10 counts {5: 7, 6: 10, 7: 2, 8: 3, 9: 1, 10: 1}
+best epochs ('GRID-002', 'grid-xavier', 'linear'): min 4 max 10 counts {4: 1, 5: 2, 6: 4, 7: 6, 8: 2, 9: 6, 10: 3}
+best epochs ('GRID-002', 'grid-xavier', 'sparse'): min 5 max 10 counts {5: 3, 6: 4, 7: 8, 8: 5, 9: 3, 10: 1}
+
+## 6. Loss weights verified from per-epoch training logs: loss - ce - w_mse*mse
+GRID-002 grid-xavier: 480 epochs; residual min 6.89e-02 max 8.06e-02; train feature_mse range 0.160-0.932; train CE range 0.0406-4.861
+ABL-001 abl-mse: 300 epochs; residual min -1.15e-08 max 1.69e-08; train feature_mse range 0.157-0.932; train CE range 0.0402-3.437
+ABL-001 abl-none: 300 epochs; residual min -7.67e-09 max 6.86e-09; train feature_mse range 1.044-3.119; train CE range 0.0190-3.494
+
+## 7. best.pt spot checks
+runs/GRID-001/grid/sparse/L080/seed43 {"format": "jpeg-sparse-resnet18/predictor-v1", "epoch": 6, "val_top1": 0.6424000000000001, "digest_ok": true, "level": 80, "atoms": 2048, "k": 512, "fc_shape": [1000, 2048], "enc_shape": [2048, 512], "has_settings": false} consistent with csv/done: True
+   last.pt settings: {'k': 512, 'atoms': 2048, 'fc_init': 'auto', 'encoder_init': 'he', 'reconstruction_weight': 1.0, 'dependency_weight': 0.1, 'coherence_weight': 0.05, 'compression_level': 80, 'seed': 43} history best epoch by (top1,-ce): 6
+runs/GRID-001/grid/linear/L090/seed44 {"format": "jpeg-sparse-resnet18/linear-baseline-v1", "epoch": 1, "val_top1": 0.5938, "digest_ok": true, "level": 90, "settings": {"epochs": 10, "batch_size": 128, "lr": 0.001, "atoms": 0, "fc_init": "original", "k": 0, "model": "linear", "weight_decay": 0.0}, "head_shape": [1000, 512]} consistent with csv/done: True
+   history.json best epoch: 1 val 0.5938
+runs/GRID-002/grid/dense/L085/seed42 {"format": "jpeg-sparse-resnet18/predictor-v1", "epoch": 6, "val_top1": 0.5852, "digest_ok": true, "level": 85, "atoms": 2048, "k": 2048, "fc_shape": [1000, 2048], "enc_shape": [2048, 512], "has_settings": false} consistent with csv/done: True
+runs/GRID-002/grid/linear/L080/seed43 {"format": "jpeg-sparse-resnet18/linear-baseline-v1", "epoch": 6, "val_top1": 0.5940000000000001, "digest_ok": true, "level": 80, "settings": {"epochs": 10, "batch_size": 128, "lr": 0.001, "atoms": 0, "fc_init": "xavier", "k": 0, "model": "linear", "weight_decay": 0.0001}, "head_shape": [1000, 512]} consistent with csv/done: True
+   history.json best epoch: 6 val 0.5940000000000001
+runs/ABL-001/abl-none/dense/L090/seed44 {"format": "jpeg-sparse-resnet18/predictor-v1", "epoch": 6, "val_top1": 0.5326000000000001, "digest_ok": true, "level": 90, "atoms": 2048, "k": 2048, "fc_shape": [1000, 2048], "enc_shape": [2048, 512], "has_settings": false} consistent with csv/done: True
+runs/ABL-001/abl-mse/sparse/L060/seed43 {"format": "jpeg-sparse-resnet18/predictor-v1", "epoch": 7, "val_top1": 0.6268, "digest_ok": true, "level": 60, "atoms": 2048, "k": 512, "fc_shape": [1000, 2048], "enc_shape": [2048, 512], "has_settings": false} consistent with csv/done: True
+
+## 8. Re-score linear best.pt on cached ImageNetV2-source features (CPU inference only)
+test features (10000, 512) labels 10000 level None
+pool features (50000, 512) pool keys_digest != test keys_digest: True
+runs/GRID-001/grid/linear/L090/seed44 rescored top1 0.5235 vs csv 0.5235
+runs/GRID-002/grid/linear/L080/seed43 rescored top1 0.4680 vs csv 0.4680
+original fc on V2-source: 0.5728
+
+## 9. Byte accounting from runs/GRID-001/jpeg_variants/manifest.csv (streamed)
+manifest rows 350000; images 50000; qualities per image Counter({7: 50000})
+source mode/channels: {('RGB', '3'): 49101, ('L', '1'): 899}
+source bytes: manifest.csv vs Datasets manifest identical for all images: True pool total 6,706,296,736
+seed 42 train45k: source 6,040,232,194 B, raw 30,963,814,297 B
+   q76: 1,889,729,601 B R_raw 16.4 R_ex 3.20 save 68.7% hdr 0.8%
+   q39: 1,005,281,955 B R_raw 30.8 R_ex 6.01 save 83.4% hdr 1.5%
+   q20: 615,578,103 B R_raw 50.3 R_ex 9.81 save 89.8% hdr 2.3%
+   q15: 494,880,253 B R_raw 62.6 R_ex 12.21 save 91.8% hdr 2.8%
+   q10: 360,039,910 B R_raw 86.0 R_ex 16.78 save 94.0% hdr 3.8%
+   q6: 238,198,791 B R_raw 130.0 R_ex 25.36 save 96.1% hdr 5.6%
+   q1: 131,331,537 B R_raw 235.8 R_ex 45.99 save 97.8% hdr 9.8%
+   seed 42 val5k q20: 68,344,742 B; train+val at q20: 683,922,845 B
+seed 43 train45k: source 6,045,573,411 B, raw 31,024,958,540 B
+   q76: 1,893,852,828 B R_raw 16.4 R_ex 3.19 save 68.7% hdr 0.8%
+   q39: 1,006,726,164 B R_raw 30.8 R_ex 6.01 save 83.3% hdr 1.5%
+   q20: 616,333,119 B R_raw 50.3 R_ex 9.81 save 89.8% hdr 2.3%
+   q15: 495,513,256 B R_raw 62.6 R_ex 12.20 save 91.8% hdr 2.8%
+   q10: 360,492,943 B R_raw 86.1 R_ex 16.77 save 94.0% hdr 3.8%
+   q6: 238,547,706 B R_raw 130.1 R_ex 25.34 save 96.1% hdr 5.6%
+   q1: 131,538,821 B R_raw 235.9 R_ex 45.96 save 97.8% hdr 9.8%
+seed 44 train45k: source 6,035,780,252 B, raw 30,941,673,015 B
+   q76: 1,889,449,477 B R_raw 16.4 R_ex 3.19 save 68.7% hdr 0.8%
+   q39: 1,004,937,485 B R_raw 30.8 R_ex 6.01 save 83.4% hdr 1.5%
+   q20: 615,249,266 B R_raw 50.3 R_ex 9.81 save 89.8% hdr 2.3%
+   q15: 494,497,657 B R_raw 62.6 R_ex 12.21 save 91.8% hdr 2.8%
+   q10: 359,810,370 B R_raw 86.0 R_ex 16.77 save 94.0% hdr 3.8%
+   q6: 238,062,970 B R_raw 130.0 R_ex 25.35 save 96.1% hdr 5.6%
+   q1: 131,259,095 B R_raw 235.7 R_ex 45.98 save 97.8% hdr 9.8%
+seed 42 L80 R_raw with every image counted as 3-channel RGB: 50.82 (reported 50.3)
+
+## 10. Integrity
+src/baseline_head.py: unchanged
+src/build_jpeg_dataset.py: unchanged
+src/compress_jpeg.py: unchanged
+src/image_data.py: unchanged
+src/main.py: unchanged
+src/resnet18_sparse_ae.py: unchanged
+src/sparse_workflow.py: unchanged
+src/README.md: unchanged
+__pycache__ in src: []

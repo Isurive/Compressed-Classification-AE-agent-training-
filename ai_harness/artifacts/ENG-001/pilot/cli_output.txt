@@ -1,0 +1,6 @@
+﻿Encoded 16 images at qualities [90, 50, 20, 10, 5]
+  q90: 17,540 bytes  R_existing 4.06  savings 75.4%  R_raw 6.1  bpp 3.405  header 27.3%
+  q50: 7,857 bytes  R_existing 9.06  savings 89.0%  R_raw 13.7  bpp 1.525  header 56.7%
+  q20: 5,992 bytes  R_existing 11.88  savings 91.6%  R_raw 17.9  bpp 1.163  header 71.6%
+  q10: 5,331 bytes  R_existing 13.35  savings 92.5%  R_raw 20.1  bpp 1.035  header 78.9%
+  q5: 4,885 bytes  R_existing 14.57  savings 93.1%  R_raw 22.0  bpp 0.948  header 84.8%

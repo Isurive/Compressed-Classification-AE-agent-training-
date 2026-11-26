@@ -1,0 +1,480 @@
+{
+  "created_utc": "2026-11-23T06:14:52+00:00",
+  "source_root": "C:\\Users\\ericw\\OneDrive\\Documents\\AI 360 (DeepLearning\\Final Project\\ai_harness\\artifacts\\ENG-001\\pilot\\source",
+  "pillow_version": "12.1.0",
+  "python_version": "3.14.2",
+  "qualities": [
+    90,
+    50,
+    20,
+    10,
+    5
+  ],
+  "requested_subsampling": "4:2:0",
+  "metadata_policy": "strip (no EXIF, ICC, or comment; JFIF header kept and counted)",
+  "optimize_huffman": true,
+  "n_source_images": 16,
+  "byte_identical_sources_shared_between_splits": {},
+  "by_quality": {
+    "90": {
+      "all": {
+        "n_images": 16,
+        "total_source_bytes": 71162,
+        "total_jpeg_bytes": 17540,
+        "total_header_bytes": 4782,
+        "total_payload_bytes": 12758,
+        "header_fraction": 0.2726339794754846,
+        "total_raw_bytes": 107264,
+        "R_existing": 4.057126567844926,
+        "savings_percent_vs_existing": 75.35201371518508,
+        "R_raw": 6.11539338654504,
+        "aggregate_bpp": 3.404503105590062,
+        "aggregate_payload_bpp": 2.4763198757763973,
+        "per_image_bpp": {
+          "min": 2.275390625,
+          "p05": 2.353515625,
+          "median": 3.779296875,
+          "mean": 4.050830078125,
+          "p95": 5.484375,
+          "max": 5.640625
+        },
+        "per_image_jpeg_bytes": {
+          "min": 554,
+          "p05": 640,
+          "median": 978.5,
+          "mean": 1096.25,
+          "p95": 1640,
+          "max": 1654
+        }
+      },
+      "test": {
+        "n_images": 4,
+        "total_source_bytes": 22283,
+        "total_jpeg_bytes": 4634,
+        "total_header_bytes": 1273,
+        "total_payload_bytes": 3361,
+        "header_fraction": 0.2747086750107898,
+        "total_raw_bytes": 30720,
+        "R_existing": 4.808588692274493,
+        "savings_percent_vs_existing": 79.2038773953238,
+        "R_raw": 6.629261976694001,
+        "aggregate_bpp": 3.6203125,
+        "aggregate_payload_bpp": 2.62578125,
+        "per_image_bpp": {
+          "min": 3.146484375,
+          "p05": 3.146484375,
+          "median": 4.220703125,
+          "mean": 4.26806640625,
+          "p95": 5.484375,
+          "max": 5.484375
+        },
+        "per_image_jpeg_bytes": {
+          "min": 667,
+          "p05": 667,
+          "median": 1156.5,
+          "mean": 1158.5,
+          "p95": 1654,
+          "max": 1654
+        }
+      },
+      "train": {
+        "n_images": 12,
+        "total_source_bytes": 48879,
+        "total_jpeg_bytes": 12906,
+        "total_header_bytes": 3509,
+        "total_payload_bytes": 9397,
+        "header_fraction": 0.27188904385557106,
+        "total_raw_bytes": 76544,
+        "R_existing": 3.787308228730823,
+        "savings_percent_vs_existing": 73.59602283189099,
+        "R_raw": 5.930884859755152,
+        "aggregate_bpp": 3.333161157024793,
+        "aggregate_payload_bpp": 2.426911157024793,
+        "per_image_bpp": {
+          "min": 2.275390625,
+          "p05": 2.353515625,
+          "median": 3.765625,
+          "mean": 3.97841796875,
+          "p95": 5.328125,
+          "max": 5.640625
+        },
+        "per_image_jpeg_bytes": {
+          "min": 554,
+          "p05": 640,
+          "median": 978.5,
+          "mean": 1075.5,
+          "p95": 1623,
+          "max": 1640
+        }
+      }
+    },
+    "50": {
+      "all": {
+        "n_images": 16,
+        "total_source_bytes": 71162,
+        "total_jpeg_bytes": 7857,
+        "total_header_bytes": 4455,
+        "total_payload_bytes": 3402,
+        "header_fraction": 0.5670103092783505,
+        "total_raw_bytes": 107264,
+        "R_existing": 9.05714649357261,
+        "savings_percent_vs_existing": 88.95899496922515,
+        "R_raw": 13.652030036909762,
+        "aggregate_bpp": 1.5250388198757765,
+        "aggregate_payload_bpp": 0.6603260869565217,
+        "per_image_bpp": {
+          "min": 0.736328125,
+          "p05": 0.736328125,
+          "median": 1.98984375,
+          "mean": 2.1157958984375,
+          "p95": 3.25,
+          "max": 3.4453125
+        },
+        "per_image_jpeg_bytes": {
+          "min": 377,
+          "p05": 377,
+          "median": 424.5,
+          "mean": 491.0625,
+          "p95": 649,
+          "max": 652
+        }
+      },
+      "test": {
+        "n_images": 4,
+        "total_source_bytes": 22283,
+        "total_jpeg_bytes": 2104,
+        "total_header_bytes": 1178,
+        "total_payload_bytes": 926,
+        "header_fraction": 0.5598859315589354,
+        "total_raw_bytes": 30720,
+        "R_existing": 10.590779467680608,
+        "savings_percent_vs_existing": 90.55782435040165,
+        "R_raw": 14.600760456273765,
+        "aggregate_bpp": 1.64375,
+        "aggregate_payload_bpp": 0.7234375,
+        "per_image_bpp": {
+          "min": 1.24609375,
+          "p05": 1.24609375,
+          "median": 2.19140625,
+          "mean": 2.2197265625,
+          "p95": 3.25,
+          "max": 3.25
+        },
+        "per_image_jpeg_bytes": {
+          "min": 398,
+          "p05": 398,
+          "median": 527.0,
+          "mean": 526.0,
+          "p95": 652,
+          "max": 652
+        }
+      },
+      "train": {
+        "n_images": 12,
+        "total_source_bytes": 48879,
+        "total_jpeg_bytes": 5753,
+        "total_header_bytes": 3277,
+        "total_payload_bytes": 2476,
+        "header_fraction": 0.5696158525986442,
+        "total_raw_bytes": 76544,
+        "R_existing": 8.496262819398575,
+        "savings_percent_vs_existing": 88.23011927412591,
+        "R_raw": 13.305058230488441,
+        "aggregate_bpp": 1.4857954545454546,
+        "aggregate_payload_bpp": 0.6394628099173554,
+        "per_image_bpp": {
+          "min": 0.736328125,
+          "p05": 0.736328125,
+          "median": 1.9869140625,
+          "mean": 2.08115234375,
+          "p95": 3.1875,
+          "max": 3.4453125
+        },
+        "per_image_jpeg_bytes": {
+          "min": 377,
+          "p05": 377,
+          "median": 420.5,
+          "mean": 479.4166666666667,
+          "p95": 639,
+          "max": 649
+        }
+      }
+    },
+    "20": {
+      "all": {
+        "n_images": 16,
+        "total_source_bytes": 71162,
+        "total_jpeg_bytes": 5992,
+        "total_header_bytes": 4291,
+        "total_payload_bytes": 1701,
+        "header_fraction": 0.7161214953271028,
+        "total_raw_bytes": 107264,
+        "R_existing": 11.876168224299066,
+        "savings_percent_vs_existing": 91.57977572299822,
+        "R_raw": 17.901201602136183,
+        "aggregate_bpp": 1.1630434782608696,
+        "aggregate_payload_bpp": 0.33016304347826086,
+        "per_image_bpp": {
+          "min": 0.47265625,
+          "p05": 0.4765625,
+          "median": 1.6060546875,
+          "mean": 1.71259765625,
+          "p95": 2.7265625,
+          "max": 2.8671875
+        },
+        "per_image_jpeg_bytes": {
+          "min": 242,
+          "p05": 244,
+          "median": 356.0,
+          "mean": 374.5,
+          "p95": 464,
+          "max": 483
+        }
+      },
+      "test": {
+        "n_images": 4,
+        "total_source_bytes": 22283,
+        "total_jpeg_bytes": 1623,
+        "total_header_bytes": 1144,
+        "total_payload_bytes": 479,
+        "header_fraction": 0.7048675292667899,
+        "total_raw_bytes": 30720,
+        "R_existing": 13.72951324707332,
+        "savings_percent_vs_existing": 92.7164205896872,
+        "R_raw": 18.927911275415898,
+        "aggregate_bpp": 1.26796875,
+        "aggregate_payload_bpp": 0.37421875,
+        "per_image_bpp": {
+          "min": 0.880859375,
+          "p05": 0.880859375,
+          "median": 1.7998046875,
+          "mean": 1.8017578125,
+          "p95": 2.7265625,
+          "max": 2.7265625
+        },
+        "per_image_jpeg_bytes": {
+          "min": 340,
+          "p05": 340,
+          "median": 400.0,
+          "mean": 405.75,
+          "p95": 483,
+          "max": 483
+        }
+      },
+      "train": {
+        "n_images": 12,
+        "total_source_bytes": 48879,
+        "total_jpeg_bytes": 4369,
+        "total_header_bytes": 3147,
+        "total_payload_bytes": 1222,
+        "header_fraction": 0.7203021286335546,
+        "total_raw_bytes": 76544,
+        "R_existing": 11.187685969329365,
+        "savings_percent_vs_existing": 91.06160109658545,
+        "R_raw": 17.519798580910965,
+        "aggregate_bpp": 1.1283574380165289,
+        "aggregate_payload_bpp": 0.315599173553719,
+        "per_image_bpp": {
+          "min": 0.47265625,
+          "p05": 0.4765625,
+          "median": 1.5875,
+          "mean": 1.6828776041666667,
+          "p95": 2.6796875,
+          "max": 2.8671875
+        },
+        "per_image_jpeg_bytes": {
+          "min": 242,
+          "p05": 244,
+          "median": 353.0,
+          "mean": 364.0833333333333,
+          "p95": 451,
+          "max": 464
+        }
+      }
+    },
+    "10": {
+      "all": {
+        "n_images": 16,
+        "total_source_bytes": 71162,
+        "total_jpeg_bytes": 5331,
+        "total_header_bytes": 4208,
+        "total_payload_bytes": 1123,
+        "header_fraction": 0.7893453385856312,
+        "total_raw_bytes": 107264,
+        "R_existing": 13.348715062839993,
+        "savings_percent_vs_existing": 92.50864225288777,
+        "R_raw": 20.120802851247422,
+        "aggregate_bpp": 1.0347437888198758,
+        "aggregate_payload_bpp": 0.21797360248447206,
+        "per_image_bpp": {
+          "min": 0.400390625,
+          "p05": 0.404296875,
+          "median": 1.4439453125,
+          "mean": 1.57685546875,
+          "p95": 2.5625,
+          "max": 2.65625
+        },
+        "per_image_jpeg_bytes": {
+          "min": 205,
+          "p05": 207,
+          "median": 333.0,
+          "mean": 333.1875,
+          "p95": 390,
+          "max": 397
+        }
+      },
+      "test": {
+        "n_images": 4,
+        "total_source_bytes": 22283,
+        "total_jpeg_bytes": 1432,
+        "total_header_bytes": 1119,
+        "total_payload_bytes": 313,
+        "header_fraction": 0.7814245810055865,
+        "total_raw_bytes": 30720,
+        "R_existing": 15.560754189944134,
+        "savings_percent_vs_existing": 93.57357626890455,
+        "R_raw": 21.452513966480446,
+        "aggregate_bpp": 1.11875,
+        "aggregate_payload_bpp": 0.24453125,
+        "per_image_bpp": {
+          "min": 0.7578125,
+          "p05": 0.7578125,
+          "median": 1.6455078125,
+          "mean": 1.64697265625,
+          "p95": 2.5390625,
+          "max": 2.5390625
+        },
+        "per_image_jpeg_bytes": {
+          "min": 322,
+          "p05": 322,
+          "median": 356.5,
+          "mean": 358.0,
+          "p95": 397,
+          "max": 397
+        }
+      },
+      "train": {
+        "n_images": 12,
+        "total_source_bytes": 48879,
+        "total_jpeg_bytes": 3899,
+        "total_header_bytes": 3089,
+        "total_payload_bytes": 810,
+        "header_fraction": 0.7922544242113363,
+        "total_raw_bytes": 76544,
+        "R_existing": 12.536291356758143,
+        "savings_percent_vs_existing": 92.02315922993515,
+        "R_raw": 19.631700436009233,
+        "aggregate_bpp": 1.0069731404958677,
+        "aggregate_payload_bpp": 0.20919421487603307,
+        "per_image_bpp": {
+          "min": 0.400390625,
+          "p05": 0.404296875,
+          "median": 1.437109375,
+          "mean": 1.5534830729166667,
+          "p95": 2.5625,
+          "max": 2.65625
+        },
+        "per_image_jpeg_bytes": {
+          "min": 205,
+          "p05": 207,
+          "median": 333.0,
+          "mean": 324.9166666666667,
+          "p95": 378,
+          "max": 390
+        }
+      }
+    },
+    "5": {
+      "all": {
+        "n_images": 16,
+        "total_source_bytes": 71162,
+        "total_jpeg_bytes": 4885,
+        "total_header_bytes": 4143,
+        "total_payload_bytes": 742,
+        "header_fraction": 0.8481064483111566,
+        "total_raw_bytes": 107264,
+        "R_existing": 14.567451381780963,
+        "savings_percent_vs_existing": 93.13538124279812,
+        "R_raw": 21.95783009211873,
+        "aggregate_bpp": 0.9481754658385093,
+        "aggregate_payload_bpp": 0.14402173913043478,
+        "per_image_bpp": {
+          "min": 0.361328125,
+          "p05": 0.36328125,
+          "median": 1.3294921875,
+          "mean": 1.4772216796875,
+          "p95": 2.4375,
+          "max": 2.5
+        },
+        "per_image_jpeg_bytes": {
+          "min": 185,
+          "p05": 186,
+          "median": 314.5,
+          "mean": 305.3125,
+          "p95": 339,
+          "max": 347
+        }
+      },
+      "test": {
+        "n_images": 4,
+        "total_source_bytes": 22283,
+        "total_jpeg_bytes": 1309,
+        "total_header_bytes": 1105,
+        "total_payload_bytes": 204,
+        "header_fraction": 0.8441558441558441,
+        "total_raw_bytes": 30720,
+        "R_existing": 17.022918258212375,
+        "savings_percent_vs_existing": 94.12556657541624,
+        "R_raw": 23.46829640947288,
+        "aggregate_bpp": 1.02265625,
+        "aggregate_payload_bpp": 0.159375,
+        "per_image_bpp": {
+          "min": 0.662109375,
+          "p05": 0.662109375,
+          "median": 1.5537109375,
+          "mean": 1.5517578125,
+          "p95": 2.4375,
+          "max": 2.4375
+        },
+        "per_image_jpeg_bytes": {
+          "min": 311,
+          "p05": 311,
+          "median": 325.5,
+          "mean": 327.25,
+          "p95": 347,
+          "max": 347
+        }
+      },
+      "train": {
+        "n_images": 12,
+        "total_source_bytes": 48879,
+        "total_jpeg_bytes": 3576,
+        "total_header_bytes": 3038,
+        "total_payload_bytes": 538,
+        "header_fraction": 0.8495525727069351,
+        "total_raw_bytes": 76544,
+        "R_existing": 13.668624161073826,
+        "savings_percent_vs_existing": 92.68397471306696,
+        "R_raw": 21.404921700223714,
+        "aggregate_bpp": 0.9235537190082644,
+        "aggregate_payload_bpp": 0.13894628099173553,
+        "per_image_bpp": {
+          "min": 0.361328125,
+          "p05": 0.36328125,
+          "median": 1.320703125,
+          "mean": 1.4523763020833333,
+          "p95": 2.421875,
+          "max": 2.5
+        },
+        "per_image_jpeg_bytes": {
+          "min": 185,
+          "p05": 186,
+          "median": 313.5,
+          "mean": 298.0,
+          "p95": 335,
+          "max": 338
+        }
+      }
+    }
+  }
+}

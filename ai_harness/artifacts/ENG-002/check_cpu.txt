@@ -1,0 +1,37 @@
+$ python -B main.py check --batch-size 4 --atoms 2048 --k 32 --encoder-init he --fc-init xavier --device cpu 
+{
+  "result": "PASS",
+  "input": "synthetic",
+  "batch": 4,
+  "backbone_features": [
+    4,
+    512
+  ],
+  "sparse_codes": [
+    4,
+    2048
+  ],
+  "encoder_init": "he",
+  "fc_init": "xavier",
+  "train_feature_mask": 0.0,
+  "max_active": 32,
+  "reconstruction": [
+    4,
+    512
+  ],
+  "classifier_logits": [
+    4,
+    1000
+  ],
+  "finite_gradients": [
+    "encoder",
+    "decoder",
+    "latent_fc"
+  ],
+  "frozen_backbone": true,
+  "parameters_unchanged": true,
+  "optimizer_steps": 0,
+  "decoder_free_reload_matches": true
+}
+/usr/bin/bash: line 1: bc: command not found
+exit 0  wall  s
