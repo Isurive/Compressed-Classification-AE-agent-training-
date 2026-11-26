@@ -1,7 +1,7 @@
 # Work summary: from dataset download to reviewed results
 
 *Written by the AI agent `claude-orient-20261122-a` for teammates joining the project. Last updated 2026-11-26.*
-*Covers everything done after the datasets were downloaded (2026-11-24 to 2026-11-26).*
+*Covers everything done after the datasets were downloaded (2026-11-24 to 2026-11-26), up to the dictionary-size sweep.*
 *Detailed, reviewer-checked reports are linked throughout. When this file and a report disagree, the report wins, except where [COORD-002/status.md](ai_harness/artifacts/COORD-002/status.md) lists a correction.*
 
 ## TL;DR
@@ -27,7 +27,7 @@
 - **Compression tolerance:** no head, loss term or sparsity setting was found to make accuracy drop less under compression. The sparse − dense gap showed no detectable change with compression.
 - **Status:**
   - Every experiment was checked by independent reviewer agents and accepted. The reviewers reproduced the numbers.
-  - SEED-001 was accepted after one wording revision. Only the reviewer's own report (REVIEW-006) still awaits a second reviewer.
+  - SEED-001, MSWEEP-001 (the M sweep) and their reviews REVIEW-006 and REVIEW-007 are all accepted.
 
 ## 1. Setup you need to reproduce anything
 
@@ -51,6 +51,7 @@ Your own code is in `src/`: `main.py`, `sparse_workflow.py`, `image_data.py`, `c
 | `src/run_grid_xavier.py` | The same grid, with every head starting from random (Xavier) weights. |
 | `src/run_ablation.py` | Turns individual loss terms off to find what makes the sparse head work. |
 | `src/run_seeds.py` | Repeats the key comparison on 7 new seeds. |
+| `src/run_msweep.py` | Dictionary-size sweep at a fixed active fraction (k = M/4). |
 
 **How "dictionary learning" appears in the code.**
 - `SparseDictionaryAE` in `resnet18_sparse_ae.py` learns M = 2048 unit-length **atoms**: the dictionary.
@@ -162,8 +163,37 @@ Your own code is in `src/`: `main.py`, `sparse_workflow.py`, `image_data.py`, `c
   - marking dense − linear and the compression trend as exploratory;
   - scoping the sparsity claim to k = 512.
 
-  Every number reproduced. After the revision, SEED-001 was **accepted**.
+  Every number reproduced. After the revision, SEED-001 was **accepted**. A second reviewer then accepted REVIEW-006 itself. It noted one more detail: if all 12 printed tests are corrected together, sparse − dense at L80 only just passes (0.0235 against 0.025). The 8 pre-registered tests pass comfortably.
 - **Report:** `ai_harness/artifacts/SEED-001/report.md`.
+
+### Step 10: clean dictionary-size sweep (MSWEEP-001, 2026-11-26)
+- **Ran:**
+  - Dictionary sizes M = 512, 1024, 2048 and 4096, with 1 in 4 atoms active at every size (k = M/4).
+  - Random-start heads with the reconstruction loss.
+  - Seeds 45–51; levels source/80/90.
+  - 63 new runs; M = 2048 reused from SEED-001.
+  - Pre-registered.
+- **Interruption:** the first attempt was killed overnight after 57 runs, with no error (the laptop or app shut down). The remaining 6 runs were resumed the next day. The reviewer confirmed there are no duplicate or corrupted runs.
+- **Result (pre-registered; pooled over the 3 levels):**
+
+  | M (k) | Accuracy | vs M = 2048 | Verdict |
+  | --- | --- | --- | --- |
+  | 512 (128) | 44.33% | −2.95 points | real, ≥ 1 point |
+  | 1024 (256) | 46.12% | −1.16 points | real, ≥ 1 point |
+  | 2048 (512) | 47.28% | — | — |
+  | 4096 (1024) | 47.73% | +0.46 points | real, below 1 point |
+
+  The trend is **+1.14 points per doubling of M** (95% CI 1.07–1.20), at every compression level.
+- **Important caveats:**
+  - M, the number of active atoms and the parameter count (about 1 M to 8 M) all grow together. So this shows "a bigger dictionary at the same sparsity helps", not "more atoms alone helps".
+  - **Training becomes unstable as M grows** at the fixed learning rate (1e-3, tuned at M = 2048). The training loss rose partway through 0/21, 0/21, 15/21 and 21/21 runs for M = 512 → 4096. The best-checkpoint selection keeps the numbers valid, but the small gain above 2048 may be held back by the learning rate. This also affects the M = 2048 heads in the earlier experiments. The reviewer found it.
+- **Exploratory:**
+  - Gains shrink with each doubling (+1.8, +1.2, +0.5), possibly limited by the learning rate.
+  - M = 512 is about 2 points below the linear head.
+  - No detected change in the M effect with compression.
+- **My mistake:** the pre-registration text counted the tests as 10 when its own rule defines 13. The stricter 13 were used, and the same tests come out significant either way.
+- **Review (REVIEW-007):** first *revise*: the reviewer added the instability finding and asked for wording fixes. After the revision, MSWEEP-001 was **accepted**.
+- **Report:** `ai_harness/artifacts/MSWEEP-001/report.md`.
 
 ## 3. What we can and cannot claim
 
@@ -175,7 +205,7 @@ Your own code is in `src/`: `main.py`, `sparse_workflow.py`, `image_data.py`, `c
 - **Training from compressed data alone.** The backbone was pretrained on original ImageNet; only the head was trained on compressed data.
 - **"Sparse dictionaries make training robust to compression."** No component reduced the accuracy drop.
 - **"98% accuracy at 50:1"** in absolute terms. Heads reach about 46–54% against 57% for the original classifier. Relative to each head's own uncompressed accuracy, level 80 retains about 98%, within noise.
-- **Any effect of dictionary size M.** Not yet tested cleanly.
+- **"More available atoms, with everything else equal, helps."** MSWEEP-001 shows that a larger dictionary at a fixed active fraction helps (+1.1 points per doubling), but M, k and the parameter count rise together. Results at M ≥ 2048 are conditional on the learning rate.
 
 **Caveats:**
 - ImageNetV2 results guided which experiment to run next, though no settings were tuned on it.
@@ -195,6 +225,7 @@ python -B -u run_grid.py summary
 python -B -u run_grid_xavier.py freeze; python -B -u run_grid_xavier.py grid; python -B -u run_grid_xavier.py summary   # ~40 min
 python -B -u run_ablation.py grid; python -B -u run_ablation.py summary                                               # ~30 min
 python -B -u run_seeds.py grid; python -B -u run_seeds.py summary                                                     # ~28 min
+python -B -u run_msweep.py grid; python -B -u run_msweep.py summary                                                   # ~25 min
 cd ..
 python -B -u src/build_jpeg_dataset.py Datasets/imagenet-1k runs/GRID-001/jpeg_variants --levels 20 60 80 85 90 95 100 --splits val   # ~90 min CPU
 python -B ai_harness/artifacts/GRID-001/pixel_check.py
@@ -209,7 +240,7 @@ python -B ai_harness/artifacts/GRID-001/analyze.py      # likewise GRID-002, ABL
 | Path | Contents | Size |
 | --- | --- | --- |
 | `runs/GRID-001/` | `results.csv` and `summary.csv` (all numbers), tuning files, cached features, checkpoints, JPEG variants with `manifest.csv` | about 14 GB + 5.3 GB of JPEG variants |
-| `runs/GRID-002/`, `runs/ABL-001/`, `runs/SEED-001/` | Results and `best.pt` checkpoints (`last.pt` deleted) | 2.7, 3.2 and 2.3 GB |
+| `runs/GRID-002/`, `runs/ABL-001/`, `runs/SEED-001/`, `runs/MSWEEP-001/` | Results and `best.pt` checkpoints (`last.pt` deleted) | 2.7, 3.2, 2.3 and 3.3 GB |
 | `runs/ENG-004/`, `runs/ENG-005/` | The pilot runs | small |
 | `ai_harness/artifacts/<TASK>/` | Report, logs and analysis for every task | small |
 | `ai_harness/artifacts/COORD-002/status.md` | **One-page list of accepted results and corrections** | small |
@@ -224,24 +255,21 @@ python -B ai_harness/artifacts/GRID-001/analyze.py      # likewise GRID-002, ABL
   - `py ai_harness/harness.py status` shows the queue.
   - `py ai_harness/harness.py check` verifies every submitted file's checksum.
 - **State on 2026-11-26:**
-  - 21 tasks done.
-  - SEED-001 accepted; REVIEW-006 (its review) awaits a second reviewer.
+  - 25 tasks done.
+  - SEED-001, MSWEEP-001, REVIEW-006 and REVIEW-007 accepted; nothing in review.
   - REPRO-001, REVIEW-001, SYNTH-001 and LIT-002 have never been claimed. LIT-002 is verifying the "Diverse Dictionary Learning" citation in `src/`.
 - **Known stale text:** the one-line ledger summaries of ABL-001 and GRID-002 still state claims that were later withdrawn. Use the reports, or `COORD-002/status.md`, instead.
-- **Reviewer agents:** four so far, `reviewer-20261125-a` to `-d`. They also cross-reviewed each other's reports. A task is never accepted by the agent that wrote it.
+- **Reviewer agents:** six so far, `reviewer-20261125-a` to `-d` and `reviewer-20261126-e`, `-f`. They also cross-reviewed each other's reports. A task is never accepted by the agent that wrote it.
 
 ## 7. Next steps
 
-**Next step (recommended): a clean dictionary-size (M) sweep.** How the number of available atoms M affects the result is the project's original research question, and it is still untested. The GRID-001 sweep was spoiled by inherited weights and epoch-1 checkpoints. A clean version:
-- **Heads:** random-start (Xavier) heads with the reconstruction loss.
-- **Sparsity:** k scaled with M, so the share of active atoms stays the same; for example k = M/4.
-- **Sizes and levels:** M ∈ {512, 1024, 2048, 4096} at levels source/80/90.
-- **Seeds:** the 7 new seeds. M = 2048 can be reused from SEED-001.
-- **Cost:** about 63 new runs, about 30 minutes on the laptop.
-- **Process:** pre-registered first, reviewed after.
+**Next step (recommended): a learning-rate check for large dictionaries.**
+- **Why:** MSWEEP-001 showed that M ≥ 2048 heads diverge late in training at lr 1e-3. That may understate how much large dictionaries help, and it affects every earlier M = 2048 result.
+- **Method:** a small validation-only check (no test set) at M = 2048 and 4096, with lr ∈ {1e-3, 3e-4, 1e-4}. If a lower learning rate removes the instability, re-run the key comparisons at that rate.
+- **Cost:** about 20–30 minutes; pre-registered first, reviewed after.
 
 **Also open:**
-1. **Review SEED-001** (a reviewer agent; minutes).
+1. **A fixed-k arm** to separate available atoms M from active atoms k: for example k = 256 at M = 1024, 2048 and 4096.
 2. **A regularized wide head:** a 2048-wide head with tuned weight decay instead of the reconstruction loss. This tests whether any regularizer matches what MSE does.
 3. **Write-up:** fold `COORD-002/status.md` and SEED-001 into the proposal and final report (task SYNTH-001). A storage-vs-accuracy plot needs matplotlib, which is not installed yet; ask before adding it.
 4. **Optional:**

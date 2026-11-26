@@ -1,0 +1,45 @@
+{
+  "configs": {
+    "512": {
+      "atoms": 512,
+      "fc_init": "xavier",
+      "k": 128,
+      "model": "sparse",
+      "weight_decay": 0.0
+    },
+    "1024": {
+      "atoms": 1024,
+      "fc_init": "xavier",
+      "k": 256,
+      "model": "sparse",
+      "weight_decay": 0.0
+    },
+    "4096": {
+      "atoms": 4096,
+      "fc_init": "xavier",
+      "k": 1024,
+      "model": "sparse",
+      "weight_decay": 0.0
+    }
+  },
+  "dictionary_loss": {
+    "reconstruction_weight": 1.0,
+    "dependency_weight": 0.0,
+    "coherence_weight": 0.0
+  },
+  "levels": [
+    "source",
+    "L080",
+    "L090"
+  ],
+  "seeds": [
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51
+  ],
+  "reused": "M2048 from runs/SEED-001 sparse"
+}

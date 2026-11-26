@@ -1,6 +1,6 @@
 # Research task board
 
-Generated: 2026-11-26T07:15:16+00:00
+Generated: 2026-11-26T19:57:29+00:00
 
 Snapshot only. Run `py ai_harness/harness.py status` for current state.
 
@@ -29,10 +29,12 @@ Snapshot only. Run `py ai_harness/harness.py status` for current state.
 | REVIEW-003 | reviewer | done | reviewer-20261125-b | — | Independent review of setup tasks: ORIENT-001, ORIENT-002, COORD-001, ENG-001 |
 | REVIEW-004 | reviewer | done | reviewer-20261125-c | — | Independent review of environment, data and pilot tasks: ENG-002, ENG-003, ENG-004, ENG-005, REASON-002 |
 | REVIEW-005 | reviewer | done | reviewer-20261125-d | — | Independent review of REVIEW-002 and COORD-002 |
-| SEED-001 | engineer | active | claude-orient-20261122-a | — | More seeds: is the sparse-vs-dense (and sparse-vs-linear) gap real? |
+| SEED-001 | engineer | done | claude-orient-20261122-a | — | More seeds: is the sparse-vs-dense (and sparse-vs-linear) gap real? |
 | COORD-003 | coordinator | done | claude-orient-20261122-a | — | Bring DECISIONS.md and RESEARCH_STATUS.md up to date (REVIEW-003 C1-1) |
 | HARNESS-001 | engineer | done | claude-orient-20261122-a | — | Let a later accepted task supersede a shared-file artifact of an earlier done task |
-| REVIEW-006 | reviewer | review | reviewer-20261125-d | — | Independent review of SEED-001 (more seeds, pre-registered) |
+| REVIEW-006 | reviewer | done | reviewer-20261125-d | — | Independent review of SEED-001 (more seeds, pre-registered) |
+| MSWEEP-001 | engineer | done | claude-orient-20261122-a | — | Clean dictionary-size (M) sweep: does the number of available atoms matter? |
+| REVIEW-007 | reviewer | done | reviewer-20261126-e | — | Independent review of MSWEEP-001 (clean dictionary-size sweep) |
 
 ## Submitted evidence
 
@@ -55,7 +57,9 @@ Snapshot only. Run `py ai_harness/harness.py status` for current state.
 - **REVIEW-003 (done)**: `ai_harness/artifacts/REVIEW-003/report.md`, `ai_harness/artifacts/REVIEW-003/task.json`
 - **REVIEW-004 (done)**: `ai_harness/artifacts/REVIEW-004/report.md`, `ai_harness/artifacts/REVIEW-004/task.json`
 - **REVIEW-005 (done)**: `ai_harness/artifacts/REVIEW-005/report.md`
-- **SEED-001 (active)**: `ai_harness/artifacts/SEED-001/report.md`, `ai_harness/artifacts/SEED-001/analysis.md`, `ai_harness/artifacts/SEED-001/analysis.json`, `ai_harness/artifacts/SEED-001/analyze.py`, `ai_harness/artifacts/SEED-001/task.json`, `ai_harness/artifacts/SEED-001/grid_log.txt`, `ai_harness/artifacts/SEED-001/summary_log.txt`, `src/run_seeds.py`, `runs/SEED-001/results.csv`, `runs/SEED-001/summary.csv`, `runs/SEED-001/settings.json`
+- **SEED-001 (done)**: `ai_harness/artifacts/SEED-001/report.md`, `ai_harness/artifacts/SEED-001/analysis.md`, `ai_harness/artifacts/SEED-001/analysis.json`, `ai_harness/artifacts/SEED-001/analyze.py`, `ai_harness/artifacts/SEED-001/task.json`, `ai_harness/artifacts/SEED-001/grid_log.txt`, `ai_harness/artifacts/SEED-001/summary_log.txt`, `src/run_seeds.py`, `runs/SEED-001/results.csv`, `runs/SEED-001/summary.csv`, `runs/SEED-001/settings.json`
 - **COORD-003 (done)**: `ai_harness/DECISIONS.md`, `ai_harness/RESEARCH_STATUS.md`, `ai_harness/artifacts/COORD-003/task.json`
 - **HARNESS-001 (done)**: `ai_harness/harness.py`, `ai_harness/test_harness.py`, `ai_harness/artifacts/HARNESS-001/task.json`, `ai_harness/artifacts/HARNESS-001/test_output.txt`
-- **REVIEW-006 (review)**: `ai_harness/artifacts/REVIEW-006/report.md`, `ai_harness/artifacts/REVIEW-006/task.json`
+- **REVIEW-006 (done)**: `ai_harness/artifacts/REVIEW-006/report.md`, `ai_harness/artifacts/REVIEW-006/task.json`
+- **MSWEEP-001 (done)**: `ai_harness/artifacts/MSWEEP-001/report.md`, `ai_harness/artifacts/MSWEEP-001/analysis.md`, `ai_harness/artifacts/MSWEEP-001/analysis.json`, `ai_harness/artifacts/MSWEEP-001/analyze.py`, `ai_harness/artifacts/MSWEEP-001/task.json`, `ai_harness/artifacts/MSWEEP-001/grid_log.txt`, `ai_harness/artifacts/MSWEEP-001/summary_log.txt`, `src/run_msweep.py`, `runs/MSWEEP-001/results.csv`, `runs/MSWEEP-001/summary.csv`, `runs/MSWEEP-001/settings.json`
+- **REVIEW-007 (done)**: `ai_harness/artifacts/REVIEW-007/report.md`, `ai_harness/artifacts/REVIEW-007/task.json`

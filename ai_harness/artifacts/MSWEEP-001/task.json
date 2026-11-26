@@ -1,0 +1,14 @@
+{
+  "id": "MSWEEP-001",
+  "title": "Clean dictionary-size (M) sweep: does the number of available atoms matter?",
+  "role": "engineer",
+  "description": "User approved (2026-11-26). Pre-registered before any run. Replaces the confounded GRID-001 M sweep (inherited fc, epoch-1 checkpoints, k fixed). Head: sparse dictionary, Xavier fc, He encoder, loss CE + feature MSE only (reconstruction 1, dependency 0, coherence 0, as ABL-001 abl-mse / SEED-001), fixed active fraction k = M/4. M in {512, 1024, 2048, 4096} -> k {128, 256, 512, 1024}. M=2048/k=512 is reused from SEED-001 sparse (identical settings); M=512, 1024, 4096 are new. Everything else as SEED-001: 10 epochs, batch 128, Adam 1e-3, best.pt by val top-1 then CE, cached GRID-001 features read-only, levels source/80/90, seeds 45-51, test on original ImageNetV2 once per run after training. 63 new runs. No new tuning (k/M = 1/4 taken from the M2048 tuned point; lr/epochs tuned only at M2048 - disclosed). New wrapper src/run_msweep.py; existing scripts unchanged; last.pt deleted. PRE-DECLARED ANALYSIS (metric ImageNetV2-source top-1; seeds 45-51, paired by seed): (1) for M in {512, 1024, 4096}: paired difference A(M) - A(2048) per level and pooled (per-seed mean over the 3 levels); mean, sd, two-sided paired-t 95% CI (df 6), sign count. (2) Trend: per seed, least-squares slope of pooled accuracy on log2(M) over the 4 sizes (pp per doubling); mean slope with paired-t 95% CI (df 6). Decision: a difference is 'detected' if its CI excludes 0 and 'meaningful' if detected and |mean| >= 1.0 pp; the trend is 'detected' if its CI excludes 0 and 'meaningful' if detected and |slope| x 3 (the 512->4096 span) >= 1.0 pp. These 9 differences plus 1 trend (10 tests) are the confirmatory family; report Holm-adjusted results alongside. Pre-declared sanity check: report best-epoch distribution per M; flag any M whose median best epoch is <= 2. Everything else (per-level trends, compression x M interaction, comparisons with dense/linear from SEED-001) is exploratory and labeled so.",
+  "depends_on": [],
+  "write_paths": ["src/run_msweep.py", "runs/MSWEEP-001", "ai_harness/artifacts/MSWEEP-001"],
+  "acceptance": [
+    "task.json and ledger add predate the first run (timestamps)",
+    "Reused M=2048 cells verified identical in settings to the new cells except atoms/k",
+    "Report states the pre-registered family first, exploratory results separately labeled, and discloses the capacity confound (parameters scale with M) and k co-varying with M",
+    "User src files and all submitted artifacts unmodified"
+  ]
+}

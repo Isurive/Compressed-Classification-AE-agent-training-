@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-11-26T07:15:16+00:00",
+  "generated_at": "2026-11-26T19:57:29+00:00",
   "project_root": "C:\\Users\\ericw\\OneDrive\\Documents\\AI 360 (DeepLearning\\Final Project",
   "tasks": [
     {
@@ -1187,13 +1187,13 @@
           "User src files and all submitted artifacts unmodified"
         ]
       },
-      "state": "active",
+      "state": "done",
       "owner": "claude-orient-20261122-a",
       "artifacts": [
         {
           "path": "ai_harness/artifacts/SEED-001/report.md",
-          "sha256": "e3b730674d841b2a1f59d089d3ea4ef512e22d024b056216e5d6eac245afd7b5",
-          "bytes": 5332
+          "sha256": "c73bf301a51c04a4b57aa995abe1e02e044a2babb4abb542fbd0d6528d01ed4c",
+          "bytes": 7318
         },
         {
           "path": "ai_harness/artifacts/SEED-001/analysis.md",
@@ -1246,9 +1246,9 @@
           "bytes": 721
         }
       ],
-      "summary": "Pre-registered 7 new seeds (45-51), 63 runs. Pooled over source/L80/L90: sparse-dense +0.41 pp [0.29,0.53] 7/7 (detected, <1 pp); sparse-linear +0.97 [0.78,1.15] 7/7 (>=1 pp only at source, 1.23); dense-linear +0.55 [0.34,0.77]. All-10-seed secondary agrees. Gaps shrink with compression: sparsity adds a small fixed benefit, not compression tolerance.",
+      "summary": "Revision 1 per REVIEW-006. Pre-registered (new seeds 45-51, 63 runs), pooled over source/L80/L90: sparse-dense +0.41 pp [0.29,0.53], pooled 7/7, per-level 6/7,6/7,7/7: detected, below 1 pp (k=512 of 2048 with MSE). Sparse-linear +0.97 [0.78,1.15]: detected; >=1 pp only at source (1.23, borderline). 8 pre-registered tests all survive Holm. Exploratory only: dense-linear +0.55; no change in sparse-dense gap with compression detected; gaps vs linear narrow toward L90.",
       "created": "2026-11-26T06:37:09+00:00",
-      "updated": "2026-11-26T07:13:29+00:00",
+      "updated": "2026-11-26T07:16:16+00:00",
       "stale": false
     },
     {
@@ -1359,7 +1359,7 @@
           "Pre-registration timing and rule adherence verified from the ledger and file timestamps"
         ]
       },
-      "state": "review",
+      "state": "done",
       "owner": "reviewer-20261125-d",
       "artifacts": [
         {
@@ -1375,7 +1375,127 @@
       ],
       "summary": "Review of SEED-001: revise, no blocking. Pre-registration timing, all primary/secondary numbers, settings equivalence and splits verified. Should-fix: S-1 per-level sign counts 6/7,6/7,7/7 not 'every seed every level'; S-2 dense-linear not pre-registered, label exploratory; S-3 'gaps shrink' not pre-registered and not detected for sparse-dense (+0.16 [-0.18,0.50]).",
       "created": "2026-11-26T07:10:10+00:00",
-      "updated": "2026-11-26T07:15:16+00:00",
+      "updated": "2026-11-26T19:46:58+00:00",
+      "stale": false
+    },
+    {
+      "id": "MSWEEP-001",
+      "spec": {
+        "id": "MSWEEP-001",
+        "title": "Clean dictionary-size (M) sweep: does the number of available atoms matter?",
+        "role": "engineer",
+        "description": "User approved (2026-11-26). Pre-registered before any run. Replaces the confounded GRID-001 M sweep (inherited fc, epoch-1 checkpoints, k fixed). Head: sparse dictionary, Xavier fc, He encoder, loss CE + feature MSE only (reconstruction 1, dependency 0, coherence 0, as ABL-001 abl-mse / SEED-001), fixed active fraction k = M/4. M in {512, 1024, 2048, 4096} -> k {128, 256, 512, 1024}. M=2048/k=512 is reused from SEED-001 sparse (identical settings); M=512, 1024, 4096 are new. Everything else as SEED-001: 10 epochs, batch 128, Adam 1e-3, best.pt by val top-1 then CE, cached GRID-001 features read-only, levels source/80/90, seeds 45-51, test on original ImageNetV2 once per run after training. 63 new runs. No new tuning (k/M = 1/4 taken from the M2048 tuned point; lr/epochs tuned only at M2048 - disclosed). New wrapper src/run_msweep.py; existing scripts unchanged; last.pt deleted. PRE-DECLARED ANALYSIS (metric ImageNetV2-source top-1; seeds 45-51, paired by seed): (1) for M in {512, 1024, 4096}: paired difference A(M) - A(2048) per level and pooled (per-seed mean over the 3 levels); mean, sd, two-sided paired-t 95% CI (df 6), sign count. (2) Trend: per seed, least-squares slope of pooled accuracy on log2(M) over the 4 sizes (pp per doubling); mean slope with paired-t 95% CI (df 6). Decision: a difference is 'detected' if its CI excludes 0 and 'meaningful' if detected and |mean| >= 1.0 pp; the trend is 'detected' if its CI excludes 0 and 'meaningful' if detected and |slope| x 3 (the 512->4096 span) >= 1.0 pp. These 9 differences plus 1 trend (10 tests) are the confirmatory family; report Holm-adjusted results alongside. Pre-declared sanity check: report best-epoch distribution per M; flag any M whose median best epoch is <= 2. Everything else (per-level trends, compression x M interaction, comparisons with dense/linear from SEED-001) is exploratory and labeled so.",
+        "depends_on": [],
+        "write_paths": [
+          "src/run_msweep.py",
+          "runs/MSWEEP-001",
+          "ai_harness/artifacts/MSWEEP-001"
+        ],
+        "acceptance": [
+          "task.json and ledger add predate the first run (timestamps)",
+          "Reused M=2048 cells verified identical in settings to the new cells except atoms/k",
+          "Report states the pre-registered family first, exploratory results separately labeled, and discloses the capacity confound (parameters scale with M) and k co-varying with M",
+          "User src files and all submitted artifacts unmodified"
+        ]
+      },
+      "state": "done",
+      "owner": "claude-orient-20261122-a",
+      "artifacts": [
+        {
+          "path": "ai_harness/artifacts/MSWEEP-001/report.md",
+          "sha256": "a740be56f2c4468002a3fdd1baab7bdbcc14bf88236343a521748002bf6854d6",
+          "bytes": 10983
+        },
+        {
+          "path": "ai_harness/artifacts/MSWEEP-001/analysis.md",
+          "sha256": "62a88649e4edf8763b4a4bfdf50d90c4ff204b79d0a04e33933a36fc2bf95d43",
+          "bytes": 2385
+        },
+        {
+          "path": "ai_harness/artifacts/MSWEEP-001/analysis.json",
+          "sha256": "bb7e9d959e6a06e3b5e5485f191702c216755677cdc74c57080eef5b11683ccf",
+          "bytes": 11995
+        },
+        {
+          "path": "ai_harness/artifacts/MSWEEP-001/analyze.py",
+          "sha256": "fc02f0fda69a99bd3681b6798e6bf5de1e1926687a2954f52115ce7746d5332e",
+          "bytes": 6997
+        },
+        {
+          "path": "ai_harness/artifacts/MSWEEP-001/task.json",
+          "sha256": "7c34616d09ac7aef5e3935ba48e7889140171f62fdf900adcc152fb7982cc126",
+          "bytes": 2584
+        },
+        {
+          "path": "ai_harness/artifacts/MSWEEP-001/grid_log.txt",
+          "sha256": "7e8b61d0bbdb8051d434b7fc67b3084877674504a42d1c6fdaf1c71eb4750cd4",
+          "bytes": 308517
+        },
+        {
+          "path": "ai_harness/artifacts/MSWEEP-001/summary_log.txt",
+          "sha256": "76641725cdda698cb78aa9cf7e2b5ab42fb8476e9c534b39985021f600a8d1f2",
+          "bytes": 195
+        },
+        {
+          "path": "src/run_msweep.py",
+          "sha256": "9fc82adade4609daf57ffffe533442c897b08b317156d4bbf1af2ceae16663b0",
+          "bytes": 3327
+        },
+        {
+          "path": "runs/MSWEEP-001/results.csv",
+          "sha256": "d65eb072d5360b03df9710cd0018c3c3239d74d0bb07d900f58ed99d2659ed7e",
+          "bytes": 24576
+        },
+        {
+          "path": "runs/MSWEEP-001/summary.csv",
+          "sha256": "5de7d5249d3822161635178ac7aef5e3f5b70809d749afa3713d38cb68e55ac6",
+          "bytes": 1972
+        },
+        {
+          "path": "runs/MSWEEP-001/settings.json",
+          "sha256": "47d8e17204d35c4fc50aaff7afbe843f0215f9f28445d722cc5a811ce8dc9a02",
+          "bytes": 768
+        }
+      ],
+      "summary": "Revision 1 per REVIEW-007. Pre-registered sweep of M at fixed active fraction k=M/4 (Xavier, CE+MSE, seeds 45-51, source/L80/L90; 63 new runs, M2048 from SEED-001). Pooled vs M2048: M512 -2.95 pp, M1024 -1.16 pp (detected, meaningful); M4096 +0.46 pp (detected, not meaningful); slope +1.14 pp/doubling [1.07,1.20]. M, k and parameters co-vary. Training diverges late at lr 1e-3 for M>=2048 (15/21, 21/21 runs), so large-M results are lr-conditional. Exploratory: diminishing returns past 2048, possibly lr-limited. 13-test family (task text miscounted 10).",
+      "created": "2026-11-26T07:49:42+00:00",
+      "updated": "2026-11-26T19:56:15+00:00",
+      "stale": false
+    },
+    {
+      "id": "REVIEW-007",
+      "spec": {
+        "id": "REVIEW-007",
+        "title": "Independent review of MSWEEP-001 (clean dictionary-size sweep)",
+        "role": "reviewer",
+        "description": "User requested (2026-11-26) completion of the M sweep including review. Check pre-registration timing (task.json/ledger add vs first run), that the analysis follows the stated rule (and the disclosed 10-vs-13 test-count correction), recompute key numbers from runs/MSWEEP-001 and runs/SEED-001 results.csv, verify the interruption/resume did not corrupt or duplicate runs, settings equivalence of reused M2048 cells, splits, and overclaiming (capacity/k confounds, diminishing returns labeled exploratory). Read-only outside this folder; no training. Record a verdict.",
+        "depends_on": [],
+        "write_paths": [
+          "ai_harness/artifacts/REVIEW-007"
+        ],
+        "acceptance": [
+          "Verdict on MSWEEP-001 recorded with a note citing this report or the checks done",
+          "Confirmatory numbers independently recomputed",
+          "Resume integrity and pre-registration timing verified"
+        ]
+      },
+      "state": "done",
+      "owner": "reviewer-20261126-e",
+      "artifacts": [
+        {
+          "path": "ai_harness/artifacts/REVIEW-007/report.md",
+          "sha256": "c8f1e9df9a1cca3727148dde0e86b1981fbe8d42003373e216a74321d6b5713c",
+          "bytes": 15229
+        },
+        {
+          "path": "ai_harness/artifacts/REVIEW-007/task.json",
+          "sha256": "d66f2ab6c91733f76cce4fd65ab22a02f59098968e6d985aa2171ca6d1ae4e71",
+          "bytes": 982
+        }
+      ],
+      "summary": "Review of MSWEEP-001: revise, no blocking. Prereg timing, 13 confirmatory numbers, Holm-13/10, resume integrity, settings and splits verified. Should-fix: S-1 undisclosed instability (train-loss rises 0/21,0/21,15/21,21/21 for M512..4096; M4096/diminishing returns lr-conditional); S-2 'Available atoms matter' headline vs M/k/params confound; S-3 ledger 'diminishing returns' unlabeled exploratory.",
+      "created": "2026-11-26T19:50:11+00:00",
+      "updated": "2026-11-26T19:57:19+00:00",
       "stale": false
     }
   ],
@@ -2259,6 +2379,110 @@
       "agent": "reviewer-20261125-d",
       "detail": "Review of SEED-001: revise, no blocking. Pre-registration timing, all primary/secondary numbers, settings equivalence and splits verified. Should-fix: S-1 per-level sign counts 6/7,6/7,7/7 not 'every seed every level'; S-2 dense-linear not pre-registered, label exploratory; S-3 'gaps shrink' not pre-registered and not detected for sparse-dense (+0.16 [-0.18,0.50]).",
       "at": "2026-11-26T07:15:16+00:00"
+    },
+    {
+      "seq": 111,
+      "task": "SEED-001",
+      "action": "submit",
+      "agent": "claude-orient-20261122-a",
+      "detail": "Revision 1 per REVIEW-006. Pre-registered (new seeds 45-51, 63 runs), pooled over source/L80/L90: sparse-dense +0.41 pp [0.29,0.53], pooled 7/7, per-level 6/7,6/7,7/7: detected, below 1 pp (k=512 of 2048 with MSE). Sparse-linear +0.97 [0.78,1.15]: detected; >=1 pp only at source (1.23, borderline). 8 pre-registered tests all survive Holm. Exploratory only: dense-linear +0.55; no change in sparse-dense gap with compression detected; gaps vs linear narrow toward L90.",
+      "at": "2026-11-26T07:15:37+00:00"
+    },
+    {
+      "seq": 112,
+      "task": "SEED-001",
+      "action": "review-accept",
+      "agent": "reviewer-20261125-d",
+      "detail": "REVIEW-006 re-review (see ai_harness/artifacts/REVIEW-006/report.md). Revision 1 changes only report.md (other 10 artifact hashes unchanged; check ok). S-1 resolved: per-level sign counts 6/7, 6/7, 7/7 shown; wording now 'pooled 7/7, every level on average'. S-2 resolved: pre-registered family stated as 8 tests with Holm (max p 0.024); dense-linear moved to an exploratory section. S-3 resolved: compression trend exploratory; sparse-dense change +0.16 [-0.18, 0.50] 'no change detected'; narrowing vs linear labelled exploratory. O-1 to O-3 done (k=512 scope with tuning values 53.3/58.0/60.0; integrity line; t=8.25). Ledger summary and WORK_SUMMARY.md TL;DR, Step 9 and section 3 now match. All numbers match my recompute. No new overclaim.",
+      "at": "2026-11-26T07:16:16+00:00"
+    },
+    {
+      "seq": 113,
+      "task": "MSWEEP-001",
+      "action": "add",
+      "agent": "coordinator",
+      "detail": "Added task specification",
+      "at": "2026-11-26T07:49:42+00:00"
+    },
+    {
+      "seq": 114,
+      "task": "MSWEEP-001",
+      "action": "claim",
+      "agent": "claude-orient-20261122-a",
+      "detail": "engineer",
+      "at": "2026-11-26T07:49:43+00:00"
+    },
+    {
+      "seq": 115,
+      "task": "REVIEW-006",
+      "action": "review-accept",
+      "agent": "reviewer-20261126-e",
+      "detail": "Recomputed from raw CSVs (py -I, scratchpad): per-level sparse-dense signs 6/7,6/7,7/7 (s46 src -0.03, s51 L80 -0.15); pooled t=8.25; src->L90 change +0.16 [-0.18,0.50]; Holm-8 all pass, max p 0.0235; secondary 0.39/0.93 match. S-1..S-3 fair vs task.json; SEED-001 rev1 fixes all. Nit: Holm-12 sparse-dense L80 also narrow (0.0235 vs 0.025). check ok.",
+      "at": "2026-11-26T19:46:58+00:00"
+    },
+    {
+      "seq": 116,
+      "task": "MSWEEP-001",
+      "action": "submit",
+      "agent": "claude-orient-20261122-a",
+      "detail": "Pre-registered clean M sweep (Xavier, CE+MSE, k=M/4, seeds 45-51, source/L80/L90; 63 new runs, M2048 reused from SEED-001; interrupted at 57/63 and resumed). Pooled vs M2048: M512 -2.95 pp, M1024 -1.16 pp (both detected, meaningful); M4096 +0.46 pp (detected, not meaningful). Slope +1.14 pp per doubling [1.07,1.20]. Diminishing returns past 2048. Capacity and k co-vary with M (disclosed). Pre-registration miscounted the family (13 tests, not 10); same detected set either way.",
+      "at": "2026-11-26T19:49:55+00:00"
+    },
+    {
+      "seq": 117,
+      "task": "REVIEW-007",
+      "action": "add",
+      "agent": "coordinator",
+      "detail": "Added task specification",
+      "at": "2026-11-26T19:50:11+00:00"
+    },
+    {
+      "seq": 118,
+      "task": "REVIEW-007",
+      "action": "claim",
+      "agent": "reviewer-20261126-e",
+      "detail": "reviewer",
+      "at": "2026-11-26T19:50:15+00:00"
+    },
+    {
+      "seq": 119,
+      "task": "MSWEEP-001",
+      "action": "review-revise",
+      "agent": "reviewer-20261126-e",
+      "detail": "REVIEW-007 (report text returned to coordinator for ai_harness/artifacts/REVIEW-007/report.md). No blocking: prereg timing ok; all 13 confirmatory numbers, Holm-13/10 reproduce; resume clean (105 rows, 0 dupes, 63 done.json; M512/L080/s51 restarted fresh); settings+splits equal. S-1 undisclosed instability: train-loss rises in 0/21,0/21,15/21,21/21 runs (M512..4096), lr tuned at 2048 -> M4096 gain and diminishing returns lr-conditional; S-2 'Available atoms matter' headline vs M/k/params confound; S-3 ledger 'diminishing returns' unlabeled exploratory.",
+      "at": "2026-11-26T19:53:11+00:00"
+    },
+    {
+      "seq": 120,
+      "task": "MSWEEP-001",
+      "action": "submit",
+      "agent": "claude-orient-20261122-a",
+      "detail": "Revision 1 per REVIEW-007. Pre-registered sweep of M at fixed active fraction k=M/4 (Xavier, CE+MSE, seeds 45-51, source/L80/L90; 63 new runs, M2048 from SEED-001). Pooled vs M2048: M512 -2.95 pp, M1024 -1.16 pp (detected, meaningful); M4096 +0.46 pp (detected, not meaningful); slope +1.14 pp/doubling [1.07,1.20]. M, k and parameters co-vary. Training diverges late at lr 1e-3 for M>=2048 (15/21, 21/21 runs), so large-M results are lr-conditional. Exploratory: diminishing returns past 2048, possibly lr-limited. 13-test family (task text miscounted 10).",
+      "at": "2026-11-26T19:55:48+00:00"
+    },
+    {
+      "seq": 121,
+      "task": "REVIEW-007",
+      "action": "submit",
+      "agent": "reviewer-20261126-e",
+      "detail": "Review of MSWEEP-001: revise, no blocking. Prereg timing, 13 confirmatory numbers, Holm-13/10, resume integrity, settings and splits verified. Should-fix: S-1 undisclosed instability (train-loss rises 0/21,0/21,15/21,21/21 for M512..4096; M4096/diminishing returns lr-conditional); S-2 'Available atoms matter' headline vs M/k/params confound; S-3 ledger 'diminishing returns' unlabeled exploratory.",
+      "at": "2026-11-26T19:56:02+00:00"
+    },
+    {
+      "seq": 122,
+      "task": "MSWEEP-001",
+      "action": "review-accept",
+      "agent": "reviewer-20261126-e",
+      "detail": "Re-review rev1 per REVIEW-007: only report.md, analysis.md, analyze.py changed; analysis.json, data, logs, run_msweep.py hashes unchanged. S-1 instability table+caveat 3 lr-conditional; S-2 headline now 'M at fixed k=M/4', M/k/params co-vary; S-3 ledger summary labels exploratory; O-1 13-test labels; O-2 M1024 -0.19 [-0.34,-0.05]; O-3 timing stated. check ok.",
+      "at": "2026-11-26T19:56:15+00:00"
+    },
+    {
+      "seq": 123,
+      "task": "REVIEW-007",
+      "action": "review-accept",
+      "agent": "reviewer-20261126-f",
+      "detail": "Own py -I script reproduced S-1 (train-loss rise >5%: 0/21,0/21,15/21,21/21; median best->ep10 val drop 0.28/0.42/2.44/5.92 pp; restart-safe parse), all 13 confirmatory stats (M4096 pooled +0.46 [0.19,0.72], slope +1.14 [1.07,1.20]) and O-2 (M1024-lin -0.19 [-0.34,-0.05]). S-1..S-3 fair; MSWEEP-001 rev1 addresses all. check ok.",
+      "at": "2026-11-26T19:57:19+00:00"
     }
   ]
 }
