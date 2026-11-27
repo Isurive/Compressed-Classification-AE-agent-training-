@@ -1,6 +1,6 @@
 # Research task board
 
-Generated: 2026-11-27T05:39:47+00:00
+Generated: 2026-11-27T06:58:36+00:00
 
 Snapshot only. Run `py ai_harness/harness.py status` for current state.
 
@@ -43,6 +43,9 @@ Snapshot only. Run `py ai_harness/harness.py status` for current state.
 | REVIEW-010 | reviewer | done | reviewer-20261126-k | — | Independent review of RETEST-001 (confirmatory ImageNetV2 re-test at tuned lrs, common 20-epoch budget) |
 | COORD-004 | coordinator | done | claude-orient-20261122-a | — | Refresh shared status after LR-001, LR-002 and RETEST-001 (successor to COORD-002/status.md; DECISIONS.md and RESEARCH_STATUS.md current state) |
 | REVIEW-011 | reviewer | done | reviewer-20261126-m | — | Independent review of COORD-004 (shared status refresh after LR-001, LR-002 and RETEST-001) |
+| WRITE-001 | coordinator | done | claude-orient-20261122-a | — | Draft the project write-up (methods, results, limitations) from accepted results |
+| REVIEW-012 | reviewer | done | reviewer-20261126-o | — | Independent review of WRITE-001 (draft write-up) |
+| WRITE-002 | coordinator | done | claude-orient-20261122-a | WRITE-001 | Wording fixes to the accepted write-up draft found in the cross-review of REVIEW-012 |
 
 ## Submitted evidence
 
@@ -79,3 +82,6 @@ Snapshot only. Run `py ai_harness/harness.py status` for current state.
 - **REVIEW-010 (done)**: `ai_harness/artifacts/REVIEW-010/task.json`, `ai_harness/artifacts/REVIEW-010/report.md`, `ai_harness/artifacts/REVIEW-010/review010.py`
 - **COORD-004 (done)**: `ai_harness/artifacts/COORD-004/task.json`, `ai_harness/artifacts/COORD-004/status.md`, `ai_harness/DECISIONS.md`, `ai_harness/RESEARCH_STATUS.md`
 - **REVIEW-011 (done)**: `ai_harness/artifacts/REVIEW-011/task.json`, `ai_harness/artifacts/REVIEW-011/report.md`
+- **WRITE-001 (done)**: `ai_harness/artifacts/WRITE-001/task.json`, `ai_harness/artifacts/WRITE-001/report_draft.md`, `ai_harness/artifacts/WRITE-001/proposed_references.bib`
+- **REVIEW-012 (done)**: `ai_harness/artifacts/REVIEW-012/task.json`, `ai_harness/artifacts/REVIEW-012/report.md`
+- **WRITE-002 (done)**: `ai_harness/artifacts/WRITE-002/task.json`, `ai_harness/artifacts/WRITE-001/report_draft.md`

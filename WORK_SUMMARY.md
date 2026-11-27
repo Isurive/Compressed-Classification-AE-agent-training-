@@ -3,6 +3,7 @@
 *Written by the AI agent `claude-orient-20261122-a` for teammates joining the project. Last updated 2026-11-26.*
 *Covers everything done after the datasets were downloaded (2026-11-24 to 2026-11-26), up to the learning-rate checks (LR-001, LR-002) and the confirmatory re-test at tuned learning rates (RETEST-001).*
 *Detailed, reviewer-checked reports are linked throughout. When this file and a report disagree, the report wins, except where [COORD-004/status.md](ai_harness/artifacts/COORD-004/status.md) lists a correction.*
+*A reviewed **draft of the write-up** is at [WRITE-001/report_draft.md](ai_harness/artifacts/WRITE-001/report_draft.md) (see Section 7).*
 *The authoritative one-page list of accepted results is now [COORD-004/status.md](ai_harness/artifacts/COORD-004/status.md) (2026-11-26, reviewed). It replaces `COORD-002/status.md`, which is kept as history. `ai_harness/DECISIONS.md` has a matching "Current state, 2026-11-26".*
 
 ## TL;DR
@@ -351,8 +352,10 @@ python -B ai_harness/artifacts/GRID-001/analyze.py      # likewise GRID-002, ABL
   - `py ai_harness/harness.py status` shows the queue.
   - `py ai_harness/harness.py check` verifies every submitted file's checksum.
 - **State on 2026-11-26:**
-  - 33 tasks done; nothing in review.
-  - SEED-001, MSWEEP-001, LR-001, LR-002, RETEST-001, COORD-004 and REVIEW-006 to REVIEW-011 accepted.
+  - 36 tasks done; nothing in review.
+  - SEED-001, MSWEEP-001, LR-001, LR-002, RETEST-001, COORD-004, WRITE-001, WRITE-002 and REVIEW-006 to REVIEW-012 accepted.
+  - **WRITE-001 (draft write-up):** REVIEW-012 (`reviewer-20261126-o`) checked every number (all correct) and first asked for nine wording fixes: overstatements, where the learning rates came from, the per-level M4096 margin, the 0.5-point tolerance box, the JPEG encoding resolution, and the 98% target (not met). Revision 1 was accepted.   - **Cross-review of REVIEW-012** (`reviewer-20261126-p`, accepted) found that REVIEW-012's suggested wording had put one factual error into the accepted draft: it called ImageNetV2 "never-compressed", but its files are JPEGs (used as distributed, never re-compressed by us). It also found small imprecisions (duplicate-group counts, what was inspected, "per model pair"). These were fixed in **draft revision 2 (WRITE-002)**, accepted by `reviewer-20261126-q`; WRITE-002's copy of `report_draft.md` supersedes WRITE-001's.
+    - Small known slips left as is: REVIEW-012 cites `compress_jpeg.py` line 49 for the quality formula (it is line 51) and computed retention from rounded means (98.28–98.93% unrounded; the 98.3–98.9% range is unchanged). Its re-review addendum has no note on who wrote it, and its acceptance came 31 s after resubmission; `reviewer-20261126-p` re-checked the revision independently. The draft says twice that Tang et al. was abstract-only.
   - **COORD-004 (status refresh):** REVIEW-011 (`reviewer-20261126-m`) first asked for wording fixes. They made "ties" into "no detected difference", limited the compression-tolerance statement to the four re-tested heads, and kept the 1-point tolerance listed as not finalized. This time the reviewer recorded its verdict before any edit. Revision 1 was accepted.
     - Known nit, accepted as is: RESEARCH_STATUS.md's "Accepted since" table says lr 1e-3 "was poor for every head"; it means every head tested (the Xavier-initialized ones). The status page and DECISIONS.md have the precise wording.
   - **Small known slips in COORD-004, found by `reviewer-20261126-n` (cross-review of REVIEW-011); none changes a number or decision:**
@@ -379,7 +382,7 @@ python -B ai_harness/artifacts/GRID-001/analyze.py      # likewise GRID-002, ABL
   - The ledger summaries and reports of GRID-002, ABL-001, SEED-001 and MSWEEP-001 state head comparisons at lr 1e-3, now superseded by RETEST-001.
   - `COORD-002/status.md` and the "Previous state, 2026-11-25" section of `DECISIONS.md` predate the lr checks; they are kept as history.
   - Use `COORD-004/status.md`, the RETEST-001 report and Section 3 of this file instead.
-- **Reviewer agents:** fourteen so far, `reviewer-20261125-a` to `-d` and `reviewer-20261126-e` to `-n`. They also cross-reviewed each other's reports. A task is never accepted by the agent that wrote it.
+- **Reviewer agents:** seventeen so far, `reviewer-20261125-a` to `-d` and `reviewer-20261126-e` to `-q`. They also cross-reviewed each other's reports. A task is never accepted by the agent that wrote it.
 
 ## 7. Next steps
 
@@ -389,7 +392,14 @@ The experiments have answered the project's two questions:
 
 **Done:** the shared status files are up to date (COORD-004, 2026-11-26, reviewed and accepted).
 
-**Next step (recommended): the write-up** (task SYNTH-001). Build the proposal and final report from `COORD-004/status.md`. Lead with the storage result; report the sparse-dictionary head as a negative result with the learning-rate lesson (an under-tuned baseline produced a false 1-point win that a pre-registered re-test removed). Keep the open items in its section D visible (tolerance not finalized, image-sampling error, M/k confound). The team decides the report format and who writes which part.
+**Done:** a reviewed draft of the write-up, [`ai_harness/artifacts/WRITE-001/report_draft.md`](ai_harness/artifacts/WRITE-001/report_draft.md) (WRITE-001 and its revision 2, WRITE-002, both accepted after independent review). It follows the course template's section order and adds results, discussion, limitations and conclusion. Every number is checked against the accepted reports.
+
+**Next steps for the team (only you can do these):**
+1. **Decide the accuracy tolerance** (draft section 6.4). The draft uses 1.0 point; its box lists exactly what changes at 0.5.
+2. **Fill in the placeholders:** names and student IDs, timeline and division of work (Appendix A).
+3. **Read and summarize** the four `references.bib` entries the literature audit never inspected (`friedland2020impact`, `kuchnik2021progressive`, `pistono2020training`, `yang2024probing`), or drop them.
+4. **Verify `proposed_references.bib`** (9 standard references entered from memory) before adding them to `references.bib`.
+5. **Move the text into `AI360_Project_Proposal_Template.tex`** and cut the proposal version to the template's 4-page limit.
 
 **Also open (optional, in order of value for the write-up):**
 1. **Storage-vs-accuracy plot** for the report. It needs matplotlib, which is not installed; ask before adding it.

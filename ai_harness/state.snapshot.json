@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-11-27T05:39:47+00:00",
+  "generated_at": "2026-11-27T06:58:36+00:00",
   "project_root": "C:\\Users\\ericw\\OneDrive\\Documents\\AI 360 (DeepLearning\\Final Project",
   "tasks": [
     {
@@ -1931,6 +1931,123 @@
       "created": "2026-11-27T05:27:36+00:00",
       "updated": "2026-11-27T05:39:14+00:00",
       "stale": false
+    },
+    {
+      "id": "WRITE-001",
+      "spec": {
+        "id": "WRITE-001",
+        "title": "Draft the project write-up (methods, results, limitations) from accepted results",
+        "role": "coordinator",
+        "description": "User request (2026-11-26, 'Yes, draft it', answering 'Should I draft the write-up (SYNTH-001) now?'). SYNTH-001 is a planning task blocked on never-claimed REPRO-001/REVIEW-001, so this separate task drafts the write-up instead. Deliverables in ai_harness/artifacts/WRITE-001/: (1) report_draft.md, a Markdown draft following the section order of AI360_Project_Proposal_Template.tex (introduction and problem definition, related work, datasets, hardware, model and methodology, baselines and evaluation) plus Results, Discussion, Limitations and Conclusion for the final report; team-only items (names, student IDs, timeline, division of work, final tolerance) left as clearly marked placeholders; (2) proposed_references.bib with standard references the draft cites that are not in references.bib (to be verified before use). Sources: only accepted tasks (COORD-004/status.md is authoritative; RETEST-001, GRID-001, LR-001, LR-002, MSWEEP-001, SEED-001, ABL-001, LIT-001) and the code in src/. Every number traceable to an accepted artifact; no claim stronger than the accepted reports; related work described only as far as LIT-001 inspected it; the unverified 'Diverse Dictionary Learning' citation not used; the 1.0 pp tolerance presented as a working tolerance needing a team decision. Do not edit the .tex, references.bib, projectIdea.md or src/.",
+        "depends_on": [],
+        "write_paths": [
+          "ai_harness/artifacts/WRITE-001"
+        ],
+        "acceptance": [
+          "Every number in the draft traces to an accepted artifact or to src/ layer shapes",
+          "No claim stronger than COORD-004/status.md and the cited reports; limitations stated",
+          "Related-work statements match LIT-001's inspected evidence; no invented citations",
+          "Team decisions left as marked placeholders; course files unchanged"
+        ]
+      },
+      "state": "done",
+      "owner": "claude-orient-20261122-a",
+      "artifacts": [
+        {
+          "path": "ai_harness/artifacts/WRITE-001/task.json",
+          "sha256": "71c1b94ce609c0147b9ee083ca7b69a366daff147ffa9535a5aa7b18ddf2d59a",
+          "bytes": 1922
+        },
+        {
+          "path": "ai_harness/artifacts/WRITE-001/report_draft.md",
+          "sha256": "f22336333818cfcca52c8ab4633f5b78ff7a67429496e67ebb384643b35b2918",
+          "bytes": 26923
+        },
+        {
+          "path": "ai_harness/artifacts/WRITE-001/proposed_references.bib",
+          "sha256": "7dab6166083745235c22600c8b26dfc4d3f2d68a5ad7d4178887a782de0afab3",
+          "bytes": 3714
+        }
+      ],
+      "summary": "Revision 1 after REVIEW-012 (revise, wording only; no number changed). S-1 frozen-backbone scope and CI qualifier in storage conclusion; S-2 lr provenance corrected (20-epoch dictionary budget is post hoc for all three heads); S-3 M4096 margin per level, no 'larger dictionary'; S-4 qualifiers for sparse-linear/dense; S-5 discussion retitled, 10->20 epochs and 0.95 pp gain gap noted; S-6 related-work 'we add' replaced by methodological choices; S-7 0.5 pp box corrected; S-8 native-resolution 4:2:0 encoding; S-9 98% target not met. O-1..O-20 applied except O-11 (Wei kept DOI-only).",
+      "created": "2026-11-27T06:39:11+00:00",
+      "updated": "2026-11-27T06:50:52+00:00",
+      "stale": false
+    },
+    {
+      "id": "REVIEW-012",
+      "spec": {
+        "id": "REVIEW-012",
+        "title": "Independent review of WRITE-001 (draft write-up)",
+        "role": "reviewer",
+        "description": "Review ai_harness/artifacts/WRITE-001/report_draft.md and proposed_references.bib. Check every number against its source (COORD-004/status.md; RETEST-001 analysis.md/report.md; GRID-001 analysis.md bytes tables and report; LR-001, LR-002, SEED-001, MSWEEP-001, ABL-001, REVIEW-004 reports; src/ for architecture, JPEG quality formula, loss and parameter counts from layer shapes); check that no claim is stronger than the accepted reports (headline storage and head-comparison wording, the discussion's account of the lr artifact, the limitations); that related-work statements match what LIT-001 actually inspected and that the four uninspected references.bib entries are not characterized; that no citation is invented or misattributed (proposed_references.bib entries are flagged verify-before-use; check whether any entry is wrong where you can tell from repository evidence, and note which you cannot verify); that team decisions (tolerance, names, timeline, division of work) are left as placeholders and the tolerance section's 0.5 pp consequences are correct; and that the course files (.tex, references.bib, projectIdea.md, src/) are unchanged. Read-only outside this folder; no training. Record the verdict on WRITE-001 BEFORE returning.",
+        "depends_on": [],
+        "write_paths": [
+          "ai_harness/artifacts/REVIEW-012"
+        ],
+        "acceptance": [
+          "Verdict on WRITE-001 recorded with a note citing the checks",
+          "Every number in the draft checked against a source",
+          "Overstatement, related-work accuracy and citation integrity checked"
+        ]
+      },
+      "state": "done",
+      "owner": "reviewer-20261126-o",
+      "artifacts": [
+        {
+          "path": "ai_harness/artifacts/REVIEW-012/task.json",
+          "sha256": "f4054a9bd97189df92230a873214633148e68026bd6976284dc64b8422da394d",
+          "bytes": 1645
+        },
+        {
+          "path": "ai_harness/artifacts/REVIEW-012/report.md",
+          "sha256": "27e3cd62f8ee2ad52d585d954fdeee384843c32496608c34666d0886dfad4615",
+          "bytes": 24714
+        }
+      ],
+      "summary": "Independent review of WRITE-001. Round 1: revise (S-1..S-9 wording fixes: storage headline CI/scope qualifiers, lr provenance, M4096 per-level margin and confounding, head-comparison qualifiers, lr-artifact framing incl. 10->20 epochs, related-work 'we add' vs LIT-001, 0.5 pp box CIs, native-resolution encoding, 98% target not met; O-1..O-20). Every number checked against RETEST-001/GRID-001/SEED-001/LR-001/LR-002/COORD-004 and src/ (param counts 0.51/3.10/6.20 M, quality formula, loss) and found correct. Round 2 on revision 1: accept; all S fixed, no new overstatement, course files unchanged; two non-blocking notes (makhzani not inspected; Wei venue inferred from DOI). Bib entries other than tang/recht title-venue unverifiable from repo.",
+      "created": "2026-11-27T06:41:22+00:00",
+      "updated": "2026-11-27T06:56:17+00:00",
+      "stale": false
+    },
+    {
+      "id": "WRITE-002",
+      "spec": {
+        "id": "WRITE-002",
+        "title": "Wording fixes to the accepted write-up draft found in the cross-review of REVIEW-012",
+        "role": "coordinator",
+        "description": "Follow-up to WRITE-001 (accepted). The cross-review of REVIEW-012 by reviewer-20261126-p (ledger review event on REVIEW-012) found a factual error that REVIEW-012's suggested S-6 text introduced into the accepted draft, plus small imprecisions. Edit ai_harness/artifacts/WRITE-001/report_draft.md (this task's submission supersedes WRITE-001's copy, per the harness supersession rule) to: (1) stop calling ImageNetV2 'never-compressed'/'uncompressed' (its files are JPEGs, Datasets/DATASETS.md lines 11 and 63); (2) replace 'a few groups span the train/validation split for each seed' with the GRID-001 counts (3, 3, 7 for seeds 42-44; not counted for 45-51); (3) say Makhzani and Frey was not inspected and Tang et al. abstract only; (4) mark the Wei et al. venue as inferred from the DOI; (5) Maudgalya evaluates on original test images 'in its main experiment'; (6) image-sampling estimate 'per model pair'; (7) 'uncompressed accuracy' -> accuracy when trained on the original files. Wording only; no number changes; WRITE-001's other artifacts unchanged. Record the change in the draft's revision log.",
+        "depends_on": [
+          "WRITE-001"
+        ],
+        "write_paths": [
+          "ai_harness/artifacts/WRITE-001/report_draft.md",
+          "ai_harness/artifacts/WRITE-002"
+        ],
+        "acceptance": [
+          "All seven items applied exactly; no other content change",
+          "No number changed",
+          "harness.py check passes with WRITE-001's report_draft.md superseded"
+        ]
+      },
+      "state": "done",
+      "owner": "claude-orient-20261122-a",
+      "artifacts": [
+        {
+          "path": "ai_harness/artifacts/WRITE-002/task.json",
+          "sha256": "7f4a4e97d76a7318cea1b671f31443d4acf6b77d2434778a0d59528029b16584",
+          "bytes": 1565
+        },
+        {
+          "path": "ai_harness/artifacts/WRITE-001/report_draft.md",
+          "sha256": "2e76700c02c1945e35dce68efb9d853ce8c49f8a9b42c03e9a030cf8f02a4cfb",
+          "bytes": 27993
+        }
+      ],
+      "summary": "Draft revision 2 (wording only): ImageNetV2 no longer called never-compressed/uncompressed (files are JPEGs used as distributed); duplicate-group counts 3/3/7 for seeds 42-44; Makhzani not inspected, Tang abstract only; Wei venue inferred from DOI; Maudgalya 'in its main experiment'; image-sampling estimate per model pair; 'uncompressed accuracy' -> accuracy when trained on original files. Revision log updated. Supersedes WRITE-001's report_draft.md.",
+      "created": "2026-11-27T06:56:58+00:00",
+      "updated": "2026-11-27T06:58:13+00:00",
+      "stale": false
     }
   ],
   "events": [
@@ -3245,6 +3362,118 @@
       "agent": "reviewer-20261126-n",
       "detail": "Accept. Hashes 6fc6fbea (report) match ledger; revision-1 hashes 6f2691a7/404ed484/0cf02667 match COORD-004 artifacts on disk (round-1 hashes 482a8079/9861c18b/98501416 not stored in ledger; unverifiable). Spot checks all correct: RETEST-001 means/A1-A4/B1-B8, A2 lo +0.0016, gains +1.01/1.18/1.33/1.95, retention 98.30/98.42/98.62/98.94%, L080 abs 48.42-49.11, 86:1/94.0% (GRID-001 sec4 line 103), 95/100 costs 2.7-5.0/7.7-18.7 (COORD-002), instability 4/6,6/6,6/6 (LR-001), +2.14, approval quotes, REASON-002 tolerance '1.0 pp, or 2.0 pp'; events 115/133/142/143/150-154 and times 01:23:51->01:24:37Z (46 s), analyze.py 04:55:12Z < REVIEW-010 submit 04:56:39Z (event 154 b), report.md 04:57:44Z < recover 04:57:52Z. S-1..S-4 correct and fair; O-1..O-8 accurate. Addendum: every S/O fix present in rev 1; nit 'every head' in RESEARCH_STATUS LR row confirmed. Order: revise (160, 05:32:41Z) could only be recorded because verify_artifacts matched event-157 hashes, so no COORD-004 edit preceded it; final writes 05:34:41-05:35:00Z, resubmit 05:35:13Z. Minor, non-blocking: (1) addendum's 'mtime 05:34:00Z' is no longer observable (report rewritten 05:35:52Z); (2) its own accept came 23 s after resubmission, not disclosed though COORD-004 E3 flags a 46 s acceptance (hash check enforced by harness). Missed in COORD-004 (minor, wording): (a) DECISIONS 'Still open' cites status.md D, but SYNTH-001, the matplotlib plot and end-to-end fine-tuning are not in D (source: WORK_SUMMARY next steps); (b) status.md B3 heading 'supersedes all lr-1e-3 head comparisons' conflicts with C (GRID-001 inherited-fc ranking and ABL-001 CE-only 'not re-tested') - read 'all lr-1e-3 comparisons among Xavier-initialized heads'; (c) DECISIONS 'Settled' rests on the unfinalized 1.0 pp tolerance (M4096-linear +0.65 robust); (d) D omits the dictionary heads' zero weight decay from 'not re-tuned' (LR-002 caveat 3). None changes a number or a decision.",
       "at": "2026-11-27T05:39:14+00:00"
+    },
+    {
+      "seq": 165,
+      "task": "WRITE-001",
+      "action": "add",
+      "agent": "coordinator",
+      "detail": "Added task specification",
+      "at": "2026-11-27T06:39:11+00:00"
+    },
+    {
+      "seq": 166,
+      "task": "WRITE-001",
+      "action": "claim",
+      "agent": "claude-orient-20261122-a",
+      "detail": "coordinator",
+      "at": "2026-11-27T06:39:11+00:00"
+    },
+    {
+      "seq": 167,
+      "task": "WRITE-001",
+      "action": "submit",
+      "agent": "claude-orient-20261122-a",
+      "detail": "Draft write-up from accepted results (COORD-004/status.md authoritative): proposal-template sections (intro, related work limited to LIT-001-inspected evidence, datasets, hardware, model/method, baselines/evaluation) plus results (storage table GRID-001; tuned-rate costs and head comparisons RETEST-001), discussion of the lr/baseline-tuning artifact, limitations, conclusion. Tolerance (1.0 pp working) flagged as a team decision with 0.5 pp consequences; names/IDs/timeline/division left as placeholders. proposed_references.bib: 9 standard references not in references.bib, marked verify-before-use. Course files untouched.",
+      "at": "2026-11-27T06:41:13+00:00"
+    },
+    {
+      "seq": 168,
+      "task": "REVIEW-012",
+      "action": "add",
+      "agent": "coordinator",
+      "detail": "Added task specification",
+      "at": "2026-11-27T06:41:22+00:00"
+    },
+    {
+      "seq": 169,
+      "task": "REVIEW-012",
+      "action": "claim",
+      "agent": "reviewer-20261126-o",
+      "detail": "reviewer",
+      "at": "2026-11-27T06:41:36+00:00"
+    },
+    {
+      "seq": 170,
+      "task": "WRITE-001",
+      "action": "review-revise",
+      "agent": "reviewer-20261126-o",
+      "detail": "REVIEW-012. Checked every number vs COORD-004, RETEST-001 analysis.md/json, GRID-001 bytes tables, SEED-001, LR-001/002, ABL-001, REVIEW-004, WORK_SUMMARY; src/ quality formula, loss, param counts (0.51/3.10/6.20 M) all correct; course files unchanged (git diff empty, 8/8 src hashes match GRID-001); placeholders present; Diverse Dictionary Learning not cited. Wording fixes required: S-1 conclusion/intro storage headline lacks CI (sparse to 1.17), frozen-backbone and metadata qualifiers; S-2 6.2 lr provenance wrong (all dictionary heads depart from LR-002 10 ep, M2048 also lr; 20 ep post hoc); S-3 M4096 'by about 0.6 pp at every level' false at L090 (+0.29 vs linear), conclusion reintroduces 'larger dictionary'; S-4 head comparisons need no-equivalence qualifier, dense '<0.1 pp'; S-5 discussion omits 10->20 epoch change and sparse lr change, 'false result'/'baseline-tuning artifact' too strong; S-6 'We add' list contradicts LIT-001 (Nayak measures disk bytes; Lee/Maudgalya test on originals); S-7 0.5 pp box: A3/A4 CIs also dip below 0.5; S-8 'JPEG at 224-pixel crops' wrong (native resolution); S-9 98% target reinterpreted as met. Plus O-1..O-20.",
+      "at": "2026-11-27T06:46:44+00:00"
+    },
+    {
+      "seq": 171,
+      "task": "WRITE-001",
+      "action": "submit",
+      "agent": "claude-orient-20261122-a",
+      "detail": "Revision 1 after REVIEW-012 (revise, wording only; no number changed). S-1 frozen-backbone scope and CI qualifier in storage conclusion; S-2 lr provenance corrected (20-epoch dictionary budget is post hoc for all three heads); S-3 M4096 margin per level, no 'larger dictionary'; S-4 qualifiers for sparse-linear/dense; S-5 discussion retitled, 10->20 epochs and 0.95 pp gain gap noted; S-6 related-work 'we add' replaced by methodological choices; S-7 0.5 pp box corrected; S-8 native-resolution 4:2:0 encoding; S-9 98% target not met. O-1..O-20 applied except O-11 (Wei kept DOI-only).",
+      "at": "2026-11-27T06:50:21+00:00"
+    },
+    {
+      "seq": 172,
+      "task": "WRITE-001",
+      "action": "review-accept",
+      "agent": "reviewer-20261126-o",
+      "detail": "REVIEW-012 re-review of revision 1 (report_draft.md sha256 f2233633..., bib unchanged 7dab6166...). S-1..S-9 all fixed as suggested and checked against sources: 6.2 lr provenance vs RETEST-001 caveat 2/LR-002; 7.3 per-level M4096 margins (+0.96/+0.29) and L090 extra costs (+0.68/+0.67, dense +0.53) vs RETEST analysis; 6.4 0.5 pp box consistent with analysis.json CIs; 3 matches LIT-001; 98% target vs projectIdea.md s6; native-resolution encoding vs build_jpeg_dataset.py. No number changed; no new overstatement. Course files unchanged. Two non-blocking notes: 3 'not inspected beyond an abstract' fits Tang but makhzani was not inspected at all; Wei venue 'IEEE GRSL' inferred from DOI, not in LIT-001.",
+      "at": "2026-11-27T06:50:52+00:00"
+    },
+    {
+      "seq": 173,
+      "task": "REVIEW-012",
+      "action": "submit",
+      "agent": "reviewer-20261126-o",
+      "detail": "Independent review of WRITE-001. Round 1: revise (S-1..S-9 wording fixes: storage headline CI/scope qualifiers, lr provenance, M4096 per-level margin and confounding, head-comparison qualifiers, lr-artifact framing incl. 10->20 epochs, related-work 'we add' vs LIT-001, 0.5 pp box CIs, native-resolution encoding, 98% target not met; O-1..O-20). Every number checked against RETEST-001/GRID-001/SEED-001/LR-001/LR-002/COORD-004 and src/ (param counts 0.51/3.10/6.20 M, quality formula, loss) and found correct. Round 2 on revision 1: accept; all S fixed, no new overstatement, course files unchanged; two non-blocking notes (makhzani not inspected; Wei venue inferred from DOI). Bib entries other than tang/recht title-venue unverifiable from repo.",
+      "at": "2026-11-27T06:51:11+00:00"
+    },
+    {
+      "seq": 174,
+      "task": "REVIEW-012",
+      "action": "review-accept",
+      "agent": "reviewer-20261126-p",
+      "detail": "Cross-review of REVIEW-012 (report.md 27e3cd62, task.json f4054a9b; WRITE-001 draft f2233633, bib 7dab6166 match ledger). Checked vs RETEST-001 analysis.md/json (recomputed retention, cost diffs incl. dense-linear L090 +0.53 [0.07,0.99] 7/7, A/B CIs for the 0.5 pp box), GRID-001 bytes table, SEED-001, LR-001/002, LIT-001, COORD-004, DATASETS.md, src/ (params 513,000/3,100,136/6,198,760; decoder 1.05/2.10 M; topk-then-ReLU; centre; stratified 45/5 split; quality formula), git diff (course files unchanged). S-1..S-9 and O-1..O-20 correct and fair. Ledger order OK: review-revise (06:46:44) passed harness hash verification, so WRITE-001 was unedited when revise was recorded; resubmit 06:50:21, accept 06:50:52 (31 s). Slips in REVIEW-012: (1) quality formula is compress_jpeg.py line 51, not 49; (2) retention from unrounded means is 98.93/98.60/98.28/98.41, not 98.94/98.62/98.30/98.42 (range 98.3-98.9 unchanged); (3) S-6 suggested text introduced an error now in the accepted draft s3: 'a separately collected, never-compressed test set (ImageNetV2)' - ImageNetV2 files are JPEGs (DATASETS.md l.11, 63); correct to 'a separately collected test set used as distributed (original ImageNetV2 JPEGs, never re-compressed by us)'; likewise s2 'normal, uncompressed test images' -> 'the original, not re-compressed test images'; (4) O-3 wording 'a few groups span the train/validation split for each seed' generalizes GRID-001's count (3, 3, 7 groups for seeds 42-44 only; seeds 45-51 not counted); draft s4 should say so; (5) original-draft hash 906a05c7/21,545 B is unverifiable (ledger keeps only current artifacts; WRITE-001 untracked); (6) addendum written 06:51:06 has no transcription note although round 1 needed one - authorship undisclosed. Non-blocking notes (a) makhzani not inspected and (b) Wei venue still unapplied in the accepted draft. Recommend a small WRITE-001 wording follow-up for (3), (4), (a) before the draft is used.",
+      "at": "2026-11-27T06:56:17+00:00"
+    },
+    {
+      "seq": 175,
+      "task": "WRITE-002",
+      "action": "add",
+      "agent": "coordinator",
+      "detail": "Added task specification",
+      "at": "2026-11-27T06:56:58+00:00"
+    },
+    {
+      "seq": 176,
+      "task": "WRITE-002",
+      "action": "claim",
+      "agent": "claude-orient-20261122-a",
+      "detail": "coordinator",
+      "at": "2026-11-27T06:56:58+00:00"
+    },
+    {
+      "seq": 177,
+      "task": "WRITE-002",
+      "action": "submit",
+      "agent": "claude-orient-20261122-a",
+      "detail": "Draft revision 2 (wording only): ImageNetV2 no longer called never-compressed/uncompressed (files are JPEGs used as distributed); duplicate-group counts 3/3/7 for seeds 42-44; Makhzani not inspected, Tang abstract only; Wei venue inferred from DOI; Maudgalya 'in its main experiment'; image-sampling estimate per model pair; 'uncompressed accuracy' -> accuracy when trained on original files. Revision log updated. Supersedes WRITE-001's report_draft.md.",
+      "at": "2026-11-27T06:57:27+00:00"
+    },
+    {
+      "seq": 178,
+      "task": "WRITE-002",
+      "action": "review-accept",
+      "agent": "reviewer-20261126-q",
+      "detail": "Diffed %TEMP%/draft_before.md (sha f2233633, equals WRITE-001's accepted ledger hash) against current draft (2e76700c, equals WRITE-002 ledger). Diff touches only header (l.3), l.24, l.44-45, l.49, l.71, l.188, l.224, l.228 and new revision-log l.275-281: exactly items 1-7, nothing else. No pre-existing number changed; only additions are 3/3/7 and seeds 42-44/45-51, matching GRID-001 report l.147 and RETEST-001 seeds 45-51. Sources: DATASETS.md l.11 (.jpeg files) and l.63 (already JPEGs) support 'used as distributed, never re-compressed by us'; LIT-001 l.17 'evaluates original test images in the main experiment' (Maudgalya), l.19 Tang arXiv abstract only, l.18 Wei DOI + third-party abstract only, Makhzani absent from LIT-001 (so 'not inspected' correct); REVIEW-010 S-4 'for a single pair of models' supports 'per model pair'. No remaining text calls ImageNetV2 uncompressed/never-compressed (only quoted in revision log l.276). proposed_references.bib (7dab6166) and WRITE-001 task.json unchanged. harness check ok, lists WRITE-001 report_draft.md superseded. Non-blocking nit: l.44 now says 'Tang et al. abstract only' in the bullet lead and again '(abstract only inspected)' inline; redundant, optional to drop one.",
+      "at": "2026-11-27T06:58:13+00:00"
     }
   ]
 }
