@@ -1,8 +1,35 @@
 # Research handoff and next actions
 
-Updated: 2026-11-25 (COORD-003). This is the coordinator's readable handoff; use `py ai_harness/harness.py status` for live task states. Reviewed research memos are not experimental results or finalized user decisions.
+Updated: 2026-11-26 (COORD-004). This is the coordinator's readable handoff; use `py ai_harness/harness.py status` for live task states. Reviewed research memos are not experimental results or finalized user decisions.
 
-## Update 2026-11-25: experiments run and reviewed
+## Update 2026-11-26: head question settled; write-up is next
+
+**Start here:**
+- [WORK_SUMMARY.md](../WORK_SUMMARY.md) is a plain-language account for teammates.
+- [COORD-004/status.md](artifacts/COORD-004/status.md) is now the authoritative list of reviewer-accepted results and corrections. It replaces COORD-002/status.md, which is kept as history.
+- [DECISIONS.md](DECISIONS.md) "Current state, 2026-11-26" has the settled choices.
+
+**Accepted since 2026-11-25** (each reviewed by a different agent; the reviews were cross-reviewed):
+
+| Task | What | Review |
+| --- | --- | --- |
+| SEED-001 | 7 new seeds, sparse vs dense vs linear at lr 1e-3 (pre-registered) | REVIEW-006 |
+| MSWEEP-001 | Clean dictionary-size sweep, k = M/4, lr 1e-3 (pre-registered) | REVIEW-007 |
+| LR-001, LR-002 | Validation-only learning-rate checks; lr 1e-3 was poor for every head, linear under-tuned by about 2 pp | REVIEW-008, REVIEW-009 |
+| RETEST-001 | Confirmatory ImageNetV2 re-test at tuned rates, 20 epochs, seeds 45–51 (pre-registered) | REVIEW-010 |
+| COORD-002, COORD-003, HARNESS-001, ENG-004, REVIEW-002 to REVIEW-005 | Results summary, shared-file update, harness supersession fix, pilot revision, first review rounds | see ledger |
+
+**Headline (measured; see COORD-004/status.md for the qualifiers):**
+- **Setting:** a head on frozen pretrained ResNet-18 features, tested on original ImageNetV2.
+- **Cost of compressed training data (tuned rates):** level 80 (50.3:1 against raw pixels, 89.8% smaller than the stored files) costs a mean of 0.53–0.85 pp of top-1 (CIs up to 1.17 pp for the sparse heads). Level 90 costs 1.5–2.2 pp.
+- **Dictionary heads vs linear:** at tuned rates sparse M2048 shows no detected difference from linear (+0.02 pp, CI [−0.25, +0.29]) and a small difference from dense (+0.09 pp, below 1 pp, not robust to multiplicity). The 4096-atom head is best by +0.6 pp, below the 1 pp tolerance, with M, k and parameters confounded. The 2026-11-25 headline below ("beat a linear head only with the feature-MSE loss") was lr-conditional and is superseded.
+- **Compression tolerance:** no head reduces the accuracy drop (exploratory).
+
+**Next:** the write-up (SYNTH-001), led by the storage result, with the sparse-dictionary head reported as a negative result. Optional follow-ups are listed in COORD-004/status.md section D.
+
+**Not yet started:** REPRO-001, REVIEW-001, SYNTH-001, LIT-002.
+
+## Update 2026-11-25: experiments run and reviewed (historical; superseded by the 2026-11-26 update)
 
 **Start here:**
 - [WORK_SUMMARY.md](../WORK_SUMMARY.md) is a plain-language account for teammates.

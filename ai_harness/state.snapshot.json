@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-11-27T05:00:33+00:00",
+  "generated_at": "2026-11-27T05:39:47+00:00",
   "project_root": "C:\\Users\\ericw\\OneDrive\\Documents\\AI 360 (DeepLearning\\Final Project",
   "tasks": [
     {
@@ -1846,6 +1846,91 @@
       "created": "2026-11-27T04:45:43+00:00",
       "updated": "2026-11-27T05:00:01+00:00",
       "stale": false
+    },
+    {
+      "id": "COORD-004",
+      "spec": {
+        "id": "COORD-004",
+        "title": "Refresh shared status after LR-001, LR-002 and RETEST-001 (successor to COORD-002/status.md; DECISIONS.md and RESEARCH_STATUS.md current state)",
+        "role": "coordinator",
+        "description": "User request (2026-11-26, 'Yes, refresh status'). COORD-002/status.md and the 2026-11-25 'Current state' sections of DECISIONS.md and RESEARCH_STATUS.md (COORD-003) predate SEED-001, MSWEEP-001, LR-001, LR-002 and RETEST-001, and still state lr-1e-3 head comparisons (sparse > linear ~1 pp; sparsity +0.4 pp) that RETEST-001 superseded. Deliverables: (1) ai_harness/artifacts/COORD-004/status.md, the new authoritative list of reviewer-accepted results, carrying forward COORD-002's errata A-C, adding errata for slips found in REVIEW-006..REVIEW-010 cross-reviews, and marking which earlier results are lr-1e-3-conditional or superseded; COORD-002/status.md stays unchanged as history (it is hash-locked). (2) DECISIONS.md: a dated 'Current state, 2026-11-26' section at the top, the 2026-11-25 section kept and marked historical, a change-log entry. (3) RESEARCH_STATUS.md: a dated 2026-11-26 update at the top pointing to the new status page; earlier updates kept as history. No experiments, no edits to src/, reports of done tasks, or the proposal/bibliography. Every status cites an accepted task, a user decision or a ledger event; nothing is stated more strongly than the accepted reports.",
+        "depends_on": [],
+        "write_paths": [
+          "ai_harness/DECISIONS.md",
+          "ai_harness/RESEARCH_STATUS.md",
+          "ai_harness/artifacts/COORD-004"
+        ],
+        "acceptance": [
+          "Every new status cites an accepted task, user decision or ledger event",
+          "No result stated more strongly than the accepted reports (RETEST-001 for head comparisons)",
+          "Earlier content preserved as history; superseded items marked",
+          "COORD-002/status.md and done reports unchanged; harness.py check passes after submission"
+        ]
+      },
+      "state": "done",
+      "owner": "claude-orient-20261122-a",
+      "artifacts": [
+        {
+          "path": "ai_harness/artifacts/COORD-004/task.json",
+          "sha256": "d9e1562b1d5445fc1e3bd016c0da4f30681d1356744bc28880bc59a7753e87ec",
+          "bytes": 1887
+        },
+        {
+          "path": "ai_harness/artifacts/COORD-004/status.md",
+          "sha256": "6f2691a722e0b82fa97ebf1a62d47436eb5e2c44595a54294681b8d348dfa995",
+          "bytes": 14446
+        },
+        {
+          "path": "ai_harness/DECISIONS.md",
+          "sha256": "404ed4848f6fa56127906c7f7553c71512b09f01cde9a40c75379b9ce0593153",
+          "bytes": 15948
+        },
+        {
+          "path": "ai_harness/RESEARCH_STATUS.md",
+          "sha256": "0cf02667746df22ffb666bc0ffbf4548f28b8e449808e9e2fe1188aef01871b8",
+          "bytes": 10427
+        }
+      ],
+      "summary": "Revision 1 after REVIEW-011 (revise, wording only; no number changed). S-1 RETEST-001 slip timing split (analyze.py before REVIEW-010 submit, found by reviewer-l; report.md before verdict); S-2 'ties' -> 'no detected difference'; S-3 compression-tolerance row limited to the four re-tested heads, exploratory; S-4 1.0 pp tolerance marked working/not finalized and kept in Still open. O-1..O-8 applied (level-80 absolute accuracy, sparse M2048 post-hoc lr, sparsity scope, Xavier-only lr claim, chosen vs tuned, E2 attributions, reviewer-j recheck, housekeeping). New authoritative page COORD-004/status.md; DECISIONS.md current state 2026-11-26; RESEARCH_STATUS.md 2026-11-26 update.",
+      "created": "2026-11-27T05:26:01+00:00",
+      "updated": "2026-11-27T05:35:36+00:00",
+      "stale": false
+    },
+    {
+      "id": "REVIEW-011",
+      "spec": {
+        "id": "REVIEW-011",
+        "title": "Independent review of COORD-004 (shared status refresh after LR-001, LR-002 and RETEST-001)",
+        "role": "reviewer",
+        "description": "Review COORD-004: ai_harness/artifacts/COORD-004/status.md (new authoritative results page), the new 'Current state, 2026-11-26' section and change-log entry in ai_harness/DECISIONS.md, and the 2026-11-26 update in ai_harness/RESEARCH_STATUS.md (compare with git HEAD for the diff). Check every number and status claim against the accepted reports and analyses (GRID-001, GRID-002, ABL-001, SEED-001, MSWEEP-001, LR-001, LR-002, RETEST-001, REVIEW-005..REVIEW-010, COORD-002/status.md); that nothing is stated more strongly than the accepted reports (RETEST-001 for head comparisons and costs); that the 'holds / superseded / not re-tested' table is fair to each earlier task; that errata from COORD-002 are carried forward faithfully and new errata are accurate; that earlier content is preserved as history; and that COORD-002/status.md and done reports are unchanged. Read-only outside this folder; no training. Record the verdict on COORD-004 BEFORE the coordinator edits anything.",
+        "depends_on": [],
+        "write_paths": [
+          "ai_harness/artifacts/REVIEW-011"
+        ],
+        "acceptance": [
+          "Verdict on COORD-004 recorded with a note citing the checks",
+          "Every number in status.md and the new DECISIONS/RESEARCH_STATUS sections checked against a source",
+          "Overstatement and history-preservation checked"
+        ]
+      },
+      "state": "done",
+      "owner": "reviewer-20261126-m",
+      "artifacts": [
+        {
+          "path": "ai_harness/artifacts/REVIEW-011/task.json",
+          "sha256": "ad78c934e0a879d5e90e36361acd987ae9a30874af8acd91fa95a4c3af63ff71",
+          "bytes": 1452
+        },
+        {
+          "path": "ai_harness/artifacts/REVIEW-011/report.md",
+          "sha256": "6fc6fbeab47bb57ff5010703b7c8575bfa7563587ffacf8b7a5acf00ae721efb",
+          "bytes": 14665
+        }
+      ],
+      "summary": "Independent review of COORD-004 (status refresh after LR-001/LR-002/RETEST-001). Round 1 revise, wording only: every number checked against RETEST-001, GRID-001, COORD-002 and ledger events; S-1 RETEST-001 slip timing/credit in E3, S-2 'ties' stronger than RETEST-001 wording, S-3 compression-tolerance row over-extended to loss terms and unlabeled exploratory, S-4 final accuracy tolerance silently dropped from Still open; O-1..O-8 minor. Revision 1 resolves all S and O items with no number changed; accepted. History preserved, COORD-002/status.md and done reports unchanged, check ok. One non-blocking nit left (RESEARCH_STATUS 'every head').",
+      "created": "2026-11-27T05:27:36+00:00",
+      "updated": "2026-11-27T05:39:14+00:00",
+      "stale": false
     }
   ],
   "events": [
@@ -3080,6 +3165,86 @@
       "agent": "reviewer-20261126-l",
       "detail": "Accept. Independent stdlib recompute (scratchpad review_l.py, exact t, incomplete-beta p) reproduces REVIEW-010: all 12 family means/sd/CIs/sign counts/p/Holm (A2 lo +0.0016; B1 hi +1.170, B2 hi +1.081, B3 +0.959, B4 +0.894), per-head means, A2 per-seed values, gains over lr 1e-3 (+1.005/+1.180/+1.331/+1.954), old pooled gaps (A1 +0.966, A2 +0.412, A3 +0.456, A4 +1.422), L090 cost diffs new (sM2048-lin +0.680 [+0.238,+1.122], sM4096-lin +0.670 [+0.272,+1.068], dense-lin +0.530 [+0.068,+0.992]) and old (+0.530 [+0.152,+0.908], +0.226 [-0.421,+0.872], +0.370 [+0.079,+0.661]), top-5 and extra-drop 2.41-6.71; 140 rows, no duplicate (run_dir, eval_level); 84 done.json, best_epoch re-derived 84/84, digests = SEED-001, medians 14/14/11/15, >=19 counts 2/3/2/3, instability 0. review010.py also runs (exit 0). S-1..S-4 correct and fair: S-3 matches committed WORK_SUMMARY ('no head ... make accuracy drop less'; 'advantage over linear narrows toward level 90') and SEED-001 item 3; S-4's 0.2-0.3 pp = sqrt(0.05..0.10)/sqrt(10000), explicitly labeled inference. Minor slips, no action needed: (a) the old-run figures +0.53 [0.15,0.91] and +0.37 [0.08,0.66] were already in SEED-001 report.md lines 61-62 (REVIEW-006), not only new recomputation; this strengthens S-3. (b) Process: RETEST-001 analyze.py was edited 21:55:12 local, before REVIEW-010 was even submitted (04:56:39Z), not merely before the verdict was recorded; recover note and revision log otherwise disclose the slip adequately. Outside scope: current WORK_SUMMARY line 26 'their small edge shrinks to nothing' overstates for sM4096 (still +0.29 vs linear at L090).",
       "at": "2026-11-27T05:00:01+00:00"
+    },
+    {
+      "seq": 155,
+      "task": "COORD-004",
+      "action": "add",
+      "agent": "coordinator",
+      "detail": "Added task specification",
+      "at": "2026-11-27T05:26:01+00:00"
+    },
+    {
+      "seq": 156,
+      "task": "COORD-004",
+      "action": "claim",
+      "agent": "claude-orient-20261122-a",
+      "detail": "coordinator",
+      "at": "2026-11-27T05:26:01+00:00"
+    },
+    {
+      "seq": 157,
+      "task": "COORD-004",
+      "action": "submit",
+      "agent": "claude-orient-20261122-a",
+      "detail": "Shared status refreshed after LR-001, LR-002 and RETEST-001. New authoritative page COORD-004/status.md (replaces COORD-002/status.md, kept as history): storage result, tuned-rate compression costs and head comparisons from RETEST-001, status table for every lr-1e-3 result (holds / superseded / not re-tested), unresolved list, errata carried forward plus new slips from REVIEW-006..010 cross-reviews. DECISIONS.md: new 'Current state, 2026-11-26' section, 2026-11-25 kept as 'Previous state'. RESEARCH_STATUS.md: 2026-11-26 update on top.",
+      "at": "2026-11-27T05:27:25+00:00"
+    },
+    {
+      "seq": 158,
+      "task": "REVIEW-011",
+      "action": "add",
+      "agent": "coordinator",
+      "detail": "Added task specification",
+      "at": "2026-11-27T05:27:36+00:00"
+    },
+    {
+      "seq": 159,
+      "task": "REVIEW-011",
+      "action": "claim",
+      "agent": "reviewer-20261126-m",
+      "detail": "reviewer",
+      "at": "2026-11-27T05:27:54+00:00"
+    },
+    {
+      "seq": 160,
+      "task": "COORD-004",
+      "action": "review-revise",
+      "agent": "reviewer-20261126-m",
+      "detail": "REVIEW-011: revise, wording only, no blocking. Verified vs RETEST-001 analysis.md/report, LR-001/002, SEED-001, MSWEEP-001, GRID-001 sec4, COORD-002/status.md and ledger events 115-157: every B1-B4 number (costs/CIs, A1-A4, means, gains +1.01/1.18/1.33/1.95, 98.3-98.9% recomputed, 86:1/94.0%), errata A-C carry-forward, E2 rows, 46 s acceptance (01:23:51->01:24:37Z), events 150-153; history kept; check ok; COORD-002/status.md and done reports untouched. S-1 E3: only analyze.py is shown edited before REVIEW-010 submission (04:55:12Z < 04:56:39Z); report.md last written 04:57:44Z, after it; credit reviewer-20261126-l. S-2 'ties' (RESEARCH_STATUS headline; status.md C ABL-001 row) is stronger than RETEST-001 (A1 not an equivalence test; A2 'small, below 1 pp, not robust to multiplicity'). S-3 status.md C last row 'Still holds at tuned rates' drops RETEST-001's '(exploratory)' and loss terms were not re-tested; same label for RESEARCH_STATUS 'Compression tolerance'. S-4 new DECISIONS 'Still open' silently drops 'final accuracy tolerance' (open in 2026-11-25 list; AGENTS.md: not finalized); label 1.0 pp as working tolerance in status.md A. O-1..O-8 optional in report.",
+      "at": "2026-11-27T05:32:41+00:00"
+    },
+    {
+      "seq": 161,
+      "task": "COORD-004",
+      "action": "submit",
+      "agent": "claude-orient-20261122-a",
+      "detail": "Revision 1 after REVIEW-011 (revise, wording only; no number changed). S-1 RETEST-001 slip timing split (analyze.py before REVIEW-010 submit, found by reviewer-l; report.md before verdict); S-2 'ties' -> 'no detected difference'; S-3 compression-tolerance row limited to the four re-tested heads, exploratory; S-4 1.0 pp tolerance marked working/not finalized and kept in Still open. O-1..O-8 applied (level-80 absolute accuracy, sparse M2048 post-hoc lr, sparsity scope, Xavier-only lr claim, chosen vs tuned, E2 attributions, reviewer-j recheck, housekeeping). New authoritative page COORD-004/status.md; DECISIONS.md current state 2026-11-26; RESEARCH_STATUS.md 2026-11-26 update.",
+      "at": "2026-11-27T05:35:13+00:00"
+    },
+    {
+      "seq": 162,
+      "task": "COORD-004",
+      "action": "review-accept",
+      "agent": "reviewer-20261126-m",
+      "detail": "REVIEW-011 re-review of revision 1: accept. Diffed vs recorded hashes (status.md 482a8079->6f2691a7, DECISIONS 9861c18b->404ed484, RESEARCH_STATUS 98501416->0cf02667); no number changed. S-1 E3 now splits analyze.py 04:55:12Z (before REVIEW-010 submit 04:56:39Z, credited reviewer-l) from report.md 04:57:44Z (before verdict). S-2 'ties' replaced by 'no detected difference'/A2 wording in status C ABL row and RESEARCH_STATUS. S-3 C last row limited to four re-tested heads, exploratory, loss terms not re-tested; RESEARCH_STATUS '(exploratory)'. S-4 tolerance 'working, not finalized' in A and D; DECISIONS Still open restored. O-1..O-8 applied (48.4-49.1% at L080, M2048 post-hoc lr, k=512/M2048 scope, Xavier-only lr, chosen vs tuned, E2 finders, reviewer-j recheck, experiment-plan row, COORD-002 row); revision log and change-log entry added; history intact; check ok. Nit, non-blocking: RESEARCH_STATUS LR-001/LR-002 row still says 'every head' (means every head tested).",
+      "at": "2026-11-27T05:35:36+00:00"
+    },
+    {
+      "seq": 163,
+      "task": "REVIEW-011",
+      "action": "submit",
+      "agent": "reviewer-20261126-m",
+      "detail": "Independent review of COORD-004 (status refresh after LR-001/LR-002/RETEST-001). Round 1 revise, wording only: every number checked against RETEST-001, GRID-001, COORD-002 and ledger events; S-1 RETEST-001 slip timing/credit in E3, S-2 'ties' stronger than RETEST-001 wording, S-3 compression-tolerance row over-extended to loss terms and unlabeled exploratory, S-4 final accuracy tolerance silently dropped from Still open; O-1..O-8 minor. Revision 1 resolves all S and O items with no number changed; accepted. History preserved, COORD-002/status.md and done reports unchanged, check ok. One non-blocking nit left (RESEARCH_STATUS 'every head').",
+      "at": "2026-11-27T05:35:52+00:00"
+    },
+    {
+      "seq": 164,
+      "task": "REVIEW-011",
+      "action": "review-accept",
+      "agent": "reviewer-20261126-n",
+      "detail": "Accept. Hashes 6fc6fbea (report) match ledger; revision-1 hashes 6f2691a7/404ed484/0cf02667 match COORD-004 artifacts on disk (round-1 hashes 482a8079/9861c18b/98501416 not stored in ledger; unverifiable). Spot checks all correct: RETEST-001 means/A1-A4/B1-B8, A2 lo +0.0016, gains +1.01/1.18/1.33/1.95, retention 98.30/98.42/98.62/98.94%, L080 abs 48.42-49.11, 86:1/94.0% (GRID-001 sec4 line 103), 95/100 costs 2.7-5.0/7.7-18.7 (COORD-002), instability 4/6,6/6,6/6 (LR-001), +2.14, approval quotes, REASON-002 tolerance '1.0 pp, or 2.0 pp'; events 115/133/142/143/150-154 and times 01:23:51->01:24:37Z (46 s), analyze.py 04:55:12Z < REVIEW-010 submit 04:56:39Z (event 154 b), report.md 04:57:44Z < recover 04:57:52Z. S-1..S-4 correct and fair; O-1..O-8 accurate. Addendum: every S/O fix present in rev 1; nit 'every head' in RESEARCH_STATUS LR row confirmed. Order: revise (160, 05:32:41Z) could only be recorded because verify_artifacts matched event-157 hashes, so no COORD-004 edit preceded it; final writes 05:34:41-05:35:00Z, resubmit 05:35:13Z. Minor, non-blocking: (1) addendum's 'mtime 05:34:00Z' is no longer observable (report rewritten 05:35:52Z); (2) its own accept came 23 s after resubmission, not disclosed though COORD-004 E3 flags a 46 s acceptance (hash check enforced by harness). Missed in COORD-004 (minor, wording): (a) DECISIONS 'Still open' cites status.md D, but SYNTH-001, the matplotlib plot and end-to-end fine-tuning are not in D (source: WORK_SUMMARY next steps); (b) status.md B3 heading 'supersedes all lr-1e-3 head comparisons' conflicts with C (GRID-001 inherited-fc ranking and ABL-001 CE-only 'not re-tested') - read 'all lr-1e-3 comparisons among Xavier-initialized heads'; (c) DECISIONS 'Settled' rests on the unfinalized 1.0 pp tolerance (M4096-linear +0.65 robust); (d) D omits the dictionary heads' zero weight decay from 'not re-tuned' (LR-002 caveat 3). None changes a number or a decision.",
+      "at": "2026-11-27T05:39:14+00:00"
     }
   ]
 }

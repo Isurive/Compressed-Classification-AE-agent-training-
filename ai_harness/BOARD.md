@@ -1,6 +1,6 @@
 # Research task board
 
-Generated: 2026-11-27T05:00:33+00:00
+Generated: 2026-11-27T05:39:47+00:00
 
 Snapshot only. Run `py ai_harness/harness.py status` for current state.
 
@@ -41,6 +41,8 @@ Snapshot only. Run `py ai_harness/harness.py status` for current state.
 | REVIEW-009 | reviewer | done | reviewer-20261126-i | — | Independent review of LR-002 (validation-only lr/epoch extension incl. linear head) |
 | RETEST-001 | engineer | done | claude-orient-20261122-a | — | Confirmatory ImageNetV2 re-test of the heads at tuned learning rates and a common 20-epoch budget |
 | REVIEW-010 | reviewer | done | reviewer-20261126-k | — | Independent review of RETEST-001 (confirmatory ImageNetV2 re-test at tuned lrs, common 20-epoch budget) |
+| COORD-004 | coordinator | done | claude-orient-20261122-a | — | Refresh shared status after LR-001, LR-002 and RETEST-001 (successor to COORD-002/status.md; DECISIONS.md and RESEARCH_STATUS.md current state) |
+| REVIEW-011 | reviewer | done | reviewer-20261126-m | — | Independent review of COORD-004 (shared status refresh after LR-001, LR-002 and RETEST-001) |
 
 ## Submitted evidence
 
@@ -75,3 +77,5 @@ Snapshot only. Run `py ai_harness/harness.py status` for current state.
 - **REVIEW-009 (done)**: `ai_harness/artifacts/REVIEW-009/report.md`, `ai_harness/artifacts/REVIEW-009/task.json`
 - **RETEST-001 (done)**: `ai_harness/artifacts/RETEST-001/task.json`, `ai_harness/artifacts/RETEST-001/analyze.py`, `ai_harness/artifacts/RETEST-001/analysis.md`, `ai_harness/artifacts/RETEST-001/analysis.json`, `ai_harness/artifacts/RETEST-001/grid_log.txt`, `ai_harness/artifacts/RETEST-001/report.md`, `src/run_retest.py`, `runs/RETEST-001/results.csv`, `runs/RETEST-001/settings.json`
 - **REVIEW-010 (done)**: `ai_harness/artifacts/REVIEW-010/task.json`, `ai_harness/artifacts/REVIEW-010/report.md`, `ai_harness/artifacts/REVIEW-010/review010.py`
+- **COORD-004 (done)**: `ai_harness/artifacts/COORD-004/task.json`, `ai_harness/artifacts/COORD-004/status.md`, `ai_harness/DECISIONS.md`, `ai_harness/RESEARCH_STATUS.md`
+- **REVIEW-011 (done)**: `ai_harness/artifacts/REVIEW-011/task.json`, `ai_harness/artifacts/REVIEW-011/report.md`

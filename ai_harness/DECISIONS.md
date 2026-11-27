@@ -1,8 +1,22 @@
 # Current decisions and unresolved choices
 
-Updated: 2026-11-25 (COORD-003); earlier text from 2026-11-22 (COORD-001) is kept below as history. Coordinator-owned integration file. Cite the user, a task report, or a measured run when changing a status. A reviewed report is evidence, not automatic user approval of its suggested design.
+Updated: 2026-11-26 (COORD-004); earlier text from 2026-11-25 (COORD-003) and 2026-11-22 (COORD-001) is kept below as history. Coordinator-owned integration file. Cite the user, a task report, or a measured run when changing a status. A reviewed report is evidence, not automatic user approval of its suggested design.
 
-## Current state, 2026-11-25 (read this first)
+## Current state, 2026-11-26 (read this first)
+
+This section supersedes the 2026-11-25 "Current state" below wherever they conflict. Rows not listed here (entry point, data, environment, baseline, byte measurement, experiment plan, claim scope, initialization, repository) are unchanged from 2026-11-25.
+
+| Item | Status | Provenance |
+| --- | --- | --- |
+| Accepted results | **See [COORD-004/status.md](artifacts/COORD-004/status.md)**, which replaces COORD-002/status.md as the authoritative list. It marks which lr-1e-3 results are superseded and carries all errata forward. | COORD-004 (this update); RETEST-001 accepted on re-review (ledger event 153) |
+| Training settings for head comparisons | **Validation-chosen learning rates and a common 20-epoch budget:** dictionary heads Adam lr 1e-4, linear 3e-4 (weight decay 1e-4). For sparse M2048, 1e-4 at 20 epochs is a disclosed post-hoc departure from LR-002's adopted 3e-4 at 10 epochs (never worse on validation). Adam lr 1e-3, used from GRID-001 to MSWEEP-001, was poor for every Xavier-initialized head tested; GRID-001's inherited-fc heads were never lr-checked. | Validation-only LR-001 and LR-002 (user approved "Yes, run lr check" and "Yes, run it", 2026-11-26); confirmed on ImageNetV2 by RETEST-001 |
+| Sparse-dictionary head vs alternatives | **Settled at the project's level of evidence:** at tuned rates, sparse M2048 − linear +0.02 pp (no detected difference); sparse − dense +0.09 pp (below 1 pp, not robust to multiplicity); M4096/k1024 is best by +0.6 pp (robust, below 1 pp; M, k and parameters confounded). The earlier "sparse beats linear by about 1 pp" and "sparsity adds about 0.4 pp" are superseded (lr-conditional). | [RETEST-001](artifacts/RETEST-001/report.md), pre-registered, user approved "Yes, run re-test" (2026-11-26); [REVIEW-010](artifacts/REVIEW-010/report.md) |
+| Storage result (main finding) | Level 80 (q20; 50.3:1 vs raw pixels; 89.8% smaller than the stored files incl. metadata) costs a mean of 0.53–0.85 pp of ImageNetV2 top-1 at tuned rates (CIs reach 1.08–1.17 pp for the sparse heads); level 90 (q10; 86:1) costs 1.5–2.2 pp. | GRID-001 §4 (bytes); RETEST-001 (accuracy) |
+| 98%-at-50:1 target | Not met in absolute terms (heads about 48.4–49.1% at level 80, 48.9–49.9% on uncompressed data, vs 57.28% for the original classifier). Relative to each head's own uncompressed accuracy, level 80 retains 98.3–98.9% at tuned rates. | COORD-004/status.md B2 |
+| Test data | Unchanged, plus: all test CIs are conditional on the fixed 10,000 ImageNetV2 images (image-sampling error not quantified), and ImageNetV2 has been scored many times. | REVIEW-010 S-4 |
+| Still open | Write-up (SYNTH-001); optional: paired bootstrap over test images, fixed-k / dense-M4096 controls, a weight-decay-tuned wide head, a storage-vs-accuracy plot (needs matplotlib; ask first); end-to-end fine-tuning is a team decision; citation check (LIT-002); final accuracy tolerance (1.0 pp is the working tolerance of the approved REASON-002 plan); final proposal wording. | COORD-004/status.md D |
+
+## Previous state, 2026-11-25 (historical; superseded where the 2026-11-26 section differs)
 
 This section supersedes the 2026-11-22 "Adopted implementation" and "Open choices" sections wherever they conflict.
 
@@ -90,6 +104,10 @@ The user authored and adopted `src/`. Code audit: [ORIENT-001](artifacts/ORIENT-
 
 - 2026-11-05: Initialized from the user conversation and current files. No dataset/model/hardware choice finalized; no training results exist.
 - 2026-11-05: Literature and reasoning reports completed by separate agents and accepted by the coordinator after artifact/source inspection. Engineering feasibility and further cross-report review are next; final synthesis waits for those tasks.
+- 2026-11-26 (COORD-004): added "Current state, 2026-11-26" at the top and renamed the 2026-11-25 section "Previous state" (kept as history).
+  - **Recorded:** the tuned learning rates and common 20-epoch budget (LR-001, LR-002), the confirmatory RETEST-001 head comparisons and compression costs, and the new authoritative status page COORD-004/status.md.
+  - **Marked superseded:** the lr-1e-3 head comparisons (sparse > linear about 1 pp; sparsity about 0.4 pp), the 2026-11-25 "Accepted results" pointer to COORD-002/status.md, and the "Still open" list.
+  - **Revised after review (REVIEW-011):** the tolerance is listed as still open; lr wording limited to the Xavier-initialized heads tested, with sparse M2048's post-hoc lr disclosed; absolute accuracy at level 80 given.
 - 2026-11-25 (COORD-003): added "Current state" at the top.
   - **Recorded:** the expanded `src/` entry point, the datasets, the environment, the baseline, the approved plan, the claim scope (including the inherited classifier), the repository, and a pointer to the accepted results.
   - **Marked superseded:** the 2026-11-22 notes on the dataset, torch, the CE default, the checkpoint criterion, and the single-image encoder.

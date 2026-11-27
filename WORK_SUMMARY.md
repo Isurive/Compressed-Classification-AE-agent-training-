@@ -2,7 +2,8 @@
 
 *Written by the AI agent `claude-orient-20261122-a` for teammates joining the project. Last updated 2026-11-26.*
 *Covers everything done after the datasets were downloaded (2026-11-24 to 2026-11-26), up to the learning-rate checks (LR-001, LR-002) and the confirmatory re-test at tuned learning rates (RETEST-001).*
-*Detailed, reviewer-checked reports are linked throughout. When this file and a report disagree, the report wins, except where [COORD-002/status.md](ai_harness/artifacts/COORD-002/status.md) lists a correction.*
+*Detailed, reviewer-checked reports are linked throughout. When this file and a report disagree, the report wins, except where [COORD-004/status.md](ai_harness/artifacts/COORD-004/status.md) lists a correction.*
+*The authoritative one-page list of accepted results is now [COORD-004/status.md](ai_harness/artifacts/COORD-004/status.md) (2026-11-26, reviewed). It replaces `COORD-002/status.md`, which is kept as history. `ai_harness/DECISIONS.md` has a matching "Current state, 2026-11-26".*
 
 ## TL;DR
 
@@ -17,7 +18,7 @@
 | 95 → q6 | 130 : 1 | 96.1% | about 2.7–5 points |
 | 100 → q1 | 236 : 1 | 97.8% | about 8–19 points |
 
-- **Storage:** compressed training data is cheap up to about level 90.
+- **Storage:** level 80 (50:1) costs under 1 point on average; level 90 (86:1) costs about 2 points; beyond that the cost climbs fast. Every head loses about the same.
 - **The sparse-dictionary head does not beat a properly tuned linear head** (RETEST-001, confirmatory, ImageNetV2, seeds 45–51, every head at a tuned lr and 20 epochs, accepted in review):
   - sparse (2048 atoms) − linear: **+0.02 points**, 95% CI [−0.25, +0.29]: no detected difference;
   - sparse − dense (same width, all atoms active): **+0.09 points**: too small to matter, and not significant after correcting for 12 tests;
@@ -52,6 +53,8 @@ Your own code is in `src/`: `main.py`, `sparse_workflow.py`, `image_data.py`, `c
 | `src/run_ablation.py` | Turns individual loss terms off to find what makes the sparse head work. |
 | `src/run_seeds.py` | Repeats the key comparison on 7 new seeds. |
 | `src/run_msweep.py` | Dictionary-size sweep at a fixed active fraction (k = M/4). |
+| `src/run_lrcheck.py`, `src/run_lrcheck2.py` | Validation-only learning-rate checks (LR-001, LR-002); they save every epoch's validation score. |
+| `src/run_retest.py` | The confirmatory ImageNetV2 re-test: four heads at tuned learning rates, 20 epochs each (RETEST-001). |
 
 **How "dictionary learning" appears in the code.**
 - `SparseDictionaryAE` in `resnet18_sparse_ae.py` learns M = 2048 unit-length **atoms**: the dictionary.
@@ -104,6 +107,7 @@ Your own code is in `src/`: `main.py`, `sparse_workflow.py`, `image_data.py`, `c
 ### Step 5: random-start grid (GRID-002)
 - **Ran:** the same 72-run grid, but every head starts from random (Xavier) weights. This is the cleaner test of "learning a head from compressed data". The settings were frozen from the existing validation tuning.
 - **Result:** sparse is ahead of linear on every seed, by ≥ 1 point only at source and level 20. Starting from the original classifier's weights was worth 3.3–6.8 points.
+  - **⚠ Superseded by RETEST-001 (Step 13):** the sparse-over-linear gap came from the linear head's poor learning rate; at tuned rates it is +0.02 points.
 - **Report:** `ai_harness/artifacts/GRID-002/report.md`.
 
 ### Step 6: ablation (ABL-001)
@@ -118,6 +122,7 @@ Your own code is in `src/`: `main.py`, `sparse_workflow.py`, `image_data.py`, `c
   | Top-k sparsity | about 0 without MSE, +0.46 with MSE (resolved in Step 9) |
 
 - **Not ruled out:** any regularizer might do what MSE does, since the wide head had no weight decay.
+  - **⚠ Superseded by RETEST-001 (Step 13):** these gains were measured against the under-tuned linear head (lr 1e-3). At tuned rates the MSE-trained sparse head only ties linear, so "MSE is what lets a wide head beat linear" no longer holds. The wide head with plain cross-entropy was not re-tested.
 - **Report:** `ai_harness/artifacts/ABL-001/report.md`.
 
 ### Step 7: first independent review (REVIEW-002)
@@ -165,6 +170,7 @@ Your own code is in `src/`: `main.py`, `sparse_workflow.py`, `image_data.py`, `c
 
   Every number reproduced. After the revision, SEED-001 was **accepted**. A second reviewer then accepted REVIEW-006 itself. It noted one more detail: if all 12 printed tests are corrected together, sparse − dense at L80 only just passes (0.0235 against 0.025). The 8 pre-registered tests pass comfortably.
 - **Report:** `ai_harness/artifacts/SEED-001/report.md`.
+  - **⚠ Superseded by RETEST-001 (Step 13):** at tuned learning rates on the same seeds, sparse − dense is +0.09 and sparse − linear is +0.02 points. Both lr 1e-3 gaps were mostly learning-rate effects.
 
 ### Step 10: clean dictionary-size sweep (MSWEEP-001, 2026-11-26)
 - **Ran:**
@@ -194,6 +200,7 @@ Your own code is in `src/`: `main.py`, `sparse_workflow.py`, `image_data.py`, `c
 - **My mistake:** the pre-registration text counted the tests as 10 when its own rule defines 13. The stricter 13 were used, and the same tests come out significant either way.
 - **Review (REVIEW-007):** first *revise*: the reviewer added the instability finding and asked for wording fixes. After the revision, MSWEEP-001 was **accepted**.
 - **Report:** `ai_harness/artifacts/MSWEEP-001/report.md`.
+  - **⚠ Superseded by RETEST-001 (Step 13):** at tuned learning rates, M4096 beats M2048 by +0.63 points (it was +0.46 here). M = 512 and 1024 were not re-run at tuned rates.
 
 ### Step 11: learning-rate check (LR-001, 2026-11-26)
 - **Why:** MSWEEP-001's reviewer found that the large dictionary heads diverge late in training at lr 1e-3.
@@ -289,7 +296,8 @@ Your own code is in `src/`: `main.py`, `sparse_workflow.py`, `image_data.py`, `c
 - **Training from compressed data alone.** The backbone was pretrained on original ImageNet; only the head was trained on compressed data.
 - **"Sparse dictionaries make training robust to compression."** No component reduced the accuracy drop.
 - **"98% accuracy at 50:1"** in absolute terms. Heads reach about 46–54% against 57% for the original classifier. Relative to each head's own uncompressed accuracy, level 80 retains about 98%, within noise.
-- **"More available atoms, with everything else equal, helps."** MSWEEP-001 shows that a larger dictionary at a fixed active fraction helps (+1.1 points per doubling), but M, k and the parameter count rise together. Results at M ≥ 2048 are conditional on the learning rate.
+- **"More available atoms, with everything else equal, helps."** A larger dictionary at a fixed active fraction helps (MSWEEP-001: +1.1 points per doubling at lr 1e-3; RETEST-001: +0.63 for 4096 vs 2048 at tuned rates), but M, k and the parameter count rise together.
+- **"The sparse dictionary is a better head."** At tuned learning rates it ties linear (+0.02) and dense (+0.09).
 
 **Caveats:**
 - ImageNetV2 results guided which experiment to run next, though no settings were tuned on it.
@@ -331,7 +339,7 @@ python -B ai_harness/artifacts/GRID-001/analyze.py      # likewise GRID-002, ABL
 | `runs/GRID-002/`, `runs/ABL-001/`, `runs/SEED-001/`, `runs/MSWEEP-001/`, `runs/LR-001/`, `runs/LR-002/`, `runs/RETEST-001/` | Results and `best.pt` checkpoints (`last.pt` deleted). The LR-001/LR-002/RETEST-001 `done.json` files also hold the per-epoch history; RETEST-001's `results.csv` has no lr column, so join on `done.json`. | 2.7, 3.2, 2.3, 3.3, 3.1, 3.2 and 3.7 GB |
 | `runs/ENG-004/`, `runs/ENG-005/` | The pilot runs | small |
 | `ai_harness/artifacts/<TASK>/` | Report, logs and analysis for every task | small |
-| `ai_harness/artifacts/COORD-002/status.md` | **One-page list of accepted results and corrections** | small |
+| `ai_harness/artifacts/COORD-004/status.md` | **One-page list of accepted results and corrections** (replaces `COORD-002/status.md`, kept as history) | small |
 
 - All of this lives inside OneDrive. Only the small files are on GitHub.
 - About 7 GB of `last.pt` files in `runs/GRID-001` could be deleted if space is needed. Nothing has been deleted without approval.
@@ -339,12 +347,20 @@ python -B ai_harness/artifacts/GRID-001/analyze.py      # likewise GRID-002, ABL
 ## 6. Team coordination (the harness)
 
 - **What it is:** a local task ledger.
-  - Start with `AGENTS.md`, `ai_harness/START_HERE.md` and the "Current state" section of `ai_harness/DECISIONS.md`.
+  - Start with `AGENTS.md`, `ai_harness/START_HERE.md` and the "Current state, 2026-11-26" section of `ai_harness/DECISIONS.md`.
   - `py ai_harness/harness.py status` shows the queue.
   - `py ai_harness/harness.py check` verifies every submitted file's checksum.
 - **State on 2026-11-26:**
-  - 31 tasks done; nothing in review.
-  - SEED-001, MSWEEP-001, LR-001, LR-002, RETEST-001 and REVIEW-006 to REVIEW-010 accepted.
+  - 33 tasks done; nothing in review.
+  - SEED-001, MSWEEP-001, LR-001, LR-002, RETEST-001, COORD-004 and REVIEW-006 to REVIEW-011 accepted.
+  - **COORD-004 (status refresh):** REVIEW-011 (`reviewer-20261126-m`) first asked for wording fixes. They made "ties" into "no detected difference", limited the compression-tolerance statement to the four re-tested heads, and kept the 1-point tolerance listed as not finalized. This time the reviewer recorded its verdict before any edit. Revision 1 was accepted.
+    - Known nit, accepted as is: RESEARCH_STATUS.md's "Accepted since" table says lr 1e-3 "was poor for every head"; it means every head tested (the Xavier-initialized ones). The status page and DECISIONS.md have the precise wording.
+  - **Small known slips in COORD-004, found by `reviewer-20261126-n` (cross-review of REVIEW-011); none changes a number or decision:**
+    - `COORD-004/status.md` B3's heading says RETEST-001 "supersedes all lr-1e-3 head comparisons". Read it as "all lr-1e-3 comparisons among Xavier-initialized heads": section C correctly keeps the GRID-001 inherited-fc ranking and the ABL-001 CE-only result "as measured, not re-tested".
+    - DECISIONS.md "Still open" cites status.md D for every item, but the write-up, the plot and end-to-end fine-tuning come from Section 7 of this file.
+    - DECISIONS.md calls the sparse-head question "settled", which rests on the 1.0-point working tolerance. That tolerance is not finalized; under a 0.5-point tolerance, sparse M4096 − linear (+0.65, robust) would count as meaningful.
+    - status.md D's "not re-tuned" list omits the dictionary heads' zero weight decay (LR-002 caveat 3).
+  - **Small known slips in REVIEW-011:** its addendum's 05:34:00Z report time can no longer be checked (the file was rewritten for the addendum), and it does not mention that its acceptance came 23 s after COORD-004's resubmission (the hash check still ran).
   - **Small known slips in REVIEW-008, found by `reviewer-20261126-h`; none changes a decision:**
     - Of 4 tied-maximum runs, 2 kept the later epoch, not the earlier one; all 4 follow the "top-1 then CE" rule.
     - Dense source − L090 at lr 1e-3 is 8.21 points, not 8.22. This figure was copied into LR-001's report.
@@ -358,18 +374,26 @@ python -B ai_harness/artifacts/GRID-001/analyze.py      # likewise GRID-002, ABL
     - More precisely (found by `reviewer-20261126-l`): the edits (analyze.py at 21:55:12 local) came before REVIEW-010 was even submitted (21:56:39 local), not just before the verdict.
     - REVIEW-010 presents the lr 1e-3 cost differences +0.53 and +0.37 as new; they were already in SEED-001's report (from REVIEW-006). Only the sparse M4096 − linear figure (+0.23) is new.
   - REPRO-001, REVIEW-001, SYNTH-001 and LIT-002 have never been claimed. LIT-002 is verifying the "Diverse Dictionary Learning" citation in `src/`.
-- **Known stale text:** the one-line ledger summaries of ABL-001 and GRID-002 still state claims that were later withdrawn. Use the reports, or `COORD-002/status.md`, instead.
-- **Reviewer agents:** twelve so far, `reviewer-20261125-a` to `-d` and `reviewer-20261126-e` to `-l`. They also cross-reviewed each other's reports. A task is never accepted by the agent that wrote it.
+- **Known stale text:**
+  - The one-line ledger summaries of ABL-001 and GRID-002 still state claims that were later withdrawn.
+  - The ledger summaries and reports of GRID-002, ABL-001, SEED-001 and MSWEEP-001 state head comparisons at lr 1e-3, now superseded by RETEST-001.
+  - `COORD-002/status.md` and the "Previous state, 2026-11-25" section of `DECISIONS.md` predate the lr checks; they are kept as history.
+  - Use `COORD-004/status.md`, the RETEST-001 report and Section 3 of this file instead.
+- **Reviewer agents:** fourteen so far, `reviewer-20261125-a` to `-d` and `reviewer-20261126-e` to `-n`. They also cross-reviewed each other's reports. A task is never accepted by the agent that wrote it.
 
 ## 7. Next steps
 
-**Next step (recommended): the write-up** (task SYNTH-001). The head question is now settled at the project's level of evidence: the storage result is the main finding, and the sparse-dictionary head is no better than a tuned linear head. Fold `COORD-002/status.md`, RETEST-001 and the superseded claims into the proposal and final report.
+The experiments have answered the project's two questions:
+- **Storage:** training a head on JPEG q20 copies (50:1, about 90% fewer bytes) costs under 1 point of ImageNetV2 accuracy on average; q10 (86:1) costs about 2 points.
+- **Sparse dictionary:** at tuned learning rates it is no better than a linear head. Only the bigger 4096-atom dictionary is slightly ahead (+0.6 points, below the 1-point tolerance).
 
-**Also open:**
-1. **A paired bootstrap over test images** (no training, a few minutes): re-score RETEST-001's 84 `best.pt` files, keep per-image correctness, and add image-sampling error to the CIs (REVIEW-010 S-4). The most fragile result is sparse − dense.
-2. **A fixed-k arm and a dense M4096 control** to separate available atoms M, active atoms k and parameter count in the M4096 result: for example k = 256 at M = 1024, 2048 and 4096, at tuned lrs.
-3. **A regularized wide head:** a 2048-wide head with tuned weight decay instead of the reconstruction loss. This tests whether any regularizer matches what MSE does.
-4. **Plot:** a storage-vs-accuracy plot needs matplotlib, which is not installed yet; ask before adding it.
-5. **Optional:**
-   - precision/recall/F1 from the saved checkpoints (no retraining);
-   - end-to-end fine-tuning of the whole ResNet on compressed images, which is a different and larger claim, and the team's decision.
+**Done:** the shared status files are up to date (COORD-004, 2026-11-26, reviewed and accepted).
+
+**Next step (recommended): the write-up** (task SYNTH-001). Build the proposal and final report from `COORD-004/status.md`. Lead with the storage result; report the sparse-dictionary head as a negative result with the learning-rate lesson (an under-tuned baseline produced a false 1-point win that a pre-registered re-test removed). Keep the open items in its section D visible (tolerance not finalized, image-sampling error, M/k confound). The team decides the report format and who writes which part.
+
+**Also open (optional, in order of value for the write-up):**
+1. **Storage-vs-accuracy plot** for the report. It needs matplotlib, which is not installed; ask before adding it.
+2. **A paired bootstrap over test images** (no training, a few minutes): re-score RETEST-001's 84 `best.pt` files, keep per-image correctness, and add image-sampling error to the CIs (REVIEW-010 S-4). The most fragile result is sparse − dense.
+3. **A fixed-k arm and a dense M4096 control** (about 1 hour of GPU) to separate available atoms M, active atoms k and parameter count in the M4096 result: for example k = 256 at M = 1024, 2048 and 4096, at tuned rates. Only worth it if the team wants to make a dictionary-size claim.
+4. **Precision/recall/F1** from the saved checkpoints (no retraining), if the course asks for more than top-1/top-5.
+5. **End-to-end fine-tuning** of the whole ResNet on compressed images: a different and larger claim (learning from compressed data, not just training a head), and the team's decision.
