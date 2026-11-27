@@ -1,6 +1,6 @@
 # Research task board
 
-Generated: 2026-11-26T19:57:29+00:00
+Generated: 2026-11-27T05:00:33+00:00
 
 Snapshot only. Run `py ai_harness/harness.py status` for current state.
 
@@ -35,6 +35,12 @@ Snapshot only. Run `py ai_harness/harness.py status` for current state.
 | REVIEW-006 | reviewer | done | reviewer-20261125-d | — | Independent review of SEED-001 (more seeds, pre-registered) |
 | MSWEEP-001 | engineer | done | claude-orient-20261122-a | — | Clean dictionary-size (M) sweep: does the number of available atoms matter? |
 | REVIEW-007 | reviewer | done | reviewer-20261126-e | — | Independent review of MSWEEP-001 (clean dictionary-size sweep) |
+| LR-001 | engineer | done | claude-orient-20261122-a | — | Validation-only learning-rate check for large dictionary heads (M >= 2048) |
+| REVIEW-008 | reviewer | done | reviewer-20261126-g | — | Independent review of LR-001 (validation-only learning-rate check) |
+| LR-002 | engineer | done | claude-orient-20261122-a | — | Validation-only lr/epoch extension: locate the best lr for all dictionary heads and the linear head |
+| REVIEW-009 | reviewer | done | reviewer-20261126-i | — | Independent review of LR-002 (validation-only lr/epoch extension incl. linear head) |
+| RETEST-001 | engineer | done | claude-orient-20261122-a | — | Confirmatory ImageNetV2 re-test of the heads at tuned learning rates and a common 20-epoch budget |
+| REVIEW-010 | reviewer | done | reviewer-20261126-k | — | Independent review of RETEST-001 (confirmatory ImageNetV2 re-test at tuned lrs, common 20-epoch budget) |
 
 ## Submitted evidence
 
@@ -63,3 +69,9 @@ Snapshot only. Run `py ai_harness/harness.py status` for current state.
 - **REVIEW-006 (done)**: `ai_harness/artifacts/REVIEW-006/report.md`, `ai_harness/artifacts/REVIEW-006/task.json`
 - **MSWEEP-001 (done)**: `ai_harness/artifacts/MSWEEP-001/report.md`, `ai_harness/artifacts/MSWEEP-001/analysis.md`, `ai_harness/artifacts/MSWEEP-001/analysis.json`, `ai_harness/artifacts/MSWEEP-001/analyze.py`, `ai_harness/artifacts/MSWEEP-001/task.json`, `ai_harness/artifacts/MSWEEP-001/grid_log.txt`, `ai_harness/artifacts/MSWEEP-001/summary_log.txt`, `src/run_msweep.py`, `runs/MSWEEP-001/results.csv`, `runs/MSWEEP-001/summary.csv`, `runs/MSWEEP-001/settings.json`
 - **REVIEW-007 (done)**: `ai_harness/artifacts/REVIEW-007/report.md`, `ai_harness/artifacts/REVIEW-007/task.json`
+- **LR-001 (done)**: `ai_harness/artifacts/LR-001/report.md`, `ai_harness/artifacts/LR-001/task.json`, `ai_harness/artifacts/LR-001/analyze.py`, `ai_harness/artifacts/LR-001/analysis.md`, `ai_harness/artifacts/LR-001/analysis.json`, `ai_harness/artifacts/LR-001/grid_log.txt`, `src/run_lrcheck.py`, `runs/LR-001/results.csv`, `runs/LR-001/settings.json`
+- **REVIEW-008 (done)**: `ai_harness/artifacts/REVIEW-008/report.md`, `ai_harness/artifacts/REVIEW-008/task.json`
+- **LR-002 (done)**: `ai_harness/artifacts/LR-002/report.md`, `ai_harness/artifacts/LR-002/task.json`, `ai_harness/artifacts/LR-002/analyze.py`, `ai_harness/artifacts/LR-002/analysis.md`, `ai_harness/artifacts/LR-002/analysis.json`, `ai_harness/artifacts/LR-002/posthoc.py`, `ai_harness/artifacts/LR-002/posthoc.md`, `ai_harness/artifacts/LR-002/grid_log.txt`, `src/run_lrcheck2.py`, `runs/LR-002/results.csv`, `runs/LR-002/settings.json`
+- **REVIEW-009 (done)**: `ai_harness/artifacts/REVIEW-009/report.md`, `ai_harness/artifacts/REVIEW-009/task.json`
+- **RETEST-001 (done)**: `ai_harness/artifacts/RETEST-001/task.json`, `ai_harness/artifacts/RETEST-001/analyze.py`, `ai_harness/artifacts/RETEST-001/analysis.md`, `ai_harness/artifacts/RETEST-001/analysis.json`, `ai_harness/artifacts/RETEST-001/grid_log.txt`, `ai_harness/artifacts/RETEST-001/report.md`, `src/run_retest.py`, `runs/RETEST-001/results.csv`, `runs/RETEST-001/settings.json`
+- **REVIEW-010 (done)**: `ai_harness/artifacts/REVIEW-010/task.json`, `ai_harness/artifacts/REVIEW-010/report.md`, `ai_harness/artifacts/REVIEW-010/review010.py`

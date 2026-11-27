@@ -1,0 +1,47 @@
+{
+  "heads": {
+    "sparse-M2048": {
+      "model": "sparse",
+      "atoms": 2048,
+      "k": 512,
+      "fc_init": "xavier",
+      "weight_decay": 0.0
+    },
+    "sparse-M4096": {
+      "model": "sparse",
+      "atoms": 4096,
+      "k": 1024,
+      "fc_init": "xavier",
+      "weight_decay": 0.0
+    },
+    "dense-M2048": {
+      "model": "dense",
+      "atoms": 2048,
+      "k": 2048,
+      "fc_init": "xavier",
+      "weight_decay": 0.0
+    }
+  },
+  "lrs": [
+    0.001,
+    0.0003,
+    0.0001
+  ],
+  "dictionary_loss": {
+    "reconstruction_weight": 1.0,
+    "dependency_weight": 0.0,
+    "coherence_weight": 0.0
+  },
+  "levels": [
+    "source",
+    "L090"
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "epochs": 10,
+  "batch": 128,
+  "test_evaluation": "none (validation only)"
+}
