@@ -1,8 +1,33 @@
 # Research handoff and next actions
 
-Updated: 2026-11-26 (COORD-004). This is the coordinator's readable handoff; use `py ai_harness/harness.py status` for live task states. Reviewed research memos are not experimental results or finalized user decisions.
+Updated: 2026-11-27 (COORD-005; wording fixes in COORD-006 for REVIEW-015 O-5: the review note above the 2026-11-27 table and the COORD-005 row). This is the coordinator's readable handoff; use `py ai_harness/harness.py status` for live task states. Reviewed research memos are not experimental results or finalized user decisions.
 
-## Update 2026-11-26: head question settled; write-up is next
+## Update 2026-11-27: weight-decay check done; draft write-up updated
+
+**Start here:** as on 2026-11-26 below. [COORD-004/status.md](artifacts/COORD-004/status.md) is now at revision 2, and the draft write-up is [WRITE-001/report_draft.md](artifacts/WRITE-001/report_draft.md) (revision 3).
+
+**Accepted since 2026-11-26** (each reviewed by a different agent; REVIEW-012, REVIEW-013, REVIEW-014 and REVIEW-015 were cross-reviewed):
+
+| Task | What | Review |
+| --- | --- | --- |
+| WRITE-001, WRITE-002 | Draft write-up (methods, results, limitations), then wording fixes from the cross-review | REVIEW-012 (WRITE-001); `reviewer-20261126-q` (WRITE-002, ledger review) |
+| WD-001S | Selection lock for WD-001, submitted before any ImageNetV2 run | REVIEW-013 |
+| WD-001 | Can tuned weight decay replace the reconstruction loss in a 2048-wide head? (pre-registered; validation selection, then ImageNetV2 seeds 45–51) | REVIEW-014 |
+| COORD-005 | This update (status page, DECISIONS.md, this file, draft section 7.4) | REVIEW-015 |
+| COORD-006 | Wording fixes to COORD-005 from REVIEW-015 and its cross-review | see ledger |
+
+**Headline from WD-001 (measured; qualifiers in COORD-004/status.md B5):**
+- **Dense head:** cross-entropy with tuned weight decay is 0.29 pp below the reconstruction-loss version (detected, below tolerance).
+- **Sparse head:** 1.36 pp below (meaningful, within the tested grid and 20-epoch budget; it may be under-trained).
+- **Neither** weight-decay head beats linear. The 2026-11-26 head conclusion is unchanged.
+
+**Ignore WD-001A:** a pending ledger entry with no owner or work, refused at claim because its write paths overlapped WD-001; the harness cannot close it.
+
+**Next:** the team decisions marked in the draft (accuracy tolerance, names, references, transfer into the course `.tex`). Optional follow-ups are in COORD-004/status.md section D.
+
+**Not yet started:** REPRO-001, REVIEW-001, SYNTH-001, LIT-002.
+
+## Update 2026-11-26: head question settled; write-up is next (historical; see the 2026-11-27 update)
 
 **Start here:**
 - [WORK_SUMMARY.md](../WORK_SUMMARY.md) is a plain-language account for teammates.

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-11-27T06:58:36+00:00",
+  "generated_at": "2026-11-27T22:50:08+00:00",
   "project_root": "C:\\Users\\ericw\\OneDrive\\Documents\\AI 360 (DeepLearning\\Final Project",
   "tasks": [
     {
@@ -2048,6 +2048,441 @@
       "created": "2026-11-27T06:56:58+00:00",
       "updated": "2026-11-27T06:58:13+00:00",
       "stale": false
+    },
+    {
+      "id": "WD-001",
+      "spec": {
+        "id": "WD-001",
+        "title": "Regularized wide head: can tuned weight decay replace the reconstruction loss? (validation selection, then ImageNetV2 test)",
+        "role": "engineer",
+        "description": "User approved (2026-11-27, 'ok lets do the weight decay', after the roadmap step-2 item 'weight decay' was identified as the one unrun item). Pre-registered before any run. QUESTION: ABL-001 (lr 1e-3) found a 2048-wide head trained with cross-entropy only overfits, and the feature-reconstruction (MSE) loss rescued it; it left open whether any regularizer, e.g. tuned weight decay, does the same (COORD-004 D). HEADS (new): dense-CE = M2048 k2048 and sparse-CE = M2048 k512, both CE only (reconstruction weight 1e-6, dependency 0, coherence 0: ABL-001 'abl-none'), Xavier fc, He encoder, batch 128, Adam, constant lr, per-epoch reseeding, 20 epochs, best.pt by validation top-1 then lower CE; cached GRID-001 features. WEIGHT DECAY: coupled L2 via Adam weight_decay (as for the linear head) on the deployed head's linear layers only (encoder weight+bias, classifier weight+bias); not on the learned centre or the training-only decoder atoms. Implemented in a new wrapper src/run_wdcheck.py that temporarily wraps torch.optim.Adam and sparse_workflow.new_parts around each call to sparse_workflow.train to build these parameter groups (asserting the parameter set is exactly the one sparse_workflow passes); user src/ files unchanged. PHASE A (validation only, no test data): seeds 42-44, levels source and L090 (as LR-001/LR-002); lr in {3e-4, 1e-4, 3e-5} x weight decay in {0, 1e-3, 1e-2, 1e-1}; 2 heads x 12 configs x 6 cells = 144 runs. Candidates per head: 12 configs x budgets {10, 20 epochs} (10-epoch budget read from the 20-epoch history: best epoch <= 10 by top-1 then lower CE). SELECTION RULE: per head, the candidate with the highest mean validation top-1 over the 6 cells, ties by lower mean validation CE. FLAGS (reported, do not change the selection): 'wd upper edge' if selected wd = 1e-1; 'wd lower edge' if 0 and 1e-3 is within 0.10 pp; 'lr edge' if selected lr is 3e-4 or 3e-5; 'budget binds' if selected budget is 20 and median selected epoch >= 19. Phase A also reports descriptively the validation gap at wd 0 vs selected wd, and vs the MSE heads' LR-002 validation numbers (exploratory). PHASE B (ImageNetV2, after phase A selection is recorded in selected.json and submitted with this task): each CE head at its selected (lr, wd, budget) trained for that budget on seeds 45-51 x levels source/L080/L090 = 42 runs; ImageNetV2-source top-1 once per run (training-level score also recorded, exploratory). Comparisons use RETEST-001's existing runs on the same seeds, levels and splits (dense M2048 MSE lr 1e-4; sparse M2048 MSE lr 1e-4; linear lr 3e-4; all 20 epochs). CONFIRMATORY FAMILY (4 tests, pooled over the 3 levels as per-seed mean of per-level differences, paired by seed, n=7, df 6, t=2.447): W1 dense-CE+wd - dense-MSE; W2 sparse-CE+wd - sparse-MSE; W3 dense-CE+wd - linear; W4 sparse-CE+wd - linear. Detected = CI excludes 0; meaningful = detected and |mean| >= tolerance; Holm over the 4 tests. The tolerance is not finalized (COORD-004 D): report meaningful at the 1.0 pp working tolerance AND at 0.5 pp. Pre-declared reading: W1/W2 not detected or positive -> 'tuned weight decay substitutes for the reconstruction loss (within tolerance)'; W1/W2 negative and meaningful -> 'the reconstruction loss gives a benefit tuned weight decay does not'. EXPLORATORY (labeled): per-level gaps, compression costs of the CE heads and their differences from the MSE heads, top-5, training-level eval. CHECKS: 144 + 42 runs with full histories; split digests per seed match SEED-001/RETEST-001; instability count (training loss rises > 5% between epochs); the wd wrapper's parameter groups logged once per run. DISCLOSURES: phase B compares against RETEST-001 runs whose test results are already known; ImageNetV2 has been reused many times; k, init, and the MSE heads' settings are as in RETEST-001; coupled L2 under Adam is not decoupled weight decay (AdamW); estimated GPU time about 90 min (phase A) + 25 min (phase B).",
+        "depends_on": [],
+        "write_paths": [
+          "src/run_wdcheck.py",
+          "runs/WD-001",
+          "ai_harness/artifacts/WD-001"
+        ],
+        "acceptance": [
+          "task.json and ledger add predate the first run; selected.json submitted before the first phase-B run",
+          "No test data touched in phase A",
+          "Wrapper parameter groups verified; user src/ unchanged",
+          "Report gives the selection, flags, and the 4-test family first; exploratory labeled; disclosures stated",
+          "harness.py check passes"
+        ]
+      },
+      "state": "done",
+      "owner": "claude-orient-20261122-a",
+      "artifacts": [
+        {
+          "path": "ai_harness/artifacts/WD-001/task.json",
+          "sha256": "0927af44915f354293471af88d411db5883316052b95781a34ee8fae3c00db8f",
+          "bytes": 4592
+        },
+        {
+          "path": "ai_harness/artifacts/WD-001/report.md",
+          "sha256": "2cada6336aa929c84e589ed3c9341dc1b499cb0a6f2e98bbd77381eb3ead9c3e",
+          "bytes": 12928
+        },
+        {
+          "path": "ai_harness/artifacts/WD-001/analyze_val.py",
+          "sha256": "2e694d60e1845ec8a23233911dff42da5985d3adda768fbb56dc1ea8b6d69489",
+          "bytes": 7639
+        },
+        {
+          "path": "ai_harness/artifacts/WD-001/analyze.py",
+          "sha256": "8b72af535c5ec51a5b61aa0d2e89f21d9aa7a75e60720216881b32e565e0287c",
+          "bytes": 10601
+        },
+        {
+          "path": "ai_harness/artifacts/WD-001/selected.json",
+          "sha256": "a594923d719e34c489d48290fd96f1eac776d960070105ed768487f79ff32fe8",
+          "bytes": 181
+        },
+        {
+          "path": "ai_harness/artifacts/WD-001/analysis_val.md",
+          "sha256": "36fa8f382affe220dba69519a4e4b4430748aba42474329be22228dad466852d",
+          "bytes": 3779
+        },
+        {
+          "path": "ai_harness/artifacts/WD-001/analysis_val.json",
+          "sha256": "bb78301bba4c0d2c997dd329fac805daf207a3fcc83f30d98a8c5f38e16126ba",
+          "bytes": 27026
+        },
+        {
+          "path": "ai_harness/artifacts/WD-001/analysis.md",
+          "sha256": "ef04c663cf8a28c6deb429dc99c7c31b4bc0d62ba8233dc204da5f33f42ae848",
+          "bytes": 4528
+        },
+        {
+          "path": "ai_harness/artifacts/WD-001/analysis.json",
+          "sha256": "d8d47b3546fa21b784d44e90191703e556899b57ef14ae67af3979535398d562",
+          "bytes": 22783
+        },
+        {
+          "path": "ai_harness/artifacts/WD-001/results.csv",
+          "sha256": "62f4e851325a0bb6aabce738dcf5d831f8ea6f5ce8d31b349a565f9fe1ed33a7",
+          "bytes": 16741
+        },
+        {
+          "path": "ai_harness/artifacts/WD-001/logs/sanity_log.txt",
+          "sha256": "6439b1e9bb931c2850d4392ae567fdb5dadf8cb2a62191b93e2c0ff524aab2d2",
+          "bytes": 5652
+        },
+        {
+          "path": "ai_harness/artifacts/WD-001/logs/val_log.txt",
+          "sha256": "b13d8b71fb86226bb6714796e5242185fa71b84f73478de678e08d36b4d31d88",
+          "bytes": 1336829
+        },
+        {
+          "path": "ai_harness/artifacts/WD-001/logs/test_log.txt",
+          "sha256": "5edbb85bd61886392874d019f0a4861b2adadd2b18c44ab41042052b7f494766",
+          "bytes": 390656
+        },
+        {
+          "path": "ai_harness/artifacts/WD-001/logs/settings_val.json",
+          "sha256": "4305c6ff75b10cba34fea30155ca60f4931fd560cb7f330201fe56dc6ea0efb8",
+          "bytes": 651
+        },
+        {
+          "path": "ai_harness/artifacts/WD-001/logs/settings_test.json",
+          "sha256": "00b1c282e4724cc17edf4309dcdf0ca86e614944b432c36a12c1360e66e448eb",
+          "bytes": 823
+        },
+        {
+          "path": "src/run_wdcheck.py",
+          "sha256": "1afb1b5d937eeeddbc3e972d51b60896ccca0c0e4213bae91da7c0a800b5875c",
+          "bytes": 8806
+        }
+      ],
+      "summary": "Weight-decay check, 144 validation + 42 ImageNetV2 runs. Selected wd 1e-3 for both CE-only heads (dense lr 1e-4 by exact-tie CE tie-break; sparse lr 3e-5, lr-edge and budget-binds flags). Confirmatory, Holm over 4, seeds 45-51: W1 dense-CE+wd - dense-MSE -0.29 [-0.41,-0.17] (detected, below 0.5 and 1.0 pp; outcome outside both pre-declared readings); W2 sparse-CE+wd - sparse-MSE -1.36 [-1.52,-1.20] (meaningful: reconstruction loss gives a benefit tuned wd does not; caveat sparse-CE possibly under-trained); W3 dense-CE+wd - linear -0.35 [-0.57,-0.14]; W4 sparse-CE+wd - linear -1.34 [-1.63,-1.05]. Phase B stopped overnight by the user and resumed; partial run re-run.",
+      "created": "2026-11-27T07:50:27+00:00",
+      "updated": "2026-11-27T20:48:42+00:00",
+      "stale": false
+    },
+    {
+      "id": "WD-001A",
+      "spec": {
+        "id": "WD-001A",
+        "title": "WD-001 phase-A selection lock: submit selected.json before any ImageNetV2 run",
+        "role": "engineer",
+        "description": "Procedural sub-task of WD-001. WD-001's acceptance requires selected.json to be submitted before the first phase-B (ImageNetV2) run, but submitting WD-001 itself would move the whole task to review before phase B exists. This task hash-locks the phase-A outputs in the ledger instead: selected.json, analysis_val.md, analysis_val.json (all generated by analyze_val.py from the 144 validation-only runs) and analyze_val.py itself (written 2026-11-27T07:53Z before any phase-A result was read). Phase B must not start until this submit is recorded. Review: check that the selection in selected.json follows the pre-registered rule in WD-001's task.json from the phase-A done.json files (no test data), that the flags are reported correctly, and that the submit time precedes the first [wd-test] line in runs/WD-001/test_log.txt. May be reviewed together with WD-001.",
+        "depends_on": [],
+        "write_paths": [
+          "ai_harness/artifacts/WD-001A",
+          "ai_harness/artifacts/WD-001/selected.json",
+          "ai_harness/artifacts/WD-001/analysis_val.md",
+          "ai_harness/artifacts/WD-001/analysis_val.json",
+          "ai_harness/artifacts/WD-001/analyze_val.py"
+        ],
+        "acceptance": [
+          "Submitted before the first phase-B run",
+          "Selection reproduces from the phase-A runs under the pre-registered rule",
+          "harness.py check passes"
+        ]
+      },
+      "state": "pending",
+      "owner": null,
+      "artifacts": [],
+      "summary": "",
+      "created": "2026-11-27T10:01:29+00:00",
+      "updated": "2026-11-27T10:01:29+00:00",
+      "stale": false
+    },
+    {
+      "id": "WD-001S",
+      "spec": {
+        "id": "WD-001S",
+        "title": "WD-001 phase-A selection lock: submit selected.json before any ImageNetV2 run",
+        "role": "engineer",
+        "description": "Procedural sub-task of WD-001. (Replaces ledger entry WD-001A, never claimed: its write paths overlapped WD-001 and the harness refused the claim; WD-001A stays pending with no work and should be ignored.) WD-001's acceptance requires selected.json to be submitted before the first phase-B (ImageNetV2) run, but submitting WD-001 itself would move the whole task to review before phase B exists. This task hash-locks byte-identical copies of the phase-A outputs (in ai_harness/artifacts/WD-001S; the harness refuses write paths that overlap WD-001, and run_wdcheck.py reads ai_harness/artifacts/WD-001/selected.json, whose sha256 must equal this copy): selected.json, analysis_val.md, analysis_val.json (all generated by analyze_val.py from the 144 validation-only runs) and analyze_val.py itself (written 2026-11-27T07:53Z before any phase-A result was read). Phase B must not start until this submit is recorded. Review: check that the selection in selected.json follows the pre-registered rule in WD-001's task.json from the phase-A done.json files (no test data), that the flags are reported correctly, and that the submit time precedes the first [wd-test] line in runs/WD-001/test_log.txt. May be reviewed together with WD-001.",
+        "depends_on": [],
+        "write_paths": [
+          "ai_harness/artifacts/WD-001S"
+        ],
+        "acceptance": [
+          "Submitted before the first phase-B run",
+          "Selection reproduces from the phase-A runs under the pre-registered rule",
+          "harness.py check passes"
+        ]
+      },
+      "state": "done",
+      "owner": "claude-orient-20261122-a",
+      "artifacts": [
+        {
+          "path": "ai_harness/artifacts/WD-001S/task.json",
+          "sha256": "fbf59df2ad30fbf388cdde8588990ec9535bcda82c7c5566b39197878fd1b362",
+          "bytes": 1607
+        },
+        {
+          "path": "ai_harness/artifacts/WD-001S/selected.json",
+          "sha256": "a594923d719e34c489d48290fd96f1eac776d960070105ed768487f79ff32fe8",
+          "bytes": 181
+        },
+        {
+          "path": "ai_harness/artifacts/WD-001S/analysis_val.md",
+          "sha256": "36fa8f382affe220dba69519a4e4b4430748aba42474329be22228dad466852d",
+          "bytes": 3779
+        },
+        {
+          "path": "ai_harness/artifacts/WD-001S/analysis_val.json",
+          "sha256": "bb78301bba4c0d2c997dd329fac805daf207a3fcc83f30d98a8c5f38e16126ba",
+          "bytes": 27026
+        },
+        {
+          "path": "ai_harness/artifacts/WD-001S/analyze_val.py",
+          "sha256": "2e694d60e1845ec8a23233911dff42da5985d3adda768fbb56dc1ea8b6d69489",
+          "bytes": 7639
+        }
+      ],
+      "summary": "Phase-A selection lock for WD-001 (144/144 validation-only runs, one split digest per seed). Selected: dense-CE lr 1e-4, wd 1e-3, 20 ep (60.33% val; exact top-1 tie with lr 3e-5 wd 1e-3 20 ep broken by lower CE 1.674 vs 1.687), flags none; sparse-CE lr 3e-5, wd 1e-3, 20 ep (58.91% val; 0.06 pp above lr 1e-4 wd 1e-3), flags lr edge, budget binds (flags do not change the selection, per pre-registration). Byte-identical copies of ai_harness/artifacts/WD-001/{selected.json, analysis_val.*, analyze_val.py}; selected.json sha256 a594923d719e34c4. Submitted before any phase-B run.",
+      "created": "2026-11-27T10:01:58+00:00",
+      "updated": "2026-11-27T10:06:55+00:00",
+      "stale": false
+    },
+    {
+      "id": "REVIEW-013",
+      "spec": {
+        "id": "REVIEW-013",
+        "title": "Independent review of WD-001S (phase-A selection lock for the weight-decay experiment WD-001)",
+        "role": "reviewer",
+        "description": "Review follows the submit-then-independent-review protocol. Check: (1) timing: WD-001 task.json and ledger add predate the first phase-A run (runs/WD-001/val_log.txt), analyze_val.py was written before phase-A results were read (file mtime 07:53Z vs val_log), and the WD-001S submit (2026-11-27T10:01:59Z) precedes the first line of runs/WD-001/test_log.txt; (2) WD-001S's copies are byte-identical to ai_harness/artifacts/WD-001/{selected.json, analysis_val.md, analysis_val.json, analyze_val.py}; (3) analyze_val.py implements the selection rule, budgets, flags and exploratory comparisons exactly as WD-001's task.json pre-registers them; (4) independently recompute the selection, the dense-CE exact top-1 tie and its CE tie-break, the flags (lr edge, budget binds for sparse-CE) and the exploratory paired CIs from runs/WD-001/val/**/done.json (and runs/LR-002 for the MSE references), without importing analyze_val.py; (5) no test data was touched in phase A (no test_* features read, no results.csv rows from phase wd-val); (6) the weight-decay groups logged in done.json (decay on encoder W/b and fc W/b only) and src/run_wdcheck.py's wrapper; user src/ files unchanged (git diff). Note the WD-001A ledger entry: added but never claimed (write paths overlapped WD-001), replaced by WD-001S; say whether this disclosure is adequate. Read-only outside this folder; no training or GPU. Record a verdict on WD-001S.",
+        "depends_on": [],
+        "write_paths": [
+          "ai_harness/artifacts/REVIEW-013"
+        ],
+        "acceptance": [
+          "Verdict on WD-001S recorded with a note citing the checks done",
+          "Selection and flags independently recomputed",
+          "Timing verified"
+        ]
+      },
+      "state": "done",
+      "owner": "reviewer-20261127-r",
+      "artifacts": [
+        {
+          "path": "ai_harness/artifacts/REVIEW-013/task.json",
+          "sha256": "fdf985e9ba4905c4e45a61938941d21b4f937908d9014a9eca4953ea0e7e64de",
+          "bytes": 1807
+        },
+        {
+          "path": "ai_harness/artifacts/REVIEW-013/report.md",
+          "sha256": "ee7b60eb2200a853b408711b2e516339b457f8be795ad542505bdd4af97b874e",
+          "bytes": 10937
+        },
+        {
+          "path": "ai_harness/artifacts/REVIEW-013/recompute.py",
+          "sha256": "117aa577b855c4ec4562943e8bfa750d35ff67d4da9f43222e95985b780ae8ca",
+          "bytes": 5790
+        }
+      ],
+      "summary": "Independent review of WD-001S: accepted; selection (dense-CE lr 1e-4 wd 1e-3 20 ep via exact-tie CE break; sparse-CE lr 3e-5 wd 1e-3 20 ep, flags lr edge + budget binds) recomputed from the 144 val done.json files without analyze_val.py, timing verified (submit 10:01:59Z before first wd-test 10:02:15Z), copies byte-identical, no phase-A test access, src/ unchanged; four optional notes (O-1..O-4).",
+      "created": "2026-11-27T10:02:20+00:00",
+      "updated": "2026-11-27T10:09:30+00:00",
+      "stale": false
+    },
+    {
+      "id": "REVIEW-014",
+      "spec": {
+        "id": "REVIEW-014",
+        "title": "Independent review of WD-001 (weight-decay check: phase-B ImageNetV2 results, analysis and report)",
+        "role": "reviewer",
+        "description": "Review follows the submit-then-independent-review protocol. Phase A's selection lock was already reviewed (WD-001S, REVIEW-013); do not redo it beyond confirming selected.json is unchanged. Check: (1) analyze.py implements WD-001 task.json's confirmatory family exactly (W1-W4 pooled over source/L080/L090 as per-seed mean of per-level differences, paired by seed 45-51, df 6, t 2.447, Holm over 4, meaningful at 1.0 and 0.5 pp) and loads the right RETEST-001 comparison runs (dense-M2048 and sparse-M2048 at lr 1e-4, linear at lr 3e-4, phase 'retest'); (2) independently recompute W1-W4, the per-level differences and the compression costs from runs/WD-001/results.csv and runs/RETEST-001/results.csv without importing analyze.py; (3) phase-B checks: 42 runs, settings equal selected.json, split digests equal SEED-001, wd groups, selected epochs, no duplicate test rows; (4) the overnight interruption and resume (runs/WD-001/test_log.txt; the deleted partial run sparse-CE L090 seed49 was re-run; no stale rows); (5) report.md: every number against analysis.md/json and your recomputation; whether the reading of W1 (detected negative but below tolerance, outside the pre-declared readings) and W2 (meaningful) is stated without overclaiming; the caveats (sparse-CE lr edge / budget binds, dense tie-break, tuning asymmetry, coupled L2, scope, test reuse); exploratory parts labeled; timeline. Read-only outside this folder; no training or GPU. Record a verdict on WD-001.",
+        "depends_on": [],
+        "write_paths": [
+          "ai_harness/artifacts/REVIEW-014"
+        ],
+        "acceptance": [
+          "Verdict on WD-001 recorded with a note citing the checks",
+          "Confirmatory family independently recomputed",
+          "Report numbers and wording checked"
+        ]
+      },
+      "state": "done",
+      "owner": "reviewer-20261127-t",
+      "artifacts": [
+        {
+          "path": "ai_harness/artifacts/REVIEW-014/task.json",
+          "sha256": "d187e989944d854c8eeed7fec8dd107abb7a895f29039103e16b5e8786d3f27b",
+          "bytes": 1881
+        },
+        {
+          "path": "ai_harness/artifacts/REVIEW-014/report.md",
+          "sha256": "0a90ca2b29a04c685ac8cbd17946834cb4873cceb485aacc19caafee392d03fb",
+          "bytes": 8684
+        },
+        {
+          "path": "ai_harness/artifacts/REVIEW-014/recompute.py",
+          "sha256": "7bf1d73b36c8998c98fe987e3cbc49c3b4246b44e42c480af6346473ac9bd2cf",
+          "bytes": 8649
+        }
+      ],
+      "summary": "Accepted WD-001: independent recompute reproduces W1-W4 (-0.29, -1.36, -0.35, -1.34 pp; all Holm-detected, W2/W4 meaningful) and all report numbers; phase-B checks and resume verified; five optional wording points, no substantive findings.",
+      "created": "2026-11-27T20:45:47+00:00",
+      "updated": "2026-11-27T20:51:08+00:00",
+      "stale": false
+    },
+    {
+      "id": "COORD-005",
+      "spec": {
+        "id": "COORD-005",
+        "title": "Add the accepted WD-001 weight-decay result to the shared status page, DECISIONS.md, RESEARCH_STATUS.md and the draft write-up",
+        "role": "coordinator",
+        "description": "User request (2026-11-27, 'Yes, update them'). WD-001 (accepted after REVIEW-014; selection lock WD-001S accepted after REVIEW-013; both reviews cross-reviewed) answered COORD-004 D's open question 'whether a weight-decay-tuned wide head would match the MSE head' and re-tested the CE-only wide head of COORD-004 C's ABL-001 row. Edit in place, per the harness supersession rule (this task's submission supersedes the earlier holders' copies): (1) ai_harness/artifacts/COORD-004/status.md (revision 2): a new B5 with W1-W4 and the caveats; the ABL-001 and compression-tolerance rows of section C; section D (weight-decay item answered; new open items: sparse-CE possibly under-trained, AdamW/decay scope untested); errata for slips found in REVIEW-013/REVIEW-014 and their cross-reviews (WD-001 report wording points O-1..O-5 and 'no detected change' in compression cost; REVIEW-013 submission note); process notes (WD-001A refused entry, overnight stop and rerun); a revision log entry. (2) ai_harness/artifacts/WRITE-001/report_draft.md (revision 3): a new results subsection for WD-001, matching edits to methods (pre-registration list, settings not re-tuned), limitations, conclusion, the tolerance box and Appendix B; revision log entry. (3) DECISIONS.md: a dated 'Update, 2026-11-27' section above 'Current state, 2026-11-26' and a change-log entry. (4) RESEARCH_STATUS.md: a dated 2026-11-27 update at the top; earlier updates kept as history. Use REVIEW-014's corrected wording (sparse top-5 and training-level gaps larger than dense; sparse gap 'about the same' at every level; 'no detected change' in compression cost, not 'no change'; sparse conclusion within the grid and 20-epoch budget). No experiments, no new numbers beyond WD-001's analysis.md/analysis.json and the accepted reviews, no edits to src/, done reports, the proposal or the bibliography. WORK_SUMMARY.md is updated by the coordinator outside this task.",
+        "depends_on": [
+          "WD-001",
+          "WD-001S",
+          "REVIEW-013",
+          "REVIEW-014",
+          "COORD-004",
+          "WRITE-002"
+        ],
+        "write_paths": [
+          "ai_harness/artifacts/COORD-004/status.md",
+          "ai_harness/artifacts/WRITE-001/report_draft.md",
+          "ai_harness/DECISIONS.md",
+          "ai_harness/RESEARCH_STATUS.md",
+          "ai_harness/artifacts/COORD-005"
+        ],
+        "acceptance": [
+          "Every WD-001 number matches WD-001 analysis.md/analysis.json or REVIEW-014",
+          "Nothing stated more strongly than the accepted WD-001 report as corrected by REVIEW-014 and the cross-reviews (W1 below tolerance and outside the pre-declared readings; W2 within the grid and 20-epoch budget; sparse-CE may be under-trained)",
+          "Earlier content preserved; changes recorded in each file's revision or change log",
+          "harness.py check passes with the earlier copies of status.md, report_draft.md, DECISIONS.md and RESEARCH_STATUS.md superseded"
+        ]
+      },
+      "state": "done",
+      "owner": "claude-orient-20261122-a",
+      "artifacts": [
+        {
+          "path": "ai_harness/artifacts/COORD-005/task.json",
+          "sha256": "2cf1baef55887541a2c372315a3d6ce7e36955f33c8c7b01097dc20f84a2646b",
+          "bytes": 2984
+        },
+        {
+          "path": "ai_harness/artifacts/COORD-004/status.md",
+          "sha256": "8efa0f2af02f09bd8a146e6600701e18fa120933519b5a755338a8af5a8715b3",
+          "bytes": 23712
+        },
+        {
+          "path": "ai_harness/artifacts/WRITE-001/report_draft.md",
+          "sha256": "7dd15a400253fd166a42047bb0a1dabbab8964a71e9106434959002113db0501",
+          "bytes": 32943
+        },
+        {
+          "path": "ai_harness/DECISIONS.md",
+          "sha256": "8c819b3c2b9a4102c75846be9cd44225e48731769aa954fb1a65b3b4749cb368",
+          "bytes": 18222
+        },
+        {
+          "path": "ai_harness/RESEARCH_STATUS.md",
+          "sha256": "39bab8c1fb73f7e614a04a081a2648847f9c585ed96c59dd027b16c2c0d4ce93",
+          "bytes": 12279
+        }
+      ],
+      "summary": "Added accepted WD-001 to shared files: COORD-004/status.md revision 2 (B5 W1-W4 with caveats, C rows for ABL-001 and compression tolerance, D answered + new open items, E2b wording errata from REVIEW-013/014 and cross-reviews, E3 WD-001A and overnight stop); report_draft.md revision 3 (new section 7.4, edits to 6.2, 6.3, 6.4, 9, 10, App. B); DECISIONS.md 'Update, 2026-11-27'; RESEARCH_STATUS.md 2026-11-27 update. No new numbers beyond WD-001 analysis.md/json; earlier content kept.",
+      "created": "2026-11-27T22:37:33+00:00",
+      "updated": "2026-11-27T22:43:41+00:00",
+      "stale": false
+    },
+    {
+      "id": "REVIEW-015",
+      "spec": {
+        "id": "REVIEW-015",
+        "title": "Independent review of COORD-005 (WD-001 added to the status page, DECISIONS.md, RESEARCH_STATUS.md and the draft write-up)",
+        "role": "reviewer",
+        "description": "Review COORD-005 (state review). Diff each of its four edited shared files against git HEAD (`git diff HEAD -- <file>`; the HEAD versions equal the previous ledger holders) and check: (1) every WD-001 number matches ai_harness/artifacts/WD-001/analysis.md or analysis.json, or REVIEW-014; (2) nothing is stated more strongly than the accepted WD-001 report as corrected by REVIEW-014 O-1..O-5 and the two cross-reviews (ledger review events on REVIEW-013 and REVIEW-014): W1 detected, below 1.0 and 0.5 pp, outside the pre-declared readings (post-hoc description); W2 meaningful within the pre-registered grid and 20-epoch budget; sparse-CE possibly under-trained; compression-cost differences 'no detected change'; (3) the errata table E2b attributes each slip correctly; (4) earlier content is preserved and only the described sections changed; revision/change logs are accurate; (5) cross-file consistency (status.md, DECISIONS.md, RESEARCH_STATUS.md, report_draft.md section 7.4 and conclusion); (6) `harness.py check` passes. Record the verdict on COORD-005 with `harness.py review COORD-005 --agent <you> --verdict accept|revise --note ...` before returning. Read-only apart from ai_harness/artifacts/REVIEW-015; no GPU.",
+        "depends_on": [],
+        "write_paths": [
+          "ai_harness/artifacts/REVIEW-015"
+        ],
+        "acceptance": [
+          "Each check reported with evidence",
+          "Findings separated into substantive (S-) and optional (O-) with suggested wording",
+          "Verdict recorded on COORD-005 by the reviewer"
+        ]
+      },
+      "state": "done",
+      "owner": "reviewer-20261127-v",
+      "artifacts": [
+        {
+          "path": "ai_harness/artifacts/REVIEW-015/task.json",
+          "sha256": "2782c110ab862bc02abb9a54cea454ec985ce4e5fabc4e67f71d202a10ece9a3",
+          "bytes": 1681
+        },
+        {
+          "path": "ai_harness/artifacts/REVIEW-015/report.md",
+          "sha256": "c7fdaad63342819040b500529a7d724fe66d442b90426fe4edcf7b36b2523bc7",
+          "bytes": 11344
+        },
+        {
+          "path": "ai_harness/artifacts/REVIEW-015/check_numbers.py",
+          "sha256": "0693d7a028f62423ec8dec7a509a062b8e4b20f7242791b88bf8c66f847d445e",
+          "bytes": 2294
+        }
+      ],
+      "summary": "Accepted COORD-005: all WD-001 numbers in status.md rev 2, report_draft.md rev 3, DECISIONS.md and RESEARCH_STATUS.md recomputed from analysis.json and match; W1 post-hoc/below tolerance and W2 grid/budget qualifiers kept; E2b attributions correct; only logged sections changed; harness check ok; no substantive findings, seven optional wording points (O-1..O-7).",
+      "created": "2026-11-27T22:40:09+00:00",
+      "updated": "2026-11-27T22:47:28+00:00",
+      "stale": false
+    },
+    {
+      "id": "COORD-006",
+      "spec": {
+        "id": "COORD-006",
+        "title": "Wording fixes to COORD-005's shared-file update from REVIEW-015 and its cross-review",
+        "role": "coordinator",
+        "description": "Follow-up to COORD-005 (accepted after REVIEW-015, cross-reviewed by reviewer-20261127-w, ledger review event on REVIEW-015). Apply in place, per the harness supersession rule: REVIEW-015 O-1 (status.md D 'answered' line keeps qualifiers), O-2 (draft section 10 dense clause: 'close but not all the way', detected, below tolerance), O-3 (status.md E2b REVIEW-013 row: the REVIEW-014 parenthetical is the coordinator's own note), O-4 (draft 6.3: seeds 45-51 'never used to choose learning rates or weight decay'), O-5 (RESEARCH_STATUS.md 2026-11-27 table header and COORD-005 row), O-6 (DECISIONS.md 'Still open': SYNTH-001, AdamW/all-parameter decay, other M), O-7 (status.md B5 and draft 6.2: reconstruction weight 1e-6, effectively off); cross-review point (b) (status.md C ABL-001 row: dense gaps 'detected, below tolerance'); and add REVIEW-015's 'not submitted' line to E2b's REVIEW-013 row pattern. Record the changes in each file's revision or change log. Wording only: no number changes, no other content change.",
+        "depends_on": [
+          "COORD-005",
+          "REVIEW-015"
+        ],
+        "write_paths": [
+          "ai_harness/artifacts/COORD-004/status.md",
+          "ai_harness/artifacts/WRITE-001/report_draft.md",
+          "ai_harness/DECISIONS.md",
+          "ai_harness/RESEARCH_STATUS.md",
+          "ai_harness/artifacts/COORD-006"
+        ],
+        "acceptance": [
+          "Each listed point applied as described; no other content change",
+          "No number changed",
+          "Logs record the changes",
+          "harness.py check passes with COORD-005's copies superseded"
+        ]
+      },
+      "state": "done",
+      "owner": "claude-orient-20261122-a",
+      "artifacts": [
+        {
+          "path": "ai_harness/artifacts/COORD-006/task.json",
+          "sha256": "e37d11196fa32e6016d1770b865d4e7afe790a6352edc3eb63e06eecf2d41556",
+          "bytes": 1624
+        },
+        {
+          "path": "ai_harness/artifacts/COORD-004/status.md",
+          "sha256": "9b87531c5558c4eefd48d8ac1bc519f8094c1547bd637939eb25e1cf891d21a9",
+          "bytes": 24909
+        },
+        {
+          "path": "ai_harness/artifacts/WRITE-001/report_draft.md",
+          "sha256": "f0b7cd32bf14b9d1e3cb37fdb65f3d599e7cfabc512891f520558d9e3c4c18a3",
+          "bytes": 33844
+        },
+        {
+          "path": "ai_harness/DECISIONS.md",
+          "sha256": "f5761c677610485db6a4f52afb8deed961c110beb32f7c5518efd7ffd7df69f4",
+          "bytes": 18619
+        },
+        {
+          "path": "ai_harness/RESEARCH_STATUS.md",
+          "sha256": "a31e97fb0aca19278aea067c428cae06904acd59f6b640ee509daec95e69e8d3",
+          "bytes": 12523
+        }
+      ],
+      "summary": "Wording fixes for REVIEW-015 O-1..O-7 and cross-review point (b): status.md revision 3 (D qualifiers, E2b transcription-pattern row, B5 reconstruction weight 1e-6, C dense gaps 'detected'), draft revision 4 (sec 10 dense clause, 6.3 'learning rates or weight decay', 6.2 reconstruction weight), DECISIONS Still open (SYNTH-001, WD-001 open items), RESEARCH_STATUS table note and rows. No number changed.",
+      "created": "2026-11-27T22:47:51+00:00",
+      "updated": "2026-11-27T22:49:50+00:00",
+      "stale": false
     }
   ],
   "events": [
@@ -3474,6 +3909,254 @@
       "agent": "reviewer-20261126-q",
       "detail": "Diffed %TEMP%/draft_before.md (sha f2233633, equals WRITE-001's accepted ledger hash) against current draft (2e76700c, equals WRITE-002 ledger). Diff touches only header (l.3), l.24, l.44-45, l.49, l.71, l.188, l.224, l.228 and new revision-log l.275-281: exactly items 1-7, nothing else. No pre-existing number changed; only additions are 3/3/7 and seeds 42-44/45-51, matching GRID-001 report l.147 and RETEST-001 seeds 45-51. Sources: DATASETS.md l.11 (.jpeg files) and l.63 (already JPEGs) support 'used as distributed, never re-compressed by us'; LIT-001 l.17 'evaluates original test images in the main experiment' (Maudgalya), l.19 Tang arXiv abstract only, l.18 Wei DOI + third-party abstract only, Makhzani absent from LIT-001 (so 'not inspected' correct); REVIEW-010 S-4 'for a single pair of models' supports 'per model pair'. No remaining text calls ImageNetV2 uncompressed/never-compressed (only quoted in revision log l.276). proposed_references.bib (7dab6166) and WRITE-001 task.json unchanged. harness check ok, lists WRITE-001 report_draft.md superseded. Non-blocking nit: l.44 now says 'Tang et al. abstract only' in the bullet lead and again '(abstract only inspected)' inline; redundant, optional to drop one.",
       "at": "2026-11-27T06:58:13+00:00"
+    },
+    {
+      "seq": 179,
+      "task": "WD-001",
+      "action": "add",
+      "agent": "coordinator",
+      "detail": "Added task specification",
+      "at": "2026-11-27T07:50:27+00:00"
+    },
+    {
+      "seq": 180,
+      "task": "WD-001",
+      "action": "claim",
+      "agent": "claude-orient-20261122-a",
+      "detail": "engineer",
+      "at": "2026-11-27T07:50:27+00:00"
+    },
+    {
+      "seq": 181,
+      "task": "WD-001A",
+      "action": "add",
+      "agent": "coordinator",
+      "detail": "Added task specification",
+      "at": "2026-11-27T10:01:29+00:00"
+    },
+    {
+      "seq": 182,
+      "task": "WD-001S",
+      "action": "add",
+      "agent": "coordinator",
+      "detail": "Added task specification",
+      "at": "2026-11-27T10:01:58+00:00"
+    },
+    {
+      "seq": 183,
+      "task": "WD-001S",
+      "action": "claim",
+      "agent": "claude-orient-20261122-a",
+      "detail": "engineer",
+      "at": "2026-11-27T10:01:59+00:00"
+    },
+    {
+      "seq": 184,
+      "task": "WD-001S",
+      "action": "submit",
+      "agent": "claude-orient-20261122-a",
+      "detail": "Phase-A selection lock for WD-001 (144/144 validation-only runs, one split digest per seed). Selected: dense-CE lr 1e-4, wd 1e-3, 20 ep (60.33% val; exact top-1 tie with lr 3e-5 wd 1e-3 20 ep broken by lower CE 1.674 vs 1.687), flags none; sparse-CE lr 3e-5, wd 1e-3, 20 ep (58.91% val; 0.06 pp above lr 1e-4 wd 1e-3), flags lr edge, budget binds (flags do not change the selection, per pre-registration). Byte-identical copies of ai_harness/artifacts/WD-001/{selected.json, analysis_val.*, analyze_val.py}; selected.json sha256 a594923d719e34c4. Submitted before any phase-B run.",
+      "at": "2026-11-27T10:01:59+00:00"
+    },
+    {
+      "seq": 185,
+      "task": "REVIEW-013",
+      "action": "add",
+      "agent": "coordinator",
+      "detail": "Added task specification",
+      "at": "2026-11-27T10:02:20+00:00"
+    },
+    {
+      "seq": 186,
+      "task": "REVIEW-013",
+      "action": "claim",
+      "agent": "reviewer-20261127-r",
+      "detail": "reviewer",
+      "at": "2026-11-27T10:02:38+00:00"
+    },
+    {
+      "seq": 187,
+      "task": "WD-001S",
+      "action": "review-accept",
+      "agent": "reviewer-20261127-r",
+      "detail": "REVIEW-013 (reviewer-20261127-r) accepts the WD-001S selection lock. Timing: WD-001 task.json mtime and ledger add/claim 07:50:27Z precede the sanity run (07:51:19Z) and phase A (val_log start 07:52:01Z, first done.json 07:52:59Z, last 10:00:47Z); WD-001S submit 10:01:59Z precedes test_log.txt creation (10:02:05Z), settings_test.json (10:02:10Z), the first [wd-test] line (10:02:15Z) and results.csv creation (10:03:10Z). The four copies are byte-identical to ai_harness/artifacts/WD-001 (sha256 a594923d.., 36fa8f38.., bb78301b.., 2e694d60..). An independent recomputation (REVIEW-013/recompute.py, integer correct counts, no import of analyze_val.py) over the 144 val done.json files reproduces selected.json exactly: dense-CE lr 1e-4 wd 1e-3 20 ep (18100/30000 = 60.333%, exact count tie with lr 3e-5 wd 1e-3 20 ep, broken by mean CE 1.67430 vs 1.68740), flags none; sparse-CE lr 3e-5 wd 1e-3 20 ep (17674/30000 = 58.913%, +0.060 pp over lr 1e-4 wd 1e-3 20 ep), flags lr edge and budget binds (median epoch 19.0); exploratory paired CIs and instability counts match analysis_val.md. analyze_val.py matches the task.json rule. No phase-A test access found (train path never calls test_features; results.csv has only wd-test rows and was created in phase B; settings_val says validation only). One split digest per seed; wd groups logged identically in all 144 runs (decay: encoder W/b, fc W/b; no decay: centre, decoder atoms); src/ tracked files have no diff vs HEAD. Minor notes (analyze_val.py mtime is 10 s after the first done.json; exploratory wd0 comparison is at the same lr/budget; the dense tie-break avoided an lr-edge config) are in the REVIEW-013 report.",
+      "at": "2026-11-27T10:06:55+00:00"
+    },
+    {
+      "seq": 188,
+      "task": "WD-001",
+      "action": "heartbeat",
+      "agent": "claude-orient-20261122-a",
+      "detail": "Heartbeat",
+      "at": "2026-11-27T10:07:50+00:00"
+    },
+    {
+      "seq": 189,
+      "task": "REVIEW-013",
+      "action": "submit",
+      "agent": "reviewer-20261127-r",
+      "detail": "Independent review of WD-001S: accepted; selection (dense-CE lr 1e-4 wd 1e-3 20 ep via exact-tie CE break; sparse-CE lr 3e-5 wd 1e-3 20 ep, flags lr edge + budget binds) recomputed from the 144 val done.json files without analyze_val.py, timing verified (submit 10:01:59Z before first wd-test 10:02:15Z), copies byte-identical, no phase-A test access, src/ unchanged; four optional notes (O-1..O-4).",
+      "at": "2026-11-27T10:08:42+00:00"
+    },
+    {
+      "seq": 190,
+      "task": "REVIEW-013",
+      "action": "review-accept",
+      "agent": "reviewer-20261127-s",
+      "detail": "Cross-review of REVIEW-013 (reviewer-20261127-s, read-only, no GPU). Read recompute.py (stdlib only, reads done.json/selected.json, writes nothing) and ran it: 144 runs, one split digest per seed, wd groups as logged in all runs, selected.json matches recomputation (True); every number in the report's Checks 4 reproduces (dense-CE 18100/30000 exact tie lr1e-4 vs lr3e-5 wd1e-3 20ep, CE 1.67430 vs 1.68740, next 60.2367%; sparse-CE 17674/30000, epochs [19,18,20,16,19,20] median 19, +0.060 pp = 18 images over lr1e-4 wd1e-3; flags none / lr edge+budget binds; all six exploratory CIs). Independent spot-check with my own per-config tally from done.json (best epoch by top-1 then CE, no reuse of recompute.py) gives the same counts, CEs and epochs. Timing: test_log.txt starts 03:02:05-07:00 = 10:02:05Z (ctime agrees) and first [wd-test] at 03:02:15 = 10:02:15Z, both after the WD-001S submit at 10:01:59Z; task.json 07:50:27Z precedes val_log start 07:52:01Z; analyze_val.py ctime=mtime 07:53:09Z vs first done.json 07:52:59Z, so O-1 is accurate. cmp confirms the four WD-001S copies are byte-identical. O-2 numbers check against analysis_val.md (dense best wd0 59.87 -> +0.46; sparse best wd0 58.60 -> +0.31); O-4's claim that the losing dense config would have carried lr edge + budget binds is correct (lr 3e-5, median 19). Verdict accept with no substantive findings is supported, and O-1..O-4 are proportionate (neither overclaimed nor underclaimed). Minor provenance nit only: the report says the reviewer did not submit REVIEW-013, but the ledger submit (10:08:42Z) is attributed to reviewer-20261127-r while the transcription note says the coordinator saved the report; worth one line in the ledger record but not an error in the review's substance. I did not re-check the no-test-access code path, the wrapper code, or git diff of src/.",
+      "at": "2026-11-27T10:09:30+00:00"
+    },
+    {
+      "seq": 191,
+      "task": "WD-001",
+      "action": "heartbeat",
+      "agent": "claude-orient-20261122-a",
+      "detail": "Heartbeat",
+      "at": "2026-11-27T20:34:56+00:00"
+    },
+    {
+      "seq": 192,
+      "task": "WD-001",
+      "action": "submit",
+      "agent": "claude-orient-20261122-a",
+      "detail": "Weight-decay check, 144 validation + 42 ImageNetV2 runs. Selected wd 1e-3 for both CE-only heads (dense lr 1e-4 by exact-tie CE tie-break; sparse lr 3e-5, lr-edge and budget-binds flags). Confirmatory, Holm over 4, seeds 45-51: W1 dense-CE+wd - dense-MSE -0.29 [-0.41,-0.17] (detected, below 0.5 and 1.0 pp; outcome outside both pre-declared readings); W2 sparse-CE+wd - sparse-MSE -1.36 [-1.52,-1.20] (meaningful: reconstruction loss gives a benefit tuned wd does not; caveat sparse-CE possibly under-trained); W3 dense-CE+wd - linear -0.35 [-0.57,-0.14]; W4 sparse-CE+wd - linear -1.34 [-1.63,-1.05]. Phase B stopped overnight by the user and resumed; partial run re-run.",
+      "at": "2026-11-27T20:45:46+00:00"
+    },
+    {
+      "seq": 193,
+      "task": "REVIEW-014",
+      "action": "add",
+      "agent": "coordinator",
+      "detail": "Added task specification",
+      "at": "2026-11-27T20:45:47+00:00"
+    },
+    {
+      "seq": 194,
+      "task": "REVIEW-014",
+      "action": "claim",
+      "agent": "reviewer-20261127-t",
+      "detail": "reviewer",
+      "at": "2026-11-27T20:46:06+00:00"
+    },
+    {
+      "seq": 195,
+      "task": "WD-001",
+      "action": "review-accept",
+      "agent": "reviewer-20261127-t",
+      "detail": "REVIEW-014 (reviewer-20261127-t): accept. analyze.py implements task.json's confirmatory family exactly (W1-W4 as per-seed mean over source/L080/L090 of per-level differences, seeds 45-51, t 2.447, Holm over 4, meaningful at 1.0 and 0.5 pp) and loads RETEST-001 phase 'retest' dense-M2048/sparse-M2048 (done.json lr 1e-4, 20 ep, wd 0) and linear (lr 3e-4, 20 ep, wd 1e-4). Independent recompute (ai_harness/artifacts/REVIEW-014/recompute.py, no import of analyze.py, incomplete-beta p-values) reproduces W1 -0.286 [-0.407,-0.165] Holm p 0.0023; W2 -1.362 [-1.520,-1.204] Holm 3e-6; W3 -0.355 [-0.566,-0.143] Holm 0.0063; W4 -1.344 [-1.634,-1.054] Holm 8.5e-5; all 0/7 positive, plus every per-level, cost, cost-difference, mean, top-5 and train-level number in analysis.md and report.md. Phase B: 42 done.json, settings equal selected.json (unchanged, sha a594923d, equal to WD-001S copy), 20-epoch histories, best_epoch consistent with history, one split digest per seed equal to SEED-001 and RETEST-001, wd groups decay [2048,512],[2048],[1000,2048],[1000] at 1e-3 / no decay [512],[2048,512] in 42/42, 0 unstable, selected-epoch medians 11 and 19 (16/21 at >=19), 70 rows, no duplicates, no leftover last.pt. Interruption: 29 runs done at stop; sparse-CE L090 s49 rerun after logged resume note; its first 8 logged epochs are identical to the interrupted attempt; no stale rows. Report states W1 as outside the pre-declared readings and W2 as the pre-declared 'benefit' reading with the lr-edge/budget caveat; caveats and disclosures present; artifact hashes match ledger; harness check ok. Optional wording points (top-5/train-level 'slightly below' understates sparse; sparse-CE-linear per-level gaps not listed; 'same at every level'; §9 conditional) are in the REVIEW-014 report.",
+      "at": "2026-11-27T20:48:42+00:00"
+    },
+    {
+      "seq": 196,
+      "task": "REVIEW-014",
+      "action": "submit",
+      "agent": "reviewer-20261127-t",
+      "detail": "Accepted WD-001: independent recompute reproduces W1-W4 (-0.29, -1.36, -0.35, -1.34 pp; all Holm-detected, W2/W4 meaningful) and all report numbers; phase-B checks and resume verified; five optional wording points, no substantive findings.",
+      "at": "2026-11-27T20:49:50+00:00"
+    },
+    {
+      "seq": 197,
+      "task": "REVIEW-014",
+      "action": "review-accept",
+      "agent": "reviewer-20261127-u",
+      "detail": "Cross-review accept. recompute.py is read-only (csv/json reads, prints only); I ran it and its output matches REVIEW-014's table and checks (W1-W4 -0.286/-1.362/-0.355/-1.344 pp, Holm 0.0023/3e-6/0.0063/8.5e-5, 42 runs, 70 rows, no duplicates, digests=SEED-001, wd groups 21+21, epochs median 11/19, 16/21 at >=19, no leftovers). My own script (not importing recompute/analyze) reproduced W1-W4 means and CIs from runs/WD-001 and RETEST-001 (retest phase, dense/sparse-M2048, linear) exactly. O-1 and O-2 numbers check against analysis.md (sparse top-5 0.72-0.84, train-level 1.47-1.70; dense train-level 0.12-0.30; sparse-CE - linear -0.99/-1.31/-1.73, all CIs exclude 0); only nit: dense top-5 lower bound is 0.05 from unrounded means but 0.06 from analysis.md's rounded table. Interrupted sparse-CE L090 seed49 attempt's 8 epoch lines are identical (timestamps stripped) to the rerun's epochs 1-8. Verdict and findings are proportionate; one missed optional wording point: WD-001 section 5 'Swapping MSE for weight decay does not change how much compression costs' reads non-significant cost differences as equivalence (dense L090 CI [-0.51,+0.92]); better 'no detected change'. Not an error in REVIEW-014.",
+      "at": "2026-11-27T20:51:08+00:00"
+    },
+    {
+      "seq": 198,
+      "task": "COORD-005",
+      "action": "add",
+      "agent": "coordinator",
+      "detail": "Added task specification",
+      "at": "2026-11-27T22:37:33+00:00"
+    },
+    {
+      "seq": 199,
+      "task": "COORD-005",
+      "action": "claim",
+      "agent": "claude-orient-20261122-a",
+      "detail": "coordinator",
+      "at": "2026-11-27T22:37:33+00:00"
+    },
+    {
+      "seq": 200,
+      "task": "COORD-005",
+      "action": "submit",
+      "agent": "claude-orient-20261122-a",
+      "detail": "Added accepted WD-001 to shared files: COORD-004/status.md revision 2 (B5 W1-W4 with caveats, C rows for ABL-001 and compression tolerance, D answered + new open items, E2b wording errata from REVIEW-013/014 and cross-reviews, E3 WD-001A and overnight stop); report_draft.md revision 3 (new section 7.4, edits to 6.2, 6.3, 6.4, 9, 10, App. B); DECISIONS.md 'Update, 2026-11-27'; RESEARCH_STATUS.md 2026-11-27 update. No new numbers beyond WD-001 analysis.md/json; earlier content kept.",
+      "at": "2026-11-27T22:39:58+00:00"
+    },
+    {
+      "seq": 201,
+      "task": "REVIEW-015",
+      "action": "add",
+      "agent": "coordinator",
+      "detail": "Added task specification",
+      "at": "2026-11-27T22:40:09+00:00"
+    },
+    {
+      "seq": 202,
+      "task": "REVIEW-015",
+      "action": "claim",
+      "agent": "reviewer-20261127-v",
+      "detail": "reviewer",
+      "at": "2026-11-27T22:40:24+00:00"
+    },
+    {
+      "seq": 203,
+      "task": "COORD-005",
+      "action": "review-accept",
+      "agent": "reviewer-20261127-v",
+      "detail": "REVIEW-015 (reviewer-20261127-v, read-only, no GPU). Diffed all four files against HEAD; HEAD hashes equal the previous ledger holders (COORD-004 status/DECISIONS/RESEARCH_STATUS, WRITE-002 draft) and current hashes equal COORD-005's submission. Recomputed every cited WD-001 number from analysis.json (W1-W4, per-level, top-5 0.054-0.160 / 0.716-0.837, train-level 0.12-0.30 / 1.47-1.70, costs and cost differences, epochs 16/21): all match. W1 labelled detected, below 1.0 and 0.5 pp and post-hoc; W2 limited to the grid and 20-epoch budget with the under-training caveat; 'no detected change' used for cost. E2b attributions match REVIEW-013/014 and ledger events 190/197. Only the logged sections changed; harness check ok with the earlier copies superseded. No substantive findings. Optional: D 'answered' line and draft conclusion drop the post-hoc/grid qualifiers; draft 6.3 widened 'learning rates' to 'settings' without a log entry; RESEARCH_STATUS lists COORD-005 as accepted before review and says all reviews were cross-reviewed (WRITE-002's was not); E2b's REVIEW-014 parenthetical is the coordinator's note, not -s's; CE-only heads keep reconstruction weight 1e-6.",
+      "at": "2026-11-27T22:43:41+00:00"
+    },
+    {
+      "seq": 204,
+      "task": "REVIEW-015",
+      "action": "submit",
+      "agent": "reviewer-20261127-v",
+      "detail": "Accepted COORD-005: all WD-001 numbers in status.md rev 2, report_draft.md rev 3, DECISIONS.md and RESEARCH_STATUS.md recomputed from analysis.json and match; W1 post-hoc/below tolerance and W2 grid/budget qualifiers kept; E2b attributions correct; only logged sections changed; harness check ok; no substantive findings, seven optional wording points (O-1..O-7).",
+      "at": "2026-11-27T22:45:13+00:00"
+    },
+    {
+      "seq": 205,
+      "task": "REVIEW-015",
+      "action": "review-accept",
+      "agent": "reviewer-20261127-w",
+      "detail": "Cross-review of REVIEW-015 (reviewer-20261127-w, read-only, no GPU). check_numbers.py is read-only (json.load of WD-001/analysis.json, prints only); ran it with ai360 python -B: output reproduces every number in REVIEW-015 Checks 2 (W1-W4 -0.286/-1.362/-0.355/-1.344, Holm 2.31e-3/2.97e-6/6.31e-3/8.47e-5, 0/7; per-level; means; top-5 0.054-0.160 / 0.716-0.837; train-level 0.121/0.303, 1.469/1.699; costs 0.73/2.24, 0.85/2.25; cost diffs max +0.206, L090 vs linear +0.736 [-0.007,+1.478] / +0.744 [+0.329,+1.159]; epochs med 11 0/21, med 19 16/21). Independent spot-check by hand from analysis.md tables (top-5, train-level, costs, W1-W4 as means of per-level gaps) matches all four COORD-005 diffs. Hashes: HEAD = COORD-004/WRITE-002 ledger (6f2691a7, 404ed484, 0cf02667, 2e76700c); current = COORD-005 artifacts; WD-001 report 2cada633 and analysis.json d8d47b35 = ledger; harness check ok. E2b attributions match REVIEW-013 O-1 (-r), events 190 (-s) and 197 (-u), REVIEW-014 O-1..O-5 (-t); WD-001S task.json and analyze_val.py contain the quoted wording. RESEARCH_STATUS 'Not yet started' and WD-001A pending match status; WRITE-002 has no cross-review (O-5 accurate). O-1..O-7 accurate and proportionate. Minor imprecisions only, not missed substantive problems: (a) Check 3 says W2 carries the under-training caveat in the C row and the draft conclusion, but those two carry only the grid/20-epoch-budget qualifier (that qualifier is the one REVIEW-014 O-4 required); (b) the status C ABL-001 row's '(both below tolerance)' for the dense gaps also omits 'detected', same class as O-1/O-2; (c) O-6's 'drops Write-up (SYNTH-001)' is partly covered by 'final write-up and proposal wording' (only the task ID is gone). Verdict accept with no substantive findings is supported.",
+      "at": "2026-11-27T22:47:28+00:00"
+    },
+    {
+      "seq": 206,
+      "task": "COORD-006",
+      "action": "add",
+      "agent": "coordinator",
+      "detail": "Added task specification",
+      "at": "2026-11-27T22:47:51+00:00"
+    },
+    {
+      "seq": 207,
+      "task": "COORD-006",
+      "action": "claim",
+      "agent": "claude-orient-20261122-a",
+      "detail": "coordinator",
+      "at": "2026-11-27T22:47:51+00:00"
+    },
+    {
+      "seq": 208,
+      "task": "COORD-006",
+      "action": "submit",
+      "agent": "claude-orient-20261122-a",
+      "detail": "Wording fixes for REVIEW-015 O-1..O-7 and cross-review point (b): status.md revision 3 (D qualifiers, E2b transcription-pattern row, B5 reconstruction weight 1e-6, C dense gaps 'detected'), draft revision 4 (sec 10 dense clause, 6.3 'learning rates or weight decay', 6.2 reconstruction weight), DECISIONS Still open (SYNTH-001, WD-001 open items), RESEARCH_STATUS table note and rows. No number changed.",
+      "at": "2026-11-27T22:48:44+00:00"
+    },
+    {
+      "seq": 209,
+      "task": "COORD-006",
+      "action": "review-accept",
+      "agent": "reviewer-20261127-x",
+      "detail": "Independent review (reviewer-20261127-x, read-only, no GPU). Baselines: scratchpad coord005 copies sha256 = COORD-005 ledger artifacts (8efa0f2a status, 7dd15a40 draft, 8c819b3c DECISIONS, 39bab8c1 RESEARCH_STATUS); current files = COORD-006 artifacts (9b87531c, f0b7cd32, f5761c67, a31e97fb). git diff --no-index --word-diff of all four: hunks are only the listed points plus headers/logs. status.md: O-1 D line matches REVIEW-015 suggested wording; O-3 parenthetical removed from REVIEW-013 row and moved to a new REVIEW-014/REVIEW-015 row credited to the coordinator, quotes match REVIEW-014 report l.5 and REVIEW-015 report l.5, submit times match ledger (-t 20:49:50Z event on REVIEW-014; -v 22:45:13Z event 204); O-7 B5 'reconstruction weight 1e-6, effectively off' matches WD-001 task.json HEADS and report l.66 (abl-none); (b) C ABL-001 row now 'both detected, below tolerance'. Draft: O-2 sec 10 matches suggested wording; O-4 6.3 'learning rates or weight decay' is accurate (LR-001/LR-002/WD-001 phase A used seeds 42-44; MSWEEP-001 task.json confirms seeds 45-51 as test seeds, as the log says); O-7 6.2 bullet. DECISIONS: O-6 Still open adds SYNTH-001, intermediate lr, AdamW/all-parameter decay, M other than 2048, consistent with status D 'New from WD-001'. RESEARCH_STATUS: O-5 header now names REVIEW-012..015 as cross-reviewed (REVIEW-015 cross-reviewed by -w, event 205; WRITE-002's ledger review correctly excluded); COORD-005 row Review = REVIEW-015. No existing number changed; new figures (1e-6, times, seeds) are sourced facts. Logs record each change (status rev 3, draft rev 4, DECISIONS change log, RESEARCH_STATUS Updated line). harness check ok, COORD-005 copies superseded, no stale. Minor, non-blocking: (i) RESEARCH_STATUS Updated line does not mention the added COORD-006 row, and that row sits in the 'Accepted since' table while in review ('see ledger'; becomes true on acceptance, same pattern O-5 flagged); (ii) 'after each checked the saved transcription' for REVIEW-014/015 is the coordinator's own note and is not independently evidenced in the ledger submit details, though consistent with the submits following the saved reports.",
+      "at": "2026-11-27T22:49:50+00:00"
     }
   ]
 }

@@ -1,6 +1,6 @@
 # DRAFT: Training an image classifier on heavily JPEG-compressed images: how much storage can we save, and does a sparse dictionary help?
 
-> **Draft for the team, written by the AI agent `claude-orient-20261122-a` (task WRITE-001, 2026-11-26; revision 1 after [REVIEW-012](../REVIEW-012/report.md); revision 2, task WRITE-002, after REVIEW-012's cross-review).**
+> **Draft for the team, written by the AI agent `claude-orient-20261122-a` (task WRITE-001, 2026-11-26; revision 1 after [REVIEW-012](../REVIEW-012/report.md); revision 2, task WRITE-002, after REVIEW-012's cross-review; revision 3, task COORD-005, 2026-11-27, adds the weight-decay check WD-001 as section 7.4; revision 4, task COORD-006, wording fixes after REVIEW-015).**
 > - **Sources:** every result comes from accepted, independently reviewed artifacts. The authoritative list is [`ai_harness/artifacts/COORD-004/status.md`](../COORD-004/status.md); per-task reports are linked in the text. Hardware and timing figures come from `WORK_SUMMARY.md` and the pilot reports; parameter counts and method details come from `src/`.
 > - **Layout:** sections 1–6 follow the order of `AI360_Project_Proposal_Template.tex`. Sections 7–10 (results, discussion, limitations, conclusion) are for the final report. The template limits the proposal to 4 pages, so the proposal version must be cut down from this.
 > - **Citations:** keys like `[nayak2023deep]` are BibTeX keys. Keys marked † are not in `references.bib` yet; proposed entries are in [`proposed_references.bib`](proposed_references.bib) and must be verified before use.
@@ -112,6 +112,7 @@ Because the backbone is frozen, features are extracted once per compression leve
   - initialization;
   - the reconstruction weight (1);
   - weight decay (1e-4 for linear, 0 for the dictionary heads).
+- **Follow-up check ([WD-001](../WD-001/report.md), section 7.4):** the two 2048-wide heads were also trained with cross-entropy only (reconstruction weight 1e-6, effectively off, as in ABL-001's cross-entropy-only setting) and with tuned weight decay instead. Weight decay was coupled L2 through Adam, on the encoder and classifier weights and biases. Learning rate, weight decay and budget were chosen on validation from 3 lr × 4 weight decays × {10, 20} epochs: lr 1e-4 (dense) and 3e-5 (sparse), weight decay 1e-3, 20 epochs for both.
 
 ### 6.3 Baselines and evaluation
 
@@ -124,7 +125,7 @@ Because the backbone is frozen, features are extracted once per compression leve
   - Comparisons are paired by seed: mean difference, paired-t 95% confidence interval and sign count.
   - A difference is **detected** if its CI excludes 0 and **meaningful** if, in addition, its mean is at least the tolerance.
   - Holm correction [holm1979simple†] is applied across each pre-registered test family.
-- **Pre-registration.** For the main experiments, the design and decision rule were recorded in a task ledger before the first run (SEED-001, MSWEEP-001, LR-001, LR-002, RETEST-001); for SEED-001, MSWEEP-001 and RETEST-001 this included the test family. The confirmatory experiment, RETEST-001, used seeds 45–51, which were never used to choose learning rates.
+- **Pre-registration.** For the main experiments, the design and decision rule were recorded in a task ledger before the first run (SEED-001, MSWEEP-001, LR-001, LR-002, RETEST-001, WD-001); for SEED-001, MSWEEP-001, RETEST-001 and WD-001 this included the test family. The confirmatory experiments, RETEST-001 and WD-001, used seeds 45–51, which were never used to choose learning rates or weight decay. WD-001's validation choice was locked in the ledger before any of its ImageNetV2 runs.
 - **Independent review.** Each experiment was independently reviewed, with numbers recomputed from logs, before acceptance. Section 8 describes how this changed our conclusions.
 
 ### 6.4 Accuracy tolerance
@@ -139,6 +140,7 @@ Because the backbone is frozen, features are extracted once per compression leve
 >   - Only the sparse M2048 and M4096 level-80 costs have CIs entirely above 0.5; the others' CIs dip below it.
 >   - The exploratory finding that the dictionary heads lose 0.5–0.7 pp more than linear at level 90 would also reach the tolerance.
 >   - The level-90 costs and the sparse − linear and sparse − dense results are unchanged.
+>   - The weight-decay results (section 7.4) are unchanged: the dense gaps (−0.29, −0.35) are below 0.5 pp and the sparse gaps (−1.36, −1.34) are above 1.0 pp.
 >   - Rewrite sections 7.2, 7.3, 8 and 10, including the "under 1 pp" wording for level 80, which becomes "a meaningful loss for every head".
 
 ## 7. Results
@@ -204,6 +206,27 @@ Pre-registered comparisons, pooled over the three training levels (pp):
 - **The 4096-atom head has the highest mean at every level.** Pooled over levels it leads the 2048-atom head by 0.63 pp and the linear head by 0.65 pp (7/7 seeds). Its lead over linear shrinks from +0.96 pp at source to +0.29 pp at level 90, where the CI includes 0. It doubles the available atoms, the active atoms and the parameter count at once, so we cannot say which causes the gain; extra capacity is the simplest explanation (an inference).
 - **No head reduces the cost of compression** (exploratory). At level 90 the sparse heads lose 0.68 and 0.67 pp more than the linear head (detected, uncorrected; dense +0.53), so the dictionary heads' advantage shrinks toward level 90. This should not be read as the linear head being more compression-tolerant: its smaller absolute cost goes with lower accuracy on the original images.
 
+### 7.4 Is the reconstruction loss needed? Weight decay instead
+
+The dictionary heads are trained with a feature-reconstruction loss next to cross-entropy. An early ablation at the old learning rate found that a 2048-wide head trained with cross-entropy alone did worse than the linear head ([ABL-001](../ABL-001/report.md)). That left an open question: does the reconstruction loss do something specific, or does it just act as a regularizer that tuned weight decay could replace? A pre-registered follow-up, [WD-001](../WD-001/report.md), trained both 2048-wide heads with cross-entropy and tuned weight decay instead (section 6.2), on the same seeds, levels and splits as section 7.2.
+
+Pre-registered comparisons, pooled over the three training levels (pp; Holm over these 4 tests):
+
+| Comparison | Mean | 95% CI | Seeds positive | Holm | Verdict (1 pp tolerance) |
+| --- | --- | --- | --- | --- | --- |
+| Dense, weight decay − dense, reconstruction loss | −0.29 | [−0.41, −0.17] | 0/7 | detected | below tolerance |
+| Sparse, weight decay − sparse, reconstruction loss | −1.36 | [−1.52, −1.20] | 0/7 | detected | **meaningful** |
+| Dense, weight decay − linear | −0.35 | [−0.57, −0.14] | 0/7 | detected | below tolerance |
+| Sparse, weight decay − linear | −1.34 | [−1.63, −1.05] | 0/7 | detected | **meaningful** |
+
+Mean accuracy (source / level 80 / level 90, %): dense with weight decay 48.90 / 48.17 / 46.66; sparse with weight decay 47.95 / 47.10 / 45.70.
+
+- **Dense head:** tuned weight decay comes close to the reconstruction loss but not all the way (−0.29 pp, detected, below the tolerance). This outcome was not one of the two readings we declared in advance, so this description is post-hoc.
+- **Sparse head:** within the tested grid and the 20-epoch budget, the reconstruction loss gives a benefit that tuned weight decay does not (−1.36 pp). The gap is about the same at every level (−1.34 to −1.40 pp). A caveat: the sparse weight-decay head chose the smallest learning rate in the grid, and 16 of its 21 test runs picked epoch 19 or 20 of 20, so it may be under-trained. A longer budget might narrow the gap; that would be a new experiment.
+- **Neither weight-decay head beats the linear head.** So the reconstruction loss matters for the sparse head, but with or without it no 2048-wide head is meaningfully better than linear (section 7.3).
+- **Compression cost** (exploratory): replacing the reconstruction loss with weight decay showed no detected change in how much compression costs (all differences within ±0.21 pp, CIs including 0; not an equivalence result).
+- **Tuning effort** favoured the weight-decay heads: each chose among 24 settings, while the reconstruction-loss heads had only a learning-rate check. So unequal tuning does not explain why they fall short.
+
 ## 8. Discussion: a head advantage that depended on the learning rate
 
 Our earlier experiments used Adam with lr 1e-3 for 10 epochs for every head. At that setting the sparse head beat the linear head by +0.97 pp [0.78, 1.15] on these same seeds, in all 7 seeds ([SEED-001](../SEED-001/report.md), pre-registered). Sparsity appeared to add +0.41 pp over the dense head.
@@ -223,7 +246,7 @@ The storage result held up through the same process. At lr 1e-3 the costs were a
 - **Frozen pretrained backbone.** Only the head is trained on compressed images. The backbone learned from original ImageNet images, so we do not show that a model can be learned from compressed data alone. End-to-end fine-tuning is a different and larger claim.
 - **One test set, reused.** ImageNetV2 was scored many times during the project, and its results guided which experiment we ran next, although no setting was tuned on it. Confidence intervals cover seed-to-seed variation on one fixed set of 10,000 images. The extra uncertainty from the choice of test images was not quantified; REVIEW-010's rough estimate (an inference, not measured) is about 0.2–0.3 pp per model pair, the same order as the smallest effects above.
 - **Confounded dictionary size.** The 4096-atom result changes M, k and the parameter count together, with no dense M4096 or parameter-matched control.
-- **Settings not re-tuned at the final learning rate:** k, initialization, the reconstruction weight and weight decay.
+- **Settings not re-tuned at the final learning rate:** k, initialization, the reconstruction weight, and weight decay for the linear head and the reconstruction-loss heads. Weight decay was tuned only for the cross-entropy-only heads of section 7.4, with coupled L2 (not AdamW), at M = 2048 only; the sparse one may be under-trained.
 - **Small per-class training set.** With 45 training images per class, results may differ from training on the full ImageNet training set (about 1,280 images per class on average; 1.28 M images).
 - **Absolute accuracy and the 98% target.** The proposal's stretch target of 98% absolute accuracy above 50:1 is not met. At level 80 (50.3:1) the heads reach about 48.4–49.1% on ImageNetV2; the original classifier, trained on the full 1.28 M-image ImageNet training set, reaches 57.28%. A different criterion, retention relative to each head's accuracy when trained on the original files, gives 98.3–98.9% at level 80.
 - **One codec and one setting:** Pillow 13.0.0 JPEG with 4:2:0 chroma subsampling, encoded at each image's native resolution. The model sees 224-px centre crops of the decoded images. Other codecs, resolutions or encoders were not tested.
@@ -233,6 +256,7 @@ The storage result held up through the same process. At lr 1e-3 the costs were a
 
 - **Storage.** Storing the training images as JPEG quality 20 shrinks them about 50-fold against raw pixels (50.3:1). That is 89.8% smaller than the original files, a saving that includes metadata stripped on re-encoding. A classifier head trained on them, on frozen ImageNet-pretrained ResNet-18 features, loses on average 0.53–0.85 pp of ImageNetV2 accuracy. The 95% CIs stay below 1 pp for the linear and dense heads but reach 1.08–1.17 pp for the sparse heads, so this is not an equivalence result. At quality 10 (86:1) it loses 1.5–2.2 pp.
 - **Sparse dictionary.** At properly tuned learning rates it does not beat a linear classifier (no detected difference) and does not make the head more tolerant of compression. Only the M4096/k1024 head is slightly more accurate (+0.6 pp pooled, below our tolerance). It doubles the available atoms, the active atoms and the parameters at once, so the cause is not identified.
+- **Reconstruction loss.** For the sparse head it is not replaceable by tuned weight decay within our grid and budget (−1.36 pp without it); for the dense head weight decay comes close but not all the way (−0.29 pp, detected, below our tolerance). Either way, no 2048-wide head beats the linear classifier.
 - **Method.** An apparent 1-pp advantage of the sparse head at a shared learning rate (Adam 1e-3, 10 epochs) did not survive validation-chosen learning rates, mainly because the linear baseline had been under-tuned. A pre-registered re-test on ImageNetV2 confirmed this.
 
 ⚠ **TEAM:** adjust the conclusion wording if the tolerance changes (section 6.4).
@@ -253,7 +277,7 @@ The storage result held up through the same process. At lr 1e-3 the costs were a
 
 ## Appendix B. Reproducibility
 
-- **Code:** `src/` (the user's model code, unchanged) and the runners `run_grid.py`, `run_grid_xavier.py`, `run_ablation.py`, `run_seeds.py`, `run_msweep.py`, `run_lrcheck.py`, `run_lrcheck2.py`, `run_retest.py`.
+- **Code:** `src/` (the user's model code, unchanged) and the runners `run_grid.py`, `run_grid_xavier.py`, `run_ablation.py`, `run_seeds.py`, `run_msweep.py`, `run_lrcheck.py`, `run_lrcheck2.py`, `run_retest.py`, `run_wdcheck.py`.
 - **Commands and runtimes:** `WORK_SUMMARY.md` section 4.
 - **Records:** every experiment's pre-registration (`task.json`), analysis script, logs and independent review are in `ai_harness/artifacts/<TASK>/`.
 - **Results tables:** `runs/<TASK>/results.csv`.
@@ -279,3 +303,15 @@ The storage result held up through the same process. At lr 1e-3 the costs were a
   - Maudgalya evaluates on original test images "in its main experiment".
   - The image-sampling estimate is "per model pair".
   - "Uncompressed accuracy" is now "accuracy when trained on the original files".
+- **Revision 3 (2026-11-27, task [COORD-005](../COORD-005/task.json); user: "Yes, update them")**, after the weight-decay check WD-001 was accepted (REVIEW-013, REVIEW-014, both cross-reviewed). Numbers from WD-001's `analysis.md`; wording follows REVIEW-014 and its cross-review:
+  - new **section 7.4** (weight decay instead of the reconstruction loss);
+  - section 6.2: a follow-up-check bullet; section 6.3: WD-001 added to the pre-registered and confirmatory experiments;
+  - section 6.4: the tolerance box notes the WD-001 verdicts do not change at 0.5 pp;
+  - section 9: the "not re-tuned" limitation now says where weight decay was tuned;
+  - section 10: a "Reconstruction loss" bullet; Appendix B: `run_wdcheck.py`.
+  - No earlier number or verdict changed.
+  - Accepted after [REVIEW-015](../REVIEW-015/report.md), cross-reviewed by `reviewer-20261127-w`.
+- **Revision 4 (2026-11-27, task [COORD-006](../COORD-006/task.json))**, wording only, no number changed, for REVIEW-015:
+  - **O-2:** section 10's dense clause says "close but not all the way (−0.29 pp, detected, below our tolerance)";
+  - **O-4:** section 6.3 says seeds 45–51 were never used to choose "learning rates or weight decay". Revision 3 had widened this to "settings"; seeds 45–51 were also MSWEEP-001's test seeds, and its results informed which heads RETEST-001 included;
+  - **O-7:** section 6.2's follow-up bullet gives the cross-entropy-only reconstruction weight (1e-6, effectively off).

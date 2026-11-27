@@ -1,0 +1,43 @@
+{
+  "heads": {
+    "dense-CE": {
+      "model": "dense",
+      "atoms": 2048,
+      "k": 2048,
+      "fc_init": "xavier"
+    },
+    "sparse-CE": {
+      "model": "sparse",
+      "atoms": 2048,
+      "k": 512,
+      "fc_init": "xavier"
+    }
+  },
+  "loss": {
+    "reconstruction_weight": 1e-06,
+    "dependency_weight": 0.0,
+    "coherence_weight": 0.0
+  },
+  "lrs": [
+    0.0003,
+    0.0001,
+    3e-05
+  ],
+  "wds": [
+    0.0,
+    0.001,
+    0.01,
+    0.1
+  ],
+  "epochs": 20,
+  "levels": [
+    "source",
+    "L090"
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "test_evaluation": "none (validation only)"
+}

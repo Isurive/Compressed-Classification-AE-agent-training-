@@ -1,6 +1,6 @@
 # Research task board
 
-Generated: 2026-11-27T06:58:36+00:00
+Generated: 2026-11-27T22:50:08+00:00
 
 Snapshot only. Run `py ai_harness/harness.py status` for current state.
 
@@ -46,6 +46,14 @@ Snapshot only. Run `py ai_harness/harness.py status` for current state.
 | WRITE-001 | coordinator | done | claude-orient-20261122-a | — | Draft the project write-up (methods, results, limitations) from accepted results |
 | REVIEW-012 | reviewer | done | reviewer-20261126-o | — | Independent review of WRITE-001 (draft write-up) |
 | WRITE-002 | coordinator | done | claude-orient-20261122-a | WRITE-001 | Wording fixes to the accepted write-up draft found in the cross-review of REVIEW-012 |
+| WD-001 | engineer | done | claude-orient-20261122-a | — | Regularized wide head: can tuned weight decay replace the reconstruction loss? (validation selection, then ImageNetV2 test) |
+| WD-001A | engineer | pending | — | — | WD-001 phase-A selection lock: submit selected.json before any ImageNetV2 run |
+| WD-001S | engineer | done | claude-orient-20261122-a | — | WD-001 phase-A selection lock: submit selected.json before any ImageNetV2 run |
+| REVIEW-013 | reviewer | done | reviewer-20261127-r | — | Independent review of WD-001S (phase-A selection lock for the weight-decay experiment WD-001) |
+| REVIEW-014 | reviewer | done | reviewer-20261127-t | — | Independent review of WD-001 (weight-decay check: phase-B ImageNetV2 results, analysis and report) |
+| COORD-005 | coordinator | done | claude-orient-20261122-a | WD-001, WD-001S, REVIEW-013, REVIEW-014, COORD-004, WRITE-002 | Add the accepted WD-001 weight-decay result to the shared status page, DECISIONS.md, RESEARCH_STATUS.md and the draft write-up |
+| REVIEW-015 | reviewer | done | reviewer-20261127-v | — | Independent review of COORD-005 (WD-001 added to the status page, DECISIONS.md, RESEARCH_STATUS.md and the draft write-up) |
+| COORD-006 | coordinator | done | claude-orient-20261122-a | COORD-005, REVIEW-015 | Wording fixes to COORD-005's shared-file update from REVIEW-015 and its cross-review |
 
 ## Submitted evidence
 
@@ -85,3 +93,10 @@ Snapshot only. Run `py ai_harness/harness.py status` for current state.
 - **WRITE-001 (done)**: `ai_harness/artifacts/WRITE-001/task.json`, `ai_harness/artifacts/WRITE-001/report_draft.md`, `ai_harness/artifacts/WRITE-001/proposed_references.bib`
 - **REVIEW-012 (done)**: `ai_harness/artifacts/REVIEW-012/task.json`, `ai_harness/artifacts/REVIEW-012/report.md`
 - **WRITE-002 (done)**: `ai_harness/artifacts/WRITE-002/task.json`, `ai_harness/artifacts/WRITE-001/report_draft.md`
+- **WD-001 (done)**: `ai_harness/artifacts/WD-001/task.json`, `ai_harness/artifacts/WD-001/report.md`, `ai_harness/artifacts/WD-001/analyze_val.py`, `ai_harness/artifacts/WD-001/analyze.py`, `ai_harness/artifacts/WD-001/selected.json`, `ai_harness/artifacts/WD-001/analysis_val.md`, `ai_harness/artifacts/WD-001/analysis_val.json`, `ai_harness/artifacts/WD-001/analysis.md`, `ai_harness/artifacts/WD-001/analysis.json`, `ai_harness/artifacts/WD-001/results.csv`, `ai_harness/artifacts/WD-001/logs/sanity_log.txt`, `ai_harness/artifacts/WD-001/logs/val_log.txt`, `ai_harness/artifacts/WD-001/logs/test_log.txt`, `ai_harness/artifacts/WD-001/logs/settings_val.json`, `ai_harness/artifacts/WD-001/logs/settings_test.json`, `src/run_wdcheck.py`
+- **WD-001S (done)**: `ai_harness/artifacts/WD-001S/task.json`, `ai_harness/artifacts/WD-001S/selected.json`, `ai_harness/artifacts/WD-001S/analysis_val.md`, `ai_harness/artifacts/WD-001S/analysis_val.json`, `ai_harness/artifacts/WD-001S/analyze_val.py`
+- **REVIEW-013 (done)**: `ai_harness/artifacts/REVIEW-013/task.json`, `ai_harness/artifacts/REVIEW-013/report.md`, `ai_harness/artifacts/REVIEW-013/recompute.py`
+- **REVIEW-014 (done)**: `ai_harness/artifacts/REVIEW-014/task.json`, `ai_harness/artifacts/REVIEW-014/report.md`, `ai_harness/artifacts/REVIEW-014/recompute.py`
+- **COORD-005 (done)**: `ai_harness/artifacts/COORD-005/task.json`, `ai_harness/artifacts/COORD-004/status.md`, `ai_harness/artifacts/WRITE-001/report_draft.md`, `ai_harness/DECISIONS.md`, `ai_harness/RESEARCH_STATUS.md`
+- **REVIEW-015 (done)**: `ai_harness/artifacts/REVIEW-015/task.json`, `ai_harness/artifacts/REVIEW-015/report.md`, `ai_harness/artifacts/REVIEW-015/check_numbers.py`
+- **COORD-006 (done)**: `ai_harness/artifacts/COORD-006/task.json`, `ai_harness/artifacts/COORD-004/status.md`, `ai_harness/artifacts/WRITE-001/report_draft.md`, `ai_harness/DECISIONS.md`, `ai_harness/RESEARCH_STATUS.md`

@@ -1,10 +1,10 @@
 # Work summary: from dataset download to reviewed results
 
-*Written by the AI agent `claude-orient-20261122-a` for teammates joining the project. Last updated 2026-11-26.*
-*Covers everything done after the datasets were downloaded (2026-11-24 to 2026-11-26), up to the learning-rate checks (LR-001, LR-002) and the confirmatory re-test at tuned learning rates (RETEST-001).*
+*Written by the AI agent `claude-orient-20261122-a` for teammates joining the project. Last updated 2026-11-27.*
+*Covers everything done after the datasets were downloaded (2026-11-24 to 2026-11-27), up to the confirmatory re-test at tuned learning rates (RETEST-001) and the weight-decay check (WD-001).*
 *Detailed, reviewer-checked reports are linked throughout. When this file and a report disagree, the report wins, except where [COORD-004/status.md](ai_harness/artifacts/COORD-004/status.md) lists a correction.*
 *A reviewed **draft of the write-up** is at [WRITE-001/report_draft.md](ai_harness/artifacts/WRITE-001/report_draft.md) (see Section 7).*
-*The authoritative one-page list of accepted results is now [COORD-004/status.md](ai_harness/artifacts/COORD-004/status.md) (2026-11-26, reviewed). It replaces `COORD-002/status.md`, which is kept as history. `ai_harness/DECISIONS.md` has a matching "Current state, 2026-11-26".*
+*The authoritative one-page list of accepted results is now [COORD-004/status.md](ai_harness/artifacts/COORD-004/status.md) (2026-11-26; revisions 2 and 3 on 2026-11-27 add WD-001, Step 14; each revision reviewed). It replaces `COORD-002/status.md`, which is kept as history. `ai_harness/DECISIONS.md` has a matching "Update, 2026-11-27" above its "Current state, 2026-11-26".*
 
 ## TL;DR
 
@@ -26,10 +26,13 @@
   - the **4096-atom head** (k = 1024) is the most accurate head: **+0.63** over the 2048-atom head and **+0.65** over linear, in all 7 seeds, but below the 1-point tolerance. M, k and parameter count double together, so the cause can't be pinned down.
 - **Why this differs from earlier results:** the earlier "sparse beats linear by about 1 point" and "sparsity adds about 0.4 points" (GRID-002, SEED-001) were measured at Adam lr 1e-3, which was wrong for every head; the linear head was under-tuned by about 2 points (LR-001, LR-002). Those measurements are correct as measured, but the head claims are **superseded**.
 - **Compression tolerance:** no head makes accuracy drop less under compression. At level 90 the dictionary heads lose 0.5–0.7 points *more* than linear (exploratory), so their edge over linear shrinks toward level 90 (sparse M4096 +0.29 points, sparse M2048 −0.33).
+- **Weight decay instead of the reconstruction loss** (WD-001, confirmatory, 2026-11-27): a 2048-wide head trained with cross-entropy and tuned weight decay ends up **0.29 points below** the same head trained with the reconstruction loss (dense; detected but below tolerance) and **1.36 points below** (sparse; meaningful). Neither beats linear. The reconstruction loss therefore does something weight decay does not, at least for the sparse head (Step 14).
 - All test results are conditional on the one fixed ImageNetV2 test set (10,000 images) and on frozen pretrained ResNet-18 features.
 - **Status:**
   - Every experiment was checked by independent reviewer agents and accepted. The reviewers reproduced the numbers.
   - SEED-001, MSWEEP-001 (the M sweep), LR-001 and LR-002 (the lr checks), RETEST-001 (the re-test) and their reviews are accepted (REVIEW-010 was cross-reviewed and accepted by `reviewer-20261126-l`).
+  - WD-001 (the weight-decay check), its selection lock WD-001S and their reviews REVIEW-013 and REVIEW-014 are accepted, each review cross-reviewed (Step 14).
+- **Roadmap:** step 2 ("complete Claude's suggested experiments: additional seeds, weight decay, clean M sweep") is now complete: SEED-001, WD-001 and MSWEEP-001.
 
 ## 1. Setup you need to reproduce anything
 
@@ -124,6 +127,7 @@ Your own code is in `src/`: `main.py`, `sparse_workflow.py`, `image_data.py`, `c
 
 - **Not ruled out:** any regularizer might do what MSE does, since the wide head had no weight decay.
   - **⚠ Superseded by RETEST-001 (Step 13):** these gains were measured against the under-tuned linear head (lr 1e-3). At tuned rates the MSE-trained sparse head only ties linear, so "MSE is what lets a wide head beat linear" no longer holds. The wide head with plain cross-entropy was not re-tested.
+  - **Answered by WD-001 (Step 14):** re-tested at tuned rates with tuned weight decay. Weight decay closes most of the gap for the dense head (0.29 points left) but not for the sparse head (1.36 points left).
 - **Report:** `ai_harness/artifacts/ABL-001/report.md`.
 
 ### Step 7: first independent review (REVIEW-002)
@@ -284,6 +288,46 @@ Your own code is in `src/`: `main.py`, `sparse_workflow.py`, `image_data.py`, `c
 - **Review (REVIEW-010, `reviewer-20261126-k`):** first *revise*, wording only; every number, the timing and the code reproduced. The fixes: give the CI with the level-80 headline, don't call the M4096 gain "capacity", don't call the level-90 pattern a reversal, and state that the CIs are conditional on the fixed test images. **Process slip:** I edited the report before the reviewer's verdict was recorded, so the ledger refused it. The task was recovered, reclaimed and resubmitted, with the revise verdict written in the recover note. Revision 1 was then **accepted**.
 - **Report:** `ai_harness/artifacts/RETEST-001/report.md`.
 
+### Step 14: can tuned weight decay replace the reconstruction loss? (WD-001, 2026-11-27)
+- **Why:** ABL-001 found that a 2048-wide head trained with plain cross-entropy (CE) overfits and that the feature-reconstruction (MSE) loss rescues it, but that head had no weight decay. This was the one unrun item of roadmap step 2 ("weight decay"); you approved it ("ok lets do the weight decay").
+- **Design** (pre-registered in `task.json` before any run):
+  - Two CE-only heads: dense-CE (M 2048, all atoms active) and sparse-CE (M 2048, k 512). Weight decay (coupled L2 in Adam, as the linear head uses) on the encoder and classifier weights and biases only.
+  - New wrapper `src/run_wdcheck.py`; your `src/` files are unchanged. At weight decay 0 it reproduced an ABL-001 run exactly.
+  - **Phase A (validation only, 144 runs, about 2 h 9 min):** lr {3e-4, 1e-4, 3e-5} x weight decay {0, 1e-3, 1e-2, 1e-1}, budgets 10 or 20 epochs, seeds 42–44, levels source/90.
+  - The selection was **locked in the ledger (task WD-001S) before any ImageNetV2 run**.
+  - **Phase B (ImageNetV2, 42 runs, about 34 min):** each head at its selected setting, seeds 45–51 x source/80/90. Compared with RETEST-001's MSE-trained heads and linear head on the same seeds and splits. 4 pre-registered tests, Holm-corrected.
+- **Selected (validation):** weight decay 1e-3 for both heads, 20 epochs.
+  - dense-CE: lr 1e-4. It tied exactly with lr 3e-5 and won on the pre-registered tie-break (lower validation loss).
+  - sparse-CE: lr 3e-5, the smallest lr in the grid, and most runs peaked at epoch 19–20 of 20. Both are flagged: the head may be under-trained.
+  - Weight decay 1e-2 and 1e-1 were far too strong.
+- **Result (ImageNetV2, points, seeds 45–51, pooled over levels):**
+
+  | Pre-registered test | Mean | 95% CI | Verdict |
+  | --- | --- | --- | --- |
+  | W1 dense-CE + wd − dense-MSE | −0.29 | [−0.41, −0.17] | detected (7/7 seeds below), below the 0.5 and 1.0 tolerances |
+  | W2 sparse-CE + wd − sparse-MSE | −1.36 | [−1.52, −1.20] | meaningful: the reconstruction loss gives a benefit weight decay does not |
+  | W3 dense-CE + wd − linear | −0.35 | [−0.57, −0.14] | detected, below tolerance |
+  | W4 sparse-CE + wd − linear | −1.34 | [−1.63, −1.05] | meaningful |
+
+  - Mean top-1 at source / 80 / 90: dense-CE 48.90 / 48.17 / 46.66; sparse-CE 47.95 / 47.10 / 45.70 (compare Step 13's table).
+  - W1's outcome (detected but below tolerance) was not one of the two pre-declared readings; "close, but not all the way" is a post-hoc description.
+  - Exploratory: swapping MSE for weight decay shows no detected change in the compression cost (all differences within ±0.21 points, CIs include 0, but wide: up to [−0.51, +0.92] at level 90).
+- **Caveats:** sparse-CE may be under-trained (lr edge; a longer budget would be a new, post-hoc experiment). The tuning effort favoured the CE heads (24 candidates vs an lr-only check for the MSE heads), so it does not explain the gap. Coupled L2 is not AdamW. One backbone, M 2048 only. ImageNetV2 has been reused many times.
+- **Process notes:**
+  - You stopped the process overnight with 29/42 phase-B runs done. The one interrupted run (sparse-CE, level 90, seed 49) was deleted and re-run from scratch; its first 8 epochs match the interrupted attempt exactly.
+  - A first attempt at the selection-lock task, **WD-001A**, was refused by the harness (its file paths overlapped WD-001's). It stays `pending` with no work and should be ignored; WD-001S replaced it.
+- **Reviews:**
+  - **REVIEW-013** (`reviewer-20261127-r`) accepted the selection lock after recomputing it. Cross-reviewed and accepted by `reviewer-20261127-s`.
+  - **REVIEW-014** (`reviewer-20261127-t`) accepted WD-001: every number recomputed (with a different p-value method). Cross-reviewed by `reviewer-20261127-u`: accepted; it confirmed every number and the interrupted-run match, and added one wording point (the report says swapping MSE for weight decay "does not change" the compression cost; read it as no *detected* change, since the dense level-90 CI is [−0.51, +0.92] points).
+  - Optional wording points left in the locked report (carry the corrected wording into any status or write-up update):
+    - the report's "CE heads at or slightly below the MSE heads" on top-5 and training-level accuracy fits dense only; sparse-CE is 0.72–0.84 points below on top-5 and 1.47–1.70 below at the training level;
+    - "the sparse gap is the same at every level" means about the same (−1.34 to −1.40; descriptive);
+    - the sparse conclusion holds within the pre-registered grid and 20-epoch budget.
+- **Report:** `ai_harness/artifacts/WD-001/report.md`.
+- **Shared files updated (2026-11-27):** with your OK ("Yes, update them"), COORD-005 added WD-001 to the status page (`COORD-004/status.md` section B5, plus the ABL-001 row in C, section D and a table of the wording slips above in E2b), to the draft write-up (new section 7.4, plus small edits to sections 6, 9 and 10), to `DECISIONS.md` and to `RESEARCH_STATUS.md`, using the corrected wording.
+  - REVIEW-015 (`reviewer-20261127-v`) accepted it with every number recomputed and seven optional wording points; cross-reviewed and accepted by `reviewer-20261127-w`, who added one more.
+  - COORD-006 applied all eight wording points (no number changed), reviewed and accepted by `reviewer-20261127-x`.
+
 ## 3. What we can and cannot claim
 
 **Can claim** (measured, reviewed):
@@ -291,6 +335,7 @@ Your own code is in `src/`: `main.py`, `sparse_workflow.py`, `image_data.py`, `c
 - **The sparse-dictionary head is no better than a tuned linear head** (RETEST-001): +0.02 points, no detected difference. Top-k sparsity at equal width adds +0.09 points, below the tolerance and not robust to multiplicity.
 - **The 4096-atom head (k = 1024) is the most accurate**, by +0.63 over the 2048-atom head and +0.65 over linear (robust, all 7 seeds), but below the 1-point tolerance. M, k and the parameter count double together, so this does not show that more atoms, or sparsity, are what helps.
 - **lr 1e-3 was a poor setting for every head** (LR-001, LR-002, confirmed on ImageNetV2 by RETEST-001): tuning raised every head by 1.0–2.0 points.
+- **Tuned weight decay does not fully replace the reconstruction loss** (WD-001, confirmatory): a CE-only 2048-wide head with tuned weight decay is 0.29 points below the MSE-trained head for the dense head (detected, below tolerance) and 1.36 points below for the sparse head (meaningful, within the pre-registered grid and 20-epoch budget). Neither weight-decay head beats linear.
 - **Superseded (correct as measured at lr 1e-3, but lr-conditional):** "sparse beats linear by about 1 point" (GRID-002, SEED-001), "sparsity adds about 0.4 points" (SEED-001) and "the reconstruction loss is what lets a wide head beat linear" (ABL-001), which also rested on comparisons with the under-tuned linear head.
 
 **Cannot claim:**
@@ -299,6 +344,7 @@ Your own code is in `src/`: `main.py`, `sparse_workflow.py`, `image_data.py`, `c
 - **"98% accuracy at 50:1"** in absolute terms. Heads reach about 46–54% against 57% for the original classifier. Relative to each head's own uncompressed accuracy, level 80 retains about 98%, within noise.
 - **"More available atoms, with everything else equal, helps."** A larger dictionary at a fixed active fraction helps (MSWEEP-001: +1.1 points per doubling at lr 1e-3; RETEST-001: +0.63 for 4096 vs 2048 at tuned rates), but M, k and the parameter count rise together.
 - **"The sparse dictionary is a better head."** At tuned learning rates it ties linear (+0.02) and dense (+0.09).
+- **"The reconstruction loss makes a head better than linear."** It only makes the wide head as good as linear; without it (even with tuned weight decay) the wide heads fall below linear (WD-001).
 
 **Caveats:**
 - ImageNetV2 results guided which experiment to run next, though no settings were tuned on it.
@@ -323,10 +369,12 @@ python -B -u run_msweep.py grid; python -B -u run_msweep.py summary             
 python -B -u run_lrcheck.py grid                                                                                       # ~23 min, validation only
 python -B -u run_lrcheck2.py grid                                                                                      # ~47 min, validation only
 python -B -u run_retest.py grid                                                                                        # ~48 min, ImageNetV2 re-test
+python -B -u run_wdcheck.py sanity; python -B -u run_wdcheck.py val                                                    # ~2 h 10 min, validation only
+python -B -u run_wdcheck.py test                                                                                       # ~34 min, needs ai_harness/artifacts/WD-001/selected.json
 cd ..
 python -B -u src/build_jpeg_dataset.py Datasets/imagenet-1k runs/GRID-001/jpeg_variants --levels 20 60 80 85 90 95 100 --splits val   # ~90 min CPU
 python -B ai_harness/artifacts/GRID-001/pixel_check.py
-python -B ai_harness/artifacts/GRID-001/analyze.py      # likewise GRID-002, ABL-001, SEED-001, MSWEEP-001, LR-001, LR-002, RETEST-001
+python -B ai_harness/artifacts/GRID-001/analyze.py      # likewise GRID-002, ABL-001, SEED-001, MSWEEP-001, LR-001, LR-002, RETEST-001, WD-001 (plus WD-001/analyze_val.py)
 ```
 
 - **Resuming:** every phase skips runs that already finished (it checks for `done.json`).
@@ -337,7 +385,7 @@ python -B ai_harness/artifacts/GRID-001/analyze.py      # likewise GRID-002, ABL
 | Path | Contents | Size |
 | --- | --- | --- |
 | `runs/GRID-001/` | `results.csv` and `summary.csv` (all numbers), tuning files, cached features, checkpoints, JPEG variants with `manifest.csv` | about 14 GB + 5.3 GB of JPEG variants |
-| `runs/GRID-002/`, `runs/ABL-001/`, `runs/SEED-001/`, `runs/MSWEEP-001/`, `runs/LR-001/`, `runs/LR-002/`, `runs/RETEST-001/` | Results and `best.pt` checkpoints (`last.pt` deleted). The LR-001/LR-002/RETEST-001 `done.json` files also hold the per-epoch history; RETEST-001's `results.csv` has no lr column, so join on `done.json`. | 2.7, 3.2, 2.3, 3.3, 3.1, 3.2 and 3.7 GB |
+| `runs/GRID-002/`, `runs/ABL-001/`, `runs/SEED-001/`, `runs/MSWEEP-001/`, `runs/LR-001/`, `runs/LR-002/`, `runs/RETEST-001/`, `runs/WD-001/` | Results and `best.pt` checkpoints (`last.pt` deleted). The LR-001/LR-002/RETEST-001/WD-001 `done.json` files also hold the per-epoch history; RETEST-001's `results.csv` has no lr column, so join on `done.json`. | 2.7, 3.2, 2.3, 3.3, 3.1, 3.2, 3.7 and 10 GB |
 | `runs/ENG-004/`, `runs/ENG-005/` | The pilot runs | small |
 | `ai_harness/artifacts/<TASK>/` | Report, logs and analysis for every task | small |
 | `ai_harness/artifacts/COORD-004/status.md` | **One-page list of accepted results and corrections** (replaces `COORD-002/status.md`, kept as history) | small |
@@ -351,10 +399,14 @@ python -B ai_harness/artifacts/GRID-001/analyze.py      # likewise GRID-002, ABL
   - Start with `AGENTS.md`, `ai_harness/START_HERE.md` and the "Current state, 2026-11-26" section of `ai_harness/DECISIONS.md`.
   - `py ai_harness/harness.py status` shows the queue.
   - `py ai_harness/harness.py check` verifies every submitted file's checksum.
-- **State on 2026-11-26:**
-  - 36 tasks done; nothing in review.
-  - SEED-001, MSWEEP-001, LR-001, LR-002, RETEST-001, COORD-004, WRITE-001, WRITE-002 and REVIEW-006 to REVIEW-012 accepted.
-  - **WRITE-001 (draft write-up):** REVIEW-012 (`reviewer-20261126-o`) checked every number (all correct) and first asked for nine wording fixes: overstatements, where the learning rates came from, the per-level M4096 margin, the 0.5-point tolerance box, the JPEG encoding resolution, and the 98% target (not met). Revision 1 was accepted.   - **Cross-review of REVIEW-012** (`reviewer-20261126-p`, accepted) found that REVIEW-012's suggested wording had put one factual error into the accepted draft: it called ImageNetV2 "never-compressed", but its files are JPEGs (used as distributed, never re-compressed by us). It also found small imprecisions (duplicate-group counts, what was inspected, "per model pair"). These were fixed in **draft revision 2 (WRITE-002)**, accepted by `reviewer-20261126-q`; WRITE-002's copy of `report_draft.md` supersedes WRITE-001's.
+- **State on 2026-11-27:**
+  - 43 tasks done (7 new today: WD-001S, REVIEW-013, WD-001, REVIEW-014, COORD-005, REVIEW-015, COORD-006); nothing in review.
+  - SEED-001, MSWEEP-001, LR-001, LR-002, RETEST-001, COORD-004, COORD-005, COORD-006, WRITE-001, WRITE-002, WD-001S, WD-001 and REVIEW-006 to REVIEW-015 accepted.
+  - **WD-001A** is an empty `pending` entry (a refused first attempt at the WD-001 selection lock); ignore it. The harness cannot close a pending task.
+  - **WD-001 (weight-decay check):** accepted on first review (REVIEW-014, no substantive findings); its selection lock WD-001S was reviewed separately (REVIEW-013). Both reviews were cross-reviewed. Small known slips: REVIEW-013 says it had not submitted itself, which was true when written (it submitted afterwards at the coordinator's request); REVIEW-013 O-1 notes the WD-001 analysis scripts were last saved 10 s after the first of 144 validation runs finished (the rule was already fixed in `task.json`).
+  - **COORD-005 / COORD-006 (WD-001 added to the shared files and the draft):** accepted on first review (REVIEW-015, no substantive findings, cross-reviewed); its optional wording points were applied in COORD-006 and accepted. The COORD-005 copies of the four files are superseded by COORD-006's (`harness.py check` lists them).
+  - **WRITE-001 (draft write-up):** REVIEW-012 (`reviewer-20261126-o`) checked every number (all correct) and first asked for nine wording fixes: overstatements, where the learning rates came from, the per-level M4096 margin, the 0.5-point tolerance box, the JPEG encoding resolution, and the 98% target (not met). Revision 1 was accepted.
+  - **Cross-review of REVIEW-012** (`reviewer-20261126-p`, accepted) found that REVIEW-012's suggested wording had put one factual error into the accepted draft: it called ImageNetV2 "never-compressed", but its files are JPEGs (used as distributed, never re-compressed by us). It also found small imprecisions (duplicate-group counts, what was inspected, "per model pair"). These were fixed in **draft revision 2 (WRITE-002)**, accepted by `reviewer-20261126-q`; WRITE-002's copy of `report_draft.md` supersedes WRITE-001's.
     - Small known slips left as is: REVIEW-012 cites `compress_jpeg.py` line 49 for the quality formula (it is line 51) and computed retention from rounded means (98.28–98.93% unrounded; the 98.3–98.9% range is unchanged). Its re-review addendum has no note on who wrote it, and its acceptance came 31 s after resubmission; `reviewer-20261126-p` re-checked the revision independently. The draft says twice that Tang et al. was abstract-only.
   - **COORD-004 (status refresh):** REVIEW-011 (`reviewer-20261126-m`) first asked for wording fixes. They made "ties" into "no detected difference", limited the compression-tolerance statement to the four re-tested heads, and kept the 1-point tolerance listed as not finalized. This time the reviewer recorded its verdict before any edit. Revision 1 was accepted.
     - Known nit, accepted as is: RESEARCH_STATUS.md's "Accepted since" table says lr 1e-3 "was poor for every head"; it means every head tested (the Xavier-initialized ones). The status page and DECISIONS.md have the precise wording.
@@ -382,7 +434,7 @@ python -B ai_harness/artifacts/GRID-001/analyze.py      # likewise GRID-002, ABL
   - The ledger summaries and reports of GRID-002, ABL-001, SEED-001 and MSWEEP-001 state head comparisons at lr 1e-3, now superseded by RETEST-001.
   - `COORD-002/status.md` and the "Previous state, 2026-11-25" section of `DECISIONS.md` predate the lr checks; they are kept as history.
   - Use `COORD-004/status.md`, the RETEST-001 report and Section 3 of this file instead.
-- **Reviewer agents:** seventeen so far, `reviewer-20261125-a` to `-d` and `reviewer-20261126-e` to `-q`. They also cross-reviewed each other's reports. A task is never accepted by the agent that wrote it.
+- **Reviewer agents:** twenty-four so far, `reviewer-20261125-a` to `-d`, `reviewer-20261126-e` to `-q` and `reviewer-20261127-r` to `-x`. They also cross-reviewed each other's reports. A task is never accepted by the agent that wrote it.
 
 ## 7. Next steps
 
@@ -390,9 +442,11 @@ The experiments have answered the project's two questions:
 - **Storage:** training a head on JPEG q20 copies (50:1, about 90% fewer bytes) costs under 1 point of ImageNetV2 accuracy on average; q10 (86:1) costs about 2 points.
 - **Sparse dictionary:** at tuned learning rates it is no better than a linear head. Only the bigger 4096-atom dictionary is slightly ahead (+0.6 points, below the 1-point tolerance).
 
-**Done:** the shared status files are up to date (COORD-004, 2026-11-26, reviewed and accepted).
+**Done:** the shared status files and the draft are up to date as of WD-001 (COORD-004 on 2026-11-26; COORD-005 and COORD-006 on 2026-11-27; all reviewed and accepted).
 
-**Done:** a reviewed draft of the write-up, [`ai_harness/artifacts/WRITE-001/report_draft.md`](ai_harness/artifacts/WRITE-001/report_draft.md) (WRITE-001 and its revision 2, WRITE-002, both accepted after independent review). It follows the course template's section order and adds results, discussion, limitations and conclusion. Every number is checked against the accepted reports.
+**Done:** the weight-decay check (WD-001, Step 14), completing roadmap step 2.
+
+**Done:** a reviewed draft of the write-up, [`ai_harness/artifacts/WRITE-001/report_draft.md`](ai_harness/artifacts/WRITE-001/report_draft.md) (WRITE-001 and its revision 2, WRITE-002; revisions 3 and 4, COORD-005 and COORD-006, add WD-001 as section 7.4; all accepted after independent review). It follows the course template's section order and adds results, discussion, limitations and conclusion. Every number is checked against the accepted reports.
 
 **Next steps for the team (only you can do these):**
 1. **Decide the accuracy tolerance** (draft section 6.4). The draft uses 1.0 point; its box lists exactly what changes at 0.5.
@@ -406,4 +460,5 @@ The experiments have answered the project's two questions:
 2. **A paired bootstrap over test images** (no training, a few minutes): re-score RETEST-001's 84 `best.pt` files, keep per-image correctness, and add image-sampling error to the CIs (REVIEW-010 S-4). The most fragile result is sparse − dense.
 3. **A fixed-k arm and a dense M4096 control** (about 1 hour of GPU) to separate available atoms M, active atoms k and parameter count in the M4096 result: for example k = 256 at M = 1024, 2048 and 4096, at tuned rates. Only worth it if the team wants to make a dictionary-size claim.
 4. **Precision/recall/F1** from the saved checkpoints (no retraining), if the course asks for more than top-1/top-5.
+5. **A longer budget (or an lr between 3e-5 and 1e-4) for the sparse weight-decay head** (about 30 min of GPU), to see whether its 1.36-point gap to the reconstruction-loss head shrinks once it is no longer under-trained. This would be post-hoc; only worth it if the team wants to say more about why the reconstruction loss helps.
 5. **End-to-end fine-tuning** of the whole ResNet on compressed images: a different and larger claim (learning from compressed data, not just training a head), and the team's decision.

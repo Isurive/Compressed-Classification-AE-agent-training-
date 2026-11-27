@@ -1,8 +1,19 @@
 # Current decisions and unresolved choices
 
-Updated: 2026-11-26 (COORD-004); earlier text from 2026-11-25 (COORD-003) and 2026-11-22 (COORD-001) is kept below as history. Coordinator-owned integration file. Cite the user, a task report, or a measured run when changing a status. A reviewed report is evidence, not automatic user approval of its suggested design.
+Updated: 2026-11-27 (COORD-005); earlier text from 2026-11-26 (COORD-004), 2026-11-25 (COORD-003) and 2026-11-22 (COORD-001) is kept below as history. Coordinator-owned integration file. Cite the user, a task report, or a measured run when changing a status. A reviewed report is evidence, not automatic user approval of its suggested design.
 
-## Current state, 2026-11-26 (read this first)
+## Update, 2026-11-27 (read this first, then "Current state, 2026-11-26")
+
+This section adds to the 2026-11-26 "Current state" and supersedes it only for the rows below. Every other 2026-11-26 row stands.
+
+| Item | Status | Provenance |
+| --- | --- | --- |
+| Accepted results | Still [COORD-004/status.md](artifacts/COORD-004/status.md), now at revision 2 (new B5 and E2b for WD-001). | COORD-005 (this update) |
+| Reconstruction loss vs tuned weight decay | **Answered:** with cross-entropy only and tuned weight decay (coupled L2, wd 1e-3), the dense 2048-wide head is 0.29 pp below its reconstruction-loss version (detected, below tolerance; a post-hoc reading) and the sparse head 1.36 pp below (meaningful, within the pre-registered grid and 20-epoch budget; it may be under-trained). Neither beats linear (−0.35, −1.34 pp). The head conclusion of 2026-11-26 is unchanged. | [WD-001](artifacts/WD-001/report.md), pre-registered, user approved "ok lets do the weight decay" (2026-11-27); [REVIEW-013](artifacts/REVIEW-013/report.md), [REVIEW-014](artifacts/REVIEW-014/report.md), both cross-reviewed |
+| Write-up | Draft accepted ([WRITE-001](artifacts/WRITE-001/report_draft.md), revised by WRITE-002; revision 3 adds WD-001 as section 7.4). The team decisions it marks (tolerance, names, references, the course `.tex`) are open. | WRITE-001, REVIEW-012, WRITE-002, COORD-005 |
+| Still open | Replaces the 2026-11-26 list: final write-up and proposal wording (team decisions in the draft); final accuracy tolerance (1.0 pp is the working tolerance); the final write-up task SYNTH-001 (not started); optional: paired bootstrap over test images, fixed-k / dense-M4096 controls, a longer budget or intermediate lr for the sparse weight-decay head (post-hoc), AdamW or decay on all parameters, M other than 2048 (COORD-004 D), a storage-vs-accuracy plot (needs matplotlib; ask first); end-to-end fine-tuning is a team decision; citation check (LIT-002). The weight-decay question is no longer open. | COORD-004/status.md D (revision 2) |
+
+## Current state, 2026-11-26 (superseded only where the 2026-11-27 update says so)
 
 This section supersedes the 2026-11-25 "Current state" below wherever they conflict. Rows not listed here (entry point, data, environment, baseline, byte measurement, experiment plan, claim scope, initialization, repository) are unchanged from 2026-11-25.
 
@@ -104,6 +115,8 @@ The user authored and adopted `src/`. Code audit: [ORIENT-001](artifacts/ORIENT-
 
 - 2026-11-05: Initialized from the user conversation and current files. No dataset/model/hardware choice finalized; no training results exist.
 - 2026-11-05: Literature and reasoning reports completed by separate agents and accepted by the coordinator after artifact/source inspection. Engineering feasibility and further cross-report review are next; final synthesis waits for those tasks.
+- 2026-11-27 (COORD-005): added "Update, 2026-11-27" at the top, recording the accepted weight-decay check WD-001, the accepted write-up draft, COORD-004/status.md revision 2 and a new "Still open" list. The 2026-11-26 section is kept; its heading now says it is superseded only where the update says so. Accepted after REVIEW-015 (cross-reviewed).
+- 2026-11-27 (COORD-006): wording only, for REVIEW-015 O-6: the 2026-11-27 "Still open" list adds SYNTH-001 (not started) and WD-001's open items (intermediate lr, AdamW or decay on all parameters, M other than 2048).
 - 2026-11-26 (COORD-004): added "Current state, 2026-11-26" at the top and renamed the 2026-11-25 section "Previous state" (kept as history).
   - **Recorded:** the tuned learning rates and common 20-epoch budget (LR-001, LR-002), the confirmatory RETEST-001 head comparisons and compression costs, and the new authoritative status page COORD-004/status.md.
   - **Marked superseded:** the lr-1e-3 head comparisons (sparse > linear about 1 pp; sparsity about 0.4 pp), the 2026-11-25 "Accepted results" pointer to COORD-002/status.md, and the "Still open" list.

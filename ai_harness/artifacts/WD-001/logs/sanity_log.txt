@@ -1,0 +1,31 @@
+﻿start 2026-11-27T00:51:19.9108887-07:00 (sanity: wrapper at wd 0 must reproduce ABL-001 abl-none dense source seed 42)
+[00:51:30] [wd-sanity] dense-CE M=2048 k=2048 lr=0.001 wd=0 epochs=10 source seed 42
+[00:51:30] single-pool holdout: 45,000 training, 5,000 validation, 1,000 classes. Device cuda, backbone frozen, Adam lr=0.001.
+[00:51:30] Encoder initialization: he. Classifier initialization: xavier. Training feature mask: 0.
+[00:51:30]   wd groups: decay [[2048, 512], [2048], [1000, 2048], [1000]] (wd=0); no decay [[512], [2048, 512]]
+[00:51:33] {"epoch": 1, "train": {"loss": 2.498912336052789, "ce": 2.498909233940972, "feature_mse": 3.102794699774848, "top1": 0.48942222222222226}, "validation": {"images": 5000, "top1": 0.5872, "top5": 0.8298000000000001, "ce": 1.794039938735962, "active_per_image": 935.5772, "used_atom_fraction": 1.0, "feature_mse": 2.0316097084045412, "backbone_top1": 0.6996, "top1_agreement": 0.6382, "backbone_top5": 0.8892}}
+[00:51:35] {"epoch": 2, "train": {"loss": 0.733957108645969, "ce": 0.7339552892896865, "feature_mse": 1.8200622107611764, "top1": 0.8008444444444445}, "validation": {"images": 5000, "top1": 0.5864, "top5": 0.8274, "ce": 1.8786777278900146, "active_per_image": 924.4492, "used_atom_fraction": 1.0, "feature_mse": 1.635392754173279, "backbone_top1": 0.6996, "top1_agreement": 0.6374000000000001, "backbone_top5": 0.8892}}
+[00:51:38] {"epoch": 3, "train": {"loss": 0.29683132264879014, "ce": 0.29682978053622777, "feature_mse": 1.5418903988308377, "top1": 0.9196888888888889}, "validation": {"images": 5000, "top1": 0.5912000000000001, "top5": 0.8316, "ce": 1.9642434602737429, "active_per_image": 931.2718, "used_atom_fraction": 1.0, "feature_mse": 1.4859510719299318, "backbone_top1": 0.6996, "top1_agreement": 0.6386000000000001, "backbone_top5": 0.8892}}
+[00:51:40] {"epoch": 4, "train": {"loss": 0.13352754901250205, "ce": 0.13352615094714695, "feature_mse": 1.39844636654324, "top1": 0.9670444444444445}, "validation": {"images": 5000, "top1": 0.607, "top5": 0.8366, "ce": 1.958151649093628, "active_per_image": 937.1646, "used_atom_fraction": 1.0, "feature_mse": 1.3689044506072998, "backbone_top1": 0.6996, "top1_agreement": 0.66, "backbone_top5": 0.8892}}
+[00:51:42] {"epoch": 5, "train": {"loss": 0.06823786327044169, "ce": 0.06823656130366855, "feature_mse": 1.3018403393215603, "top1": 0.9850000000000001}, "validation": {"images": 5000, "top1": 0.6198, "top5": 0.8374, "ce": 2.0157270309448245, "active_per_image": 942.5644, "used_atom_fraction": 1.0, "feature_mse": 1.2937719017028808, "backbone_top1": 0.6996, "top1_agreement": 0.6668000000000001, "backbone_top5": 0.8892}}
+[00:51:44] {"epoch": 6, "train": {"loss": 0.062090379455354484, "ce": 0.0620891412920422, "feature_mse": 1.238192091539171, "top1": 0.9864222222222223}, "validation": {"images": 5000, "top1": 0.6172000000000001, "top5": 0.8380000000000001, "ce": 2.076560776138306, "active_per_image": 934.711, "used_atom_fraction": 1.0, "feature_mse": 1.2412256484985351, "backbone_top1": 0.6996, "top1_agreement": 0.6656000000000001, "backbone_top5": 0.8892}}
+[00:51:47] {"epoch": 7, "train": {"loss": 0.061421982706917656, "ce": 0.06142078909344144, "feature_mse": 1.193313848537869, "top1": 0.9873777777777778}, "validation": {"images": 5000, "top1": 0.614, "top5": 0.8348, "ce": 2.1477851333618165, "active_per_image": 922.9116, "used_atom_fraction": 1.0, "feature_mse": 1.2123664878845215, "backbone_top1": 0.6996, "top1_agreement": 0.6612, "backbone_top5": 0.8892}}
+[00:51:49] {"epoch": 8, "train": {"loss": 0.0704670846634441, "ce": 0.07046590706772275, "feature_mse": 1.1774802415635852, "top1": 0.9835111111111111}, "validation": {"images": 5000, "top1": 0.5924, "top5": 0.8150000000000001, "ce": 2.5169278743743897, "active_per_image": 894.4784, "used_atom_fraction": 1.0, "feature_mse": 1.2273882001876832, "backbone_top1": 0.6996, "top1_agreement": 0.6372, "backbone_top5": 0.8892}}
+[00:51:51] {"epoch": 9, "train": {"loss": 0.208377837589052, "ce": 0.20837663758595784, "feature_mse": 1.1999732881334093, "top1": 0.9474222222222223}, "validation": {"images": 5000, "top1": 0.5656, "top5": 0.8034, "ce": 2.637215997695923, "active_per_image": 746.0922, "used_atom_fraction": 1.0, "feature_mse": 1.2247418951034545, "backbone_top1": 0.6996, "top1_agreement": 0.6106, "backbone_top5": 0.8892}}
+[00:51:53] {"epoch": 10, "train": {"loss": 0.23171075126859877, "ce": 0.23170956474939983, "feature_mse": 1.186002821858724, "top1": 0.935288888888889}, "validation": {"images": 5000, "top1": 0.5804, "top5": 0.8, "ce": 2.5930274238586426, "active_per_image": 667.6516, "used_atom_fraction": 1.0, "feature_mse": 1.2006439094543457, "backbone_top1": 0.6996, "top1_agreement": 0.6282, "backbone_top5": 0.8892}}
+[00:51:53] Deployment: C:\Users\ericw\OneDrive\Documents\AI 360 (DeepLearning\Final Project\runs\WD-001\sanity\dense-CE_lr1e-3_wd0_10ep\source\seed42\best.pt   Resume and dictionary: C:\Users\ericw\OneDrive\Documents\AI 360 (DeepLearning\Final Project\runs\WD-001\sanity\dense-CE_lr1e-3_wd0_10ep\source\seed42\last.pt
+[00:51:54] {
+[00:51:54]   "new": {
+[00:51:54]     "split_digest": "2bbb411f2b9dcda3f5372d8956415e4bf89d31e6bc9f26f7ef39119dcb4b858f",
+[00:51:54]     "best_epoch": 5,
+[00:51:54]     "val_top1": 0.6198,
+[00:51:54]     "val_ce": 2.0157270309448245
+[00:51:54]   },
+[00:51:54]   "abl001": {
+[00:51:54]     "split_digest": "2bbb411f2b9dcda3f5372d8956415e4bf89d31e6bc9f26f7ef39119dcb4b858f",
+[00:51:54]     "best_epoch": 5,
+[00:51:54]     "val_top1": 0.6198,
+[00:51:54]     "val_ce": 2.0157270309448245
+[00:51:54]   },
+[00:51:54]   "identical": true
+[00:51:54] }
